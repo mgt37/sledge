@@ -19,9 +19,9 @@ var commentRoutes    = require("./routes/comments"),
    
 console.log(process.env.DATABASEURL);   
 
-//var url = process.env.DATABASEURL || "mongodb://localhost/sledge";
-//mongoose.connect(url);
-mongoose.connect("mongodb://localhost/sledge", {useMongoClient: true} );
+var url = process.env.DATABASEURL || "mongodb://localhost/sledge";
+mongoose.connect(url);
+//mongoose.connect("mongodb://localhost/sledge", {useMongoClient: true} );
 
 //mongoose.connect(process.env.DATABASEURL);
 app.use(bodyParser.urlencoded({extended: true}));
