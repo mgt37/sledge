@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <header class="jumbotron">
+       <div class="container">
+           <h1>View the latest topics</h1> 
+           <p>
+               <a class="btn btn-primary btn-lg" href="/topics/new">Add new topic</a>
+           </p>
+       </div>
+    </header>
+    <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% topics.forEach(function(topic){ %>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="thumbnail">
+                    <img src="<%= topic.image %>">
+                    <div class="caption">
+                        <h4><%= topic.title %></h4>
+                    </div>
+                    <p>
+                        <a href="/topics/<%= topic._id %>" class="btn btn-primary">Read topic</a>
+                    </p>
+                </div>
+            </div>
+        <% }); %>
+    </div>    
+</div>   
+
+<% include ../partials/footer %>
