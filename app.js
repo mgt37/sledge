@@ -20,7 +20,7 @@ var url = process.env.DATABASEURL || "mongodb://localhost/sledge";
 mongoose.connect(url);
 //mongoose.connect("mongodb://localhost/sledge", {useMongoClient: true} );
 
-//mongoose.connect(process.env.DATABASEURL);
+mongoose.connect(process.env.DATABASEURL);
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
