@@ -16,7 +16,7 @@ var commentRoutes    = require("./routes/comments"),
     topicRoutes      = require("./routes/topics"),
     indexRoutes      = require("./routes/index");
 
-var url = process.env.DATABASEURL || "mongodb://localhost/sledge";
+var url = process.env.DATABASEURL || "mongodb://localhost/sledge"
 mongoose.connect(url);
 //mongoose.connect("mongodb://localhost/sledge", {useMongoClient: true} );
 
