@@ -78,27 +78,31 @@ body {
   background-repeat: no-repeat;
   opacity: 0;
   z-index: 0;
-  animation: imageAnimation 50s linear infinite; 
+  animation: imageAnimation 60s linear infinite; 
 }
 
 .slideshow li:nth-child(1) { 
-  background-image: url(/images/Main_Picture_1.jpg); 
+  background-image: url(/images/Landing_Picture_1.jpg); 
 }
 .slideshow li:nth-child(2) { 
-  background-image: url(/images/Main_Picture_2.jpg);
+  background-image: url(/images/Landing_Picture_2.jpg);
   animation-delay: 10s; 
 }
 .slideshow li:nth-child(3) { 
-  background-image: url(/images/Main_Picture_3.jpg);
+  background-image: url(/images/Landing_Picture_3.jpg);
   animation-delay: 20s; 
 }
 .slideshow li:nth-child(4) { 
-  background-image: url(/images/Main_Picture_4.jpg);
+  background-image: url(/images/Landing_Picture_4.jpg);
   animation-delay: 30s; 
 }
 .slideshow li:nth-child(5) { 
-  background-image: url(/images/Main_Picture_5.jpg);
+  background-image: url(/images/Landing_Picture_5.jpg);
   animation-delay: 40s; 
+}
+.slideshow li:nth-child(6) { 
+  background-image: url(/images/Landing_Picture_6.jpg);
+  animation-delay: 50s; 
 }
 
 @keyframes imageAnimation { 
@@ -106,14 +110,14 @@ body {
     opacity: 0; 
     animation-timing-function: ease-in;
   }
-  10% {
+  8.3333% {
     opacity: 1;
     animation-timing-function: ease-out;
   }
-  20% {
+  16.6667% {
     opacity: 1
   }
-  30% {
+  25% {
     opacity: 0
   }
 }
