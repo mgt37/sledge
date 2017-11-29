@@ -78,7 +78,7 @@ body {
   background-repeat: no-repeat;
   opacity: 0;
   z-index: 0;
-  animation: imageAnimation 60s linear infinite; 
+  animation: imageAnimation 80s linear infinite; 
 }
 
 .slideshow li:nth-child(1) { 
@@ -104,20 +104,28 @@ body {
   background-image: url(/images/Landing_Picture_6.jpg);
   animation-delay: 50s; 
 }
+.slideshow li:nth-child(7) { 
+  background-image: url(/images/Landing_Picture_7.jpg);
+  animation-delay: 60s; 
+}
+.slideshow li:nth-child(8) { 
+  background-image: url(/images/Landing_Picture_8.jpg);
+  animation-delay: 70s; 
+}
 
 @keyframes imageAnimation { 
   0% { 
     opacity: 0; 
     animation-timing-function: ease-in;
   }
-  8.3333% {
+  6.25% {
     opacity: 1;
     animation-timing-function: ease-out;
   }
-  16.6667% {
+  12.5% {
     opacity: 1
   }
-  25% {
+  18.75% {
     opacity: 0
   }
 }
