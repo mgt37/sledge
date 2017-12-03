@@ -124,6 +124,16 @@ ul.nav li.dropdown:hover ul.dropdown-menu{ display: block; }
     font-family: typewriter_1942;
     color: white;
     }
+    
+.topicbox {
+  height: 10vh;
+  background-color: #a3a4a7;
+  border: 1px solid #151515;
+  font-size: 1.25em;
+  font-family: arial,helvetica,sans-serif;
+  color: #000000;
+  margin: 0 0;
+}
 
 .sidebar {
   margin-top: 50px; }
