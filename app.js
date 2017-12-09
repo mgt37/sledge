@@ -22,7 +22,7 @@ var topicRoutes      = require("./routes/topics");
 var indexRoutes      = require("./routes/index");
 var blogRoutes       = require("./routes/blog");
 
-//require('./config/passport')(passport);
+
 
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
@@ -39,7 +39,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 
-
+require('./config/passport')(passport);
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
