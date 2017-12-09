@@ -1,6 +1,6 @@
 var express        = require("express"),
     app            = express(),
-    port           = process.env.PORT || 8080,
+    /*port           = process.env.PORT || 8080,*/
     mongoose       = require("mongoose"),
     flash          = require("connect-flash"),
     morgan         = require('morgan'),
