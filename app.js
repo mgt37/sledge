@@ -15,6 +15,7 @@ var express        = require("express"),
     Comment        = require("./app/models/comment");
     
 /*var configDB       = require('./config/database.js');*/
+require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
     
 //Require Routes
 var commentRoutes    = require("./routes/comments");
@@ -25,7 +26,7 @@ var blogRoutes       = require("./routes/blog");
 
 
 // routes ======================================================================
-require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+
 
 
 var url = process.env.DATABASEURL || "mongodb://localhost/sledge";
