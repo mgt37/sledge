@@ -14,7 +14,7 @@ var express        = require("express"),
     Topic          = require("./app/models/topic"),
     Comment        = require("./app/models/comment");
     
-var configDB       = require('./config/database.js');
+/*var configDB       = require('./config/database.js');*/
     
 //Require Routes
 var commentRoutes    = require("./routes/comments");
