@@ -1,7 +1,7 @@
 var express    = require("express");
 var router     = express.Router({mergeParams: true});
-/*var Topic      = require("../app/models/topic");*/
-var Comment    = require("../app/models/comment");
+/*var Topic      = require("./app/models/topic");*/
+var Comment    = require("./app/models/comment");
 var middleware = require("../middleware");
 
 // Comments NEW

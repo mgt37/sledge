@@ -4,7 +4,7 @@ module.exports = function(app, passport) {
     // HOME PAGE (with login links) ========
     // =====================================
     app.get('/home', function(req, res) {
-        res.render('home.ejs'); // load the index.ejs file
+        res.render('home.ejs'); // load the home.ejs file
         //NOTE CHANGED TO HOME FROM INDEX
     });
 
@@ -15,7 +15,8 @@ module.exports = function(app, passport) {
     app.get('/login', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('login.ejs', { message: req.flash('loginMessage') }); 
+        res.render('login.ejs');
+        /*, { message: req.flash('loginMessage') });*/ 
     });
 
     // process the login form
@@ -33,7 +34,8 @@ module.exports = function(app, passport) {
     app.get('/register', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('signup.ejs', { message: req.flash('signupMessage') });
+        res.render('register.ejs');
+       /*, { message: req.flash('signupMessage') });*/
     });
 
     // process the signup form
@@ -81,7 +83,7 @@ module.exports = function(app, passport) {
     // route for logging out
     app.get('/logout', function(req, res) {
         req.logout();
-        res.redirect('/');
+        res.redirect('/home');
     });
 
 

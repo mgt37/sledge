@@ -13,7 +13,6 @@ var express        = require("express"),
     User           = require("./app/models/user"),  
     Topic          = require("./app/models/topic"),
     Comment        = require("./app/models/comment");
-    //seedDB         = require("./seeds");
     
 var configDB       = require('./config/database.js');
     
@@ -48,6 +47,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 /*app.use(bodyParser()); // get information from html forms*/
 
 // PASSPORT CONFIGURATION
+
 app.use(require("express-session")({
     secret: "The secret code",
     resave: false,

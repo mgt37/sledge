@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var topicSchema = new mongoose.Schema({
+var blogSchema = new mongoose.Schema({
     title: String,
     post: String,
     tag: String,
@@ -17,4 +17,4 @@ var topicSchema = new mongoose.Schema({
     ]
 });
 
-module.exports = mongoose.model("Topic", topicSchema);
+module.exports = mongoose.model("Blog", blogSchema);
