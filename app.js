@@ -45,7 +45,7 @@ app.use(flash());
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
+/*app.use(bodyParser()); // get information from html forms*/
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
