@@ -1,30 +1,16 @@
 var express    = require("express");
 var router     = express.Router({mergeParams: true});
-var Topic      = require("../app/models/topic");
+/*var Topic      = require("../app/models/topic");*/
 var Comment    = require("../app/models/comment");
 var middleware = require("../middleware");
 
 // Comments NEW
 router.get("/new", middleware.isLoggedIn, function(req, res){
-    //Find topic by id
-    Topic.findById(req.params.id, function(err, topic){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("comments/new", {topic: topic});
-        }
-    });
+            res.render("comments/new");
 });
 
 // Comments CREATE
 router.post("/", middleware.isLoggedIn, function(req, res){
-    //lookup topic using id
-    Topic.findById(req.params.id, function(err, topic){
-        if(err){
-            console.log(err);
-            res.redirect("/topics");
-        } else {
-            console.log(req.body.comment);
             Comment.create(req.body.comment, function(err, comment){
                 if(err){
                     req.flash("error", "Something went wrong");
@@ -35,14 +21,11 @@ router.post("/", middleware.isLoggedIn, function(req, res){
                     comment.author.username = req.user.username;
                     // Save comment
                     comment.save();
-                    topic.comments.push(comment);
-                    topic.save();
                     req.flash("success", "Successfully added comment");
-                    res.redirect('/topics/' + topic._id);
+                    res.redirect("back");
                 }
             });
-        }
-    });
+        
 });
 
 // Comments EDIT
@@ -51,7 +34,7 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, 
         if(err){
             res.redirect("back");
         } else {
-           res.render("comments/edit", {topic_id: req.params.id, comment: foundComment}); 
+           res.render("comments/edit", {comment: foundComment}); 
         }
     });
 });
@@ -60,9 +43,9 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, 
 router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
         if(err){
-            res.redirect("back")
+            res.redirect("back");
         } else {
-            res.redirect("/topics/" + req.params.id) 
+            res.redirect("back"); 
         }
     });
 });
@@ -74,7 +57,7 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, re
             res.redirect("back");
         } else {
             req.flash("success", "Comment deleted");
-            res.redirect("/topics/" + req.params.id);
+            res.redirect("back");
         }
     });
 });

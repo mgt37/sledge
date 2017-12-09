@@ -1,5 +1,5 @@
-var Topic      = require("../models/topic");
-var Comment    = require("../models/comment");
+var Topic      = require("../app/models/topic");
+var Comment    = require("../app/models/comment");
 
 // All the middleware goes here
 var middlewareObj = {};

@@ -1,6 +1,6 @@
 var express    = require("express");
 var router     = express.Router();
-var Topic      = require("../models/topic");
+var Topic      = require("../app/models/topic");
 var middleware = require("../middleware");
 
 //INDEX - Show all topics
@@ -10,7 +10,7 @@ router.get("/", function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.render("topics/index", {topics:allTopics});
+            res.render("topics/index", {topics: allTopics});
         }
     });
 });

@@ -1,22 +1,35 @@
 var express        = require("express"),
     app            = express(),
-    bodyParser     = require("body-parser"),
+    port           = process.env.PORT || 8080,
     mongoose       = require("mongoose"),
     flash          = require("connect-flash"),
+    morgan         = require('morgan'),
+    cookieParser   = require('cookie-parser'),
+    bodyParser     = require("body-parser"),
+    session        = require('express-session'),
     passport       = require("passport"),
     LocalStrategy  = require("passport-local"),
     methodOverride = require("method-override"),
-    User           = require("./models/user"),  
-    Topic          = require("./models/topic"),
-    Comment        = require("./models/comment");
+    User           = require("./app/models/user"),  
+    Topic          = require("./app/models/topic"),
+    Comment        = require("./app/models/comment");
     //seedDB         = require("./seeds");
     
+var configDB       = require('./config/database.js');
+    
 //Require Routes
-var commentRoutes    = require("./routes/comments"),
-    topicRoutes      = require("./routes/topics"),
-    indexRoutes      = require("./routes/index");
+var commentRoutes    = require("./routes/comments");
+var topicRoutes      = require("./routes/topics");
+var indexRoutes      = require("./routes/index");
+var blogRoutes       = require("./routes/blog");
 
-var url = process.env.DATABASEURL || "mongodb://localhost/sledge"
+require('./config/passport')(passport);
+
+// routes ======================================================================
+require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+
+
+var url = process.env.DATABASEURL || "mongodb://localhost/sledge";
 mongoose.connect(url);
 //mongoose.connect("mongodb://localhost/sledge", {useMongoClient: true} );
 
@@ -27,6 +40,13 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 
+
+
+// set up our express application
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser()); // get information from html forms
+
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
     secret: "The secret code",
@@ -35,9 +55,9 @@ app.use(require("express-session")({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
+/*passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.deserializeUser(User.deserializeUser());*/
 
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
@@ -46,8 +66,13 @@ app.use(function(req, res, next){
     next();
 });
 
+
+
+
+
 app.use("/", indexRoutes);
 app.use("/home", indexRoutes);
+app.use("/blog", blogRoutes);
 app.use("/topics", topicRoutes);
 app.use("/topics/:id/comments", commentRoutes);
 
