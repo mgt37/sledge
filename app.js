@@ -1,6 +1,6 @@
 var express        = require("express"),
     app            = express(),
-    /*port           = process.env.PORT || 8080,*/
+    port           = process.env.PORT || 8080,
     mongoose       = require("mongoose"),
     flash          = require("connect-flash"),
     morgan         = require('morgan'),
@@ -22,14 +22,14 @@ var topicRoutes      = require("./routes/topics");
 var indexRoutes      = require("./routes/index");
 var blogRoutes       = require("./routes/blog");
 
-require('./config/passport')(passport);
+//require('./config/passport')(passport);
 
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 
 var url = process.env.DATABASEURL || "mongodb://localhost/sledge";
-mongoose.connect(url);
+mongoose.connect(url, {useMongoClient: true} );
 //mongoose.connect("mongodb://localhost/sledge", {useMongoClient: true} );
 
 mongoose.connect(process.env.DATABASEURL);
