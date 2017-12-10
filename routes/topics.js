@@ -18,7 +18,7 @@ router.get("/", function(req, res){
 //CREATE - add new topic to DB
 router.post("/", middleware.isLoggedIn, function(req, res){
     //get data from form and add to topics array
-    var title   = req.body.title;
+    var title  = req.body.title;
     var image  = req.body.image;
     var body   = req.body.body;
     var author = {
