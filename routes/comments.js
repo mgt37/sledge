@@ -27,7 +27,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(req.body.comment);
             Comment.create(req.body.comment, function(err, comment){
                 if(err){
-                    req.flash("error", "Something went wrong");
+                    /*req.flash("error", "Something went wrong");*/
                     console.log(err);
                 } else {
                     // Add username and id to comment
@@ -37,7 +37,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
                     comment.save();
                     topic.comments.push(comment);
                     topic.save();
-                    req.flash("success", "Successfully added comment");
+                    /*req.flash("success", "Successfully added comment");*/
                     res.redirect('/topics/' + topic._id);
                 }
             });
@@ -73,7 +73,7 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, re
         if(err){
             res.redirect("back");
         } else {
-            req.flash("success", "Comment deleted");
+            /*req.flash("success", "Comment deleted");*/
             res.redirect("/topics/" + req.params.id);
         }
     });

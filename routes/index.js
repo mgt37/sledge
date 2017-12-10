@@ -28,11 +28,11 @@ router.post("/register", function(req, res){
     var newUser = new User({username: req.body.username, user_type: req.body.user_type});
     User.register(newUser, req.body.password, function(err, user){
         if(err){
-            req.flash("error", err.message);
+            /*req.flash("error", err.message);*/
             return res.render("register");
         }
         passport.authenticate("local")(req, res, function(){
-            req.flash("success", "Welcome to Sledge " + user.username);
+            /*req.flash("success", "Welcome to Sledge " + user.username);*/
             res.redirect("/home");
         });
     });
@@ -54,7 +54,7 @@ router.post("/login", passport.authenticate("local",
 // Logout route
 router.get("/logout", function(req, res){
     req.logout();
-    req.flash("success", "Logged you out");
+    /*req.flash("success", "Logged you out");*/
     res.redirect("/home");
 });
 

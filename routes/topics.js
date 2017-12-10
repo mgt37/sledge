@@ -85,7 +85,7 @@ router.delete("/:id", middleware.checkTopicOwnership, function(req, res){
         if(err){
             res.redirect("/topics");
         } else {
-            req.flash("success", "Topic deleted");
+            /*req.flash("success", "Topic deleted");*/
             res.redirect("/topics");
         }
     });

@@ -2,11 +2,11 @@ var express        = require("express"),
     app            = express(),
     port           = process.env.PORT || 8080,
     mongoose       = require("mongoose"),
-    flash          = require("connect-flash"),
+    session        = require('express-session'),
+    /*flash          = require("connect-flash"),*/
     morgan         = require('morgan'),
     cookieParser   = require('cookie-parser'),
     bodyParser     = require("body-parser"),
-    session        = require('express-session'),
     passport       = require("passport"),
     LocalStrategy  = require("passport-local"),
     methodOverride = require("method-override"),
@@ -23,12 +23,6 @@ var topicRoutes      = require("./routes/topics");
 var indexRoutes      = require("./routes/index");
 var blogRoutes       = require("./routes/blog");
 
-
-
-// routes ======================================================================
-
-
-
 var url = process.env.DATABASEURL || "mongodb://localhost/sledge";
 mongoose.connect(url, {useMongoClient: true} );
 //mongoose.connect("mongodb://localhost/sledge", {useMongoClient: true} );
@@ -38,7 +32,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
-app.use(flash());
+/*app.use(flash());*/
 
 require('./config/passport')(passport);
 
@@ -60,15 +54,14 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+/*app.use(flash());*/
+
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
-    res.locals.error       = req.flash("error");
-    res.locals.success     = req.flash("success");
+    /*res.locals.error       = req.flash("error");
+    res.locals.success     = req.flash("success");*/
     next();
 });
-
-
-
 
 
 app.use("/", indexRoutes);
