@@ -24,20 +24,20 @@ router.get("/register", function(req, res){
 });
 
 // Handle sign up logic
-router.post("/register", function(req, res){
-    var newUser = new User({username: req.body.username});
+/*router.post("/register", function(req, res){
+    var newUser = new User({username: req.body.local.username || req.body.facebook.name || req.body.twitter.username || req.body.google.name});*/
     /*, user_type: req.body.user_type});*/
-    User.register(newUser, req.body.password, function(err, user){
-        if(err){
+    /*User.register(newUser, req.body.local.password || req.body.facebook.token || req.body.twitter.token || req.body.google.token , function(err, user){
+        if(err){*/
             /*req.flash("error", err.message);*/
-            return res.render("register");
+            /*return res.render("register");
         }
-        passport.authenticate("local")(req, res, function(){
+        passport.authenticate("local")(req, res, function(){*/
             /*req.flash("success", "Welcome to Sledge " + user.username);*/
-            res.redirect("/home");
+            /*res.redirect("/home");
         });
     });
-});
+});*/
 
 // Show login form
 router.get("/login", function(req, res){
@@ -45,12 +45,12 @@ router.get("/login", function(req, res){
 });
 
 // Handling login logic
-router.post("/login", passport.authenticate("local",
+/*router.post("/login", passport.authenticate("local",
     {
         successRedirect: "/home",
         failureRedirect: "/login"
     }), function(req, res){
-});
+});*/
 
 // Logout route
 router.get("/logout", function(req, res){
