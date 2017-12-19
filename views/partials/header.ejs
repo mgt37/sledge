@@ -20,20 +20,12 @@
                 <a class="navbar-brand" href="/">Sledge</a>
             </div>
             
-            
-            
             <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar">
-                    <li class="nav-item">
-                        <a href="/home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="dropdown-item" href="/blog">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/topics">Topics</a>
-                    </li>
-                    
+                    <li class="nav-item"><a href="/home">Home</a></li>
+                    <li class="nav-item"><a class="dropdown-item" href="/blog">Blog</a></li>
+                    <li class="nav-item"><a href="/topics">Topics</a></li>
+                    <li class="nav-item"><a href="/uniTalk">Uni Talk</a></li>
                     <li>
                         <form class="form-inline">
                             <input class="form-control mr-sm-2" type="text" placeholder="Search">
@@ -41,14 +33,16 @@
                         </form>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right" id="bs-navbar-collapse-1">
-                    
-                        <li><a href="/logout">Logout</a></li>
-                    <!--NEED TO FIX THIS SO LOGOUT ONLY SHOWS WHEN SIGNED IN-->
+                <ul class="nav navbar-nav navbar-right">
+                    <% if(!currentUser){ %>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register">Sign Up</a></li>
+                    <% } else { %>
+                        <li><a href="#">You are signed in</a></li>
+                        <li><a href="/logout">Logout?</a></li>
+                    <% } %>    
                 </ul>
             </div>
         </div>
     </nav>
-    
-    
-    <div class="container">
+<div class="container">

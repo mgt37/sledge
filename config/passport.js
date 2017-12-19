@@ -1,21 +1,16 @@
 var express          = require("express"),
-    router           = express(),
-    passport         = require("passport"),
+    /*router           = express(),*/
+    /*passport         = require("passport"),*/
     User             = require('../app/models/user'),
-    app              = require('../app'),
-    middleware       = require("../middleware/index");
-
-// load the auth variables
-var configAuth = require('./auth'); // use this one for testing
-
-// load all the things we need
-var LocalStrategy    = require('passport-local').Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
-var TwitterStrategy  = require('passport-twitter').Strategy;
-var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
+    /*app              = require('../app'),*/
+    /*middleware       = require("../middleware/index"),*/
+    configAuth       = require('./auth'), // use this one for testing
+    LocalStrategy    = require('passport-local').Strategy,
+    FacebookStrategy = require('passport-facebook').Strategy,
+    TwitterStrategy  = require('passport-twitter').Strategy,
+    GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 
 module.exports = function(passport) {
-
     // =========================================================================
     // passport session setup ==================================================
     // =========================================================================
@@ -119,10 +114,8 @@ module.exports = function(passport) {
                         return done(null, newUser);
                     });
                 }
-
             });
         });
-
     }));
 
     // =========================================================================
@@ -271,9 +264,7 @@ module.exports = function(passport) {
                     return done(null, user);
                 });
             }
-
         });
-
     }));
 
     // =========================================================================

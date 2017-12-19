@@ -1,21 +1,18 @@
-var express    = require("express");
-var router     = express.Router();
-var passport   = require("passport");
-var User       = require("../app/models/user");
-var middleware = require("../middleware/index");
-var app        = require('../app');
-
-var configPassport = require('../config/passport');
-var configAuth = require('../config/auth');
+var express        = require("express"),
+    router         = express.Router(),
+    passport       = require("passport"),
+    User           = require("../app/models/user"),
+    middleware     = require("../middleware/index"),
+    app            = require('../app'),
+    configPassport = require('../config/passport'),
+    configAuth     = require('../config/auth');
 
 module.exports = function(applic, passport) {
 
 // normal routes ===============================================================
 
 	// show the home page (will also have our login links)
-	applic.get('/home', function(req, res) {
-		res.render('home');
-	});
+	/*applic.get('/home', function(req, res) {res.render('home');});*/
 
 	// PROFILE SECTION =========================
 	applic.get('/profile', middleware.isLoggedIn, function(req, res) {
@@ -49,23 +46,6 @@ module.exports = function(applic, passport) {
     		}), function(req, res){
     		/*	res.redirect('/users/' + req.user.username);*/
 		});
-		
-		/*applic.get('/login', function(req, res, next) {
-		  passport.authenticate('local', function(err, user, info) {
-		    if (err) { return next(err); }
-		    if (!user) { return res.redirect('/login'); }
-		    req.logIn(user, function(err) {
-		      if (err) { return next(err); }
-		      return res.redirect('/users/' + user.username);
-		    });
-		  })(req, res, next);
-		});*/
-		
-		/*applic.post('/login', passport.authenticate('local-login', {
-			successRedirect : '/profile', // redirect to the secure profile section
-			failureRedirect : '/login', // redirect back to the signup page if there is an error
-			/*failureFlash : true*/ // allow flash messages
-		/*}));*/
 
 		// SIGNUP =================================
 		
@@ -74,27 +54,12 @@ module.exports = function(applic, passport) {
 			res.render('register');
 		/*	 { message: req.flash('loginMessage') });*/
 		});
-		
-		// Handle sign up logic
-		/*applic.post("/register", function(req, res){
-			 var newUser = new User({username: req.body.username});
-			 User.register(newUser, req.body.password, function(err, user){
-			    if(err){*/
-			        /*req.flash("error", err.message);*/
-			        /*return res.render("register");
-			        }
-			    passport.authenticate("local")(req, res, function(){
-			        req.flash("success", "Welcome to Sledge " + user.username);
-			        res.redirect("/home");
-			    });
-			});
-		})*/;
 
 		// process the signup form
 		applic.post('/register', passport.authenticate('local-signup', {
 			successRedirect : '/profile', // redirect to the secure profile section
 			failureRedirect : '/register', // redirect back to the signup page if there is an error
-			/*failureFlash : true*/ // allow flash messages
+			failureFlash : true // allow flash messages
 		}));
 
 	// facebook -------------------------------
@@ -146,7 +111,7 @@ module.exports = function(applic, passport) {
 		applic.post('/connect/local', passport.authenticate('local-signup', {
 			successRedirect : '/profile', // redirect to the secure profile section
 			failureRedirect : '/connect/local', // redirect back to the signup page if there is an error
-			/*failureFlash : true*/ // allow flash messages
+			failureFlash : true // allow flash messages
 		}));
 
 	// facebook -------------------------------
@@ -230,5 +195,3 @@ module.exports = function(applic, passport) {
 		});
 	});
 };
-
-/*module.exports = router;*/

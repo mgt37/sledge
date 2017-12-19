@@ -1,23 +1,18 @@
 //Load dependencies
-var express          = require("express"),
+var express          = require('express'),
     app              = express(),
-    /*port             = process.env.PORT || 8080,*/
     mongoose         = require('mongoose'),
-    session          = require('express-session'),
+    /*session          = require('express-session'),*/
     flash            = require("connect-flash"),
     morgan           = require('morgan'),
     cookieParser     = require('cookie-parser'),
     bodyParser       = require('body-parser'),
     passport         = require('passport'),
-    /*passport         = require('./config/passport'),*/
-    configAuth       = require('./config/auth'),
+    /*configAuth       = require('./config/auth'),
     LocalStrategy    = require('passport-local').Strategy,
-    /*OpenIDStrategy   = require('passport-openid').Strategy,*/
-    /*OAuthStrategy    = require('passport-oauth').OAuthStrategy,*/
     FacebookStrategy = require('passport-facebook').Strategy,
     TwitterStrategy  = require('passport-twitter').Strategy,
-    GoogleStrategy   = require('passport-google-oauth20').Strategy,
-    /*GoogleStrategy   = require('passport-google-oauth').Auth20Strategy,*/
+    GoogleStrategy   = require('passport-google-oauth20').Strategy,*/
     methodOverride   = require('method-override'),
     User             = require('./app/models/user'),  
     Topic            = require('./app/models/topic'),
@@ -27,10 +22,9 @@ var express          = require("express"),
 var commentRoutes    = require('./routes/comments'),
     topicRoutes      = require('./routes/topics'),
     indexRoutes      = require('./routes/index'),
-    /*appRoutes        = require('./routes/login'),*/
-    blogRoutes       = require('./routes/blog');
+    blogRoutes       = require('./routes/blog'),
+    uniTalkRoutes    = require('./routes/uniTalk');
     
-   
    require('./config/passport')(passport); // pass passport for configuration 
 
 //Connect to mongo database
@@ -47,7 +41,7 @@ app.use(flash());
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
-/*app.use(bodyParser());*/ // get information from html forms
+
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -57,7 +51,6 @@ app.use(require("express-session")({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-/*passport.use(new LocalStrategy(User.authenticate()));*/
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -68,23 +61,16 @@ app.use(function(req, res, next){
     next();
 });
 
-
-
-
-
-
 // Use Routes
 app.use("/", indexRoutes);
 app.use("/home", indexRoutes);
 app.use("/blog", blogRoutes);
 app.use("/topics", topicRoutes);
 app.use("/topics/:id/comments", commentRoutes);
-/*app.use("/", appRoutes);*/
+app.use("/uniTalk", uniTalkRoutes);
 
 require('./app/routes')(app, passport); // load our routes and pass in our app and fully configured passport
 
-/*  require('./app/routes');*/
-  
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("The Sledge server has started");
 });
