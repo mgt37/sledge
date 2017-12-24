@@ -1,0 +1,33 @@
+<% include ../../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="thumbnail">
+                <div class="caption-full">
+                    <h4><a><%= sex.title %></a></h4>
+                    <p><%= sex.body %></p>
+                    <p>
+                        <em>Submitted by <%= sex.author.username %></em>
+                    </p>
+                    <% if(currentUser && sex.author.id.equals(currentUser._id)){ %>
+                        <a class="btn btn-xs btn-warning" href="/uniTalk/sex/<%= sex._id %>/edit">Edit</a>
+                        <form id="delete-form" action="/uniTalk/sex/<%= sex._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-danger">Delete</button>
+                        </form>
+                    <% } %>
+                </div>
+            </div>
+            <div class="well">
+                <div class= "text-right">
+                    <a class="btn btn-xs btn-success" href="/uniTalk/sex/<%= sex._id %>/comments/new">Add comment</a>
+                </div>
+                <hr>
+                <% include ../../partials/uniTalk/sexComment %>
+            </div>
+            <div class= "text-right">
+                    <a class="btn btn-success" href="/uniTalk/sex/">Return to all topics</a>
+            </div>
+        </div>
+    </div>
+</div>
+<% include ../../partials/footer %>

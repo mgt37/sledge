@@ -1,5 +1,6 @@
 var Topic      = require("../app/models/topic");
 var Comment    = require("../app/models/comment");
+var UniTalk    = require("../app/models/uniTalk");
 
 // All the middleware goes here
 var middlewareObj = {};
@@ -13,6 +14,30 @@ middlewareObj.checkTopicOwnership = function(req, res, next) {
             } else {
             //does user own the topic?
                 if(foundTopic.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkUniTalkOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        UniTalk.findById(req.params.id, function(err, foundUniTalk){
+            if(err){
+                /*req.flash("error", "uniTalk not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the uniTalk?
+                if(foundUniTalk.author.id.equals(req.user._id)){
                     next();
                 } else {
                     //otherwise, redirect

@@ -25,4 +25,8 @@ router.get("/money-plan", function(req, res){
     res.render("blog/2016/02/14/blogformat");
 });
 
+router.get("/take-some-time-to-think-about-depression", function(req, res){
+    res.render("blog/2016/02/22/blogformat");
+});
+
 module.exports = router;

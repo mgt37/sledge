@@ -8,22 +8,33 @@ var express          = require('express'),
     cookieParser     = require('cookie-parser'),
     bodyParser       = require('body-parser'),
     passport         = require('passport'),
-    /*configAuth       = require('./config/auth'),
-    LocalStrategy    = require('passport-local').Strategy,
-    FacebookStrategy = require('passport-facebook').Strategy,
-    TwitterStrategy  = require('passport-twitter').Strategy,
-    GoogleStrategy   = require('passport-google-oauth20').Strategy,*/
     methodOverride   = require('method-override'),
-    User             = require('./app/models/user'),  
-    Topic            = require('./app/models/topic'),
-    Comment          = require('./app/models/comment');
-    
+    User             = require('./app/models/user'); 
+
 //Require Routes
 var commentRoutes    = require('./routes/comments'),
     topicRoutes      = require('./routes/topics'),
     indexRoutes      = require('./routes/index'),
-    blogRoutes       = require('./routes/blog'),
-    uniTalkRoutes    = require('./routes/uniTalk');
+    blogRoutes       = require('./routes/blog');
+    
+// Uni Talk routes - require    
+/*var uniTalkRoutes    = require('./routes/uniTalk');*/
+var alcoholRoutes         = require('./routes/uniTalk/alcohol'),
+    careerRoutes          = require('./routes/uniTalk/careers'),
+    fashionFemaleRoutes   = require('./routes/uniTalk/fashionFemale'),
+    fashionMaleRoutes     = require('./routes/uniTalk/fashionMale'),
+    flattingRoutes        = require('./routes/uniTalk/flatting'),
+    foodRoutes            = require('./routes/uniTalk/food'),
+    healthRoutes          = require('./routes/uniTalk/health'),
+    moneyRoutes           = require('./routes/uniTalk/money'),
+    otherRoutes           = require('./routes/uniTalk/other'),
+    partyRoutes           = require('./routes/uniTalk/parties'),
+    partTimeWorkRoutes    = require('./routes/uniTalk/partTimeWork'),
+    relationshipRoutes    = require('./routes/uniTalk/relationships'),
+    sexRoutes             = require('./routes/uniTalk/sex'),
+    sportRoutes           = require('./routes/uniTalk/sports'),
+    studyRoutes           = require('./routes/uniTalk/study'),
+    vehicleRoutes         = require('./routes/uniTalk/vehicle');
     
    require('./config/passport')(passport); // pass passport for configuration 
 
@@ -67,7 +78,26 @@ app.use("/home", indexRoutes);
 app.use("/blog", blogRoutes);
 app.use("/topics", topicRoutes);
 app.use("/topics/:id/comments", commentRoutes);
-app.use("/uniTalk", uniTalkRoutes);
+
+//Uni Talk routes - use
+/*app.use("/uniTalk", uniTalkRoutes);*/
+app.use("/uniTalk/alcohol", alcoholRoutes);
+app.use("/uniTalk/career", careerRoutes);
+app.use("/uniTalk/fashionFemale", fashionFemaleRoutes);
+app.use("/uniTalk/fashionMale", fashionMaleRoutes);
+app.use("/uniTalk/flatting", flattingRoutes);
+app.use("/uniTalk/food", foodRoutes);
+app.use("/uniTalk/health", healthRoutes);
+app.use("/uniTalk/money", moneyRoutes);
+app.use("/uniTalk/other", otherRoutes);
+app.use("/uniTalk/partTimeWork", partTimeWorkRoutes);
+app.use("/uniTalk/party", partyRoutes);
+app.use("/uniTalk/relationship", relationshipRoutes);
+app.use("/uniTalk/sex", sexRoutes);
+app.use("/uniTalk/sport", sportRoutes);
+app.use("/uniTalk/study", studyRoutes);
+app.use("/uniTalk/vehicle", vehicleRoutes);
+
 
 require('./app/routes')(app, passport); // load our routes and pass in our app and fully configured passport
 

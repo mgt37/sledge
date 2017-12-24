@@ -1,0 +1,31 @@
+<% include ../../partials/header %>
+
+<div class="container">
+    <header class="jumbotron">
+       <div class="container">
+           <h1>Male Fashion</h1> 
+           <p>
+               <a class="btn btn-primary btn-lg" href="fashionMale/new">Add new uniTalk topic</a>
+           </p>
+       </div>
+    </header>
+    <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% fashionMale.forEach(function(fashionMale){ %>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h4><%= fashionMale.title %></h4>
+                    </div>
+                    <div class="description">
+                        <p><%- fashionMale.body.substring(0, 100) %>...</p>
+                    </div>
+                    <p>
+                        <a href="/uniTalk/fashionMale/<%= fashionMale._id %>" class="btn btn-primary">Read topic</a>
+                    </p>
+                </div>
+            </div>
+        <% }); %>
+    </div>    
+</div>
+
+<% include ../../partials/footer %>
