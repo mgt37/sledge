@@ -58,12 +58,12 @@ boxfont  {
   color: #AAAAAA; }  
 
 body  {
-  font-family: arial,helvetica,sans-serif;
-  background-color: #e9e9c9;
+  font-family: 'Raleway', sans-serif;;
+  background-color: #eef4be;
   /*color: #ffebad;*/ }
   
 .home h2 h3  {
-  font-family: arial,helvetica,sans-serif;
+  font-family: 'Raleway', sans-serif;;
   background-color: #141414;
   color: #AAAAAA; }
       
@@ -79,6 +79,10 @@ icons  {
   height: 10vh;
   }
   
+.jumbotron {
+  background-color: #d4f291;
+  color: gray-400;
+}
  
 .socialicons {
  position: relative;
