@@ -1,11 +1,11 @@
 var express        = require("express"),
-    router         = express.Router(),
-    passport       = require("passport"),
-    User           = require("../app/models/user"),
-    middleware     = require("../middleware/index"),
-    app            = require('../app'),
+    /*router         = express.Router(),*/
+    /*passport       = require("passport"),
+    User           = require("../app/models/user"),*/
+    middleware     = require("../middleware/index");
+    /*app            = require('../app'),
     configPassport = require('../config/passport'),
-    configAuth     = require('../config/auth');
+    configAuth     = require('../config/auth');*/
 
 module.exports = function(applic, passport) {
 

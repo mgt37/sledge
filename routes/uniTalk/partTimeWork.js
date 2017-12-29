@@ -2,7 +2,7 @@ var express           = require("express"),
     router            = express(),
     PartTimeWork      = require("../../app/models/uniTalk/partTimeWork"),
     middleware        = require("../../middleware"),
-    uniTalkmiddleware = require("../../middleware/uniTalk");
+    uniTalkMiddleware = require("../../middleware/uniTalk");
 
 //INDEX - Show all uniTalk topics
 router.get("/", function(req, res){
@@ -56,7 +56,7 @@ router.get("/:id", function(req, res){
 });
 
 // EDIT uniTalk Topic Route
-router.get("/:id/edit", uniTalkmiddleware.checkPartTimeWorkOwnership, function(req, res){
+router.get("/:id/edit", uniTalkMiddleware.checkPartTimeWorkOwnership, function(req, res){
     PartTimeWork.findById(req.params.id, function(err, foundPartTimeWork){
         if(err){
             res.redirect("/uniTalk/partTimeWork");
@@ -67,7 +67,7 @@ router.get("/:id/edit", uniTalkmiddleware.checkPartTimeWorkOwnership, function(r
 });
 
 // UPDATE uniTalk Topic Route
-router.put("/:id", uniTalkmiddleware.checkPartTimeWorkOwnership, function(req, res){
+router.put("/:id", uniTalkMiddleware.checkPartTimeWorkOwnership, function(req, res){
     // Find and update the correct topic
     PartTimeWork.findByIdAndUpdate(req.params.id, req.body.partTimeWork, function(err, updatedPartTimeWork){
         if(err){
@@ -80,7 +80,7 @@ router.put("/:id", uniTalkmiddleware.checkPartTimeWorkOwnership, function(req, r
 });
 
 // DESTROY uniTalk Topic Route
-router.delete("/:id", uniTalkmiddleware.checkPartTimeWorkOwnership, function(req, res){
+router.delete("/:id", uniTalkMiddleware.checkPartTimeWorkOwnership, function(req, res){
     PartTimeWork.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/uniTalk/partTimeWork");

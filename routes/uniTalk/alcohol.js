@@ -1,8 +1,9 @@
 var express           = require("express"),
     router            = express(),
+    timestamp         = require('time-stamp'),
     Alcohol            = require("../../app/models/uniTalk/alcohol"),
     middleware        = require("../../middleware"),
-    uniTalkmiddleware = require("../../middleware/uniTalk");
+    uniTalkMiddleware = require("../../middleware/uniTalk");
 
 //INDEX - Show all uniTalk topics
 router.get("/", function(req, res){
@@ -56,7 +57,7 @@ router.get("/:id", function(req, res){
 });
 
 // EDIT uniTalk Topic Route
-router.get("/:id/edit", uniTalkmiddleware.checkAlcoholOwnership, function(req, res){
+router.get("/:id/edit", uniTalkMiddleware.checkAlcoholOwnership, function(req, res){
     Alcohol.findById(req.params.id, function(err, foundAlcohol){
         if(err){
             res.redirect("/uniTalk/alcohol");
@@ -67,7 +68,7 @@ router.get("/:id/edit", uniTalkmiddleware.checkAlcoholOwnership, function(req, r
 });
 
 // UPDATE uniTalk Topic Route
-router.put("/:id", uniTalkmiddleware.checkAlcoholOwnership, function(req, res){
+router.put("/:id", uniTalkMiddleware.checkAlcoholOwnership, function(req, res){
     // Find and update the correct topic
     Alcohol.findByIdAndUpdate(req.params.id, req.body.alcohol, function(err, updatedAlcohol){
         if(err){
@@ -80,7 +81,7 @@ router.put("/:id", uniTalkmiddleware.checkAlcoholOwnership, function(req, res){
 });
 
 // DESTROY uniTalk Topic Route
-router.delete("/:id", uniTalkmiddleware.checkAlcoholOwnership, function(req, res){
+router.delete("/:id", uniTalkMiddleware.checkAlcoholOwnership, function(req, res){
     Alcohol.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/uniTalk/alcohol");

@@ -2,7 +2,7 @@ var express           = require("express"),
     router            = express(),
     Vehicle            = require("../../app/models/uniTalk/vehicle"),
     middleware        = require("../../middleware"),
-    uniTalkmiddleware = require("../../middleware/uniTalk");
+    uniTalkMiddleware = require("../../middleware/uniTalk");
 
 //INDEX - Show all uniTalk topics
 router.get("/", function(req, res){
@@ -56,7 +56,7 @@ router.get("/:id", function(req, res){
 });
 
 // EDIT uniTalk Topic Route
-router.get("/:id/edit", uniTalkmiddleware.checkVehicleOwnership, function(req, res){
+router.get("/:id/edit", uniTalkMiddleware.checkVehicleOwnership, function(req, res){
     Vehicle.findById(req.params.id, function(err, foundVehicle){
         if(err){
             res.redirect("/uniTalk/vehicle");
@@ -67,7 +67,7 @@ router.get("/:id/edit", uniTalkmiddleware.checkVehicleOwnership, function(req, r
 });
 
 // UPDATE uniTalk Topic Route
-router.put("/:id", uniTalkmiddleware.checkVehicleOwnership, function(req, res){
+router.put("/:id", uniTalkMiddleware.checkVehicleOwnership, function(req, res){
     // Find and update the correct topic
     Vehicle.findByIdAndUpdate(req.params.id, req.body.vehicle, function(err, updatedVehicle){
         if(err){
@@ -80,7 +80,7 @@ router.put("/:id", uniTalkmiddleware.checkVehicleOwnership, function(req, res){
 });
 
 // DESTROY uniTalk Topic Route
-router.delete("/:id", uniTalkmiddleware.checkVehicleOwnership, function(req, res){
+router.delete("/:id", uniTalkMiddleware.checkVehicleOwnership, function(req, res){
     Vehicle.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/uniTalk/vehicle");

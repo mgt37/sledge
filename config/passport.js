@@ -1,9 +1,5 @@
 var express          = require("express"),
-    /*router           = express(),*/
-    /*passport         = require("passport"),*/
     User             = require('../app/models/user'),
-    /*app              = require('../app'),*/
-    /*middleware       = require("../middleware/index"),*/
     configAuth       = require('./auth'), // use this one for testing
     LocalStrategy    = require('passport-local').Strategy,
     FacebookStrategy = require('passport-facebook').Strategy,

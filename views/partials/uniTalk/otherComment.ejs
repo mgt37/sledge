@@ -8,10 +8,10 @@
                             </p>
                         <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                             <a class="btn btn-xs btn-warning" 
-                                href="/uniTalk/other/<%= other._id %>/comments/<%= comment._id %>/edit">
+                                href="/uniTalk/other/<%= other._id %>/otherComments/<%= comment._id %>/edit">
                                 Edit
                             </a>
-                            <form id="delete-form" action="/uniTalk/other/<%= other._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                            <form id="delete-form" action="/uniTalk/other/<%= other._id %>/otherComments/<%= comment._id %>?_method=DELETE" method="POST">
                                 <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                             </form>
                         <% } %>

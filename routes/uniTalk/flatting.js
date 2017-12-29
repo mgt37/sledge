@@ -2,7 +2,7 @@ var express           = require("express"),
     router            = express(),
     Flatting            = require("../../app/models/uniTalk/flatting"),
     middleware        = require("../../middleware"),
-    uniTalkmiddleware = require("../../middleware/uniTalk");
+    uniTalkMiddleware = require("../../middleware/uniTalk");
 
 //INDEX - Show all uniTalk topics
 router.get("/", function(req, res){
@@ -56,7 +56,7 @@ router.get("/:id", function(req, res){
 });
 
 // EDIT uniTalk Topic Route
-router.get("/:id/edit", uniTalkmiddleware.checkFlattingOwnership, function(req, res){
+router.get("/:id/edit", uniTalkMiddleware.checkFlattingOwnership, function(req, res){
     Flatting.findById(req.params.id, function(err, foundFlatting){
         if(err){
             res.redirect("/uniTalk/flatting");
@@ -67,7 +67,7 @@ router.get("/:id/edit", uniTalkmiddleware.checkFlattingOwnership, function(req, 
 });
 
 // UPDATE uniTalk Topic Route
-router.put("/:id", uniTalkmiddleware.checkFlattingOwnership, function(req, res){
+router.put("/:id", uniTalkMiddleware.checkFlattingOwnership, function(req, res){
     // Find and update the correct topic
     Flatting.findByIdAndUpdate(req.params.id, req.body.flatting, function(err, updatedFlatting){
         if(err){
@@ -80,7 +80,7 @@ router.put("/:id", uniTalkmiddleware.checkFlattingOwnership, function(req, res){
 });
 
 // DESTROY uniTalk Topic Route
-router.delete("/:id", uniTalkmiddleware.checkFlattingOwnership, function(req, res){
+router.delete("/:id", uniTalkMiddleware.checkFlattingOwnership, function(req, res){
     Flatting.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/uniTalk/flatting");

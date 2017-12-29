@@ -1,8 +1,9 @@
 var express           = require("express"),
     router            = express(),
+    timestamp         = require('time-stamp'),
     Career            = require("../../app/models/uniTalk/career"),
     middleware        = require("../../middleware"),
-    uniTalkmiddleware = require("../../middleware/uniTalk");
+    uniTalkMiddleware = require("../../middleware/uniTalk");
 
 //INDEX - Show all uniTalk topics
 router.get("/", function(req, res){
@@ -56,7 +57,7 @@ router.get("/:id", function(req, res){
 });
 
 // EDIT uniTalk Topic Route
-router.get("/:id/edit", uniTalkmiddleware.checkCareerOwnership, function(req, res){
+router.get("/:id/edit", uniTalkMiddleware.checkCareerOwnership, function(req, res){
     Career.findById(req.params.id, function(err, foundCareer){
         if(err){
             res.redirect("/uniTalk/career");
@@ -67,7 +68,7 @@ router.get("/:id/edit", uniTalkmiddleware.checkCareerOwnership, function(req, re
 });
 
 // UPDATE uniTalk Topic Route
-router.put("/:id", uniTalkmiddleware.checkCareerOwnership, function(req, res){
+router.put("/:id", uniTalkMiddleware.checkCareerOwnership, function(req, res){
     // Find and update the correct topic
     Career.findByIdAndUpdate(req.params.id, req.body.career, function(err, updatedCareer){
         if(err){
@@ -80,7 +81,7 @@ router.put("/:id", uniTalkmiddleware.checkCareerOwnership, function(req, res){
 });
 
 // DESTROY uniTalk Topic Route
-router.delete("/:id", uniTalkmiddleware.checkCareerOwnership, function(req, res){
+router.delete("/:id", uniTalkMiddleware.checkCareerOwnership, function(req, res){
     Career.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/uniTalk/career");

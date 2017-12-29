@@ -2,7 +2,8 @@ var express           = require("express"),
     router            = express(),
     FashionFemale     = require("../../app/models/uniTalk/fashionFemale"),
     middleware        = require("../../middleware"),
-    uniTalkmiddleware = require("../../middleware/uniTalk");
+    uniTalkMiddleware = require("../../middleware/uniTalk"),
+    applic            = require("../../app.js");
 
 //INDEX - Show all uniTalk topics
 router.get("/", function(req, res){
@@ -56,7 +57,7 @@ router.get("/:id", function(req, res){
 });
 
 // EDIT uniTalk Topic Route
-router.get("/:id/edit", uniTalkmiddleware.checkFashionFemaleOwnership, function(req, res){
+router.get("/:id/edit", uniTalkMiddleware.checkFashionFemaleOwnership, function(req, res){
     FashionFemale.findById(req.params.id, function(err, foundFashionFemale){
         if(err){
             res.redirect("/uniTalk/fashionFemale");
@@ -67,7 +68,7 @@ router.get("/:id/edit", uniTalkmiddleware.checkFashionFemaleOwnership, function(
 });
 
 // UPDATE uniTalk Topic Route
-router.put("/:id", uniTalkmiddleware.checkFashionFemaleOwnership, function(req, res){
+router.put("/:id", uniTalkMiddleware.checkFashionFemaleOwnership, function(req, res){
     // Find and update the correct topic
     FashionFemale.findByIdAndUpdate(req.params.id, req.body.fashionFemale, function(err, updatedFashionFemale){
         if(err){
@@ -80,7 +81,7 @@ router.put("/:id", uniTalkmiddleware.checkFashionFemaleOwnership, function(req, 
 });
 
 // DESTROY uniTalk Topic Route
-router.delete("/:id", uniTalkmiddleware.checkFashionFemaleOwnership, function(req, res){
+router.delete("/:id", uniTalkMiddleware.checkFashionFemaleOwnership, function(req, res){
     FashionFemale.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/uniTalk/fashionFemale");
@@ -90,5 +91,27 @@ router.delete("/:id", uniTalkmiddleware.checkFashionFemaleOwnership, function(re
         }
     });
 });
+
+/*router.post('/upload', (req, res) => {
+  applic.upload(req, res, (err) => {
+    if(err){
+      res.render('index', {
+        msg: err
+      });
+    } else {
+      if(req.file == undefined){
+        res.render('index', {
+          msg: 'Error: No File Selected!'
+        });
+      } else {
+        res.render('new', {
+          msg: 'File Uploaded!',
+          file: `uploads/${req.file.filename}`
+        });
+      }
+    }
+  });
+});*/
+
 
 module.exports = router;

@@ -2,7 +2,7 @@ var express           = require("express"),
     router            = express(),
     Sex               = require("../../app/models/uniTalk/sex"),
     middleware        = require("../../middleware"),
-    uniTalkmiddleware = require("../../middleware/uniTalk");
+    uniTalkMiddleware = require("../../middleware/uniTalk");
 
 //INDEX - Show all uniTalk topics
 router.get("/", function(req, res){
@@ -56,7 +56,7 @@ router.get("/:id", function(req, res){
 });
 
 // EDIT uniTalk Topic Route
-router.get("/:id/edit", uniTalkmiddleware.checkSexOwnership, function(req, res){
+router.get("/:id/edit", uniTalkMiddleware.checkSexOwnership, function(req, res){
     Sex.findById(req.params.id, function(err, foundSex){
         if(err){
             res.redirect("/uniTalk/sex");
@@ -67,7 +67,7 @@ router.get("/:id/edit", uniTalkmiddleware.checkSexOwnership, function(req, res){
 });
 
 // UPDATE uniTalk Topic Route
-router.put("/:id", uniTalkmiddleware.checkSexOwnership, function(req, res){
+router.put("/:id", uniTalkMiddleware.checkSexOwnership, function(req, res){
     // Find and update the correct topic
     Sex.findByIdAndUpdate(req.params.id, req.body.sex, function(err, updatedSex){
         if(err){
@@ -80,7 +80,7 @@ router.put("/:id", uniTalkmiddleware.checkSexOwnership, function(req, res){
 });
 
 // DESTROY uniTalk Topic Route
-router.delete("/:id", uniTalkmiddleware.checkSexOwnership, function(req, res){
+router.delete("/:id", uniTalkMiddleware.checkSexOwnership, function(req, res){
     Sex.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/uniTalk/sex");
