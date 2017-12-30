@@ -1,0 +1,493 @@
+<% include partials/header %>
+
+<style>
+       #map {
+        height: 800px;
+        width: 90%;
+       }
+    </style>
+    
+<h3>Select your location</h3>
+    <div id="map"></div>
+    <script>
+      function initMap(){
+        // Map options
+        var options = {
+            zoom: 6,
+            maxZoom: 8,
+            minZoom: 5,
+            center: {lat: -41.272, lng: 173.300},
+            scrollwheel: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+            /*styles: styles*/
+        }
+            
+         
+        
+ 
+        // New map
+        var map = new google.maps.Map(document.getElementById('map'), options);
+      
+        // Array of markers
+        var markers = [
+            {
+                coords: {lat: -35.117, lng: 173.268},
+                iconImage: '/images/mapMarkers/letter_k.png',
+                content: '<a href="/studySearch/kaitaia"><h6>Kaitaia</h6></a>'
+            },
+            {
+                coords: {lat: -35.228, lng: 173.948},
+                iconImage: '/images/mapMarkers/letter_k.png',
+                content: '<a href="/studySearch/kerikeri"><h6>Kerikeri</h6></a>'
+            },
+            {
+                coords: {lat: -35.402, lng: 173.504},
+                iconImage: '/images/mapMarkers/letter_r.png',
+                content: '<a href="/studySearch/rawene"><h6>Rawene</h6></a>'
+            },
+            {
+                coords: {lat: -35.407, lng: 173.804},
+                iconImage: '/images/mapMarkers/letter_k.png',
+                content: '<a href="/studySearch/kaikohe"><h6>Kaikohe</h6></a>'
+            },
+            {
+                coords: {lat: -35.725, lng: 174.324},
+                iconImage: '/images/mapMarkers/letter_w.png',
+                content: '<a href="/studySearch/whangarei"><h6>Whangarei</h6></a>'
+            },
+            {
+                coords: {lat: -36.849, lng: 174.763},
+                iconImage: '/images/mapMarkers/letter_a.png',
+                content: '<a href="/studySearch/auckland"><h6>Auckland</h6></a>'
+            },
+            {
+                coords: {lat: -37.138, lng: 175.541},
+                iconImage: '/images/mapMarkers/letter_t.png',
+                content: '<a href="/studySearch/thames"><h6>Thames</h6></a>'
+            },
+            {
+                coords: {lat: -37.688, lng: 176.165},
+                iconImage: '/images/mapMarkers/letter_t.png',
+                content: '<a href="/studySearch/tauranga"><h6>Tauranga</h6></a>'
+            },
+            {
+                coords: {lat: -37.787, lng: 175.279},
+                iconImage: '/images/mapMarkers/letter_h.png',
+                content: '<a href="hamilton"><h6>Hamilton</h6></a>'
+            },
+            {
+                coords: {lat: -37.893, lng: 178.319},
+                iconImage: '/images/mapMarkers/letter_r.png',
+                content: '<a href="/studySearch/ruatoria"><h6>Ruatoria</h6></a>'
+            },
+            {
+                coords: {lat: -37.953, lng: 176.991},
+                iconImage: '/images/mapMarkers/letter_w.png',
+                content: '<a href="/studySearch/whakatane"><h6>Whakatane</h6></a>'
+            },
+            {
+                coords: {lat: -38.129, lng: 178.315},
+                iconImage: '/images/mapMarkers/letter_t.png',
+                content: '<a href="/studySearch/tokomaruBay"><h6>Tokomaru Bay</h6></a>'
+            },
+            {
+                coords: {lat: -38.137, lng: 176.250},
+                iconImage: '/images/mapMarkers/letter_r.png',
+                content: '<a href="/studySearch/rotorua"><h6>Rotorua</h6></a>'
+            },
+            {
+                coords: {lat: -38.189, lng: 175.210},
+                iconImage: '/images/mapMarkers/letter_o.png',
+                content: '<a href="/studySearch/otorohanga"><h6>Otorohanga</h6></a>'
+            },
+            {
+                coords: {lat: -38.218, lng: 175.871},
+                iconImage: '/images/mapMarkers/letter_t.png',
+                content: '<a href="/studySearch/tokoroa"><h6>Tokoroa</h6></a>'
+            },
+            {
+                coords: {lat: -38.662, lng: 178.018},
+                iconImage: '/images/mapMarkers/letter_g.png',
+                content: '<a href="/studySearch/gisborne"><h6>Gisborne</h6></a>'
+            },
+            {
+                coords: {lat: -38.686, lng: 176.070},
+                iconImage: '/images/mapMarkers/letter_t.png',
+                content: '<a href="/studySearch/taupo"><h6>Taupo</h6></a>'
+            },
+            {
+                coords: {lat: -39.035, lng: 177.418},
+                iconImage: '/images/mapMarkers/letter_w.png',
+                content: '<a href="/studySearch/wairoa"><h6>Wairoa</h6></a>'
+            },
+            {
+                coords: {lat: -39.056, lng: 174.075},
+                iconImage: '/images/mapMarkers/letter_n.png',
+                content: '<a href="/studySearch/newPlymouth"><h6>New Plymouth</h6></a>'
+            },
+            {
+                coords: {lat: -39.337, lng: 174.284},
+                iconImage: '/images/mapMarkers/letter_s.png',
+                content: '<a href="/studySearch/stratford"><h6>Stratford</h6></a>'
+            },
+            {
+                coords: {lat: -39.588, lng: 174.279},
+                iconImage: '/images/mapMarkers/letter_h.png',
+                content: '<a href="/studySearch/hawera"><h6>Hawera</h6></a>'
+            },
+            {
+                coords: {lat: -39.493, lng: 176.912},
+                iconImage: '/images/mapMarkers/letter_n.png',
+                content: '<a href="/studySearch/napier"><h6>Napier</h6></a>'
+            },
+            {
+                coords: {lat: -39.640, lng: 176.839},
+                iconImage: '/images/mapMarkers/letter_h.png',
+                content: '<a href="/studySearch/hastings"><h6>Hastings</h6></a>'
+            },
+            {
+                coords: {lat: -39.930, lng: 175.048},
+                iconImage: '/images/mapMarkers/letter_w.png',
+                content: '<a href="/studySearch/whanganui"><h6>Whanganui</h6></a>'
+            },
+            {
+                coords: {lat: -39.996, lng: 176.557},
+                iconImage: '/images/mapMarkers/letter_w.png',
+                content: '<a href="/studySearch/waipukurau"><h6>Waipukurau</h6></a>'
+            },
+            {
+                coords: {lat: -40.352, lng: 175.608},
+                iconImage: '/images/mapMarkers/letter_p.png',
+                content: '<a href="/studySearch/palmerstonNorth"><h6>Palmerston North</h6></a>'
+            },
+            {
+                coords: {lat: -40.622, lng: 175.286},
+                iconImage: '/images/mapMarkers/letter_l.png',
+                content: '<a href="/studySearch/levin"><h6>Levin</h6></a>'
+            },
+            {
+                coords: {lat: -40.914, lng: 175.008},
+                iconImage: '/images/mapMarkers/letter_p.png',
+                content: '<a href="/studySearch/paraparaumu"><h6>Paraparaumu</h6></a>'
+            },
+            {
+                coords: {lat: -40.951, lng: 175.657},
+                iconImage: '/images/mapMarkers/letter_m.png',
+                content: '<a href="/studySearch/masterton"><h6>Masterton</h6></a>'
+            },
+            {
+                coords: {lat: -41.134, lng: 174.841},
+                iconImage: '/images/mapMarkers/letter_p.png',
+                content: '<a href="/studySearch/porirua"><h6>Porirua</h6></a>'
+            },
+            {
+                coords: {lat: -41.209, lng: 174.908},
+                iconImage: '/images/mapMarkers/letter_l.png',
+                content: '<a href="/studySearch/lowerHutt"><h6>Lower Hutt</h6></a>'
+            },
+            {
+                coords: {lat: -41.286, lng: 174.776},
+                iconImage: '/images/mapMarkers/letter_w.png',
+                content: '<a href="/studySearch/wellington"><h6>Wellington</h6></a>'
+            },
+            {
+                coords: {lat: -41.271, lng: 173.284},
+                iconImage: '/images/mapMarkers/letter_n.png',
+                content: '<a href="/studySearch/nelson"><h6>Nelson</h6></a>'
+            },
+            {
+                coords: {lat: -41.513, lng: 173.961},
+                iconImage: '/images/mapMarkers/letter_b.png',
+                content: '<a href="/studySearch/blenheim"><h6>Blenheim</h6></a>'
+            },
+            {
+                coords: {lat: -41.754, lng: 171.606},
+                iconImage: '/images/mapMarkers/letter_w.png',
+                content: '<a href="/studySearch/westport"><h6>Westport</h6></a>'
+            },
+            {
+                coords: {lat: -42.115, lng: 171.862},
+                iconImage: '/images/mapMarkers/letter_r.png',
+                content: '<a href="/studySearch/reefton"><h6>Reefton</h6></a>'
+            },
+            {
+                coords: {lat: -42.450, lng: 171.210},
+                iconImage: '/images/mapMarkers/letter_g.png',
+                content: '<a href="/studySearch/greymouth"><h6>Greymouth</h6></a>'
+            },
+            {
+                coords: {lat: -42.717, lng: 170.966},
+                iconImage: '/images/mapMarkers/letter_h.png',
+                content: '<a href="/studySearch/hokitika"><h6>Hokitika</h6></a>'
+            },
+            {
+                coords: {lat: -43.532, lng: 172.636},
+                iconImage: '/images/mapMarkers/letter_c.png',
+                content: '<a href="/studySearch/christchurch"><h6>Christchurch</h6></a>'
+            },
+            {
+                coords: {lat: -43.908, lng: 171.748},
+                iconImage: '/images/mapMarkers/letter_a.png',
+                content: '<a href="/studySearch/ashburton"><h6>Ashburton</h6></a>'
+            },
+            {
+                coords: {lat: -44.397, lng: 171.254},
+                iconImage: '/images/mapMarkers/letter_t.png',
+                content: '<a href="/studySearch/timaru"><h6>Timaru</h6></a>'
+            },
+            {
+                coords: {lat: -44.703, lng: 169.132},
+                iconImage: '/images/mapMarkers/letter_w.png',
+                content: '<a href="/studySearch/wanaka"><h6>Wanaka</h6></a>'
+            },
+            {
+                coords: {lat: -45.031, lng: 168.663},
+                iconImage: '/images/mapMarkers/letter_q.png',
+                content: '<a href="/studySearch/queenstown"><h6>Queenstown</h6></a>'
+            },
+            {
+                coords: {lat: -45.034, lng: 169.202},
+                iconImage: '/images/mapMarkers/letter_c.png',
+                content: '<a href="/studySearch/cromwell"><h6>Cromwell</h6></a>'
+            },
+            {
+                coords: {lat: -45.098, lng: 170.970},
+                iconImage: '/images/mapMarkers/letter_o.png',
+                content: '<a href="/studySearch/oamaru"><h6>Oamaru</h6></a>'
+            },
+            {
+                coords: {lat: -45.879, lng: 170.502},
+                iconImage: '/images/mapMarkers/letter_d.png',
+                content: '<a href="/studySearch/dunedin"><h6>Dunedin</h6></a>'
+            },
+            {
+                coords: {lat: -46.099, lng: 168.946},
+                iconImage: '/images/mapMarkers/letter_g.png',
+                content: '<a href="/studySearch/gore"><h6>Gore</h6></a>'
+            },
+            {
+                coords: {lat: -46.239, lng: 169.737},
+                iconImage: '/images/mapMarkers/letter_b.png',
+                content: '<a href="/studySearch/balclutha"><h6>Balclutha</h6></a>'
+            },
+            {
+                coords: {lat: -46.418, lng: 168.354},
+                iconImage: '/images/mapMarkers/letter_i.png',
+                content: '<a href="/studySearch/invercargill"><h6>Invercargill</h6></a>'
+            }
+            ]  
+        
+        // Loop through markers    
+        for(var i = 0; i < markers.length; i++){
+          addMarker(markers[i]);
+        }  
+        
+        //Add marker function
+        function addMarker(props){
+            var marker = new google.maps.Marker({
+                position: props.coords,
+                map: map
+            });
+          
+            // Check for custom icon   
+            if(props.iconImage){
+               //Set icon image
+               marker.setIcon(props.iconImage);
+            }
+                
+            if(props.content){
+                var infoWindow = new google.maps.InfoWindow({
+                content: props.content 
+            });
+            
+            marker.addListener('click', function(){
+                infoWindow.open(map, marker);
+            });
+        }
+      }
+    }
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key= AIzaSyCXXawr3FmnkIOO6Fz7zrRvcoUxzLEhUj0 &callback=initMap">
+</script>
+
+<% include partials/footer %>
+
+<!--var Kaitaia = {
+            coords = {lat: -35.117, lng: 173.268}
+        }
+        var Kerikeri = {
+            coords = {lat: -35.228, lng: 173.948}
+        }
+        var Rawene = {
+            coords = {lat: -35.402, lng: 173.504}
+        }
+        var Kaikohe = {
+            coords = {lat: -35.407, lng: 173.804}
+        }
+        var Whangarei = {
+            coords = {lat: -35.725, lng: 174.324}
+        }
+        var Auckland = {
+            coords = {lat: -36.849, lng: 174.763}
+        }
+        var Thames = {
+            coords = {lat: -37.138, lng: 175.541}
+        }  
+        var Tauranga = {
+            coords = {lat: -37.688, lng: 176.165}
+        }  
+        var Hamilton = {
+            coords = {lat: -37.787, lng: 175.279}
+        }
+        var Ruatoria = {
+            coords = {lat: -37.893, lng: 178.319}
+        }
+        var Whakatane = {
+            coords = {lat: -37.953, lng: 176.991}
+        }
+        var Tokomaru_Bay = {
+            coords = {lat: -38.129, lng: 178.315}
+        }
+        var Rotorua = {
+            coords = {lat: -38.137, lng: 176.250}
+        }
+        var Otorohanga = {
+            coords = {lat: -38.189, lng: 175.210}
+        }
+        var Tokoroa = {
+            coords = {lat: -38.218, lng: 175.871}
+        }
+        var Gisborne = {
+            coords = {lat: -38.662, lng: 178.018}
+        }
+        var Taupo = {
+            coords = {lat: -38.686, lng: 176.070}
+        }
+        var Wairoa = {
+            coords = {lat: -39.035, lng: 177.418}
+        }
+        var New_Plymouth = {
+            coords = {lat: -39.056, lng: 174.075}
+        }
+        var Stratford = {
+            coords = {lat: -39.337, lng: 174.284}
+        }
+        var Hawera = {
+            coords = {lat: -39.588, lng: 174.279}
+        }
+        var Napier = {
+            coords = {lat: -39.493, lng: 176.912}
+        }
+        var Hastings = {
+            coords = {lat: -39.640, lng: 176.839}
+        }
+        var Whanganui = {
+            coords = {lat: -39.930, lng: 175.048}
+        }
+        var Waipukurau = {
+            coords = {lat: -39.996, lng: 176.557}
+        }
+        var Palmerston_North = {
+            coords = {lat: -40.352, lng: 175.608}
+        }
+        var Levin = {
+            coords = {lat: -40.622, lng: 175.286}
+        }
+        var Paraparaumu = {
+            coords = {lat: -40.914, lng: 175.008}
+        }
+        var Masterton = {
+            coords = {lat: -40.951, lng: 175.657}
+        }
+        var Porirua = {
+            coords = {lat: -41.134, lng: 174.841}
+        }
+        var Lower_Hutt = {
+            coords = {lat: -41.209, lng: 174.908}
+        }
+        var Wellington = {
+            coords = {lat: -41.286, lng: 174.776}
+        }
+        var Nelson = {
+            coords = {lat: -41.271, lng: 173.284}
+        }
+        var Blenheim = {
+            coords = {lat: -41.513, lng: 173.961}
+        }
+        var Westport = {
+            coords = {lat: -41.754, lng: 171.606}
+        }
+        var Reefton = {
+            coords = {lat: -42.115, lng: 171.862}
+        }
+        var Greymouth = {
+            coords = {lat: -42.450, lng: 171.210}
+        }
+        var Hokitika = {
+            coords = {lat: -42.717, lng: 170.966}
+        }
+        var Christchurch = {
+            coords = {lat: -43.532, lng: 172.636}
+        }
+        var Ashburton = {
+            coords = {lat: -43.908, lng: 171.748}
+        }
+        var Timaru = {
+            coords = {lat: -44.397, lng: 171.254}
+        }
+        var Wanaka = {
+            coords = {lat: -44.703, lng: 169.132}
+        }
+        var Queenstown = {
+            coords = {lat: -45.031, lng: 168.663}
+        }
+        var Cromwell = {
+            coords = {lat: -45.034, lng: 169.202}
+        }
+        var Oamaru = {
+            coords = {lat: -45.098, lng: 170.970}
+        }
+        var Dunedin = {
+            coords = {lat: -45.879, lng: 170.502}
+        }
+        var Balclutha = {
+            coords = {lat: -46.239, lng: 169.737}
+        }
+        var Gore = {
+            coords = {lat: -46.099, lng: 168.946}
+        }
+        var Invercargill = {
+            coords = {lat: -46.418, lng: 168.354}
+        }-->
+        
+<!--var styles = [{
+    featureType: 'all',
+    elementType: 'labels',
+    stylers: [{visibility: 'off'}]
+},{
+    featureType: 'water',
+    elementType: 'geometry',
+    stylers: [{color: '#3498db'}]
+},{
+   featureType: 'landscape',
+   elementType: 'geometry',
+   stylers: [{color: '#27ae60'}]
+},{
+   featureType: 'poi',
+   elementType: 'geometry',
+   stylers: [{color: '#27ae60'}] 
+},{
+   featureType: 'transit',
+   elementType: 'geometry',
+   stylers: [{color: '#27ae60'}]
+},{
+   featureType: 'road.highway',
+   elementType: 'geometry',
+   stylers: [{color: '#34495e'}]
+},{
+   featureType: 'road.arterial',
+   elementType: 'geometry',
+   stylers: [{color: '#ecf0f1'}]
+}]
+-->

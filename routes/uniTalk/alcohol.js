@@ -1,7 +1,7 @@
 var express           = require("express"),
     router            = express(),
     timestamp         = require('time-stamp'),
-    Alcohol            = require("../../app/models/uniTalk/alcohol"),
+    Alcohol           = require("../../app/models/uniTalk/alcohol"),
     middleware        = require("../../middleware"),
     uniTalkMiddleware = require("../../middleware/uniTalk");
 

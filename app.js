@@ -13,13 +13,18 @@ var express          = require('express'),
     passport         = require('passport'),
     methodOverride   = require('method-override'),
     User             = require('./app/models/user');
+ 
+// Content Filter    
+var filter = require('content-filter');
+app.use(filter());
     
 //Require Routes
-var commentRoutes    = require('./routes/comments'),
-    topicRoutes      = require('./routes/topics'),
-    indexRoutes      = require('./routes/index'),
-    blogRoutes       = require('./routes/blog'),
-    emailRoutes      = require('./routes/email');
+var commentRoutes     = require('./routes/comments'),
+    topicRoutes       = require('./routes/topics'),
+    indexRoutes       = require('./routes/index'),
+    studySearchRoutes = require('./routes/studySearch'), //Update to correct section
+    blogRoutes        = require('./routes/blog'),
+    emailRoutes       = require('./routes/email');
     
 // Uni Talk routes - require    
 /*var uniTalkRoutes    = require('./routes/uniTalk');*/
@@ -144,6 +149,7 @@ app.use(function(req, res, next){
 
 // Use Routes
 app.use("/", indexRoutes);
+app.use("/", studySearchRoutes);
 app.use("/home", indexRoutes);
 app.use("/blog", blogRoutes);
 app.use("/topics", topicRoutes);

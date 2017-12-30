@@ -1,0 +1,209 @@
+<% include ../partials/header %>
+
+<h1>Auckland</h1>
+
+<style>
+       #map {
+        height: 600px;
+        width: 90%;
+       }
+    </style>
+
+    <div id="map"></div>
+    <script>
+      function initMap(){
+        // Map options
+        var options = {
+            zoom: 11,
+            maxZoom: 20,
+            minZoom: 9,
+            center: {lat: -36.861, lng: 174.752},
+            scrollwheel: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+            /*styles: styles*/
+        }
+ 
+        // New map
+        var map = new google.maps.Map(document.getElementById('map'), options);
+      
+        // Array of markers
+        var markers = [
+            {
+                coords: {lat: -36.852336, lng: 174.769106},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="https://www.auckland.ac.nz/en.html" target="_blank"><h6>University of Auckland - City Campus</h6></a>'
+            },{
+                coords: {lat: -36.882493, lng: 174.851637},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>University of Auckland - Tamaki Innovation Campus</h6></a>'
+            },{
+                coords: {lat: -36.865879, lng: 174.773287},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>University of Auckland - Newmarket Campus</h6></a>'
+            },{
+                coords: {lat: -36.882579, lng: 174.766495},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>University of Auckland - Epsom Campus</h6></a>'
+            },{
+                coords: {lat: -36.861783, lng: 174.769578},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>University of Auckland - Grafton Campus</h6></a>'
+            },{
+                coords: {lat: -36.270110, lng: 174.795855},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>University of Auckland - Leigh Marine Laboratory</h6></a>'
+            },{
+                coords: {lat: -36.780223, lng: 174.754602},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>University of Auckland - Waitemata Health Campus</h6></a>'
+            },{
+                coords: {lat: -36.860883, lng: 174.770339},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>University of Auckland - South Auckland Clinical Campus</h6></a>'
+            },{
+                coords: {lat: -36.732388, lng: 174.702742},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Massey University - Albany</h6></a>'
+            },{
+                coords: {lat: -36.847541, lng: 174.76551},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>NorthTec - Auckland International - Auckland Campus</h6></a>'
+            },{
+                coords: {lat: -36.867662, lng: 174.778504},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>NorthTec - Auckland International - Newmarket Campus</h6></a>'
+            },{
+                coords: {lat: -36.797890, lng: 174.758316},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Auckland University of Technology (AUT) - North Campus</h6></a>'
+            },{
+                coords: {lat: -36.853554, lng: 174.765822},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Auckland University of Technology (AUT) - City Campus</h6></a>'
+            },{
+                coords: {lat: -36.985490, lng: 174.881869},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Auckland University of Technology (AUT) - South Campus</h6></a>'
+            },{
+                coords: {lat: -36.954777, lng: 174.872765},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Manukau Institute of Technology (MIT) - Otara Campus</h6></a>'
+            },{
+                coords: {lat: -36.843919, lng: 174.769015},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Manukau Institute of Technology (MIT) - New Zealand Maritime School</h6></a>'
+            },{
+                coords: {lat: -36.849939, lng: 174.765379},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Manukau Institute of Technology (MIT) - Central Campus</h6></a>'
+            },{
+                coords: {lat: -36.943206, lng: 174.793041},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Manukau Institute of Technology (MIT) - Mangere Campus</h6></a>'
+            },{
+                coords: {lat: -36.993965, lng: 174.877144},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Manukau Institute of Technology (MIT) - Manukau Campus</h6></a>'
+            },{
+                coords: {lat: -36.880128, lng: 174.706728},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Unitec - Mt Albert Campus</h6></a>'
+            },{
+                coords: {lat: -36.878690, lng: 174.632859},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Unitec - Waitakere Campus</h6></a>'
+            },{
+                coords: {lat: -36.864465, lng: 174.771581},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>The Mind Lab by Unitec</h6></a>'
+            },{
+                coords: {lat: -36.868333, lng: 174.778384},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>UCOL Institute of Commercial Photography</h6></a>'
+            },{
+                coords: {lat: -36.849633, lng: 174.765338},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Eastern Institute of Technology - Auckland</h6></a>'
+            },{
+                coords: {lat: -36.852749, lng: 174.764245},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Wellington Institute of Technology (Weltec) - Auckland</h6></a>'
+            },{
+                coords: {lat: -36.855266, lng: 174.762769},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Whiteria New Zealand - Auckland Campus</h6></a>'
+            },{
+                coords: {lat: -36.853537, lng: 174.764268},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>The Open Polytechnic of New Zealand - Auckland</h6></a>'
+            },{
+                coords: {lat: -36.848162, lng: 174.767763},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Victoria University of Wellington - Auckland</h6></a>'
+            },{
+                coords: {lat: -36.860841, lng: 174.760300},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Nelson Marlborough Institute of Technology (NMIT) - Auckland</h6></a>'
+            },{
+                coords: {lat: -36.971487, lng: 174.776087},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Tai Poutini Polytechnic - Trades Auckland</h6></a>'
+            },{
+                coords: {lat: -36.847947, lng: 174.759375},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Tai Poutini Polytechnic - Mainz Auckland</h6></a>'
+            },{
+                coords: {lat: -36.855962, lng: 174.762162},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>University of Otago - Auckland Campus</h6></a>'
+            },{
+                coords: {lat: -36.852022, lng: 174.764416},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Otago Polytechnic - Auckland</h6></a>'
+            },{
+                coords: {lat: -36.849669, lng: 174.765422},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="#" target="_blank"><h6>Southern Institute of Technology (SIT) - Auckland</h6></a>'
+            }]  
+            
+        // Loop through markers    
+        for(var i = 0; i < markers.length; i++){
+          addMarker(markers[i]);
+        }  
+        
+        //Add marker function
+        function addMarker(props){
+            var marker = new google.maps.Marker({
+                position: props.coords,
+                map: map
+            });
+          
+            // Check for custom icon   
+            if(props.iconImage){
+               //Set icon image
+               marker.setIcon(props.iconImage);
+            }
+                
+            if(props.content){
+                var infoWindow = new google.maps.InfoWindow({
+                content: props.content 
+            });
+            
+            marker.addListener('click', function(){
+                infoWindow.open(map, marker);
+            });
+            
+        
+        }
+      }
+    }
+    var markerCluster = new MarkerClusterer(map, markers, {imagePath: '/images/mapMarkers/m1.png'});  <!--// CHECK THIS-->
+</script>
+<script src="/maps/markerclusterer.js"></script> <!--// CHECK THIS-->
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key= AIzaSyCXXawr3FmnkIOO6Fz7zrRvcoUxzLEhUj0 &callback=initMap">
+</script>
+
+
+
+<% include ../partials/footer %>

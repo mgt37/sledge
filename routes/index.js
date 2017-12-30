@@ -13,6 +13,9 @@ router.get("/blog", function(req, res){res.render("blog");});
 // Uni Talk page route
 router.get("/uniTalk", function(req, res){res.render("uniTalk");});
 
+// Study search page route
+router.get("/studySearch", function(req, res){res.render("studySearch");});
+
 // Show our vision page
 router.get("/our_vision", function(req, res){res.render("our_vision");});
 
