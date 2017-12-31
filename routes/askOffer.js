@@ -1,42 +1,42 @@
 var express    = require("express"),
     router     = express();
 
-router.get("/askOffer/northlandRegion", function(req, res){res.render("askOffer/northlandRegion");});
+router.get("/askOffer/northlandRegion/index", function(req, res){res.render("askOffer/northlandRegion/index");});
 
-router.get("/askOffer/auckland", function(req, res){res.render("askOffer/auckland");});
+router.get("/askOffer/auckland/index", function(req, res){res.render("askOffer/auckland/index");});
 
-router.get("/askOffer/waikatoRegion", function(req, res){res.render("askOffer/waikatoRegion");});
+router.get("/askOffer/waikatoRegion/index", function(req, res){res.render("askOffer/waikatoRegion/index");});
 
-router.get("/askOffer/bayOfPlentyRegion", function(req, res){res.render("askOffer/bayOfPlentyRegion");});
+router.get("/askOffer/bayOfPlentyRegion/index", function(req, res){res.render("askOffer/bayOfPlentyRegion/index");});
 
-router.get("/askOffer/hamilton", function(req, res){res.render("askOffer/hamilton");});
+router.get("/askOffer/hamilton/index", function(req, res){res.render("askOffer/hamilton/index");});
 
-router.get("/askOffer/gisborneRegion", function(req, res){res.render("askOffer/gisborneRegion");});
+router.get("/askOffer/gisborneRegion/index", function(req, res){res.render("askOffer/gisborneRegion/index");});
 
-router.get("/askOffer/taranakiRegion", function(req, res){res.render("askOffer/taranakiRegion");});
+router.get("/askOffer/taranakiRegion/index", function(req, res){res.render("askOffer/taranakiRegion/index");});
 
-router.get("/askOffer/hawkesBayRegion", function(req, res){res.render("askOffer/hawkesBayRegion");});
+router.get("/askOffer/hawkesBayRegion/index", function(req, res){res.render("askOffer/hawkesBayRegion/index");});
 
-router.get("/askOffer/manawatuWanganuiRegion", function(req, res){res.render("askOffer/manawatuWanganuiRegion");});
+router.get("/askOffer/manawatuWanganuiRegion/index", function(req, res){res.render("askOffer/manawatuWanganuiRegion/index");});
 
-router.get("/askOffer/wellingtonRegion", function(req, res){res.render("askOffer/wellingtonRegion");});
+router.get("/askOffer/wellingtonRegion/index", function(req, res){res.render("askOffer/wellingtonRegion");});
 
-router.get("/askOffer/wellington", function(req, res){res.render("askOffer/wellington");});
+router.get("/askOffer/wellington/index", function(req, res){res.render("askOffer/wellington/index");});
 
-router.get("/askOffer/nelsonMarlboroughRegion", function(req, res){res.render("askOffer/nelsonMarlboroughRegion");});
+router.get("/askOffer/nelsonMarlboroughRegion/index", function(req, res){res.render("askOffer/nelsonMarlboroughRegion/index");});
 
-router.get("/askOffer/westCoastRegion", function(req, res){res.render("askOffer/westCoastRegion");});
+router.get("/askOffer/westCoastRegion/index", function(req, res){res.render("askOffer/westCoastRegion/index");});
 
-router.get("/askOffer/christchurch", function(req, res){res.render("askOffer/christchurch");});
+router.get("/askOffer/christchurch/index", function(req, res){res.render("askOffer/christchurch/index");});
 
-router.get("/askOffer/southCanterbury", function(req, res){res.render("askOffer/southCanterbury");});
+router.get("/askOffer/southCanterbury/index", function(req, res){res.render("askOffer/southCanterbury/index");});
 
-router.get("/askOffer/centralOtago", function(req, res){res.render("askOffer/centralOtago");});
+router.get("/askOffer/centralOtago/index", function(req, res){res.render("askOffer/centralOtago/index");});
 
-router.get("/askOffer/coastalOtago", function(req, res){res.render("askOffer/coastalOtago");});
+router.get("/askOffer/coastalOtago/index", function(req, res){res.render("askOffer/coastalOtago/index");});
 
-router.get("/askOffer/dunedin", function(req, res){res.render("askOffer/dunedin");});
+router.get("/askOffer/dunedin/index", function(req, res){res.render("askOffer/dunedin/index");});
 
-router.get("/askOffer/southlandRegion", function(req, res){res.render("askOffer/southlandRegion");});
+router.get("/askOffer/southlandRegion/index", function(req, res){res.render("askOffer/southlandRegion/index");});
 
 module.exports = router;
