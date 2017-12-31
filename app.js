@@ -1,6 +1,7 @@
 //Load dependencies
 var express          = require('express'),
     app              = express(),
+    google           = require('google'),
     mongoose         = require('mongoose'),
     flash            = require("connect-flash"),
     morgan           = require('morgan'),
@@ -22,7 +23,8 @@ app.use(filter());
 var commentRoutes     = require('./routes/comments'),
     topicRoutes       = require('./routes/topics'),
     indexRoutes       = require('./routes/index'),
-    studySearchRoutes = require('./routes/studySearch'), //Update to correct section
+    askOfferRoutes    = require('./routes/askOffer'),
+    studySearchRoutes = require('./routes/studySearch'),
     blogRoutes        = require('./routes/blog'),
     emailRoutes       = require('./routes/email');
     
@@ -149,6 +151,7 @@ app.use(function(req, res, next){
 
 // Use Routes
 app.use("/", indexRoutes);
+app.use("/", askOfferRoutes);
 app.use("/", studySearchRoutes);
 app.use("/home", indexRoutes);
 app.use("/blog", blogRoutes);
