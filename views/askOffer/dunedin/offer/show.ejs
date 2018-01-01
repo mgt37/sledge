@@ -1,0 +1,31 @@
+<% include ../../../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="thumbnail">
+                <div class="caption-full">
+                    <h4><a><%= dunedinOffer.title %></a></h4>
+                    <p><%= dunedinOffer.body %></p>
+                    <p>
+                        <em>Submitted by <%= dunedinOffer.author.username %></em>
+                    </p>
+                    <% if(currentUser && dunedinOffer.author.id.equals(currentUser._id)){ %>
+                        <a class="btn btn-xs btn-warning" href="/askOffer/dunedin/offer/<%= dunedinOffer._id %>/edit">Edit</a>
+                        <form id="delete-form" action="/askOffer/dunedin/offer/<%= dunedinOffer._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-danger">Delete</button>
+                        </form>
+                        <a class="btn btn-primary btn-sm btn-block" href="#">Send email</a>
+                    <% } %>
+                </div>
+            </div>
+            <div>
+                    
+            </div>
+            
+            <div class= "text-right">
+                    <a class="btn btn-info" href="/askOffer/dunedin/offer/">Return to all offers</a>
+            </div>
+        </div>
+    </div>
+</div>
+<% include ../../../partials/footer %>

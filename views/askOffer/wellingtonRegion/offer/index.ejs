@@ -1,0 +1,28 @@
+<% include ../../../partials/header %>
+
+<div class="container">
+    <a class="btn btn-info" href="/askOffer/wellingtonRegion/index">Return to index page</a>
+    <a class="btn btn-info" href="/askOffer">Return to start page</a>
+       <div class="container">
+           <h1>Offer</h1>
+       </div>
+       <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% wellingtonRegionOffer.reverse().forEach(function(wellingtonRegionOffer){ %>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h4><%= wellingtonRegionOffer.title %></h4>
+                    </div>
+                    <div class="description">
+                        <p><%- wellingtonRegionOffer.body.substring(0, 100) %>...</p>
+                    </div>
+                    <p>
+                        <a href="/askOffer/wellingtonRegion/offer/<%= wellingtonRegionOffer._id %>" class="btn btn-primary">Read offer</a>
+                    </p>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<% include ../../../partials/footer %>

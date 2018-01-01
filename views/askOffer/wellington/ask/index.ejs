@@ -1,0 +1,28 @@
+<% include ../../../partials/header %>
+
+<div class="container">
+    <a class="btn btn-info" href="/askOffer/wellington/index">Return to index page</a>
+    <a class="btn btn-info" href="/askOffer">Return to start page</a>
+       <div class="container">
+           <h1>Ask</h1>
+       </div>
+       <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% wellingtonAsk.reverse().forEach(function(wellingtonAsk){ %>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h4><%= wellingtonAsk.title %></h4>
+                    </div>
+                    <div class="description">
+                        <p><%- wellingtonAsk.body.substring(0, 100) %>...</p>
+                    </div>
+                    <p>
+                        <a href="/askOffer/wellington/ask/<%= wellingtonAsk._id %>" class="btn btn-primary">Read ask</a>
+                    </p>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<% include ../../../partials/footer %>

@@ -1,0 +1,23 @@
+<% include ../../../partials/header %>
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center">Edit <%= christchurchOffer.name %></h1>
+        <div style="width: 66.667%; margin: 25px auto;">
+            <form action="/askOffer/christchurch/offer/<%= christchurchOffer._id %>?_method=PUT" method="POST">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input class="form-control" type="text" name="christchurchOffer[title]" value="<%= christchurchOffer.title %>">
+                </div>
+                <div class="form-group">
+                    <label>Content</label>
+                    <textarea class="form-control" rows="10" name="christchurchOffer[body]"><%= christchurchOffer.body %></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Submit</button>
+                </div>
+            </form>
+            <a href="/askOffer/christchurch/offer/<%= christchurchOffer._id %>">Go Back</a>
+        </div>
+    </div>
+</div>
+<% include ../../../partials/footer %>
