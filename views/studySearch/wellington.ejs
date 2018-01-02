@@ -2,7 +2,125 @@
 
 <h1>Wellington</h1>
 
-<p>Nothing has been added to this page yet.</p>
+<style>
+       #map {
+        height: 600px;
+        width: 90%;
+       }
+</style>
 
+    <div id="map"></div>
+    <script>
+      function initMap(){
+        // Map options
+        var options = {
+            zoom: 14,
+            maxZoom: 17,
+            minZoom: 11,
+            center: {lat: -41.294, lng: 174.763},
+            scrollwheel: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+            /*styles: styles*/
+        }
+ 
+        // New map
+        var map = new google.maps.Map(document.getElementById('map'), options);
+      
+        // Array of markers
+        var markers = [
+            {
+                coords: {lat: -41.290377, lng: 174.768661},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="https://www.victoria.ac.nz/about/explore-victoria/campuses/kelburn" target="_blank"><p>Victoria University of Wellington - Kelburn Campus</p></a>'
+            },{
+                coords: {lat: -41.278885, lng: 174.778926},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="https://www.victoria.ac.nz/about/explore-victoria/campuses/pipitea" target="_blank"><p><Victoria University of Wellington - Pipitea Campus/p></a>'
+            },{
+                coords: {lat: -41.295500, lng: 174.775618},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="https://www.victoria.ac.nz/about/explore-victoria/campuses/te-aro" target="_blank"><p>Victoria University of Wellington - Te Aro Campus</p></a>'
+            },{
+                coords: {lat: -41.301130, lng: 174.776586},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="http://www.massey.ac.nz/massey/student-life/about-our-campuses/wellington-campus/wellington-campus_home.cfm" target="_blank"><p>Massey University - Wellington</p></a>'
+            },{
+                coords: {lat: -41.309776, lng: 174.780819},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="http://www.otago.ac.nz/wellington/index.html" target="_blank"><p>University of Otago - Wellington School of Medicine and Health Sciences</p></a>'
+            },{
+                coords: {lat: -41.290583, lng: 174.776979},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="https://www.weltec.ac.nz/" target="_blank"><p>Wellington Institute of Technology (Weltec) - School of Hospitality</p></a>'
+            },{
+                coords: {lat: -41.287946, lng: 174.773031},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="https://www.weltec.ac.nz/" target="_blank"><p>Wellington Institute of Technology (Weltec) - Church Street</p></a>'
+            },{
+                coords: {lat: -41.291814, lng: 174.776341},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="https://www.weltec.ac.nz/" target="_blank"><p>Wellington Institute of Technology (Weltec) - Te Kāhui Auaha</p></a>'
+            },{
+                coords: {lat: -41.292419, lng: 174.778326},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="https://www.wellingtonict.ac.nz/" target="_blank"><p>Wellington Institute of Technology (Weltec) - Wellington ICT Graduate School</p></a>'
+            },{
+                coords: {lat: -41.292494, lng: 174.778103},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="http://www.radioschool.co.nz/" target="_blank"><p>Whitireia New Zealand - The New Zealand Radio Training School</p></a>'
+            },{
+                coords: {lat: -41.295542, lng: 174.778169},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="http://www.filmschool.org.nz/" target="_blank"><p>Whitireia New Zealand - The New Zealand Film and Television School</p></a>'
+            },{
+                coords: {lat: -41.296664, lng: 174.780468},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="https://www.whitireia.ac.nz/about-us/where-we-are/performance-centre/" target="_blank"><p>Whitireia New Zealand - Wellington Performing Arts Centre</p></a>'
+            },{
+                coords: {lat: -41.285932, lng: 174.774737},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="http://www.computerpowerplus.ac.nz/" target="_blank"><p>Whitireia New Zealand - Computer Power Plus - Wellington</p></a>'
+            },{
+                coords: {lat: -41.284649, lng: 174.773909},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="https://www.openpolytechnic.ac.nz/" target="_blank"><p>The Open Polytechnic of New Zealand</p></a>'
+            }] 
+            
+        // Loop through markers    
+        for(var i = 0; i < markers.length; i++){
+          addMarker(markers[i]);
+        }  
+        
+        //Add marker function
+        function addMarker(props){
+            var marker = new google.maps.Marker({
+                position: props.coords,
+                map: map
+            });
+          
+            // Check for custom icon   
+            if(props.iconImage){
+               //Set icon image
+               marker.setIcon(props.iconImage);
+            }
+                
+            if(props.content){
+                var infoWindow = new google.maps.InfoWindow({
+                content: props.content 
+            });
+            
+            marker.addListener('click', function(){
+                infoWindow.open(map, marker);
+            });
+            
+        /*var markerCluster = new MarkerClusterer(map, markers, {imagePath: '/images/mapMarkers/m1.png'});*/  <!--// CHECK THIS-->
+        }
+      }
+    }
+</script>
+<script src="/maps/markerclusterer.js"></script> <!--// CHECK THIS-->
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key= AIzaSyCXXawr3FmnkIOO6Fz7zrRvcoUxzLEhUj0 &callback=initMap">
+</script>
 
 <% include ../partials/footer %>

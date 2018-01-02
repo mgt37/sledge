@@ -2,7 +2,73 @@
 
 <h1>Waipukurau</h1>
 
-<p>Nothing has been added to this page yet.</p>
+<style>
+       #map {
+        height: 500px;
+        width: 90%;
+       }
+</style>
 
+    <div id="map"></div>
+    <script>
+      function initMap(){
+        // Map options
+        var options = {
+            zoom: 14,
+            maxZoom: 17,
+            minZoom: 12,
+            center: {lat: -39.995, lng: 176.553},
+            scrollwheel: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+            /*styles: styles*/
+        }
+ 
+        // New map
+        var map = new google.maps.Map(document.getElementById('map'), options);
+      
+        // Array of markers
+        var markers = [
+            {
+                coords: {lat: -39.993993, lng: 176.55328},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="https://www.eit.ac.nz/campus/central-hb-learning-centre/" target="_blank"><p>Eastern Institute of Technology - Central Hawkes Bay Learning Centre</p></a>'
+            }] 
+            
+        // Loop through markers    
+        for(var i = 0; i < markers.length; i++){
+          addMarker(markers[i]);
+        }  
+        
+        //Add marker function
+        function addMarker(props){
+            var marker = new google.maps.Marker({
+                position: props.coords,
+                map: map
+            });
+          
+            // Check for custom icon   
+            if(props.iconImage){
+               //Set icon image
+               marker.setIcon(props.iconImage);
+            }
+                
+            if(props.content){
+                var infoWindow = new google.maps.InfoWindow({
+                content: props.content 
+            });
+            
+            marker.addListener('click', function(){
+                infoWindow.open(map, marker);
+            });
+            
+        /*var markerCluster = new MarkerClusterer(map, markers, {imagePath: '/images/mapMarkers/m1.png'});*/  <!--// CHECK THIS-->
+        }
+      }
+    }
+</script>
+<script src="/maps/markerclusterer.js"></script> <!--// CHECK THIS-->
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key= AIzaSyCXXawr3FmnkIOO6Fz7zrRvcoUxzLEhUj0 &callback=initMap">
+</script>
 
 <% include ../partials/footer %>

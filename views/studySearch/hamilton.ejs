@@ -2,7 +2,89 @@
 
 <h1>Hamilton</h1>
 
-<p>Nothing has been added to this page yet.</p>
+<style>
+       #map {
+        height: 600px;
+        width: 90%;
+       }
+</style>
 
+    <div id="map"></div>
+    <script>
+      function initMap(){
+        // Map options
+        var options = {
+            zoom: 13,
+            maxZoom: 16,
+            minZoom: 12,
+            center: {lat: -37.786, lng: 175.277},
+            scrollwheel: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+            /*styles: styles*/
+        }
+ 
+        // New map
+        var map = new google.maps.Map(document.getElementById('map'), options);
+      
+        // Array of markers
+        var markers = [
+            {
+                coords: {lat: -37.786834, lng: 175.318423},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="http://www.waikato.ac.nz/" target="_blank"><p>University of Waikato</p></a>'
+            },{
+                coords: {lat: -37.804738, lng: 175.282483},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="https://www.fmhs.auckland.ac.nz/en/som/about/clinical-schools/waikato.html" target="_blank"><p>University of Auckland - Waikato Clinical Campus</p></a>'
+            },{
+                coords: {lat: -37.788913, lng: 175.278339},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="https://www.wintec.ac.nz/" target="_blank"><p>Waikato Institute of Technology (Wintec) - Hamilton City Campus</p></a>'
+            },{
+                coords: {lat: -37.756989, lng: 175.230329},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="https://www.wintec.ac.nz/" target="_blank"><p>Waikato Institute of Technology (Wintec) - Rotokauri Campus</p></a>'
+            },{
+                coords: {lat: -37.806017, lng: 175.301823},
+                iconImage: '/images/mapMarkers/university.png',
+                content: '<a href="https://www.wintec.ac.nz/" target="_blank"><p>Waikato Institute of Technology (Wintec) - Hamilton Gardens Campus</p></a>'
+            }] 
+            
+        // Loop through markers    
+        for(var i = 0; i < markers.length; i++){
+          addMarker(markers[i]);
+        }  
+        
+        //Add marker function
+        function addMarker(props){
+            var marker = new google.maps.Marker({
+                position: props.coords,
+                map: map
+            });
+          
+            // Check for custom icon   
+            if(props.iconImage){
+               //Set icon image
+               marker.setIcon(props.iconImage);
+            }
+                
+            if(props.content){
+                var infoWindow = new google.maps.InfoWindow({
+                content: props.content 
+            });
+            
+            marker.addListener('click', function(){
+                infoWindow.open(map, marker);
+            });
+            
+        /*var markerCluster = new MarkerClusterer(map, markers, {imagePath: '/images/mapMarkers/m1.png'});*/  <!--// CHECK THIS-->
+        }
+      }
+    }
+</script>
+<script src="/maps/markerclusterer.js"></script> <!--// CHECK THIS-->
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key= AIzaSyCXXawr3FmnkIOO6Fz7zrRvcoUxzLEhUj0 &callback=initMap">
+</script>
 
 <% include ../partials/footer %>

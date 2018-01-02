@@ -3,13 +3,11 @@ var express    = require("express"),
 
 router.get("/studySearch/kaitaia", function(req, res){res.render("studySearch/kaitaia");});
 
-router.get("/studySearch/kerikeri", function(req, res){res.render("studySearch/kerikeri");});
-
-router.get("/studySearch/rawene", function(req, res){res.render("studySearch/rawene");});
-
 router.get("/studySearch/kaikohe", function(req, res){res.render("studySearch/kaikohe");});
 
 router.get("/studySearch/whangarei", function(req, res){res.render("studySearch/whangarei");});
+
+router.get("/studySearch/dargaville", function(req, res){res.render("studySearch/dargaville");});
 
 router.get("/studySearch/auckland", function(req, res){res.render("studySearch/auckland");});
 
@@ -38,8 +36,6 @@ router.get("/studySearch/taupo", function(req, res){res.render("studySearch/taup
 router.get("/studySearch/wairoa", function(req, res){res.render("studySearch/wairoa");});
 
 router.get("/studySearch/newPlymouth", function(req, res){res.render("studySearch/newPlymouth");});
-
-router.get("/studySearch/stratford", function(req, res){res.render("studySearch/stratford");});
 
 router.get("/studySearch/hawera", function(req, res){res.render("studySearch/hawera");});
 
@@ -74,8 +70,6 @@ router.get("/studySearch/westport", function(req, res){res.render("studySearch/w
 router.get("/studySearch/reefton", function(req, res){res.render("studySearch/reefton");});
 
 router.get("/studySearch/greymouth", function(req, res){res.render("studySearch/greymouth");});
-
-router.get("/studySearch/hokitika", function(req, res){res.render("studySearch/hokitika");});
 
 router.get("/studySearch/christchurch", function(req, res){res.render("studySearch/christchurch");});
 
