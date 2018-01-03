@@ -8,11 +8,11 @@ blogMiddleware                  = require("../../middleware/blog");
 //INDEX
 router.get("/", function(req, res){
     // Get all comments from DB
-    HayfeverTreatmentComment.find({}, function(err, allHayfeverTreatmentComments){
+    HayfeverTreatmentComment.find({}, function(err, allHayfeverTreatmentComment){
         if(err){
             console.log(err);
         } else {
-            res.render("blog/hayfever-treatment-on-a-budget/index", {hayfeverTreatmentComments: allHayfeverTreatmentComments});
+            res.render("blog/hayfeverTreatmentOnABudget/index", {hayfeverTreatmentComment: allHayfeverTreatmentComment});
         }
     });
 });
@@ -32,25 +32,25 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(err);
         } else {
             //redirect back to index page
-            res.redirect("/blog/hayfever-treatment-on-a-budget");
+            res.redirect("/blog/hayfeverTreatmentOnABudget");
         }
     });
 });
 
 //NEW - Show form to create new comment
 router.get("/new", middleware.isLoggedIn, function(req, res){
-    res.render("blog/hayfever-treatment-on-a-budget/new");
+    res.render("blog/hayfeverTreatmentOnABudget/new");
 });
 
 //SHOW - Shows more information about one comment
 router.get("/:id", function(req, res){
     //Find the comment with provided ID
-    HayfeverTreatmentComment.findById(req.params.id).populate("hayfeverTreatmentComments").exec(function(err, foundHayfeverTreatmentComment){
+    HayfeverTreatmentComment.findById(req.params.id).populate("comments").exec(function(err, foundHayfeverTreatmentComment){
         if(err){
             console.log(err);
         } else {
             //Render show template with that comment
-            res.render("blog/hayfever-treatment-on-a-budget/show", {hayfeverTreatmentComment: foundHayfeverTreatmentComment});    
+            res.render("blog/hayfeverTreatmentOnABudget/show", {hayfeverTreatmentComment: foundHayfeverTreatmentComment});    
         }
     });    
 });
@@ -59,9 +59,9 @@ router.get("/:id", function(req, res){
 router.get("/:id/edit", blogMiddleware.checkHayfeverTreatmentCommentOwnership, function(req, res){
     HayfeverTreatmentComment.findById(req.params.id, function(err, foundHayfeverTreatmentComment){
         if(err){
-            res.redirect("/blog/hayfever-treatment-on-a-budget");
+            res.redirect("/blog/hayfeverTreatmentOnABudget");
         } else {
-            res.render("blog/hayfever-treatment-on-a-budget/edit", {hayfeverTreatmentComment: foundHayfeverTreatmentComment});
+            res.render("blog/hayfeverTreatmentOnABudget/edit", {hayfeverTreatmentComment: foundHayfeverTreatmentComment});
         }
     });
 });
@@ -71,10 +71,10 @@ router.put("/:id", blogMiddleware.checkHayfeverTreatmentCommentOwnership, functi
     // Find and update the correct comment
     HayfeverTreatmentComment.findByIdAndUpdate(req.params.id, req.body.hayfeverTreatmentComment, function(err, updatedHayfeverTreatmentComment){
         if(err){
-            res.redirect("/blog/hayfever-treatment-on-a-budget");
+            res.redirect("/blog/hayfeverTreatmentOnABudget");
         } else {
             // Redirect to show page
-            res.redirect("/blog/hayfever-treatment-on-a-budget/" + req.params.id);
+            res.redirect("/blog/hayfeverTreatmentOnABudget/" + req.params.id);
         }
     });
 });
@@ -83,10 +83,10 @@ router.put("/:id", blogMiddleware.checkHayfeverTreatmentCommentOwnership, functi
 router.delete("/:id", blogMiddleware.checkHayfeverTreatmentCommentOwnership, function(req, res){
     HayfeverTreatmentComment.findByIdAndRemove(req.params.id, function(err){
         if(err){
-            res.redirect("/blog/hayfever-treatment-on-a-budget");
+            res.redirect("/blog/hayfeverTreatmentOnABudget");
         } else {
             req.flash("success", "comment deleted");
-            res.redirect("/blog/hayfever-treatment-on-a-budget");
+            res.redirect("/blog/hayfeverTreatmentOnABudget");
         }
     });
 });    

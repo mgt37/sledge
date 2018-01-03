@@ -18,8 +18,31 @@
                     <% } %>
                 </div>
             </div>
-            <div>
-                    
+            <div class="well">
+                <div class= "text-right">
+                    <a class="btn btn-xs btn-success" href="/askOffer/auckland/offer/<%= aucklandOffer._id %>/aucklandOfferComments/new">Add comment</a>
+                </div>
+                <hr>
+                <% aucklandOffer.aucklandOfferComments.reverse().forEach(function(aucklandOfferComment){ %>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <strong><%= aucklandOfferComment.author.username %></strong>
+                            <span class="pull-right"><%= Date.now();%></span>
+                            <p>
+                                <%= aucklandOfferComment.text %>
+                            </p>
+                        <% if(currentUser && aucklandOfferComment.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-xs btn-warning" 
+                                href="/askOffer/auckland/offer/<%= aucklandOffer._id %>/aucklandOfferComments/<%= aucklandOfferComment._id %>/edit">
+                                Edit
+                            </a>
+                            <form id="delete-form" action="/askOffer/auckland/offer/<%= aucklandOffer._id %>/aucklandOfferComments/<%= aucklandOfferComment._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                        <% } %>
+                        </div>
+                    </div>
+                <% }); %>
             </div>
             
             <div class= "text-right">

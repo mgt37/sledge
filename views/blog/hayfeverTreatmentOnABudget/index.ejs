@@ -1,20 +1,20 @@
 <% include ../../partials/header %>
 
-<% include hayfever-treatment-on-a-budget %>
+<% include hayfeverTreatmentOnABudget %>
 
 <div class="container">
     <div class="well">
-        <a class="btn btn-primary btn-lg" href="hayfever-treatment-on-a-budget/new">Add new comment</a>
+        <a class="btn btn-primary btn-lg" href="hayfeverTreatmentOnABudget/new">Add new comment</a>
     </div>
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-        <% hayfeverTreatmentComments.reverse().forEach(function(hayfeverTreatmentComment){ %>
+        <% hayfeverTreatmentComment.reverse().forEach(function(hayfeverTreatmentComment){ %>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="thumbnail">
-                    <div class="description">
+                    <div>
                         <p><%- hayfeverTreatmentComment.body %></p>
                     </div>
                         <div>
-                            <a href="/blog/hayfever-treatment-on-a-budget/<%= hayfeverTreatmentComment._id %>" class="btn btn-primary">Read comment</a>
+                            <a href="/blog/hayfeverTreatmentOnABudget/<%= hayfeverTreatmentComment._id %>" class="btn btn-primary">Read comment</a>
                         </div>
                 </div>   
             </div>

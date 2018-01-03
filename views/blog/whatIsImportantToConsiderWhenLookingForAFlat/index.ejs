@@ -1,20 +1,20 @@
 <% include ../../partials/header %>
 
-<% include what-is-important-to-consider-when-looking-for-a-flat %>
+<% include whatIsImportantToConsiderWhenLookingForAFlat %>
 
 <div class="container">
     <div class="well">
-        <a class="btn btn-primary btn-lg" href="what-is-important-to-consider-when-looking-for-a-flat/new">Add new comment</a>
+        <a class="btn btn-primary btn-lg" href="whatIsImportantToConsiderWhenLookingForAFlat/new">Add new comment</a>
     </div>
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-        <% lookingForAFlatComments.reverse().forEach(function(lookingForAFlatComment){ %>
+        <% lookingForAFlatComment.reverse().forEach(function(lookingForAFlatComment){ %>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="thumbnail">
                     <div class="description">
                         <p><%- lookingForAFlatComment.body %></p>
                     </div>
                         <div>
-                            <a href="/blog/what-is-important-to-consider-when-looking-for-a-flat/<%= lookingForAFlatComment._id %>" class="btn btn-primary">Read comment</a>
+                            <a href="/blog/whatIsImportantToConsiderWhenLookingForAFlat/<%= lookingForAFlatComment._id %>" class="btn btn-primary">Read comment</a>
                         </div>
                 </div>   
             </div>

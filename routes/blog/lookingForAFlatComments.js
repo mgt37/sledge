@@ -1,18 +1,18 @@
 var express                     = require("express");
 var router                      = express.Router({mergeParams: true});
 var timestamp                   = require('time-stamp');
-var LookingForAFlatComment    = require("../../app/models/blog/lookingForAFlatComment");
+var LookingForAFlatComment      = require("../../app/models/blog/lookingForAFlatComment");
 var middleware                  = require("../../middleware"),
 blogMiddleware                  = require("../../middleware/blog");
 
 //INDEX
 router.get("/", function(req, res){
     // Get all comments from DB
-    LookingForAFlatComment.find({}, function(err, allLookingForAFlatComments){
+    LookingForAFlatComment.find({}, function(err, allLookingForAFlatComment){
         if(err){
             console.log(err);
         } else {
-            res.render("blog/what-is-important-to-consider-when-looking-for-a-flat/index", {lookingForAFlatComments: allLookingForAFlatComments});
+            res.render("blog/whatIsImportantToConsiderWhenLookingForAFlat/index", {lookingForAFlatComment: allLookingForAFlatComment});
         }
     });
 });
@@ -32,25 +32,25 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(err);
         } else {
             //redirect back to index page
-            res.redirect("/blog/what-is-important-to-consider-when-looking-for-a-flat");
+            res.redirect("/blog/whatIsImportantToConsiderWhenLookingForAFlat");
         }
     });
 });
 
 //NEW - Show form to create new comment
 router.get("/new", middleware.isLoggedIn, function(req, res){
-    res.render("blog/what-is-important-to-consider-when-looking-for-a-flat/new");
+    res.render("blog/whatIsImportantToConsiderWhenLookingForAFlat/new");
 });
 
 //SHOW - Shows more information about one comment
 router.get("/:id", function(req, res){
     //Find the comment with provided ID
-    LookingForAFlatComment.findById(req.params.id).populate("lookingForAFlatComments").exec(function(err, foundLookingForAFlatComment){
+    LookingForAFlatComment.findById(req.params.id).populate("comments").exec(function(err, foundLookingForAFlatComment){
         if(err){
             console.log(err);
         } else {
             //Render show template with that comment
-            res.render("blog/what-is-important-to-consider-when-looking-for-a-flat/show", {lookingForAFlatComment: foundLookingForAFlatComment});    
+            res.render("blog/whatIsImportantToConsiderWhenLookingForAFlat/show", {lookingForAFlatComment: foundLookingForAFlatComment});    
         }
     });    
 });
@@ -59,9 +59,9 @@ router.get("/:id", function(req, res){
 router.get("/:id/edit", blogMiddleware.checkLookingForAFlatCommentOwnership, function(req, res){
     LookingForAFlatComment.findById(req.params.id, function(err, foundLookingForAFlatComment){
         if(err){
-            res.redirect("/blog/what-is-important-to-consider-when-looking-for-a-flat");
+            res.redirect("/blog/whatIsImportantToConsiderWhenLookingForAFlat");
         } else {
-            res.render("blog/what-is-important-to-consider-when-looking-for-a-flat/edit", {lookingForAFlatComment: foundLookingForAFlatComment});
+            res.render("blog/whatIsImportantToConsiderWhenLookingForAFlat/edit", {lookingForAFlatComment: foundLookingForAFlatComment});
         }
     });
 });
@@ -71,10 +71,10 @@ router.put("/:id", blogMiddleware.checkLookingForAFlatCommentOwnership, function
     // Find and update the correct comment
     LookingForAFlatComment.findByIdAndUpdate(req.params.id, req.body.lookingForAFlatComment, function(err, updatedLookingForAFlatComment){
         if(err){
-            res.redirect("/blog/what-is-important-to-consider-when-looking-for-a-flat");
+            res.redirect("/blog/whatIsImportantToConsiderWhenLookingForAFlat");
         } else {
             // Redirect to show page
-            res.redirect("/blog/what-is-important-to-consider-when-looking-for-a-flat/" + req.params.id);
+            res.redirect("/blog/whatIsImportantToConsiderWhenLookingForAFlat/" + req.params.id);
         }
     });
 });
@@ -83,10 +83,10 @@ router.put("/:id", blogMiddleware.checkLookingForAFlatCommentOwnership, function
 router.delete("/:id", blogMiddleware.checkLookingForAFlatCommentOwnership, function(req, res){
     LookingForAFlatComment.findByIdAndRemove(req.params.id, function(err){
         if(err){
-            res.redirect("/blog/what-is-important-to-consider-when-looking-for-a-flat");
+            res.redirect("/blog/whatIsImportantToConsiderWhenLookingForAFlat");
         } else {
             req.flash("success", "comment deleted");
-            res.redirect("/blog/what-is-important-to-consider-when-looking-for-a-flat");
+            res.redirect("/blog/whatIsImportantToConsiderWhenLookingForAFlat");
         }
     });
 });    

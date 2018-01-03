@@ -7,7 +7,13 @@ var aucklandAskSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
         },
         username: String
-    }
+    },
+    comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "AucklandAskComment"
+        }
+    ]
 });
 
 module.exports = mongoose.model("AucklandAsk", aucklandAskSchema);

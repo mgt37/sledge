@@ -9,8 +9,8 @@ router.get("/hayfever-treatment-on-a-budget", function(req, res){
     res.render("blog/hayfever-treatment-on-a-budget/index");
 });
 
-router.get("/what-is-important-to-consider-when-looking-for-a-flat", function(req, res){
-    res.render("blog/what-is-important-to-consider-when-looking-for-a-flat/index");
+router.get("/whatIsImportantToConsiderWhenLookingForAFlat", function(req, res){
+    res.render("blog/whatIsImportantToConsiderWhenLookingForAFlat/index");
 });
 
 router.get("/food-budget", function(req, res){

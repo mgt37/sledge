@@ -9,8 +9,8 @@
                         <em>Submitted by <%= hayfeverTreatmentComment.author.username %></em>
                     </p>
                     <% if(currentUser && hayfeverTreatmentComment.author.id.equals(currentUser._id)){ %>
-                        <a class="btn btn-xs btn-warning" href="/blog/hayfever-treatment-on-a-budget/<%= hayfeverTreatmentComment._id %>/edit">Edit</a>
-                        <form id="delete-form" action="/blog/hayfever-treatment-on-a-budget/<%= hayfeverTreatmentComment._id %>?_method=DELETE" method="POST">
+                        <a class="btn btn-xs btn-warning" href="/blog/hayfeverTreatmentOnABudget/<%= hayfeverTreatmentComment._id %>/edit">Edit</a>
+                        <form id="delete-form" action="/blog/hayfeverTreatmentOnABudget/<%= hayfeverTreatmentComment._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-xs btn-danger">Delete</button>
                         </form>
                     <% } %>
@@ -19,4 +19,10 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <div class= "text-right">
+        <a class="btn btn-success" href="/blog/hayfeverTreatmentOnABudget/">Return to blog post</a>
+    </div>
+</div>
+
 <% include ../../partials/footer %>

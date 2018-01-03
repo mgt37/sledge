@@ -9,8 +9,8 @@
                         <em>Submitted by <%= lookingForAFlatComment.author.username %></em>
                     </p>
                     <% if(currentUser && lookingForAFlatComment.author.id.equals(currentUser._id)){ %>
-                        <a class="btn btn-xs btn-warning" href="/blog/what-is-important-to-consider-when-looking-for-a-flat/<%= lookingForAFlatComment._id %>/edit">Edit</a>
-                        <form id="delete-form" action="/blog/what-is-important-to-consider-when-looking-for-a-flat/<%= lookingForAFlatComment._id %>?_method=DELETE" method="POST">
+                        <a class="btn btn-xs btn-warning" href="/blog/whatIsImportantToConsiderWhenLookingForAFlat/<%= lookingForAFlatComment._id %>/edit">Edit</a>
+                        <form id="delete-form" action="/blog/whatIsImportantToConsiderWhenLookingForAFlat/<%= lookingForAFlatComment._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-xs btn-danger">Delete</button>
                         </form>
                     <% } %>
@@ -19,4 +19,10 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <div class= "text-right">
+        <a class="btn btn-success" href="/blog/whatIsImportantToConsiderWhenLookingForAFlat/">Return to blog post</a>
+    </div>
+</div>
+
 <% include ../../partials/footer %>

@@ -1,5 +1,5 @@
 var HayfeverTreatmentComment    = require("../../app/models/blog/hayfeverTreatmentComment");
-var LookingForAFlatComment    = require("../../app/models/blog/lookingForAFlatComment");
+var LookingForAFlatComment      = require("../../app/models/blog/lookingForAFlatComment");
     
 // All the middleware goes here
 var middlewareObj = {};

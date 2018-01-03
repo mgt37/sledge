@@ -1,5 +1,7 @@
 var AucklandAsk                   = require("../../app/models/askOffer/aucklandAsk"),
+    AucklandAskComment            = require("../../app/models/askOffer/aucklandAskComment"),
     AucklandOffer                 = require("../../app/models/askOffer/aucklandOffer"),
+    AucklandOfferComment          = require("../../app/models/askOffer/aucklandOfferComment"),
     BayOfPlentyRegionAsk          = require("../../app/models/askOffer/bayOfPlentyRegionAsk"),
     BayOfPlentyRegionOffer        = require("../../app/models/askOffer/bayOfPlentyRegionOffer"),
     CentralOtagoAsk               = require("../../app/models/askOffer/centralOtagoAsk"),
@@ -65,6 +67,30 @@ middlewareObj.checkAucklandAskOwnership = function(req, res, next) {
         }
 };
 
+middlewareObj.checkAucklandAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        AucklandAskComment.findById(req.params.comment_id, function(err, foundAucklandAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundAucklandAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
 middlewareObj.checkAucklandOfferOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         AucklandOffer.findById(req.params.id, function(err, foundAucklandOffer){
@@ -85,6 +111,30 @@ middlewareObj.checkAucklandOfferOwnership = function(req, res, next) {
         } else {
         //if not, redirect
         req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkAucklandOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        AucklandOfferComment.findById(req.params.comment_id, function(err, foundAucklandOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundAucklandOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
         res.redirect("back");
         }
 };

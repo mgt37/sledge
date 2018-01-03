@@ -64,7 +64,9 @@ var careerRoutes                 = require('./routes/uniTalk/careers'),
     
 // Ask offer routes - require
 var aucklandAskRoutes                   = require('./routes/askOffer/aucklandAsk'),
+    aucklandAskCommentRoutes            = require('./routes/askOffer/aucklandAskComments'),
     aucklandOfferRoutes                 = require('./routes/askOffer/aucklandOffer'),
+    aucklandOfferCommentRoutes          = require('./routes/askOffer/aucklandOfferComments'),
     bayOfPlentyRegionAskRoutes          = require('./routes/askOffer/bayOfPlentyRegionAsk'),
     bayOfPlentyRegionOfferRoutes        = require('./routes/askOffer/bayOfPlentyRegionOffer'),
     centralOtagoAskRoutes               = require('./routes/askOffer/centralOtagoAsk'),
@@ -103,7 +105,7 @@ var aucklandAskRoutes                   = require('./routes/askOffer/aucklandAsk
     westCoastRegionOfferRoutes          = require('./routes/askOffer/westCoastRegionOffer');
     
 // blog routes - require    
-var hayfeverTreatmentCommentRoutes             = require('./routes/blog/hayfeverTreatmentComments');    
+var hayfeverTreatmentCommentRoutes           = require('./routes/blog/hayfeverTreatmentComments');    
 var lookingForAFlatCommentRoutes             = require('./routes/blog/lookingForAFlatComments');    
     
    require('./config/passport')(passport); // pass passport for configuration 
@@ -238,7 +240,9 @@ app.use("/uniTalk/vehicle/:id/vehicleComments", vehicleCommentRoutes);
 
 //Ask Offer routes
 app.use("/askOffer/auckland/ask", aucklandAskRoutes);
+app.use("/askOffer/auckland/ask/comments", aucklandAskCommentRoutes);
 app.use("/askOffer/auckland/offer", aucklandOfferRoutes);
+app.use("/askOffer/auckland/offer/comments", aucklandOfferCommentRoutes);
 app.use("/askOffer/bayOfPlentyRegion/ask", bayOfPlentyRegionAskRoutes);
 app.use("/askOffer/bayOfPlentyRegion/offer", bayOfPlentyRegionOfferRoutes);
 app.use("/askOffer/centralOtago/ask", centralOtagoAskRoutes);
@@ -277,8 +281,8 @@ app.use("/askOffer/westCoastRegion/ask", westCoastRegionAskRoutes);
 app.use("/askOffer/westCoastRegion/offer", westCoastRegionOfferRoutes);
 
 //Ask Offer routes
-app.use("/blog/hayfever-treatment-on-a-budget", hayfeverTreatmentCommentRoutes);
-app.use("/blog/what-is-important-to-consider-when-looking-for-a-flat", lookingForAFlatCommentRoutes);
+app.use("/blog/hayfeverTreatmentOnABudget", hayfeverTreatmentCommentRoutes);
+app.use("/blog/whatIsImportantToConsiderWhenLookingForAFlat", lookingForAFlatCommentRoutes);
 
 require('./app/routes')(app, passport); // load our routes and pass in our app and fully configured passport
 
