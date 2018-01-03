@@ -2,8 +2,8 @@ var express    = require("express"),
     router     = express();
 
 //Alcohol
-router.get("/alcohol", function(req, res){res.render("uniTalk/alcohol/index");});
-    
+router.get("/liquor", function(req, res){res.render("uniTalk/liquor/index");});
+
 //Career
 router.get("/career", function(req, res){res.render("uniTalk/career/index");});
 

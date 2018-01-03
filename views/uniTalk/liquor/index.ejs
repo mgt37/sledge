@@ -5,22 +5,22 @@
        <div class="container">
            <h1>Alcohol</h1> 
            <p>
-               <a class="btn btn-primary btn-lg" href="alcohol/new">Add new uniTalk topic</a>
+               <a class="btn btn-primary btn-lg" href="liquor/new">Add new uniTalk topic</a>
            </p>
        </div>
     </header>
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-        <% alcohol.reverse().forEach(function(alcohol){ %>
+        <% liquor.reverse().forEach(function(liquor){ %>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="thumbnail">
                     <div class="caption">
-                        <h4><%= alcohol.title %></h4>
+                        <h4><%= liquor.title %></h4>
                     </div>
                     <div class="description">
-                        
+                        <p><%- liquor.body.substring(0, 100) %>...</p>
                     </div>
                     <p>
-                        <a href="/uniTalk/alcohol/<%= alcohol._id %>" class="btn btn-primary">Read topic</a>
+                        <a href="/uniTalk/liquor/<%= liquor._id %>" class="btn btn-primary">Read topic</a>
                     </p>
                 </div>
             </div>

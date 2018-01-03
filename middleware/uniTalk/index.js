@@ -1,6 +1,4 @@
-var Alcohol              = require("../../app/models/uniTalk/alcohol"),
-    AlcoholComment       = require("../../app/models/uniTalk/alcoholComment"),
-    Career               = require("../../app/models/uniTalk/career"),
+var Career               = require("../../app/models/uniTalk/career"),
     CareerComment        = require("../../app/models/uniTalk/careerComment"),
     FashionFemale        = require("../../app/models/uniTalk/fashionFemale"),
     FashionFemaleComment = require("../../app/models/uniTalk/fashionFemaleComment"),
@@ -12,6 +10,8 @@ var Alcohol              = require("../../app/models/uniTalk/alcohol"),
     FoodComment          = require("../../app/models/uniTalk/foodComment"),
     Health               = require("../../app/models/uniTalk/health"),
     HealthComment        = require("../../app/models/uniTalk/healthComment"),
+    Liquor               = require("../../app/models/uniTalk/liquor"),
+    LiquorComment        = require("../../app/models/uniTalk/liquorComment"),
     Money                = require("../../app/models/uniTalk/money"),
     MoneyComment         = require("../../app/models/uniTalk/moneyComment"),
     Other                = require("../../app/models/uniTalk/other"),
@@ -34,54 +34,6 @@ var Alcohol              = require("../../app/models/uniTalk/alcohol"),
 
 // All the middleware goes here
 var middlewareObj = {};
-
-middlewareObj.checkAlcoholOwnership = function(req, res, next) {
-    if(req.isAuthenticated()){
-        Alcohol.findById(req.params.id, function(err, foundAlcohol){
-            if(err){
-                req.flash("error", "item not found");
-                res.redirect("back");
-            } else {
-            //does user own the uniTalk?
-                if(foundAlcohol.author.id.equals(req.user._id)){
-                    next();
-                } else {
-                    //otherwise, redirect
-                    req.flash("error", "You do not have permission to do that");
-                    res.redirect("back");
-                }
-            }
-            });
-        } else {
-        //if not, redirect
-        req.flash("error", "You need to be logged in to do that");
-        res.redirect("back");
-        }
-};
-
-middlewareObj.checkAlcoholCommentOwnership = function(req, res, next) {
-    if(req.isAuthenticated()){
-        AlcoholComment.findById(req.params.comment_id, function(err, foundAlcoholComment){
-            if(err){
-                /*req.flash("error", "Comment not found");*/
-                res.redirect("back");
-            } else {
-            //does user own the comment?
-                if(foundAlcoholComment.author.id.equals(req.user._id)){
-                    next();
-                } else {
-                    //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
-                    res.redirect("back");
-                }
-            }
-            });
-        } else {
-        //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
-        res.redirect("back");
-        }
-};
 
 middlewareObj.checkCareerOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
@@ -356,6 +308,54 @@ middlewareObj.checkHealthCommentOwnership = function(req, res, next) {
             } else {
             //does user own the comment?
                 if(foundHealthComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkLiquorOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        Liquor.findById(req.params.id, function(err, foundLiquor){
+            if(err){
+                req.flash("error", "item not found");
+                res.redirect("back");
+            } else {
+            //does user own the uniTalk?
+                if(foundLiquor.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    req.flash("error", "You do not have permission to do that");
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkLiquorCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        LiquorComment.findById(req.params.comment_id, function(err, foundLiquorComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundLiquorComment.author.id.equals(req.user._id)){
                     next();
                 } else {
                     //otherwise, redirect

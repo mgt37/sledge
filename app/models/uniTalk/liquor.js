@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var alcoholSchema = new mongoose.Schema({
+var liquorSchema = new mongoose.Schema({
     title: String,
     body: String,
     author: {
@@ -11,9 +11,9 @@ var alcoholSchema = new mongoose.Schema({
     comments: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "AlcoholComment"
+            ref: "liquorComment"
         }
     ]
 });
 
-module.exports = mongoose.model("Alcohol", alcoholSchema);
+module.exports = mongoose.model("Liquor", liquorSchema);

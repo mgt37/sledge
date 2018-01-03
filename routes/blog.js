@@ -6,11 +6,11 @@ var User       = require("../app/models/user");
 // Blog Posts
 
 router.get("/hayfever-treatment-on-a-budget", function(req, res){
-    res.render("blog/2016/01/28/blogformat");
+    res.render("blog/hayfever-treatment-on-a-budget/index");
 });
 
 router.get("/what-is-important-to-consider-when-looking-for-a-flat", function(req, res){
-    res.render("blog/2016/01/31/blogformat");
+    res.render("blog/what-is-important-to-consider-when-looking-for-a-flat/index");
 });
 
 router.get("/food-budget", function(req, res){

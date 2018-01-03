@@ -1,42 +1,18 @@
-var Topic      = require("../app/models/topic");
-var Comment    = require("../app/models/comment");
-
+var HayfeverTreatmentComment    = require("../../app/models/blog/hayfeverTreatmentComment");
+var LookingForAFlatComment    = require("../../app/models/blog/lookingForAFlatComment");
+    
 // All the middleware goes here
 var middlewareObj = {};
 
-middlewareObj.checkTopicOwnership = function(req, res, next) {
+middlewareObj.checkHayfeverTreatmentCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
-        Topic.findById(req.params.id, function(err, foundTopic){
-            if(err){
-                /*req.flash("error", "Topic not found");*/
-                res.redirect("back");
-            } else {
-            //does user own the topic?
-                if(foundTopic.author.id.equals(req.user._id)){
-                    next();
-                } else {
-                    //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
-                    res.redirect("back");
-                }
-            }
-            });
-        } else {
-        //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
-        res.redirect("back");
-        }
-};
-
-middlewareObj.checkCommentOwnership = function(req, res, next) {
-    if(req.isAuthenticated()){
-        Comment.findById(req.params.comment_id, function(err, foundComment){
+        HayfeverTreatmentComment.findById(req.params.id, function(err, foundHayfeverTreatmentComment){
             if(err){
                 /*req.flash("error", "Comment not found");*/
                 res.redirect("back");
             } else {
             //does user own the comment?
-                if(foundComment.author.id.equals(req.user._id)){
+                if(foundHayfeverTreatmentComment.author.id.equals(req.user._id)){
                     next();
                 } else {
                     //otherwise, redirect
@@ -52,12 +28,28 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
         }
 };
 
-middlewareObj.isLoggedIn = function(req, res, next){
+middlewareObj.checkLookingForAFlatCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
-        return next();
-    }
-    /*req.flash("error", "You need to be logged in to do that");*/
-    res.redirect("/login");
-}
+        LookingForAFlatComment.findById(req.params.id, function(err, foundLookingForAFlatComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundLookingForAFlatComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
 
 module.exports = middlewareObj;

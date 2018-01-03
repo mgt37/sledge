@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-var alcoholCommentSchema = mongoose.Schema({
+var liquorCommentSchema = mongoose.Schema({
     text:   String,
     author: {
         id: {
@@ -11,4 +11,4 @@ var alcoholCommentSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("AlcoholComment", alcoholCommentSchema);
+module.exports = mongoose.model("LiquorComment", liquorCommentSchema);

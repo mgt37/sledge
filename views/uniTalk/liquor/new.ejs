@@ -1,22 +1,22 @@
 <% include ../../partials/header %>
 <div class="container">
     <div class="row">
-        <h1 style="text-align: center">Edit <%= alcohol.name %></h1>
+        <h1 style="text-align: center">Create a new uniTalk topic</h1>
         <div style="width: 66.667%; margin: 25px auto;">
-            <form action="/uniTalk/alcohol/<%= alcohol._id %>?_method=PUT" method="POST">
+            <form action="/uniTalk/liquor" method="POST">
                 <div class="form-group">
-                    <label>Title</label>
-                    <input class="form-control" type="text" name="alcohol[title]" value="<%= alcohol.title %>">
+                   <label>Title</label>
+                   <input class="form-control" type="text" name="title" placeholder="Title"> 
                 </div>
                 <div class="form-group">
                     <label>Content</label>
-                    <textarea class="form-control" rows="10" name="alcohol[body]"><%= alcohol.body %></textarea>
+                    <textarea class="form-control" name="body" rows="10" placeholder="Add your content here"></textarea>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block">Submit</button>
                 </div>
             </form>
-            <a href="/uniTalk/alcohol/<%= alcohol._id %>">Go Back</a>
+            <a href="/uniTalk/liquor">Go Back</a>
         </div>
     </div>
 </div>

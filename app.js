@@ -29,10 +29,7 @@ var commentRoutes     = require('./routes/comments'),
     emailRoutes       = require('./routes/email');
     
 // Uni Talk routes - require    
-/*var uniTalkRoutes    = require('./routes/uniTalk');*/
-var alcoholRoutes                = require('./routes/uniTalk/alcohol'),
-    alcoholCommentRoutes         = require('./routes/uniTalk/alcoholComments'),
-    careerRoutes                 = require('./routes/uniTalk/careers'),
+var careerRoutes                 = require('./routes/uniTalk/careers'),
     careerCommentRoutes          = require('./routes/uniTalk/careerComments'),
     fashionFemaleRoutes          = require('./routes/uniTalk/fashionFemale'),
     fashionFemaleCommentRoutes   = require('./routes/uniTalk/fashionFemaleComments'),
@@ -44,6 +41,8 @@ var alcoholRoutes                = require('./routes/uniTalk/alcohol'),
     foodCommentRoutes            = require('./routes/uniTalk/foodComments'),
     healthRoutes                 = require('./routes/uniTalk/health'),
     healthCommentRoutes          = require('./routes/uniTalk/healthComments'),
+    liquorRoutes                 = require('./routes/uniTalk/liquor'),
+    liquorCommentRoutes          = require('./routes/uniTalk/liquorComments'),
     moneyRoutes                  = require('./routes/uniTalk/money'),
     moneyCommentRoutes           = require('./routes/uniTalk/moneyComments'),
     otherRoutes                  = require('./routes/uniTalk/other'),
@@ -103,6 +102,9 @@ var aucklandAskRoutes                   = require('./routes/askOffer/aucklandAsk
     westCoastRegionAskRoutes            = require('./routes/askOffer/westCoastRegionAsk'),
     westCoastRegionOfferRoutes          = require('./routes/askOffer/westCoastRegionOffer');
     
+// blog routes - require    
+var hayfeverTreatmentCommentRoutes             = require('./routes/blog/hayfeverTreatmentComments');    
+var lookingForAFlatCommentRoutes             = require('./routes/blog/lookingForAFlatComments');    
     
    require('./config/passport')(passport); // pass passport for configuration 
    
@@ -201,9 +203,6 @@ app.use("/topics/:id/comments", commentRoutes);
 app.use("/", emailRoutes);
 
 //Uni Talk routes
-/*app.use("/uniTalk", uniTalkRoutes);*/
-app.use("/uniTalk/alcohol", alcoholRoutes);
-app.use("/uniTalk/alcohol/:id/alcoholComments", alcoholCommentRoutes);
 app.use("/uniTalk/career", careerRoutes);
 app.use("/uniTalk/career/:id/careerComments", careerCommentRoutes);
 app.use("/uniTalk/fashionFemale", fashionFemaleRoutes);
@@ -216,6 +215,8 @@ app.use("/uniTalk/food", foodRoutes);
 app.use("/uniTalk/food/:id/foodComments", foodCommentRoutes);
 app.use("/uniTalk/health", healthRoutes);
 app.use("/uniTalk/health/:id/healthComments", healthCommentRoutes);
+app.use("/uniTalk/liquor", liquorRoutes);
+app.use("/uniTalk/liquor/:id/liquorComments", liquorCommentRoutes);
 app.use("/uniTalk/money", moneyRoutes);
 app.use("/uniTalk/money/:id/moneyComments", moneyCommentRoutes);
 app.use("/uniTalk/other", otherRoutes);
@@ -275,6 +276,9 @@ app.use("/askOffer/wellingtonRegion/offer", wellingtonRegionOfferRoutes);
 app.use("/askOffer/westCoastRegion/ask", westCoastRegionAskRoutes);
 app.use("/askOffer/westCoastRegion/offer", westCoastRegionOfferRoutes);
 
+//Ask Offer routes
+app.use("/blog/hayfever-treatment-on-a-budget", hayfeverTreatmentCommentRoutes);
+app.use("/blog/what-is-important-to-consider-when-looking-for-a-flat", lookingForAFlatCommentRoutes);
 
 require('./app/routes')(app, passport); // load our routes and pass in our app and fully configured passport
 
