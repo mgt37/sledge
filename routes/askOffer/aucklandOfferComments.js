@@ -20,14 +20,14 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 
 // Comments CREATE
 router.post("/", middleware.isLoggedIn, function(req, res){
-    //lookup topic using id
+    //lookup comment using id
     AucklandOffer.findById(req.params.id, function(err, aucklandOffer){
         if(err){
             console.log(err);
             res.redirect("/askOffer/auckland/offer");
         } else {
             /*console.log(req.body.careerComment);*/
-            AucklandOffer.create(req.body.comment, function(err, comment){
+            AucklandOfferComment.create(req.body.comment, function(err, comment){
                 if(err){
                     /*req.flash("error", "Something went wrong");*/
                     /*console.log(err);*/
@@ -55,7 +55,7 @@ router.get("/:comment_id/edit", askOfferMiddleware.checkAucklandOfferCommentOwne
         if(err){
             res.redirect("back");
         } else {
-           res.render("askOffer/auckland/offer/comments/edit", {career_id: req.params.id, comment: foundAucklandOfferComment}); 
+           res.render("askOffer/auckland/offer/comments/edit", {aucklandOffer_id: req.params.id, comment: foundAucklandOfferComment}); 
         }
     });
 });

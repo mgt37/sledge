@@ -18,8 +18,31 @@
                     <% } %>
                 </div>
             </div>
-            <div>
-                    
+            <div class="well">
+                <div class= "text-right">
+                    <a class="btn btn-xs btn-success" href="/askOffer/taranakiRegion/ask/<%= taranakiRegionAsk._id %>/taranakiRegionAskComments/new/">Add comment</a>
+                </div>
+                <hr>
+                <% taranakiRegionAsk.comments.reverse().forEach(function(taranakiRegionAskComment){ %>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <strong><%= taranakiRegionAskComment.author.username %></strong>
+                            <span class="pull-right"><%= Date();%></span>
+                            <p>
+                                <%= taranakiRegionAskComment.text %>
+                            </p>
+                        <% if(currentUser && taranakiRegionAskComment.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-xs btn-warning" 
+                                href="/askOffer/taranakiRegion/ask/<%= taranakiRegionAsk._id %>/taranakiRegionAskComments/<%= taranakiRegionAskComment._id %>/edit">
+                                Edit
+                            </a>
+                            <form id="delete-form" action="/askOffer/taranakiRegion/ask/<%= taranakiRegionAsk._id %>/taranakiRegionAskComments/<%= taranakiRegionAskComment._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                        <% } %>
+                        </div>
+                    </div>
+                <% }); %>
             </div>
             
             <div class= "text-right">

@@ -18,8 +18,31 @@
                     <% } %>
                 </div>
             </div>
-            <div>
-                    
+            <div class="well">
+                <div class= "text-right">
+                    <a class="btn btn-xs btn-success" href="/askOffer/bayOfPlentyRegion/offer/<%= bayOfPlentyRegionOffer._id %>/bayOfPlentyRegionOfferComments/new">Add comment</a>
+                </div>
+                <hr>
+                <% bayOfPlentyRegionOffer.comments.reverse().forEach(function(bayOfPlentyRegionOfferComment){ %>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <strong><%= bayOfPlentyRegionOfferComment.author.username %></strong>
+                            <span class="pull-right"><%= Date.now();%></span>
+                            <p>
+                                <%= bayOfPlentyRegionOfferComment.text %>
+                            </p>
+                        <% if(currentUser && bayOfPlentyRegionOfferComment.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-xs btn-warning" 
+                                href="/askOffer/bayOfPlentyRegion/offer/<%= bayOfPlentyRegionOffer._id %>/bayOfPlentyRegionOfferComments/<%= bayOfPlentyRegionOfferComment._id %>/edit">
+                                Edit
+                            </a>
+                            <form id="delete-form" action="/askOffer/bayOfPlentyRegion/offer/<%= bayOfPlentyRegionOffer._id %>/bayOfPlentyRegionOfferComments/<%= bayOfPlentyRegionOfferComment._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                        <% } %>
+                        </div>
+                    </div>
+                <% }); %>
             </div>
             
             <div class= "text-right">

@@ -18,8 +18,31 @@
                     <% } %>
                 </div>
             </div>
-            <div>
-                    
+            <div class="well">
+                <div class= "text-right">
+                    <a class="btn btn-xs btn-success" href="/askOffer/southCanterbury/ask/<%= southCanterburyAsk._id %>/southCanterburyAskComments/new/">Add comment</a>
+                </div>
+                <hr>
+                <% southCanterburyAsk.comments.reverse().forEach(function(southCanterburyAskComment){ %>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <strong><%= southCanterburyAskComment.author.username %></strong>
+                            <span class="pull-right"><%= Date();%></span>
+                            <p>
+                                <%= southCanterburyAskComment.text %>
+                            </p>
+                        <% if(currentUser && southCanterburyAskComment.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-xs btn-warning" 
+                                href="/askOffer/southCanterbury/ask/<%= southCanterburyAsk._id %>/southCanterburyAskComments/<%= southCanterburyAskComment._id %>/edit">
+                                Edit
+                            </a>
+                            <form id="delete-form" action="/askOffer/southCanterbury/ask/<%= southCanterburyAsk._id %>/southCanterburyAskComments/<%= southCanterburyAskComment._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                        <% } %>
+                        </div>
+                    </div>
+                <% }); %>
             </div>
             
             <div class= "text-right">

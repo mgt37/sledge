@@ -18,8 +18,31 @@
                     <% } %>
                 </div>
             </div>
-            <div>
-                    
+            <div class="well">
+                <div class= "text-right">
+                    <a class="btn btn-xs btn-success" href="/askOffer/hawkesBayRegion/offer/<%= hawkesBayRegionOffer._id %>/hawkesBayRegionOfferComments/new">Add comment</a>
+                </div>
+                <hr>
+                <% hawkesBayRegionOffer.comments.reverse().forEach(function(hawkesBayRegionOfferComment){ %>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <strong><%= hawkesBayRegionOfferComment.author.username %></strong>
+                            <span class="pull-right"><%= Date.now();%></span>
+                            <p>
+                                <%= hawkesBayRegionOfferComment.text %>
+                            </p>
+                        <% if(currentUser && hawkesBayRegionOfferComment.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-xs btn-warning" 
+                                href="/askOffer/hawkesBayRegion/offer/<%= hawkesBayRegionOffer._id %>/hawkesBayRegionOfferComments/<%= hawkesBayRegionOfferComment._id %>/edit">
+                                Edit
+                            </a>
+                            <form id="delete-form" action="/askOffer/hawkesBayRegion/offer/<%= hawkesBayRegionOffer._id %>/hawkesBayRegionOfferComments/<%= hawkesBayRegionOfferComment._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                        <% } %>
+                        </div>
+                    </div>
+                <% }); %>
             </div>
             
             <div class= "text-right">

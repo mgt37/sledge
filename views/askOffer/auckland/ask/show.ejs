@@ -20,14 +20,14 @@
             </div>
             <div class="well">
                 <div class= "text-right">
-                    <a class="btn btn-xs btn-success" href="/askOffer/auckland/ask/<%= aucklandAsk._id %>/aucklandAskComments/new">Add comment</a>
+                    <a class="btn btn-xs btn-success" href="/askOffer/auckland/ask/<%= aucklandAsk._id %>/aucklandAskComments/new/">Add comment</a>
                 </div>
                 <hr>
-                <% aucklandAsk.aucklandAskComments.reverse().forEach(function(aucklandAskComment){ %>
+                <% aucklandAsk.comments.reverse().forEach(function(aucklandAskComment){ %>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <strong><%= aucklandAskComment.author.username %></strong>
-                            <span class="pull-right"><%= Date.now();%></span>
+                            <span class="pull-right"><%= Date();%></span>
                             <p>
                                 <%= aucklandAskComment.text %>
                             </p>

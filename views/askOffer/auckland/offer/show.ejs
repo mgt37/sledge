@@ -23,7 +23,7 @@
                     <a class="btn btn-xs btn-success" href="/askOffer/auckland/offer/<%= aucklandOffer._id %>/aucklandOfferComments/new">Add comment</a>
                 </div>
                 <hr>
-                <% aucklandOffer.aucklandOfferComments.reverse().forEach(function(aucklandOfferComment){ %>
+                <% aucklandOffer.comments.reverse().forEach(function(aucklandOfferComment){ %>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <strong><%= aucklandOfferComment.author.username %></strong>

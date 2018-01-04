@@ -18,8 +18,31 @@
                     <% } %>
                 </div>
             </div>
-            <div>
-                    
+            <div class="well">
+                <div class= "text-right">
+                    <a class="btn btn-xs btn-success" href="/askOffer/coastalOtago/ask/<%= coastalOtagoAsk._id %>/coastalOtagoAskComments/new/">Add comment</a>
+                </div>
+                <hr>
+                <% coastalOtagoAsk.comments.reverse().forEach(function(coastalOtagoAskComment){ %>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <strong><%= coastalOtagoAskComment.author.username %></strong>
+                            <span class="pull-right"><%= Date();%></span>
+                            <p>
+                                <%= coastalOtagoAskComment.text %>
+                            </p>
+                        <% if(currentUser && coastalOtagoAskComment.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-xs btn-warning" 
+                                href="/askOffer/coastalOtago/ask/<%= coastalOtagoAsk._id %>/coastalOtagoAskComments/<%= coastalOtagoAskComment._id %>/edit">
+                                Edit
+                            </a>
+                            <form id="delete-form" action="/askOffer/coastalOtago/ask/<%= coastalOtagoAsk._id %>/coastalOtagoAskComments/<%= coastalOtagoAskComment._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                        <% } %>
+                        </div>
+                    </div>
+                <% }); %>
             </div>
             
             <div class= "text-right">

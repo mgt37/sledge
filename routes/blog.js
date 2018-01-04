@@ -3,98 +3,165 @@ var router     = express.Router();
 var passport   = require("passport");
 var User       = require("../app/models/user");
 
+// Blog Sections
+
+router.get("/sections/alcohol", function(req, res){
+    res.render("blog/sections/alcohol");
+});
+
+router.get("/sections/career", function(req, res){
+    res.render("blog/sections/career");
+});
+
+router.get("/sections/fashionFemale", function(req, res){
+    res.render("blog/sections/fashionFemale");
+});
+
+router.get("/sections/fashionMale", function(req, res){
+    res.render("blog/sections/fashionMale");
+});
+
+router.get("/sections/food", function(req, res){
+    res.render("blog/sections/food");
+});
+
+router.get("/sections/flatting", function(req, res){
+    res.render("blog/sections/flatting");
+});
+
+router.get("/sections/health", function(req, res){
+    res.render("blog/sections/health");
+});
+
+router.get("/sections/money", function(req, res){
+    res.render("blog/sections/money");
+});
+
+router.get("/sections/partTimeWork", function(req, res){
+    res.render("blog/sections/partTimeWork");
+});
+
+router.get("/sections/parties", function(req, res){
+    res.render("blog/sections/parties");
+});
+
+router.get("/sections/relationships", function(req, res){
+    res.render("blog/sections/relationships");
+});
+
+router.get("/sections/sex", function(req, res){
+    res.render("blog/sections/sex");
+});
+
+router.get("/sections/sport", function(req, res){
+    res.render("blog/sections/sport");
+});
+
+router.get("/sections/study", function(req, res){
+    res.render("blog/sections/study");
+});
+
+router.get("/sections/vehicle", function(req, res){
+    res.render("blog/sections/vehicle");
+});
+
+router.get("/sections/other", function(req, res){
+    res.render("blog/sections/other");
+});
+
+
 // Blog Posts
 
-router.get("/hayfever-treatment-on-a-budget", function(req, res){
-    res.render("blog/hayfever-treatment-on-a-budget/index");
+router.get("/posts/hayfeverTreatmentOnABudget", function(req, res){
+    res.render("blog/posts/hayfeverTreatmentOnABudget/index");
 });
 
-router.get("/whatIsImportantToConsiderWhenLookingForAFlat", function(req, res){
-    res.render("blog/whatIsImportantToConsiderWhenLookingForAFlat/index");
+router.get("/posts/whatIsImportantToConsiderWhenLookingForAFlat", function(req, res){
+    res.render("blog/posts/whatIsImportantToConsiderWhenLookingForAFlat/index");
 });
 
-router.get("/food-budget", function(req, res){
-    res.render("blog/2016/02/01/blogformat");
+router.get("/posts/foodBudget", function(req, res){
+    res.render("blog/posts/foodBudget/index");
 });
 
-router.get("/where-you-are-in-life-right-now-is-just-fine", function(req, res){
-    res.render("blog/2016/02/05/blogformat");
+router.get("/posts/whereYouAreInLifeRightNowIsJustFine", function(req, res){
+    res.render("blog/posts/whereYouAreInLifeRightNowIsJustFine/index");
 });
 
-router.get("/money-plan", function(req, res){
-    res.render("blog/2016/02/14/blogformat");
+router.get("/posts/moneyPlan", function(req, res){
+    res.render("blog/posts/moneyPlan/index");
 });
 
-router.get("/take-some-time-to-think-about-depression", function(req, res){
-    res.render("blog/2016/02/22/blogformat");
+router.get("/posts/takeSomeTimeToThinkAboutDepression", function(req, res){
+    res.render("blog/posts/takeSomeTimeToThinkAboutDepression/index");
 });
 
-router.get("/be-honest-about-sex-with-your-flatmates", function(req, res){
-    res.render("blog/2016/02/24/blogformat");
+router.get("/posts/beHonestAboutSexWithYourFlatmates", function(req, res){
+    res.render("blog/posts/beHonestAboutSexWithYourFlatmates/index");
 });
 
-router.get("/how-to-sleep-effectively-while-studying", function(req, res){
-    res.render("blog/2016/02/28/blogformat");
+router.get("/posts/howToSleepEffectivelyWhileStudying", function(req, res){
+    res.render("blog/posts/howToSleepEffectivelyWhileStudying/index");
 });
 
-router.get("/there-is-more-to-it-than-just-breakfast", function(req, res){
-    res.render("blog/2016/03/06/blogformat");
+router.get("/posts/thereIsMoreToItThanJustBreakfast", function(req, res){
+    res.render("blog/posts/thereIsMoreToItThanJustBreakfast/index");
 });
 
-router.get("/stop-wearing-skinny-jeans", function(req, res){
-    res.render("blog/2016/03/10/blogformat");
+router.get("/posts/stopWearingSkinnyJeans", function(req, res){
+    res.render("blog/posts/stopWearingSkinnyJeans/index");
 });
 
-router.get("/study-is-stressful-find-ways-to-manage-it", function(req, res){
-    res.render("blog/2016/03/17/blogformat");
+router.get("/posts/studyIsStressfulFindWaysToManageIt", function(req, res){
+    res.render("blog/posts/studyIsStressfulFindWaysToManageIt/index");
 });
 
-router.get("/what-to-consider-when-a-friend-stays-over-at-your-flat", function(req, res){
-    res.render("blog/2016/03/25/blogformat");
+router.get("/posts/whatToConsiderWhenAFriendStaysOverAtYourFlat", function(req, res){
+    res.render("blog/posts/whatToConsiderWhenAFriendStaysOverAtYourFlat/index");
 });
 
-router.get("/talk-to-a-recruitment-agent-and-start-your-career", function(req, res){
-    res.render("blog/2016/03/31/blogformat");
+router.get("/posts/talkToARecruitmentAgentAndStartYourCareer", function(req, res){
+    res.render("blog/posts/talkToARecruitmentAgentAndStartYourCareer/index");
 });
 
-router.get("/get-the-balance-right-with-part-time-work", function(req, res){
-    res.render("blog/2016/04/07/blogformat");
+router.get("/posts/getTheBalanceRightWithPartTimeWork", function(req, res){
+    res.render("blog/posts/getTheBalanceRightWithPartTimeWork/index");
 });
 
-router.get("/be-social-and-build-your-network", function(req, res){
-    res.render("blog/2016/05/10/blogformat");
+router.get("/posts/beSocialAndBuildYourNetwork", function(req, res){
+    res.render("blog/posts/beSocialAndBuildYourNetwork/index");
 });
 
-router.get("/ways-to-have-fun-outside-of-study", function(req, res){
-    res.render("blog/2016/05/22/blogformat");
+router.get("/posts/waysToHaveFunOutsideOfStudy", function(req, res){
+    res.render("blog/posts/waysToHaveFunOutsideOfStudy/index");
 });
 
-router.get("/take-on-the-challenge-to-correct-your-habits", function(req, res){
-    res.render("blog/2016/05/31/blogformat");
+router.get("/posts/takeOnTheChallengeToCorrectYourHabits", function(req, res){
+    res.render("blog/posts/takeOnTheChallengeToCorrectYourHabits/index");
 });
 
-router.get("/ideas-for-your-next-party", function(req, res){
-    res.render("blog/2016/06/14/blogformat");
+router.get("/posts/ideasForYourNextParty", function(req, res){
+    res.render("blog/posts/ideasForYourNextParty/index");
 });
 
-router.get("/what-is-a-fair-amount-to-pay-for-driving-on-a-trip", function(req, res){
-    res.render("blog/2016/08/16/blogformat");
+router.get("/posts/whatIsAFairAmountToPayForDrivingOnATrip", function(req, res){
+    res.render("blog/posts/whatIsAFairAmountToPayForDrivingOnATrip/index");
 });
 
-router.get("/find-your-flaws-and-learn-to-improve-on-them", function(req, res){
-    res.render("blog/2016/09/18/blogformat");
+router.get("/posts/findYourFlawsAndLearnToImproveOnThem", function(req, res){
+    res.render("blog/posts/findYourFlawsAndLearnToImproveOnThem/index");
 });
 
-router.get("/solving-the-toilet-shortage-problem-at-parties", function(req, res){
-    res.render("blog/2016/09/25/blogformat");
+router.get("/posts/solvingTheToiletShortageProblemAtParties", function(req, res){
+    res.render("blog/posts/solvingTheToiletShortageProblemAtParties/index");
 });
 
-router.get("/how-to-overcome-procrastination", function(req, res){
-    res.render("blog/2016/11/28/blogformat");
+router.get("/posts/howToOvercomeProcrastination", function(req, res){
+    res.render("blog/posts/howToOvercomeProcrastination/index");
 });
 
-router.get("/what-ideas-are-there-for-finding-part-time-work", function(req, res){
-    res.render("blog/2017/03/25/blogformat");
+router.get("/posts/whatIdeasAreThereForFindingPartTimeWork", function(req, res){
+    res.render("blog/posts/whatIdeasAreThereForFindingPartTimeWork/index");
 });
 
 module.exports = router;

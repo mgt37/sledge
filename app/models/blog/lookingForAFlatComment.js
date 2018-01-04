@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var lookingForAFlatCommentSchema = mongoose.Schema({
-    body:   String,
+    text:   String,
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,

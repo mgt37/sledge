@@ -1,10 +1,11 @@
 var mongoose = require("mongoose");
 
 var hayfeverTreatmentCommentSchema = mongoose.Schema({
-    body:   String,
+    blogComment: String,
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
         },
         username: String
     }

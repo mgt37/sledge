@@ -18,8 +18,31 @@
                     <% } %>
                 </div>
             </div>
-            <div>
-                    
+            <div class="well">
+                <div class= "text-right">
+                    <a class="btn btn-xs btn-success" href="/askOffer/westCoastRegion/ask/<%= westCoastRegionAsk._id %>/westCoastRegionAskComments/new/">Add comment</a>
+                </div>
+                <hr>
+                <% westCoastRegionAsk.comments.reverse().forEach(function(westCoastRegionAskComment){ %>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <strong><%= westCoastRegionAskComment.author.username %></strong>
+                            <span class="pull-right"><%= Date();%></span>
+                            <p>
+                                <%= westCoastRegionAskComment.text %>
+                            </p>
+                        <% if(currentUser && westCoastRegionAskComment.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-xs btn-warning" 
+                                href="/askOffer/westCoastRegion/ask/<%= westCoastRegionAsk._id %>/westCoastRegionAskComments/<%= westCoastRegionAskComment._id %>/edit">
+                                Edit
+                            </a>
+                            <form id="delete-form" action="/askOffer/westCoastRegion/ask/<%= westCoastRegionAsk._id %>/westCoastRegionAskComments/<%= westCoastRegionAskComment._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                        <% } %>
+                        </div>
+                    </div>
+                <% }); %>
             </div>
             
             <div class= "text-right">

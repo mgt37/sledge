@@ -1,0 +1,28 @@
+<% include ../../../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="thumbnail">
+                <div class="caption-full">
+                    <p><%= foodBudgetComment.blogComment %></p>
+                    <p>
+                        <em>Submitted by <%= foodBudgetComment.author.username %></em>
+                    </p>
+                    <% if(currentUser && foodBudgetComment.author.id.equals(currentUser._id)){ %>
+                        <a class="btn btn-xs btn-warning" href="/blog/foodBudget/<%= foodBudgetComment._id %>/edit">Edit</a>
+                        <form id="delete-form" action="/blog/foodBudget/<%= foodBudgetComment._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-danger">Delete</button>
+                        </form>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class= "text-right">
+        <a class="btn btn-success" href="/blog/foodBudget">Return to blog post</a>
+    </div>
+</div>
+
+<% include ../../../partials/footer %>

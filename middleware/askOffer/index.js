@@ -1,71 +1,83 @@
-var AucklandAsk                   = require("../../app/models/askOffer/aucklandAsk"),
-    AucklandAskComment            = require("../../app/models/askOffer/aucklandAskComment"),
-    AucklandOffer                 = require("../../app/models/askOffer/aucklandOffer"),
-    AucklandOfferComment          = require("../../app/models/askOffer/aucklandOfferComment"),
-    BayOfPlentyRegionAsk          = require("../../app/models/askOffer/bayOfPlentyRegionAsk"),
-    BayOfPlentyRegionOffer        = require("../../app/models/askOffer/bayOfPlentyRegionOffer"),
-    CentralOtagoAsk               = require("../../app/models/askOffer/centralOtagoAsk"),
-    CentralOtagoOffer             = require("../../app/models/askOffer/centralOtagoOffer"),
-    ChristchurchAsk               = require("../../app/models/askOffer/christchurchAsk"),
-    ChristchurchOffer             = require("../../app/models/askOffer/christchurchOffer"),
-    CoastalOtagoAsk               = require("../../app/models/askOffer/coastalOtagoAsk"),
-    CoastalOtagoOffer             = require("../../app/models/askOffer/coastalOtagoOffer"),
-    DunedinAsk                    = require("../../app/models/askOffer/dunedinAsk"),
-    DunedinOffer                  = require("../../app/models/askOffer/dunedinOffer"),
-    GisborneRegionAsk             = require("../../app/models/askOffer/gisborneRegionAsk"),
-    GisborneRegionOffer           = require("../../app/models/askOffer/gisborneRegionOffer"),
-    HamiltonAsk                   = require("../../app/models/askOffer/hamiltonAsk"),
-    HamiltonOffer                 = require("../../app/models/askOffer/hamiltonOffer"),
-    HawkesBayRegionAsk            = require("../../app/models/askOffer/hawkesBayRegionAsk"),
-    HawkesBayRegionOffer          = require("../../app/models/askOffer/hawkesBayRegionOffer"),
-    ManawatuWanganuiRegionAsk     = require("../../app/models/askOffer/manawatuWanganuiRegionAsk"),
-    ManawatuWanganuiRegionOffer   = require("../../app/models/askOffer/manawatuWanganuiRegionOffer"),
-    NelsonMarlboroughRegionAsk    = require("../../app/models/askOffer/nelsonMarlboroughRegionAsk"),
-    NelsonMarlboroughRegionOffer  = require("../../app/models/askOffer/nelsonMarlboroughRegionOffer"),
-    NorthlandRegionAsk            = require("../../app/models/askOffer/northlandRegionAsk"),
-    NorthlandRegionOffer          = require("../../app/models/askOffer/northlandRegionOffer"),
-    SouthCanterburyAsk            = require("../../app/models/askOffer/southCanterburyAsk"),
-    SouthCanterburyOffer          = require("../../app/models/askOffer/southCanterburyOffer"),
-    SouthlandRegionAsk            = require("../../app/models/askOffer/southlandRegionAsk"),
-    SouthlandRegionOffer          = require("../../app/models/askOffer/southlandRegionOffer"),
-    TaranakiRegionAsk          = require("../../app/models/askOffer/taranakiRegionAsk"),
-    TaranakiRegionOffer        = require("../../app/models/askOffer/taranakiRegionOffer"),
-    WaikatoRegionAsk          = require("../../app/models/askOffer/waikatoRegionAsk"),
-    WaikatoRegionOffer        = require("../../app/models/askOffer/waikatoRegionOffer"),
-    WellingtonAsk          = require("../../app/models/askOffer/wellingtonAsk"),
-    WellingtonOffer        = require("../../app/models/askOffer/wellingtonOffer"),
-    WellingtonRegionAsk          = require("../../app/models/askOffer/wellingtonRegionAsk"),
-    WellingtonRegionOffer        = require("../../app/models/askOffer/wellingtonRegionOffer"),
-    WestCoastRegionAsk          = require("../../app/models/askOffer/westCoastRegionAsk"),
-    WestCoastRegionOffer        = require("../../app/models/askOffer/westCoastRegionOffer");
+var AucklandAsk                          = require("../../app/models/askOffer/aucklandAsk"),
+    AucklandOffer                        = require("../../app/models/askOffer/aucklandOffer"),
+    AucklandAskComment                   = require("../../app/models/askOffer/aucklandAskComment"),
+    AucklandOfferComment                 = require("../../app/models/askOffer/aucklandOfferComment"),
+    BayOfPlentyRegionAsk                 = require("../../app/models/askOffer/bayOfPlentyRegionAsk"),
+    BayOfPlentyRegionOffer               = require("../../app/models/askOffer/bayOfPlentyRegionOffer"),
+    BayOfPlentyRegionAskComment          = require("../../app/models/askOffer/bayOfPlentyRegionAskComment"),
+    BayOfPlentyRegionOfferComment        = require("../../app/models/askOffer/bayOfPlentyRegionOfferComment"),
+    CentralOtagoAsk                      = require("../../app/models/askOffer/centralOtagoAsk"),
+    CentralOtagoOffer                    = require("../../app/models/askOffer/centralOtagoOffer"),
+    CentralOtagoAskComment               = require("../../app/models/askOffer/centralOtagoAskComment"),
+    CentralOtagoOfferComment             = require("../../app/models/askOffer/centralOtagoOfferComment"),
+    ChristchurchAsk                      = require("../../app/models/askOffer/christchurchAsk"),
+    ChristchurchOffer                    = require("../../app/models/askOffer/christchurchOffer"),
+    ChristchurchAskComment               = require("../../app/models/askOffer/christchurchAskComment"),
+    ChristchurchOfferComment             = require("../../app/models/askOffer/christchurchOfferComment"),
+    CoastalOtagoAsk                      = require("../../app/models/askOffer/coastalOtagoAsk"),
+    CoastalOtagoOffer                    = require("../../app/models/askOffer/coastalOtagoOffer"),
+    CoastalOtagoAskComment               = require("../../app/models/askOffer/coastalOtagoAskComment"),
+    CoastalOtagoOfferComment             = require("../../app/models/askOffer/coastalOtagoOfferComment"),
+    DunedinAsk                           = require("../../app/models/askOffer/dunedinAsk"),
+    DunedinOffer                         = require("../../app/models/askOffer/dunedinOffer"),
+    DunedinAskComment                    = require("../../app/models/askOffer/dunedinAskComment"),
+    DunedinOfferComment                  = require("../../app/models/askOffer/dunedinOfferComment"),
+    GisborneRegionAsk                    = require("../../app/models/askOffer/gisborneRegionAsk"),
+    GisborneRegionOffer                  = require("../../app/models/askOffer/gisborneRegionOffer"),
+    GisborneRegionAskComment             = require("../../app/models/askOffer/gisborneRegionAskComment"),
+    GisborneRegionOfferComment           = require("../../app/models/askOffer/gisborneRegionOfferComment"),
+    HamiltonAsk                          = require("../../app/models/askOffer/hamiltonAsk"),
+    HamiltonOffer                        = require("../../app/models/askOffer/hamiltonOffer"),
+    HamiltonAskComment                   = require("../../app/models/askOffer/hamiltonAskComment"),
+    HamiltonOfferComment                 = require("../../app/models/askOffer/hamiltonOfferComment"),
+    HawkesBayRegionAsk                   = require("../../app/models/askOffer/hawkesBayRegionAsk"),
+    HawkesBayRegionOffer                 = require("../../app/models/askOffer/hawkesBayRegionOffer"),
+    HawkesBayRegionAskComment            = require("../../app/models/askOffer/hawkesBayRegionAskComment"),
+    HawkesBayRegionOfferComment          = require("../../app/models/askOffer/hawkesBayRegionOfferComment"),
+    ManawatuWanganuiRegionAsk            = require("../../app/models/askOffer/manawatuWanganuiRegionAsk"),
+    ManawatuWanganuiRegionOffer          = require("../../app/models/askOffer/manawatuWanganuiRegionOffer"),
+    ManawatuWanganuiRegionAskComment     = require("../../app/models/askOffer/manawatuWanganuiRegionAskComment"),
+    ManawatuWanganuiRegionOfferComment   = require("../../app/models/askOffer/manawatuWanganuiRegionOfferComment"),
+    NelsonMarlboroughRegionAsk           = require("../../app/models/askOffer/nelsonMarlboroughRegionAsk"),
+    NelsonMarlboroughRegionOffer         = require("../../app/models/askOffer/nelsonMarlboroughRegionOffer"),
+    NelsonMarlboroughRegionAskComment    = require("../../app/models/askOffer/nelsonMarlboroughRegionAskComment"),
+    NelsonMarlboroughRegionOfferComment  = require("../../app/models/askOffer/nelsonMarlboroughRegionOfferComment"),
+    NorthlandRegionAsk                   = require("../../app/models/askOffer/northlandRegionAsk"),
+    NorthlandRegionOffer                 = require("../../app/models/askOffer/northlandRegionOffer"),
+    NorthlandRegionAskComment            = require("../../app/models/askOffer/northlandRegionAskComment"),
+    NorthlandRegionOfferComment          = require("../../app/models/askOffer/northlandRegionOfferComment"),
+    SouthCanterburyAsk                   = require("../../app/models/askOffer/southCanterburyAsk"),
+    SouthCanterburyOffer                 = require("../../app/models/askOffer/southCanterburyOffer"),
+    SouthCanterburyAskComment            = require("../../app/models/askOffer/southCanterburyAskComment"),
+    SouthCanterburyOfferComment          = require("../../app/models/askOffer/southCanterburyOfferComment"),
+    SouthlandRegionAsk                   = require("../../app/models/askOffer/southlandRegionAsk"),
+    SouthlandRegionOffer                 = require("../../app/models/askOffer/southlandRegionOffer"),
+    SouthlandRegionAskComment            = require("../../app/models/askOffer/southlandRegionAskComment"),
+    SouthlandRegionOfferComment          = require("../../app/models/askOffer/southlandRegionOfferComment"),
+    TaranakiRegionAsk                    = require("../../app/models/askOffer/taranakiRegionAsk"),
+    TaranakiRegionOffer                  = require("../../app/models/askOffer/taranakiRegionOffer"),
+    TaranakiRegionAskComment             = require("../../app/models/askOffer/taranakiRegionAskComment"),
+    TaranakiRegionOfferComment           = require("../../app/models/askOffer/taranakiRegionOfferComment"),
+    WaikatoRegionAsk                     = require("../../app/models/askOffer/waikatoRegionAsk"),
+    WaikatoRegionOffer                   = require("../../app/models/askOffer/waikatoRegionOffer"),
+    WaikatoRegionAskComment              = require("../../app/models/askOffer/waikatoRegionAskComment"),
+    WaikatoRegionOfferComment            = require("../../app/models/askOffer/waikatoRegionOfferComment"),
+    WellingtonAsk                        = require("../../app/models/askOffer/wellingtonAsk"),
+    WellingtonOffer                      = require("../../app/models/askOffer/wellingtonOffer"),
+    WellingtonAskComment                 = require("../../app/models/askOffer/wellingtonAskComment"),
+    WellingtonOfferComment               = require("../../app/models/askOffer/wellingtonOfferComment"),
+    WellingtonRegionAsk                  = require("../../app/models/askOffer/wellingtonRegionAsk"),
+    WellingtonRegionOffer                = require("../../app/models/askOffer/wellingtonRegionOffer"),
+    WellingtonRegionAskComment           = require("../../app/models/askOffer/wellingtonRegionAskComment"),
+    WellingtonRegionOfferComment         = require("../../app/models/askOffer/wellingtonRegionOfferComment"),
+    WestCoastRegionAsk                   = require("../../app/models/askOffer/westCoastRegionAsk"),
+    WestCoastRegionOffer                 = require("../../app/models/askOffer/westCoastRegionOffer"),
+    WestCoastRegionAskComment            = require("../../app/models/askOffer/westCoastRegionAskComment"),
+    WestCoastRegionOfferComment          = require("../../app/models/askOffer/westCoastRegionOfferComment");
     
 
 // All the middleware goes here
 var middlewareObj = {};
-
-middlewareObj.checkAucklandAskOwnership = function(req, res, next) {
-    if(req.isAuthenticated()){
-        AucklandAsk.findById(req.params.id, function(err, foundAucklandAsk){
-            if(err){
-                req.flash("error", "item not found");
-                res.redirect("back");
-            } else {
-            //does user own the uniTalk?
-                if(foundAucklandAsk.author.id.equals(req.user._id)){
-                    next();
-                } else {
-                    //otherwise, redirect
-                    req.flash("error", "You do not have permission to do that");
-                    res.redirect("back");
-                }
-            }
-            });
-        } else {
-        //if not, redirect
-        req.flash("error", "You need to be logged in to do that");
-        res.redirect("back");
-        }
-};
 
 middlewareObj.checkAucklandAskCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
@@ -87,6 +99,54 @@ middlewareObj.checkAucklandAskCommentOwnership = function(req, res, next) {
         } else {
         //if not, redirect
         /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkAucklandOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        AucklandOfferComment.findById(req.params.comment_id, function(err, foundAucklandOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundAucklandOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkAucklandAskOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        AucklandAsk.findById(req.params.id, function(err, foundAucklandAsk){
+            if(err){
+                req.flash("error", "item not found");
+                res.redirect("back");
+            } else {
+            //does user own the uniTalk?
+                if(foundAucklandAsk.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    req.flash("error", "You do not have permission to do that");
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -115,15 +175,39 @@ middlewareObj.checkAucklandOfferOwnership = function(req, res, next) {
         }
 };
 
-middlewareObj.checkAucklandOfferCommentOwnership = function(req, res, next) {
+middlewareObj.checkBayOfPlentyRegionAskCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
-        AucklandOfferComment.findById(req.params.comment_id, function(err, foundAucklandOfferComment){
+        BayOfPlentyRegionAskComment.findById(req.params.comment_id, function(err, foundBayOfPlentyRegionAskComment){
             if(err){
                 /*req.flash("error", "Comment not found");*/
                 res.redirect("back");
             } else {
             //does user own the comment?
-                if(foundAucklandOfferComment.author.id.equals(req.user._id)){
+                if(foundBayOfPlentyRegionAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkBayOfPlentyRegionOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        BayOfPlentyRegionOfferComment.findById(req.params.comment_id, function(err, foundBayOfPlentyRegionOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundBayOfPlentyRegionOfferComment.author.id.equals(req.user._id)){
                     next();
                 } else {
                     //otherwise, redirect
@@ -187,6 +271,54 @@ middlewareObj.checkBayOfPlentyRegionOfferOwnership = function(req, res, next) {
         }
 };
 
+middlewareObj.checkCentralOtagoAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        CentralOtagoAskComment.findById(req.params.comment_id, function(err, foundCentralOtagoAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundCentralOtagoAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkCentralOtagoOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        CentralOtagoOfferComment.findById(req.params.comment_id, function(err, foundCentralOtagoOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundCentralOtagoOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
 middlewareObj.checkCentralOtagoAskOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         CentralOtagoAsk.findById(req.params.id, function(err, foundCentralOtagoAsk){
@@ -231,6 +363,54 @@ middlewareObj.checkCentralOtagoOfferOwnership = function(req, res, next) {
         } else {
         //if not, redirect
         req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkChristchurchAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        ChristchurchAskComment.findById(req.params.comment_id, function(err, foundChristchurchAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundChristchurchAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkChristchurchOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        ChristchurchOfferComment.findById(req.params.comment_id, function(err, foundChristchurchOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundChristchurchOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
         res.redirect("back");
         }
 };
@@ -283,6 +463,54 @@ middlewareObj.checkChristchurchOfferOwnership = function(req, res, next) {
         }
 };
 
+middlewareObj.checkCoastalOtagoAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        CoastalOtagoAskComment.findById(req.params.comment_id, function(err, foundCoastalOtagoAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundCoastalOtagoAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkCoastalOtagoOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        CoastalOtagoOfferComment.findById(req.params.comment_id, function(err, foundCoastalOtagoOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundCoastalOtagoOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
 middlewareObj.checkCoastalOtagoAskOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         CoastalOtagoAsk.findById(req.params.id, function(err, foundCoastalOtagoAsk){
@@ -327,6 +555,54 @@ middlewareObj.checkCoastalOtagoOfferOwnership = function(req, res, next) {
         } else {
         //if not, redirect
         req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkDunedinAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        DunedinAskComment.findById(req.params.comment_id, function(err, foundDunedinAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundDunedinAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkDunedinOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        DunedinOfferComment.findById(req.params.comment_id, function(err, foundDunedinOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundDunedinOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
         res.redirect("back");
         }
 };
@@ -379,6 +655,54 @@ middlewareObj.checkDunedinOfferOwnership = function(req, res, next) {
         }
 };
 
+middlewareObj.checkGisborneRegionAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        GisborneRegionAskComment.findById(req.params.comment_id, function(err, foundGisborneRegionAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundGisborneRegionAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkGisborneRegionOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        GisborneRegionOfferComment.findById(req.params.comment_id, function(err, foundGisborneRegionOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundGisborneRegionOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
 middlewareObj.checkGisborneRegionAskOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         GisborneRegionAsk.findById(req.params.id, function(err, foundGisborneRegionAsk){
@@ -423,6 +747,54 @@ middlewareObj.checkGisborneRegionOfferOwnership = function(req, res, next) {
         } else {
         //if not, redirect
         req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkHamiltonAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        HamiltonAskComment.findById(req.params.comment_id, function(err, foundHamiltonAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundHamiltonAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkHamiltonOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        HamiltonOfferComment.findById(req.params.comment_id, function(err, foundHamiltonOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundHamiltonOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
         res.redirect("back");
         }
 };
@@ -475,6 +847,54 @@ middlewareObj.checkHamiltonOfferOwnership = function(req, res, next) {
         }
 };
 
+middlewareObj.checkHawkesBayRegionAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        HawkesBayRegionAskComment.findById(req.params.comment_id, function(err, foundHawkesBayRegionAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundHawkesBayRegionAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkHawkesBayRegionOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        HawkesBayRegionOfferComment.findById(req.params.comment_id, function(err, foundHawkesBayRegionOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundHawkesBayRegionOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
 middlewareObj.checkHawkesBayRegionAskOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         HawkesBayRegionAsk.findById(req.params.id, function(err, foundHawkesBayRegionAsk){
@@ -519,6 +939,54 @@ middlewareObj.checkHawkesBayRegionOfferOwnership = function(req, res, next) {
         } else {
         //if not, redirect
         req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkManawatuWanganuiRegionAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        ManawatuWanganuiRegionAskComment.findById(req.params.comment_id, function(err, foundManawatuWanganuiRegionAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundManawatuWanganuiRegionAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkManawatuWanganuiRegionOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        ManawatuWanganuiRegionOfferComment.findById(req.params.comment_id, function(err, foundManawatuWanganuiRegionOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundManawatuWanganuiRegionOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
         res.redirect("back");
         }
 };
@@ -571,6 +1039,54 @@ middlewareObj.checkManawatuWanganuiRegionOfferOwnership = function(req, res, nex
         }
 };
 
+middlewareObj.checkNelsonMarlboroughRegionAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        NelsonMarlboroughRegionAskComment.findById(req.params.comment_id, function(err, foundNelsonMarlboroughRegionAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundNelsonMarlboroughRegionAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkNelsonMarlboroughRegionOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        NelsonMarlboroughRegionOfferComment.findById(req.params.comment_id, function(err, foundNelsonMarlboroughRegionOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundNelsonMarlboroughRegionOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
 middlewareObj.checkNelsonMarlboroughRegionAskOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         NelsonMarlboroughRegionAsk.findById(req.params.id, function(err, foundNelsonMarlboroughRegionAsk){
@@ -615,6 +1131,54 @@ middlewareObj.checkNelsonMarlboroughRegionOfferOwnership = function(req, res, ne
         } else {
         //if not, redirect
         req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkNorthlandRegionAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        NorthlandRegionAskComment.findById(req.params.comment_id, function(err, foundNorthlandRegionAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundNorthlandRegionAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkNorthlandRegionOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        NorthlandRegionOfferComment.findById(req.params.comment_id, function(err, foundNorthlandRegionOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundNorthlandRegionOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
         res.redirect("back");
         }
 };
@@ -667,6 +1231,54 @@ middlewareObj.checkNorthlandRegionOfferOwnership = function(req, res, next) {
         }
 };
 
+middlewareObj.checkSouthCanterburyAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        SouthCanterburyAskComment.findById(req.params.comment_id, function(err, foundSouthCanterburyAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundSouthCanterburyAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkSouthCanterburyOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        SouthCanterburyOfferComment.findById(req.params.comment_id, function(err, foundSouthCanterburyOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundSouthCanterburyOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
 middlewareObj.checkSouthCanterburyAskOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         SouthCanterburyAsk.findById(req.params.id, function(err, foundSouthCanterburyAsk){
@@ -711,6 +1323,54 @@ middlewareObj.checkSouthCanterburyOfferOwnership = function(req, res, next) {
         } else {
         //if not, redirect
         req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkSouthlandRegionAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        SouthlandRegionAskComment.findById(req.params.comment_id, function(err, foundSouthlandRegionAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundSouthlandRegionAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkSouthlandRegionOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        SouthlandRegionOfferComment.findById(req.params.comment_id, function(err, foundSouthlandRegionOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundSouthlandRegionOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
         res.redirect("back");
         }
 };
@@ -763,6 +1423,54 @@ middlewareObj.checkSouthlandRegionOfferOwnership = function(req, res, next) {
         }
 };
 
+middlewareObj.checkTaranakiRegionAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        TaranakiRegionAskComment.findById(req.params.comment_id, function(err, foundTaranakiRegionAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundTaranakiRegionAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkTaranakiRegionOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        TaranakiRegionOfferComment.findById(req.params.comment_id, function(err, foundTaranakiRegionOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundTaranakiRegionOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
 middlewareObj.checkTaranakiRegionAskOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         TaranakiRegionAsk.findById(req.params.id, function(err, foundTaranakiRegionAsk){
@@ -807,6 +1515,54 @@ middlewareObj.checkTaranakiRegionOfferOwnership = function(req, res, next) {
         } else {
         //if not, redirect
         req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkWaikatoRegionAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        WaikatoRegionAskComment.findById(req.params.comment_id, function(err, foundWaikatoRegionAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundWaikatoRegionAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkWaikatoRegionOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        WaikatoRegionOfferComment.findById(req.params.comment_id, function(err, foundWaikatoRegionOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundWaikatoRegionOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
         res.redirect("back");
         }
 };
@@ -859,6 +1615,54 @@ middlewareObj.checkWaikatoRegionOfferOwnership = function(req, res, next) {
         }
 };
 
+middlewareObj.checkWellingtonAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        WellingtonAskComment.findById(req.params.comment_id, function(err, foundWellingtonAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundWellingtonAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkWellingtonOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        WellingtonOfferComment.findById(req.params.comment_id, function(err, foundWellingtonOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundWellingtonOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
 middlewareObj.checkWellingtonAskOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         WellingtonAsk.findById(req.params.id, function(err, foundWellingtonAsk){
@@ -907,6 +1711,54 @@ middlewareObj.checkWellingtonOfferOwnership = function(req, res, next) {
         }
 };
 
+middlewareObj.checkWellingtonRegionAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        WellingtonRegionAskComment.findById(req.params.comment_id, function(err, foundWellingtonRegionAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundWellingtonRegionAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkWellingtonRegionOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        WellingtonRegionOfferComment.findById(req.params.comment_id, function(err, foundWellingtonRegionOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundWellingtonRegionOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
 middlewareObj.checkWellingtonRegionAskOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         WellingtonRegionAsk.findById(req.params.id, function(err, foundWellingtonRegionAsk){
@@ -951,6 +1803,54 @@ middlewareObj.checkWellingtonRegionOfferOwnership = function(req, res, next) {
         } else {
         //if not, redirect
         req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkWestCoastRegionAskCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        WestCoastRegionAskComment.findById(req.params.comment_id, function(err, foundWestCoastRegionAskComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundWestCoastRegionAskComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkWestCoastRegionOfferCommentOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        WestCoastRegionOfferComment.findById(req.params.comment_id, function(err, foundWestCoastRegionOfferComment){
+            if(err){
+                /*req.flash("error", "Comment not found");*/
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundWestCoastRegionOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    /*req.flash("error", "You do not have permission to do that");*/
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        /*req.flash("error", "You need to be logged in to do that");*/
         res.redirect("back");
         }
 };

@@ -18,8 +18,31 @@
                     <% } %>
                 </div>
             </div>
-            <div>
-                    
+            <div class="well">
+                <div class= "text-right">
+                    <a class="btn btn-xs btn-success" href="/askOffer/nelsonMarlboroughRegion/ask/<%= nelsonMarlboroughRegionAsk._id %>/nelsonMarlboroughRegionAskComments/new/">Add comment</a>
+                </div>
+                <hr>
+                <% nelsonMarlboroughRegionAsk.comments.reverse().forEach(function(nelsonMarlboroughRegionAskComment){ %>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <strong><%= nelsonMarlboroughRegionAskComment.author.username %></strong>
+                            <span class="pull-right"><%= Date();%></span>
+                            <p>
+                                <%= nelsonMarlboroughRegionAskComment.text %>
+                            </p>
+                        <% if(currentUser && nelsonMarlboroughRegionAskComment.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-xs btn-warning" 
+                                href="/askOffer/nelsonMarlboroughRegion/ask/<%= nelsonMarlboroughRegionAsk._id %>/nelsonMarlboroughRegionAskComments/<%= nelsonMarlboroughRegionAskComment._id %>/edit">
+                                Edit
+                            </a>
+                            <form id="delete-form" action="/askOffer/nelsonMarlboroughRegion/ask/<%= nelsonMarlboroughRegionAsk._id %>/nelsonMarlboroughRegionAskComments/<%= nelsonMarlboroughRegionAskComment._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                        <% } %>
+                        </div>
+                    </div>
+                <% }); %>
             </div>
             
             <div class= "text-right">
