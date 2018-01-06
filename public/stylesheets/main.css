@@ -3,12 +3,12 @@
 /*MAIN FONT*/
 
 body  {
-  font-family: 'Raleway', sans-serif;;
+  font-family: 'Raleway', sans-serif;
   background-color: #eef4be;
   /*color: #ffebad;*/ }
   
 .home h2 h3  {
-  font-family: 'Raleway', sans-serif;;
+  font-family: 'Raleway', sans-serif;
   background-color: #141414;
   color: #AAAAAA; }
 
@@ -24,124 +24,325 @@ body  {
 }
 
 .homejumbotron {
-  background-image: url("/images/jumbotron/Waikato_University_long.jpg");
+  background-image: url("/images/jumbotron/Auckland_Business_School.jpg");
   background-size: cover;
   opacity: 1;
 }
 
+/*ASK / OFFER JUMBOTRONS*/
+
 .northlandjumbotron {
-  background-image: url("/images/jumbotron/locations/Cape_Reinga.jpg");
+  background-image: url("/images/jumbotron/askOffer/Cape_Reinga.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .aucklandjumbotron {
-  background-image: url("/images/jumbotron/locations/Auckland.jpg");
+  background-image: url("/images/jumbotron/askOffer/Auckland.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .waikatojumbotron {
-  background-image: url("/images/jumbotron/locations/Waikato_River.jpg");
+  background-image: url("/images/jumbotron/askOffer/Waikato_River.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .bayofplentyjumbotron {
-  background-image: url("/images/jumbotron/locations/Mount_Maunganui.jpg");
+  background-image: url("/images/jumbotron/askOffer/Mount_Maunganui.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .hamiltonjumbotron {
-  background-image: url("/images/jumbotron/locations/Hamilton_Lake.jpg");
+  background-image: url("/images/jumbotron/askOffer/Hamilton_Lake.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .gisbornejumbotron {
-  background-image: url("/images/jumbotron/locations/Gisborne.jpg");
+  background-image: url("/images/jumbotron/askOffer/Gisborne.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .taranakijumbotron {
-  background-image: url("/images/jumbotron/locations/Mount_Taranaki.jpg");
+  background-image: url("/images/jumbotron/askOffer/Mount_Taranaki.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .hawkesbayjumbotron {
-  background-image: url("/images/jumbotron/locations/Napier.jpg");
+  background-image: url("/images/jumbotron/askOffer/Napier.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .manawatuwanganuijumbotron {
-  background-image: url("/images/jumbotron/locations/Whanganui_River.jpg");
+  background-image: url("/images/jumbotron/askOffer/Whanganui_River.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .wellingtonregionjumbotron {
-  background-image: url("/images/jumbotron/locations/Kapiti.jpg");
+  background-image: url("/images/jumbotron/askOffer/Kapiti.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .wellingtonjumbotron {
-  background-image: url("/images/jumbotron/locations/Wellington_City.jpg");
+  background-image: url("/images/jumbotron/askOffer/Wellington_City.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .nelsonmarlboroughjumbotron {
-  background-image: url("/images/jumbotron/locations/Marlborough.jpg");
+  background-image: url("/images/jumbotron/askOffer/Marlborough.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .westcoastjumbotron {
-  background-image: url("/images/jumbotron/locations/Westport.jpg");
+  background-image: url("/images/jumbotron/askOffer/Westport.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .christchurchjumbotron {
-  background-image: url("/images/jumbotron/locations/Christchurch.jpg");
+  background-image: url("/images/jumbotron/askOffer/Christchurch.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .southcanterburyjumbotron {
-  background-image: url("/images/jumbotron/locations/South_Canterbury.jpg");
+  background-image: url("/images/jumbotron/askOffer/South_Canterbury.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .centralotagojumbotron {
-  background-image: url("/images/jumbotron/locations/Queenstown.jpg");
+  background-image: url("/images/jumbotron/askOffer/Queenstown.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .coastalotagojumbotron {
-  background-image: url("/images/jumbotron/locations/Oamaru.jpg");
+  background-image: url("/images/jumbotron/askOffer/Oamaru.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .dunedinjumbotron {
-  background-image: url("/images/jumbotron/locations/Dunedin.jpg");
+  background-image: url("/images/jumbotron/askOffer/Dunedin.jpg");
   background-size: cover;
   opacity: 1;
 }
 
 .southlandjumbotron {
-  background-image: url("/images/jumbotron/locations/Southland.jpg");
+  background-image: url("/images/jumbotron/askOffer/Southland.jpg");
   background-size: cover;
   opacity: 1;
 }
+
+/*UNITALK JUMBOTRONS*/
+
+.alcoholjumbotron {
+  background-image: url("/images/jumbotron/uniTalk/alcohol.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.careerjumbotron {
+  background-image: url("/images/jumbotron/uniTalk/careers.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.femalefashionjumbotron {
+  background-image: url("/images/jumbotron/uniTalk/femalefashion.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.flattingjumbotron {
+  background-image: url("/images/jumbotron/uniTalk/flatting.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.foodjumbotron {
+  background-image: url("/images/jumbotron/uniTalk/food.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.healthjumbotron {
+  background-image: url("/images/jumbotron/uniTalk/health.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.malefashionjumbotron {
+  background-image: url("/images/jumbotron/uniTalk/malefashion.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.moneyjumbotron {
+  background-image: url("/images/jumbotron/uniTalk/money.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.otherjumbotron {
+  background-image: url("/images/jumbotron/uniTalk/other.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.parttimeworkjumbotron {
+  background-image: url("/images/jumbotron/uniTalk/parttimework.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.partyjumbotron {
+  background-image: url("/images/jumbotron/uniTalk/party.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.relationshipjumbotron {
+  background-image: url("/images/jumbotron/uniTalk/relationships.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.sexjumbotron {
+  background-image: url("/images/jumbotron/uniTalk/sex.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.sportjumbotron {
+  background-image: url("/images/jumbotron/uniTalk/sport.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.studyjumbotron {
+  background-image: url("/images/jumbotron/uniTalk/study.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.vehiclejumbotron {
+  background-image: url("/images/jumbotron/uniTalk/car.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+
+/*UNITALK AND BLOG START PAGES*/
+
+
+.alcoholbox {
+  background-image: url("/images/jumbotron/uniTalk/alcohol.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.careerbox {
+  background-image: url("/images/jumbotron/uniTalk/careers.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.femalefashionbox {
+  background-image: url("/images/jumbotron/uniTalk/femalefashion.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.flattingbox {
+  background-image: url("/images/jumbotron/uniTalk/flatting.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.foodbox {
+  background-image: url("/images/jumbotron/uniTalk/food.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.healthbox {
+  background-image: url("/images/jumbotron/uniTalk/health.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.malefashionbox {
+  background-image: url("/images/jumbotron/uniTalk/malefashion.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.moneybox {
+  background-image: url("/images/jumbotron/uniTalk/money.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.otherbox {
+  background-image: url("/images/jumbotron/uniTalk/other.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.parttimeworkbox {
+  background-image: url("/images/jumbotron/uniTalk/parttimework.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.partybox {
+  background-image: url("/images/jumbotron/uniTalk/party.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.relationshipbox {
+  background-image: url("/images/jumbotron/uniTalk/relationships.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.sexbox {
+  background-image: url("/images/jumbotron/uniTalk/sex.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.sportbox {
+  background-image: url("/images/jumbotron/uniTalk/sport.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.studybox {
+  background-image: url("/images/jumbotron/uniTalk/study.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.vehiclebox {
+  background-image: url("/images/jumbotron/uniTalk/car.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
 
 /*MAIN PAGE CONTAINER SETUP*/
 
@@ -254,24 +455,34 @@ border-radius: 0; }
 ul.nav li.dropdown:hover ul.dropdown-menu{ display: block; }
 
 .blogbox {
-  height: 10vh;
+  height: 20vh;
   background-color: #d4f291;
-  border: 1px solid #10b0c7;
-  font-size: 1.25em;
-  font-family: arial,helvetica,sans-serif;
-  color: #000000;
+  border: 0.05px solid #10b0c7;
+  font-family: 'Raleway', sans-serif;
   margin: 0 0;
 }
 
 .unitalkbox {
-  height: 10vh;
+  height: 20vh;
   background-color: #d4f291;
-  border: 1px solid #10b0c7;
-  font-size: 1.25em;
-  font-family: arial,helvetica,sans-serif;
-  color: #000000;
+  border: 0.05px solid #10b0c7;
+  font-family: 'Raleway', sans-serif;
   margin: 0 0;
 }
+
+.inlink {
+  color: white; text-shadow: black 0.3em 0.3em 0.4em;
+  text-shadow: -1px 0 black, 0 1px black,
+  1px 0 black, 0 -1px black;
+  font-size: 4em;
+  text-align: center;
+}
+
+.startbox {
+  background-color: #d4f291;
+  
+}
+
 
 
 .topicbox {
