@@ -1,5 +1,5 @@
-var express                     = require("express");
-var router                      = express.Router({mergeParams: true});
+var express           = require("express");
+var router            = express();
 var timestamp                   = require('time-stamp');
 var TalkToARecruitmentAgentComment    = require("../../app/models/blog/talkToARecruitmentAgentComment");
 var middleware                  = require("../../middleware"),

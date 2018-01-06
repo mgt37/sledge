@@ -1,61 +1,6 @@
-/*
-* Theme Name: Sledge
-* Description: A spartan framework for theme development
-* Author: Sledge
-* Version: 1.0.0
-* License: GNU General Public License version 3.0
-* License URI: http://www.gnu.org/licenses/gpl-3.0.html
-* Tags: responsive, bootstrap grid,
-* Text Domain: sledgetheme;
-*/
+/*MAIN CSS FILE*/
 
-img{
-    max-width: 100%;
-}
-
-footer.footer{
-    background-color: #222;
-    color: white;
-}
-footer.footer .sub-menu{
-    display: none;
-}
-
-.main_picture {
-  max-width: 100%;
-  width: 50%;
-  height: 20px;
-}
-
-
-
-/**** CSS3 Transitions ****/
-/**** Font weights ****/
-/****  Break points for media queries ***/
-/**** Mixins ****/
-/** Functions *****/
-@font-face {
-  font-family: "typewriter_1942";
-  src: url("../fonts/1942-webfont.eot");
-  src: url("../fonts/1942-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/1942-webfont.woff2") format("woff2"), url("../fonts/1942-webfont.woff") format("woff"), url("../fonts/1942-webfont.ttf") format("truetype"), url("../fonts/1942-webfont.svgtypewriter_1942{$weight}") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-  
-@font-face {
-  font-family: "dense";
-  src: url("../fonts/dense-regular-webfont.eot");
-  src: url("../fonts/dense-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/dense-regular-webfont.woff2") format("woff2"), url("../fonts/dense-regular-webfont.woff") format("woff"), url("../fonts/dense-regular-webfont.ttf") format("truetype"), url("../fonts/dense-regular-webfont.svgdense{$weight}") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-  
-iframe {
-  border: none;
-  width: 100%; }
-
-boxfont  {
-  font-family: typewriter_1942;
-    color: #c32222;
-  color: #AAAAAA; }  
+/*MAIN FONT*/
 
 body  {
   font-family: 'Raleway', sans-serif;;
@@ -66,23 +11,219 @@ body  {
   font-family: 'Raleway', sans-serif;;
   background-color: #141414;
   color: #AAAAAA; }
-      
-h2 h3  {
-  font-family: arial,helvetica,sans-serif;
-  background-color: #141414;
-  color: #AAAAAA; }
 
-.fullwidth .mainContent {
-  width: 100%; }
-  
-icons  {
-  height: 10vh;
-  }
+/*JUMBOTRON*/
   
 .jumbotron {
   background-color: #d4f291;
-  color: gray-400;
+  color: white; text-shadow: black 0.2em 0.2em 0.3em;
+  text-shadow: -1px 0 black, 0 1px black,
+  1px 0 black, 0 -1px black;
+  height: 40vh;
+  border: 0.05px solid #10b0c7;
 }
+
+.homejumbotron {
+  background-image: url("/images/jumbotron/Waikato_University_long.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.northlandjumbotron {
+  background-image: url("/images/jumbotron/locations/Cape_Reinga.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.aucklandjumbotron {
+  background-image: url("/images/jumbotron/locations/Auckland.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.waikatojumbotron {
+  background-image: url("/images/jumbotron/locations/Waikato_River.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.bayofplentyjumbotron {
+  background-image: url("/images/jumbotron/locations/Mount_Maunganui.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.hamiltonjumbotron {
+  background-image: url("/images/jumbotron/locations/Hamilton_Lake.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.gisbornejumbotron {
+  background-image: url("/images/jumbotron/locations/Gisborne.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.taranakijumbotron {
+  background-image: url("/images/jumbotron/locations/Mount_Taranaki.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.hawkesbayjumbotron {
+  background-image: url("/images/jumbotron/locations/Napier.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.manawatuwanganuijumbotron {
+  background-image: url("/images/jumbotron/locations/Whanganui_River.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.wellingtonregionjumbotron {
+  background-image: url("/images/jumbotron/locations/Kapiti.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.wellingtonjumbotron {
+  background-image: url("/images/jumbotron/locations/Wellington_City.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.nelsonmarlboroughjumbotron {
+  background-image: url("/images/jumbotron/locations/Marlborough.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.westcoastjumbotron {
+  background-image: url("/images/jumbotron/locations/Westport.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.christchurchjumbotron {
+  background-image: url("/images/jumbotron/locations/Christchurch.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.southcanterburyjumbotron {
+  background-image: url("/images/jumbotron/locations/South_Canterbury.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.centralotagojumbotron {
+  background-image: url("/images/jumbotron/locations/Queenstown.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.coastalotagojumbotron {
+  background-image: url("/images/jumbotron/locations/Oamaru.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.dunedinjumbotron {
+  background-image: url("/images/jumbotron/locations/Dunedin.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+.southlandjumbotron {
+  background-image: url("/images/jumbotron/locations/Southland.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
+/*MAIN PAGE CONTAINER SETUP*/
+
+.pagecontainer {
+  padding: 0 2vh 0 2vh;
+}
+
+/*HOME PAGE*/
+
+.icons  {
+  height: 15vh;
+  padding: 2.5vh 0 2.5vh 0;
+  }
+
+.iconbox {
+  height: 15vh;
+  background-color: #d4f291;
+  border: 0.05px solid #10b0c7;
+}
+
+.homeheadings {
+  text-align: center;
+}
+
+.homesentences {
+  text-align: center;
+}
+
+.homebuttons {
+ 
+}
+
+.bloghomebox {
+  height: 50vh;
+  background-color: #d4f291;
+  border: 0.05px solid #10b0c7;
+  /*background-image: url("/images/Landing_Picture_1.jpg");
+  background-size: cover;
+  opacity: 1;*/
+}
+
+.unitalkhomebox {
+  height: 50vh;
+  background-color: #d4f291;
+  border: 0.05px solid #10b0c7;
+}
+
+.askofferhomebox {
+  height: 50vh;
+  background-color: #d4f291;
+  border: 0.05px solid #10b0c7;
+}
+
+.studysearchhomebox {
+  height: 50vh;
+  background-color: #d4f291;
+  border: 0.05px solid #10b0c7;
+}
+
+/*Adjustment to 10 columns for picture bar*/  
+
+.col-xs-2-10 {
+  width: 20%;
+  float: left;
+}
+
+.col-sm-1-10 {
+  width: 10%;
+  float: left;
+}
+
+.col-md-1-10 {
+  width: 10%;
+  float: left;
+}
+
+.col-lg-1-10 {
+  width: 10%;
+  float: left;
+}
+
+/*SOCIAL ICONS*/
  
 .socialicons {
  position: relative;
@@ -102,143 +243,63 @@ transition: all 200ms; }
  width: 5em; 	
 		}
 .socialicons .icons img {
- width: 5em; } 
-  
+ width: 5em; }
+ 
+
+/*NAVBAR*/
+
 .navbar {
 margin-bottom: 0;
 border-radius: 0; }
 ul.nav li.dropdown:hover ul.dropdown-menu{ display: block; }
 
-.homebar {
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-  border-radius: 0; 
-  text-align: center; 
-  font-size: 100%;
-  top: 0vh;
-  font-size: 1.1em;} 
-
-.topContainer {
-  height: 320px;
-  background-image: url("/images/Main_Picture.jpg");
-  background-size: cover;
-  width: 100%; }
-  .topContainer .bannertitle {
-    font-size: 400%;
-    font-family: typewriter_1942;
-    color: white;
-    }
-    
-.topicbox {
+.blogbox {
   height: 10vh;
-  background-color: #a3a4a7;
-  border: 1px solid #151515;
+  background-color: #d4f291;
+  border: 1px solid #10b0c7;
   font-size: 1.25em;
   font-family: arial,helvetica,sans-serif;
   color: #000000;
   margin: 0 0;
 }
 
-.sidebar {
-  margin-top: 50px; }
-    
-#SmallBox
-/*  background-image: url("/content/themes/sledge/images/dark_background_zoom.png");
-  background-size: cover; } */
-  
-#StudentPicture {
-  background-image: url("/content/themes/sledge/images/student_picture.png");
-  background-size: cover; }
- 
-.topsectionbox {
-  position: relative;
-  top: 0vh;
-  font-size: 2.5em;
-  font-family: arial,helvetica,sans-serif;
-  color: #AAAAAA;
-  font-color: #141414;
-  height: 40vh;
-  background-color: #e9e9c9;
-  border: 1px solid #151515;
-  text-align: center;
-  -webkit-transition: all 300ms;
-  -o-transition: all 300ms;
-  transition: all 300ms; }
-  
-.bottomsectionbox {
-  position: relative;  
-  top: 0vh;
-  bottom: 5vh;
-  font-size: 2.5em;
-  font-family: arial,helvetica,sans-serif;
-  color: #AAAAAA;
-  font-color: #141414;
-  height: 52vh;
-  background-color: #e9e9c9;
-  border: 0px solid #151515;
-  text-align: center;
-  -webkit-transition: all 300ms;
-  -o-transition: all 300ms;
-  transition: all 300ms; } 
-  
-.smallbox {
-  position: relative;
-  top: 0vh;
-  font-size: 1.5em;
-  font-family: arial,helvetica,sans-serif;
-  color: #AAAAAA;
-  font-color: #141414;
+.unitalkbox {
   height: 10vh;
-  background-color: #65675d;
-  border: 1px solid #151515;
-  text-align: center;
-  -webkit-transition: all 300ms;
-  -o-transition: all 300ms;
-  transition: all 300ms; }
-   
-.topsidebox {
-  position: relative;
-  top: 0vh;  
-  color: #AAAAAA;
-  font-color: #141414;
-  height: 40vh;
-  background-color: #241124;
-  border: 0px solid #151515;
-  -webkit-transition: all 300ms;
-  -o-transition: all 300ms;
-  transition: all 300ms; }
+  background-color: #d4f291;
+  border: 1px solid #10b0c7;
+  font-size: 1.25em;
+  font-family: arial,helvetica,sans-serif;
+  color: #000000;
+  margin: 0 0;
+}
+
+
+.topicbox {
+  height: 10vh;
+  background-color: #a3a4a7;
+  border: 1px solid #10b0c7;
+  font-size: 1.25em;
+  font-family: arial,helvetica,sans-serif;
+  color: #000000;
+  margin: 0 0;
+}
+
+img{
+    max-width: 100%;
+}
+
+.fullwidth .mainContent {
+  width: 100%; }  
   
-.bottomsidebox {
-  position: relative;
-  top: 0vh;  
-  color: #AAAAAA;
-  font-color: #141414;
-  height: 52vh;
-  background-color: #241124;
-  border: 0px solid #151515;
-  -webkit-transition: all 300ms;
-  -o-transition: all 300ms;
-  transition: all 300ms; }
- 
-.sidestrip {
-  position: relative;
-  top: 0vh;  
-  color: #AAAAAA;
-  font-color: #141414;
-  background-color: #5fa50d;
-  border: 0px solid #151515;
-  -webkit-transition: all 300ms;
-  -o-transition: all 300ms;
-  transition: all 300ms; }
   
 .basestrip {
   position: relative;
   top: 0vh; 
   width: 100%; 
-  color: #AAAAAA;
+  color: #33d6ee;
   font-color: #141414;
   height: 2vh;
-  background-color: #36363a;
+  background-color: #10b0c7;
   border: 0px solid #151515;
   -webkit-transition: all 300ms;
   -o-transition: all 300ms;
@@ -757,3 +818,165 @@ url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 .range.range-danger input[type="range"] {
     outline-color: #D9534F;
 }
+
+/*----------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+
+/*.main_picture {
+  max-width: 100%;
+  width: 50%;
+  height: 20px;
+}*/
+
+/*@font-face {
+  font-family: "typewriter_1942";
+  src: url("../fonts/1942-webfont.eot");
+  src: url("../fonts/1942-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/1942-webfont.woff2") format("woff2"), url("../fonts/1942-webfont.woff") format("woff"), url("../fonts/1942-webfont.ttf") format("truetype"), url("../fonts/1942-webfont.svgtypewriter_1942{$weight}") format("svg");
+  font-weight: normal;
+  font-style: normal; }*/
+  
+/*@font-face {
+  font-family: "dense";
+  src: url("../fonts/dense-regular-webfont.eot");
+  src: url("../fonts/dense-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/dense-regular-webfont.woff2") format("woff2"), url("../fonts/dense-regular-webfont.woff") format("woff"), url("../fonts/dense-regular-webfont.ttf") format("truetype"), url("../fonts/dense-regular-webfont.svgdense{$weight}") format("svg");
+  font-weight: normal;
+  font-style: normal; }*/
+  
+/*iframe {
+  border: none;
+  width: 100%; }*/
+
+/*boxfont  {
+  font-family: typewriter_1942;
+    color: #c32222;
+  color: #AAAAAA; }*/
+  
+/*footer.footer{
+    background-color: #222;
+    color: white;
+}
+footer.footer .sub-menu{
+    display: none;
+}*/
+
+/*h2 h3  {
+  font-family: arial,helvetica,sans-serif;
+  background-color: #141414;
+  color: #AAAAAA; }*/
+  
+/*.homebar {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  border-radius: 0; 
+  text-align: center; 
+  font-size: 100%;
+  top: 0vh;
+  font-size: 1.1em;} 
+
+.topContainer {
+  height: 320px;
+  background-image: url("/images/Main_Picture.jpg");
+  background-size: cover;
+  width: 100%; }
+  .topContainer .bannertitle {
+    font-size: 400%;
+    font-family: typewriter_1942;
+    color: white;
+    }*/
+    
+/*.sidebar {
+  margin-top: 50px; }*/
+    
+/*#SmallBox
+  background-image: url("/content/themes/sledge/images/dark_background_zoom.png");
+  background-size: cover; }*/
+  
+/*#StudentPicture {
+  background-image: url("/content/themes/sledge/images/student_picture.png");
+  background-size: cover; }*/
+ 
+/*.topsectionbox {
+  position: relative;
+  top: 0vh;
+  font-size: 2.5em;
+  font-family: arial,helvetica,sans-serif;
+  color: #AAAAAA;
+  font-color: #141414;
+  height: 40vh;
+  background-color: #e9e9c9;
+  border: 1px solid #151515;
+  text-align: center;
+  -webkit-transition: all 300ms;
+  -o-transition: all 300ms;
+  transition: all 300ms; }*/
+  
+/*.bottomsectionbox {
+  position: relative;  
+  top: 0vh;
+  bottom: 5vh;
+  font-size: 2.5em;
+  font-family: arial,helvetica,sans-serif;
+  color: #AAAAAA;
+  font-color: #141414;
+  height: 52vh;
+  background-color: #e9e9c9;
+  border: 0px solid #151515;
+  text-align: center;
+  -webkit-transition: all 300ms;
+  -o-transition: all 300ms;
+  transition: all 300ms; }*/
+  
+/*.smallbox {
+  position: relative;
+  top: 0vh;
+  font-size: 1.5em;
+  font-family: arial,helvetica,sans-serif;
+  color: #AAAAAA;
+  font-color: #141414;
+  height: 10vh;
+  background-color: #65675d;
+  border: 1px solid #151515;
+  text-align: center;
+  -webkit-transition: all 300ms;
+  -o-transition: all 300ms;
+  transition: all 300ms; }*/
+   
+/*.topsidebox {
+  position: relative;
+  top: 0vh;  
+  color: #AAAAAA;
+  font-color: #141414;
+  height: 40vh;
+  background-color: #241124;
+  border: 0px solid #151515;
+  -webkit-transition: all 300ms;
+  -o-transition: all 300ms;
+  transition: all 300ms; }*/
+  
+/*.bottomsidebox {
+  position: relative;
+  top: 0vh;  
+  color: #AAAAAA;
+  font-color: #141414;
+  height: 52vh;
+  background-color: #241124;
+  border: 0px solid #151515;
+  -webkit-transition: all 300ms;
+  -o-transition: all 300ms;
+  transition: all 300ms; }*/
+ 
+/*.sidestrip {
+  position: relative;
+  top: 0vh;  
+  color: #AAAAAA;
+  font-color: #141414;
+  background-color: #5fa50d;
+  border: 0px solid #151515;
+  -webkit-transition: all 300ms;
+  -o-transition: all 300ms;
+  transition: all 300ms; }*/
+    
+    
+    
+    

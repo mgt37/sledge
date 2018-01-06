@@ -1,0 +1,29 @@
+<% include partials/header %>
+
+<div class="container" style= "text-align: center">
+  <h1>Contact us</h1>
+    <form action="/formsend" method="post" style="width: 66.667%; margin: 25px auto;">
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <label for="subject">Subject:</label>
+            <input type="text" class="form-control" name="subject" placeholder="Subject">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <label for="message">Message:</label>
+            <!--<input type="text" class="form-control" name="message" placeholder="Message">-->
+            <textarea cols="5" rows="5" class="form-control" name="message" placeholder="Message"></textarea>
+        </div>
+      </div>
+        
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <button type="submit" class="btn btn-success btn-block">Submit</button>
+        </div>
+      </div>
+    </form>
+</div>
+    
+<% include partials/footer %>

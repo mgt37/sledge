@@ -6,7 +6,7 @@ var express          = require('express'),
     flash            = require("connect-flash"),
     morgan           = require('morgan'),
     multer           = require('multer'),
-    /*nodeMailer       = require('nodemailer'),*/
+    nodeMailer       = require('nodemailer'),
     path             = require('path'),
     timestamp        = require('time-stamp'),
     cookieParser     = require('cookie-parser'),
@@ -26,7 +26,7 @@ var commentRoutes     = require('./routes/comments'),
     askOfferRoutes    = require('./routes/askOffer'),
     studySearchRoutes = require('./routes/studySearch'),
     blogRoutes        = require('./routes/blog'),
-    emailRoutes       = require('./routes/email');
+    contactRoutes     = require('./routes/contact');
     
 // Uni Talk routes - require    
 var careerRoutes                 = require('./routes/uniTalk/careers'),
@@ -167,7 +167,10 @@ var whereYouAreInLifeCommentRoutes              = require('./routes/blog/whereYo
     
    require('./config/passport')(passport); // pass passport for configuration 
    
-// MULTER - move to separate file ---------------------------------------------- 
+//------------------------------------------------------------------------------
+// MULTER - move to separate file -- START
+//------------------------------------------------------------------------------   
+ 
 // Set storage engine
 var storage =   multer.diskStorage({
   destination: './public/uploads/',
@@ -213,9 +216,9 @@ app.post('/api/photo',function(req,res){
     });
 });
    */
-//------------------------------------------------------------------------------   
-   
-   
+//------------------------------------------------------------------------------
+// MULTER - move to separate file -- END
+//------------------------------------------------------------------------------
 
 //Connect to mongo database
 var url = process.env.DATABASEURL || "mongodb://localhost/sledge";
@@ -223,6 +226,7 @@ mongoose.connect(url, {useMongoClient: true} );
 
 mongoose.connect(process.env.DATABASEURL);
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
@@ -255,11 +259,11 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/", askOfferRoutes);
 app.use("/", studySearchRoutes);
-app.use("/home", indexRoutes);
+/*app.use("/home", indexRoutes);*/
 app.use("/blog", blogRoutes);
 app.use("/topics", topicRoutes);
 app.use("/topics/:id/comments", commentRoutes);
-app.use("/", emailRoutes);
+app.use("/", contactRoutes);
 
 //Uni Talk routes
 app.use("/uniTalk/career", careerRoutes);

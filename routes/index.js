@@ -29,7 +29,6 @@ router.get("/about_us", function(req, res){res.render("about_us");});
 router.get("/FAQ", function(req, res){res.render("FAQ");});
 
 // Show contact us page
-router.get("/contact_us", function(req, res){res.render("contact_us");});
-
+router.get("/contact_us", function(req, res){res.render("contact_us");}); // UPDATE with contact page
 
 module.exports = router;
