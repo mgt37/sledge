@@ -18,6 +18,8 @@ var express          = require('express'),
 // Content Filter    
 var filter = require('content-filter');
 app.use(filter());
+
+console.log(timestamp('YYYY/MM/DD HH:mm:ss'));
     
 //Require Routes
 var commentRoutes     = require('./routes/comments'),

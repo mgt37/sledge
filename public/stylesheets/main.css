@@ -19,7 +19,7 @@ body  {
   color: white; text-shadow: black 0.2em 0.2em 0.3em;
   text-shadow: -1px 0 black, 0 1px black,
   1px 0 black, 0 -1px black;
-  height: 40vh;
+  height: 45vh;
   border: 0.05px solid #10b0c7;
 }
 
@@ -359,8 +359,8 @@ body  {
 
 .iconbox {
   height: 15vh;
-  background-color: #d4f291;
-  border: 0.05px solid #10b0c7;
+  background-color: #eef4be;
+  /*border: 0.05px solid #10b0c7;*/
 }
 
 .homeheadings {
@@ -376,30 +376,39 @@ body  {
 }
 
 .bloghomebox {
-  height: 50vh;
+  height: 75vh;
   background-color: #d4f291;
   border: 0.05px solid #10b0c7;
-  /*background-image: url("/images/Landing_Picture_1.jpg");
+  background-image: url("/images/home/Blog_Picture.jpg");
   background-size: cover;
-  opacity: 1;*/
+  opacity: 1;
 }
 
 .unitalkhomebox {
-  height: 50vh;
+  height: 75vh;
   background-color: #d4f291;
   border: 0.05px solid #10b0c7;
+  background-image: url("/images/home/Unitalk_Picture.jpg");
+  background-size: cover;
+  opacity: 1;
 }
 
 .askofferhomebox {
-  height: 50vh;
+  height: 75vh;
   background-color: #d4f291;
   border: 0.05px solid #10b0c7;
+  background-image: url("/images/home/Ask_Offer_Picture.jpg");
+  background-size: cover;
+  opacity: 1;
 }
 
 .studysearchhomebox {
-  height: 50vh;
+  height: 75vh;
   background-color: #d4f291;
   border: 0.05px solid #10b0c7;
+  background-image: url("/images/home/Study_Search_Picture.jpg");
+  background-size: cover;
+  opacity: 1;
 }
 
 /*Adjustment to 10 columns for picture bar*/  
@@ -478,12 +487,26 @@ ul.nav li.dropdown:hover ul.dropdown-menu{ display: block; }
   text-align: center;
 }
 
+.inlinkhead {
+  color: white; text-shadow: black 0.3em 0.3em 0.4em;
+  text-shadow: -1px 0 black, 0 1px black,
+  1px 0 black, 0 -1px black;
+  font-size: 3em;
+  text-align: center;
+}
+
+.inlinkintro {
+  color: white; text-shadow: black 0.3em 0.3em 0.4em;
+  text-shadow: -1px 0 black, 0 1px black,
+  1px 0 black, 0 -1px black;
+  font-size: 1em;
+  text-align: center;
+}
+
 .startbox {
   background-color: #d4f291;
   
 }
-
-
 
 .topicbox {
   height: 10vh;

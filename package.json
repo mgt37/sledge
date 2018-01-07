@@ -24,6 +24,7 @@
     "google": "^2.1.0",
     "material-ui-search-bar": "^0.4.1",
     "method-override": "^2.3.10",
+    "moment-datetime": "0.0.2",
     "mongoose": "^4.13.5",
     "morgan": "~1.0.0",
     "multer": "^1.3.0",
