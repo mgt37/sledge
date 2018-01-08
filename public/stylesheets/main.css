@@ -411,25 +411,34 @@ body  {
   opacity: 1;
 }
 
+.socialplaceshomebox {
+  height: 75vh;
+  background-color: #d4f291;
+  border: 0.05px solid #10b0c7;
+  background-image: url("/images/home/Social_Places_Picture.jpg");
+  background-size: cover;
+  opacity: 1;
+}
+
 /*Adjustment to 10 columns for picture bar*/  
 
 .col-xs-2-10 {
-  width: 20%;
+  width: 19.8%;
   float: left;
 }
 
 .col-sm-1-10 {
-  width: 10%;
+  width: 9.9%;
   float: left;
 }
 
 .col-md-1-10 {
-  width: 10%;
+  width: 9.9%;
   float: left;
 }
 
 .col-lg-1-10 {
-  width: 10%;
+  width: 9.9%;
   float: left;
 }
 

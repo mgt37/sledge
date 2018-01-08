@@ -19,14 +19,13 @@ var express          = require('express'),
 var filter = require('content-filter');
 app.use(filter());
 
-console.log(timestamp('YYYY/MM/DD HH:mm:ss'));
-    
 //Require Routes
 var commentRoutes     = require('./routes/comments'),
     topicRoutes       = require('./routes/topics'),
     indexRoutes       = require('./routes/index'),
     askOfferRoutes    = require('./routes/askOffer'),
     studySearchRoutes = require('./routes/studySearch'),
+    socialPlacesRoutes = require('./routes/socialPlaces'),
     blogRoutes        = require('./routes/blog'),
     contactRoutes     = require('./routes/contact');
     
@@ -261,6 +260,7 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/", askOfferRoutes);
 app.use("/", studySearchRoutes);
+app.use("/", socialPlacesRoutes);
 /*app.use("/home", indexRoutes);*/
 app.use("/blog", blogRoutes);
 app.use("/topics", topicRoutes);

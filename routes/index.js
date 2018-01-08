@@ -16,6 +16,9 @@ router.get("/uniTalk", function(req, res){res.render("uniTalk");});
 // Ask / Offer page route
 router.get("/askOffer", function(req, res){res.render("askOffer");});
 
+// Social places page route
+router.get("/socialPlaces", function(req, res){res.render("socialPlaces");});
+
 // Study search page route
 router.get("/studySearch", function(req, res){res.render("studySearch");});
 
