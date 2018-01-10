@@ -4,7 +4,7 @@
 
 <style>
        #map {
-        height: 600px;
+        height: 750px;
         width: 90%;
        }
     </style>
@@ -14,10 +14,10 @@
       function initMap(){
         // Map options
         var options = {
-            zoom: 11,
-            maxZoom: 20,
-            minZoom: 9,
-            center: {lat: -36.861, lng: 174.752},
+            zoom: 16,
+            maxZoom: 19,
+            minZoom: 12,
+            center: {lat: -36.849, lng: 174.764},
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
             /*styles: styles*/
@@ -27,7 +27,29 @@
         var map = new google.maps.Map(document.getElementById('map'), options);
       
         // Array of markers
-        var markers = []
+        var markers = [
+            {
+                coords: {lat: -36.849687, lng: 174.764204},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.bar101.co.nz/" target="_blank"><p>Bar 101 - Auckland</p></a>'
+            },{
+                coords: {lat: -36.847184, lng: 174.766382},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.cassettenine.com/" target="_blank"><p>Cassette Nine</p></a>'
+            },{
+                coords: {lat: -36.849459, lng: 174.764192},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://globeauckland.wordpress.com/" target="_blank"><p>Habana Joes</p></a>'
+            },{
+                coords: {lat: -36.845433, lng: 174.767211},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.thejefferson.co.nz/" target="_blank"><p>The Jefferson</p></a>'
+            },{
+                coords: {lat: -36.851382, lng: 174.763847},
+                iconImage: '/images/mapMarkers/cinema.png',
+                content: '<a href="https://www.eventcinemas.co.nz/cinema/queen-street" target="_blank"><p>Event Cinemas</p></a>'
+            }
+            ]
             
             
         // Loop through markers    

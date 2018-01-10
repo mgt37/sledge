@@ -4,7 +4,7 @@
 
 <style>
        #map {
-        height: 500px;
+        height: 750px;
         width: 90%;
        }
 </style>
@@ -14,10 +14,10 @@
       function initMap(){
         // Map options
         var options = {
-            zoom: 13,
-            maxZoom: 16,
-            minZoom: 11,
-            center: {lat: -40.364, lng: 175.616},
+            zoom: 15,
+            maxZoom: 18,
+            minZoom: 12,
+            center: {lat: -40.356, lng: 175.611},
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
             /*styles: styles*/
@@ -27,7 +27,21 @@
         var map = new google.maps.Map(document.getElementById('map'), options);
       
         // Array of markers
-        var markers = [] 
+        var markers = [
+        {
+                coords: {lat: -40.353547, lng: 175.612756},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.bubblesbar.co.nz/" target="_blank"><p>Bubbles</p></a>'
+        },{
+                coords: {lat: -40.352271, lng: 175.609593},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://speightspalmerstonnorth.co.nz/" target="_blank"><p>Speights Ale House</p></a>'
+        },{
+                coords: {lat: -40.354293, lng: 175.613038},
+                iconImage: '/images/mapMarkers/cinema.png',
+                content: '<a href="https://www.eventcinemas.co.nz/Cinema/Palmerston-North" target="_blank"><p>Event Cinemas</p></a>'
+        }
+        ] 
             
         // Loop through markers    
         for(var i = 0; i < markers.length; i++){

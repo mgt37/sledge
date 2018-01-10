@@ -4,7 +4,7 @@
 
 <style>
        #map {
-        height: 600px;
+        height: 750px;
         width: 90%;
        }
 </style>
@@ -14,10 +14,10 @@
       function initMap(){
         // Map options
         var options = {
-            zoom: 13,
-            maxZoom: 16,
+            zoom: 16,
+            maxZoom: 19,
             minZoom: 12,
-            center: {lat: -37.786, lng: 175.277},
+            center: {lat: -37.788, lng: 175.282},
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
             /*styles: styles*/
@@ -27,7 +27,33 @@
         var map = new google.maps.Map(document.getElementById('map'), options);
       
         // Array of markers
-        var markers = [] 
+        var markers = [
+            {
+                coords: {lat: -37.789006, lng: 175.284876},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.bar101.co.nz/" target="_blank"><p>Bar 101 - Hamilton</p></a>'
+            },{
+                coords: {lat: -37.789414, lng: 175.284584},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="#"><p>Hood</p></a>'
+            },{
+                coords: {lat: -37.790838, lng: 175.284747},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://houseonhood.co.nz/" target="_blank"><p>House on Hood</p></a>'
+            },{
+                coords: {lat: -37.790665, lng: 175.284810},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.biddyshamilton.co.nz/" target="_blank"><p>Biddy Mulligans Irish Pub</p></a>'
+            },{
+                coords: {lat: -37.785742, lng: 175.279955},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://thejandal.kiwi/locations/hamilton" target="_blank"><p>The Jandal Hamilton</p></a>'
+            },{
+                coords: {lat: -37.785625, lng: 175.280427},
+                iconImage: '/images/mapMarkers/cinema.png',
+                content: '<a href="http://www.lidocinema.co.nz/" target="_blank"><p>Lido Cinema</p></a>'
+            }
+            ] 
             
         // Loop through markers    
         for(var i = 0; i < markers.length; i++){

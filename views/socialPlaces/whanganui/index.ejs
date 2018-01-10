@@ -4,7 +4,7 @@
 
 <style>
        #map {
-        height: 500px;
+        height: 750px;
         width: 90%;
        }
 </style>
@@ -14,10 +14,10 @@
       function initMap(){
         // Map options
         var options = {
-            zoom: 14,
-            maxZoom: 17,
-            minZoom: 12,
-            center: {lat: -39.932, lng: 175.052},
+            zoom: 16,
+            maxZoom: 19,
+            minZoom: 13,
+            center: {lat: -39.934, lng: 175.053},
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
             /*styles: styles*/
@@ -27,7 +27,21 @@
         var map = new google.maps.Map(document.getElementById('map'), options);
       
         // Array of markers
-        var markers = [] 
+        var markers = [
+            {
+                coords: {lat: -39.935509, lng: 175.058486},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://redlioninn.co.nz/" target="_blank"><p>Red Lion Inn</p></a>'
+            },{
+                coords: {lat: -39.934596, lng: 175.055399},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://stellarrestaurant.co.nz/" target="_blank"><p>Stellar Restaurant and Bar</p></a>'
+            },{
+                coords: {lat: -39.934225, lng: 175.054522},
+                iconImage: '/images/mapMarkers/cinema.png',
+                content: '<a href="https://www.embassy3.co.nz/" target="_blank"><p>Embassy 3 Cinema</p></a>'
+            }
+            ] 
             
         // Loop through markers    
         for(var i = 0; i < markers.length; i++){
