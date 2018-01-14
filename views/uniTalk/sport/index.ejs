@@ -5,7 +5,7 @@
        <div class="container">
            <h1>Sport</h1> 
            <p>
-               <a class="btn btn-primary btn-lg" href="sport/new">Add new uniTalk topic</a>
+               <a class="btn btn-primary btn-lg" href="sport/new">Add a new topic</a>
            </p>
        </div>
     </header>
@@ -13,6 +13,7 @@
         <% sports.reverse().forEach(function(sport){ %>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="thumbnail">
+                    <img class="img-responsive" src="<%= sport.image %>">
                     <div class="caption">
                         <h4><%= sport.title %></h4>
                     </div>

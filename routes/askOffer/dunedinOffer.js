@@ -6,9 +6,9 @@ var express           = require("express"),
     askOfferMiddleware = require("../../middleware/askOffer");
     
     
-//INDEX - Show all offers
+//INDEX - Show all asks
 router.get("/", function(req, res){
-    // Get all offers from DB
+    // Get all asks from DB
     DunedinOffer.find({}, function(err, allDunedinOffer){
         if(err){
             console.log(err);
@@ -18,17 +18,20 @@ router.get("/", function(req, res){
     });
 });
 
-//CREATE - add new offer to DB
+//CREATE - add new ask to DB
 router.post("/", middleware.isLoggedIn, function(req, res){
-    //get data from form and add to offer array
+    //get data from form and add to ask array
     var title  = req.body.title;
     var body   = req.body.body;
+    var hourlyRate = req.body.hourlyRate;
+    var contactEmail = req.body.contactEmail;
+    var otherContact = req.body.otherContact;
     var author = {
         id: req.user._id,
-        username: req.user.username
+        username: req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name
     };
-    var newDunedinOffer = ({title: title, body: body, author: author});
-    //create a new offer and save to DB
+    var newDunedinOffer = ({title: title, body: body, hourlyRate: hourlyRate, contactEmail: contactEmail, otherContact: otherContact, author: author});
+    //create a new ask and save to DB
     DunedinOffer.create(newDunedinOffer, function(err, newlyCreated){
         if(err){
             console.log(err);
@@ -39,25 +42,25 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     });
 });
 
-//NEW - Show form to create new offer
+//NEW - Show form to create new ask
 router.get("/new", middleware.isLoggedIn, function(req, res){
     res.render("askOffer/dunedin/offer/new");
 });
 
-//SHOW - Shows more information about one offer
+//SHOW - Shows more information about one ask
 router.get("/:id", function(req, res){
-    //Find the offer with provided ID
+    //Find the ask with provided ID
     DunedinOffer.findById(req.params.id).populate("comments").exec(function(err, foundDunedinOffer){
         if(err){
             console.log(err);
         } else {
-            //Render show template with that offer
+            //Render show template with that ask
             res.render("askOffer/dunedin/offer/show", {dunedinOffer: foundDunedinOffer});    
         }
     });
 });
 
-// EDIT Offer Route
+// EDIT Ask Route
 router.get("/:id/edit", askOfferMiddleware.checkDunedinOfferOwnership, function(req, res){
     DunedinOffer.findById(req.params.id, function(err, foundDunedinOffer){
         if(err){
@@ -68,9 +71,9 @@ router.get("/:id/edit", askOfferMiddleware.checkDunedinOfferOwnership, function(
     });
 });
 
-// UPDATE Offer Route
+// UPDATE Ask Route
 router.put("/:id", askOfferMiddleware.checkDunedinOfferOwnership, function(req, res){
-    // Find and update the offer
+    // Find and update the ask
     DunedinOffer.findByIdAndUpdate(req.params.id, req.body.dunedinOffer, function(err, updatedDunedinOffer){
         if(err){
             res.redirect("/askOffer/dunedin/offer/index");
@@ -87,7 +90,7 @@ router.delete("/:id", askOfferMiddleware.checkDunedinOfferOwnership, function(re
         if(err){
             res.redirect("/askOffer/dunedin/offer");
         } else {
-            req.flash("success", "offer deleted");
+            req.flash("success", "ask deleted");
             res.redirect("/askOffer/dunedin/offer");
         }
     });

@@ -1,17 +1,17 @@
-                <% flatting.flattingComments.reverse().forEach(function(flattingComment){ %>
+                <% flatting.comments.reverse().forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <strong><%= flattingComment.author.username %></strong>
+                            <strong><%= comment.author.username %></strong>
                             <span class="pull-right"><%= Date.now();%></span>
                             <p>
-                                <%= flattingComment.text %>
+                                <%= comment.text %>
                             </p>
-                        <% if(currentUser && flattingComment.author.id.equals(currentUser._id)){ %>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                             <a class="btn btn-xs btn-warning" 
-                                href="/uniTalk/flatting/<%= flatting._id %>/flattingComments/<%= flattingComment._id %>/edit">
+                                href="/uniTalk/flatting/<%= flatting._id %>/flattingComments/<%= comment._id %>/edit">
                                 Edit
                             </a>
-                            <form id="delete-form" action="/uniTalk/flatting/<%= flatting._id %>/flattingComments/<%= flattingComment._id %>?_method=DELETE" method="POST">
+                            <form id="delete-form" action="/uniTalk/flatting/<%= flatting._id %>/flattingComments/<%= comment._id %>?_method=DELETE" method="POST">
                                 <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                             </form>
                         <% } %>

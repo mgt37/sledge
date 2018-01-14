@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 var partySchema = new mongoose.Schema({
     title: String,
     body: String,
+    image: String,
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,

@@ -26,22 +26,20 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(err);
             res.redirect("/uniTalk/money");
         } else {
-            /*console.log(req.body.moneyComment);*/
             Comment.create(req.body.comment, function(err, comment){
                 if(err){
-                    /*req.flash("error", "Something went wrong");*/
-                    /*console.log(err);*/
+                    req.flash("error", "Something went wrong");
                 } else {
                     // Add username and id to comment
                     comment.author.id = req.user._id;
-                    /*comment.text = req.body.body;*/
-                    comment.author.username = req.user.username;
-                   /* req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name ;*/
+                    comment.text = req.body.body;
+                    comment.author.username =  req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name;
+
                     // Save comment
                     comment.save();
                     money.comments.push(comment);
                     money.save();
-                    /*req.flash("success", "Successfully added comment");*/
+                    req.flash("success", "Successfully added comment");
                     res.redirect('/uniTalk/money/' + money._id);
                 }
             });

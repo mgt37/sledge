@@ -23,11 +23,14 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     //get data from form and add to ask array
     var title  = req.body.title;
     var body   = req.body.body;
+    var hourlyRate = req.body.hourlyRate;
+    var contactEmail = req.body.contactEmail;
+    var otherContact = req.body.otherContact;
     var author = {
         id: req.user._id,
-        username: req.user.username
+        username: req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name
     };
-    var newWellingtonRegionAsk = ({title: title, body: body, author: author});
+    var newWellingtonRegionAsk = ({title: title, body: body, hourlyRate: hourlyRate, contactEmail: contactEmail, otherContact: otherContact, author: author});
     //create a new ask and save to DB
     WellingtonRegionAsk.create(newWellingtonRegionAsk, function(err, newlyCreated){
         if(err){

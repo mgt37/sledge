@@ -5,13 +5,26 @@
         <div style="width: 66.667%; margin: 25px auto;">
             <form action="/askOffer/dunedin/ask" method="POST">
                 <div class="form-group">
-                   <label>Title</label>
-                   <input class="form-control" type="text" name="title" placeholder="Title"> 
+                   <label>What are you asking for?</label>
+                   <input class="form-control" type="text" name="title" placeholder="Ask title"> 
                 </div>
                 <div class="form-group">
-                    <label>Content</label>
-                    <textarea class="form-control" name="body" rows="10" placeholder="Add your content here"></textarea>
+                    <label>Describe the details:</label>
+                    <textarea class="form-control" name="body" rows="6" placeholder="Describe the details"></textarea>
                 </div>
+                <div class="form-group">
+                    <label>What is your contact email? (Required)</label>
+                    <input class="form-control" type="text" name="contactEmail" placeholder="Contact email">
+                </div>
+                <div class="form-group">
+                    <label>How else can you be contacted? (Optional)</label>
+                    <input class="form-control" type="text" name="otherContact" placeholder="Other contact information">
+                </div>
+                <div class="form-group">
+                   <label>What is the maximum hourly rate for your request? (enter $0 if N/A)</label>
+                   <input style="width: 33.333%" class="form-control" type="number" name="hourlyRate" placeholder="Hourly rate" min="0.00" step="0.50"> 
+                </div>
+               
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block">Submit</button>
                 </div>

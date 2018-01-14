@@ -17,7 +17,7 @@ router.get("/askOffer/taranakiRegion/index", function(req, res){res.render("askO
 
 router.get("/askOffer/hawkesBayRegion/index", function(req, res){res.render("askOffer/hawkesBayRegion/index");});
 
-router.get("/askOffer/manawatuWanganuiRegion/index", function(req, res){res.render("askOffer/manawatuWanganuiRegion/index");});
+router.get("/askOffer/manawatuWhanganuiRegion/index", function(req, res){res.render("askOffer/manawatuWhanganuiRegion/index");});
 
 router.get("/askOffer/wellingtonRegion/index", function(req, res){res.render("askOffer/wellingtonRegion");});
 

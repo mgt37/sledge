@@ -1,6 +1,6 @@
 var express        = require("express");
 var router         = express.Router({mergeParams: true});
-var Flatting         = require("../../app/models/uniTalk/flatting");
+var Flatting       = require("../../app/models/uniTalk/flatting");
 var timestamp      = require('time-stamp');
 var Comment        = require("../../app/models/uniTalk/flattingComment");
 var middleware     = require("../../middleware"),
@@ -26,22 +26,20 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(err);
             res.redirect("/uniTalk/flatting");
         } else {
-            /*console.log(req.body.flattingComment);*/
             Comment.create(req.body.comment, function(err, comment){
                 if(err){
-                    /*req.flash("error", "Something went wrong");*/
-                    /*console.log(err);*/
+                    req.flash("error", "Something went wrong");
                 } else {
                     // Add username and id to comment
                     comment.author.id = req.user._id;
-                    /*comment.text = req.body.body;*/
-                    comment.author.username = req.user.username;
-                   /* req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name ;*/
+                    comment.text = req.body.body;
+                    comment.author.username =  req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name;
+                  
                     // Save comment
                     comment.save();
                     flatting.comments.push(comment);
                     flatting.save();
-                    /*req.flash("success", "Successfully added comment");*/
+                    req.flash("success", "Successfully added comment");
                     res.redirect('/uniTalk/flatting/' + flatting._id);
                 }
             });
@@ -77,7 +75,7 @@ router.delete("/:comment_id", uniTalkMiddleware.checkFlattingCommentOwnership, f
         if(err){
             res.redirect("back");
         } else {
-            /*req.flash("success", "Comment deleted");*/
+            req.flash("success", "Comment deleted");
             res.redirect("/uniTalk/flatting/" + req.params.id);
         }
     });

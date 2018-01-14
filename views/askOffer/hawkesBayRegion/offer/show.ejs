@@ -1,42 +1,44 @@
 <% include ../../../partials/header %>
-<div class="container">
+<div class="container" style="width: 66.667%;>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="thumbnail">
+                
                 <div class="caption-full">
-                    <h4><a><%= hawkesBayRegionOffer.title %></a></h4>
-                    <p><%= hawkesBayRegionOffer.body %></p>
-                    <p>
-                        <em>Submitted by <%= hawkesBayRegionOffer.author.username %></em>
-                    </p>
+                    <h3><%= hawkesBayRegionOffer.title %></h3>
+                    <p>Details: <%= hawkesBayRegionOffer.body %></p>
+                    <p>Contact email: <%= hawkesBayRegionOffer.contactEmail %></p>
+                    <p>Other contact information: <%= hawkesBayRegionOffer.otherContact %></p>
+                    <p>Hourly rate: $<%= hawkesBayRegionOffer.hourlyRate %>/hour</p>
+                    
+                    <p><em>Submitted by <%= hawkesBayRegionOffer.author.username %></em></p>
                     <% if(currentUser && hawkesBayRegionOffer.author.id.equals(currentUser._id)){ %>
                         <a class="btn btn-xs btn-warning" href="/askOffer/hawkesBayRegion/offer/<%= hawkesBayRegionOffer._id %>/edit">Edit</a>
                         <form id="delete-form" action="/askOffer/hawkesBayRegion/offer/<%= hawkesBayRegionOffer._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-xs btn-danger">Delete</button>
                         </form>
-                        <a class="btn btn-primary btn-sm btn-block" href="#">Send email</a>
                     <% } %>
                 </div>
             </div>
             <div class="well">
                 <div class= "text-right">
-                    <a class="btn btn-xs btn-success" href="/askOffer/hawkesBayRegion/offer/<%= hawkesBayRegionOffer._id %>/hawkesBayRegionOfferComments/new">Add comment</a>
+                    <a class="btn btn-xs btn-success" href="/askOffer/hawkesBayRegion/offer/<%= hawkesBayRegionOffer._id %>/hawkesBayRegionOfferComments/new/">Add comment</a>
                 </div>
                 <hr>
-                <% hawkesBayRegionOffer.comments.reverse().forEach(function(hawkesBayRegionOfferComment){ %>
+                <% hawkesBayRegionOffer.comments.reverse().forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <strong><%= hawkesBayRegionOfferComment.author.username %></strong>
-                            <span class="pull-right"><%= Date.now();%></span>
+                            <strong><%= comment.author.username %></strong>
+                            <span class="pull-right"><%= Date();%></span>
                             <p>
-                                <%= hawkesBayRegionOfferComment.text %>
+                                <%= comment.text %>
                             </p>
-                        <% if(currentUser && hawkesBayRegionOfferComment.author.id.equals(currentUser._id)){ %>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                             <a class="btn btn-xs btn-warning" 
-                                href="/askOffer/hawkesBayRegion/offer/<%= hawkesBayRegionOffer._id %>/hawkesBayRegionOfferComments/<%= hawkesBayRegionOfferComment._id %>/edit">
+                                href="/askOffer/hawkesBayRegion/offer/<%= hawkesBayRegionOffer._id %>/hawkesBayRegionOfferComments/<%= comment._id %>/edit">
                                 Edit
                             </a>
-                            <form id="delete-form" action="/askOffer/hawkesBayRegion/offer/<%= hawkesBayRegionOffer._id %>/hawkesBayRegionOfferComments/<%= hawkesBayRegionOfferComment._id %>?_method=DELETE" method="POST">
+                            <form id="delete-form" action="/askOffer/hawkesBayRegion/offer/<%= hawkesBayRegionOffer._id %>/hawkesBayRegionOfferComments/<%= comment._id %>?_method=DELETE" method="POST">
                                 <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                             </form>
                         <% } %>

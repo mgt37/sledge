@@ -1,9 +1,9 @@
-var express              = require("express"),
-    router               = express(),
-    timestamp            = require('time-stamp'),
-    BayOfPlentyRegionAsk = require("../../app/models/askOffer/bayOfPlentyRegionAsk"),
-    middleware           = require("../../middleware"),
-    askOfferMiddleware   = require("../../middleware/askOffer");
+var express           = require("express"),
+    router            = express(),
+    timestamp         = require('time-stamp'),
+    BayOfPlentyRegionAsk       = require("../../app/models/askOffer/bayOfPlentyRegionAsk"),
+    middleware        = require("../../middleware"),
+    askOfferMiddleware = require("../../middleware/askOffer");
     
     
 //INDEX - Show all asks
@@ -23,11 +23,14 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     //get data from form and add to ask array
     var title  = req.body.title;
     var body   = req.body.body;
+    var hourlyRate = req.body.hourlyRate;
+    var contactEmail = req.body.contactEmail;
+    var otherContact = req.body.otherContact;
     var author = {
         id: req.user._id,
-        username: req.user.username
+        username: req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name
     };
-    var newBayOfPlentyRegionAsk = ({title: title, body: body, author: author});
+    var newBayOfPlentyRegionAsk = ({title: title, body: body, hourlyRate: hourlyRate, contactEmail: contactEmail, otherContact: otherContact, author: author});
     //create a new ask and save to DB
     BayOfPlentyRegionAsk.create(newBayOfPlentyRegionAsk, function(err, newlyCreated){
         if(err){

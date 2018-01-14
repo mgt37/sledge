@@ -1,4 +1,4 @@
-var BeHonestAboutSexComment               = require('../../app/models/blog/beHonestAboutSexComment');
+var BHASWYF                        = require('../../app/models/blog/bHASWYF');
 var BuildYourNetworkComment               = require('../../app/models/blog/buildYourNetworkComment');
 var FindYourFlawsComment                  = require('../../app/models/blog/findYourFlawsComment');
 var FoodBudgetComment                     = require('../../app/models/blog/foodBudgetComment');
@@ -25,26 +25,26 @@ var WhereYouAreInLifeComment              = require('../../app/models/blog/where
 // All the middleware goes here
 var middlewareObj = {};
 
-middlewareObj.checkBeHonestAboutSexCommentOwnership = function(req, res, next) {
+middlewareObj.checkBHASWYFOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
-        BeHonestAboutSexComment.findById(req.params.id, function(err, foundBeHonestAboutSexComment){
+        BHASWYF.findById(req.params.id, function(err, foundBHASWYF){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
-                if(foundBeHonestAboutSexComment.author.id.equals(req.user._id)){
+                if(foundBHASWYF.author.id.equals(req.user._id)){
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -53,7 +53,7 @@ middlewareObj.checkBuildYourNetworkCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         BuildYourNetworkComment.findById(req.params.id, function(err, foundBuildYourNetworkComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -61,14 +61,14 @@ middlewareObj.checkBuildYourNetworkCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -77,7 +77,7 @@ middlewareObj.checkFindYourFlawsCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         FindYourFlawsComment.findById(req.params.id, function(err, foundFindYourFlawsComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -85,14 +85,14 @@ middlewareObj.checkFindYourFlawsCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -101,7 +101,7 @@ middlewareObj.checkFoodBudgetCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         FoodBudgetComment.findById(req.params.id, function(err, foundFoodBudgetComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -109,14 +109,14 @@ middlewareObj.checkFoodBudgetCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -125,7 +125,7 @@ middlewareObj.checkBalancePartTimeWorkCommentOwnership = function(req, res, next
     if(req.isAuthenticated()){
         BalancePartTimeWorkComment.findById(req.params.id, function(err, foundBalancePartTimeWorkComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -133,14 +133,14 @@ middlewareObj.checkBalancePartTimeWorkCommentOwnership = function(req, res, next
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -149,7 +149,7 @@ middlewareObj.checkHayfeverTreatmentCommentOwnership = function(req, res, next) 
     if(req.isAuthenticated()){
         HayfeverTreatmentComment.findById(req.params.id, function(err, foundHayfeverTreatmentComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -157,14 +157,14 @@ middlewareObj.checkHayfeverTreatmentCommentOwnership = function(req, res, next) 
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -173,7 +173,7 @@ middlewareObj.checkOvercomeProcrastinationCommentOwnership = function(req, res, 
     if(req.isAuthenticated()){
         OvercomeProcrastinationComment.findById(req.params.id, function(err, foundOvercomeProcrastinationComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -181,14 +181,14 @@ middlewareObj.checkOvercomeProcrastinationCommentOwnership = function(req, res, 
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -197,7 +197,7 @@ middlewareObj.checkSleepEffectivelyCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         SleepEffectivelyComment.findById(req.params.id, function(err, foundSleepEffectivelyComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -205,14 +205,14 @@ middlewareObj.checkSleepEffectivelyCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -221,7 +221,7 @@ middlewareObj.checkPartyIdeasCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         PartyIdeasComment.findById(req.params.id, function(err, foundPartyIdeasComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -229,14 +229,14 @@ middlewareObj.checkPartyIdeasCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -245,7 +245,7 @@ middlewareObj.checkMoneyPlanCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         MoneyPlanComment.findById(req.params.id, function(err, foundMoneyPlanComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -253,14 +253,14 @@ middlewareObj.checkMoneyPlanCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -269,7 +269,7 @@ middlewareObj.checkToiletShortageAtPartiesCommentOwnership = function(req, res, 
     if(req.isAuthenticated()){
         ToiletShortageAtPartiesComment.findById(req.params.id, function(err, foundToiletShortageAtPartiesComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -277,14 +277,14 @@ middlewareObj.checkToiletShortageAtPartiesCommentOwnership = function(req, res, 
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -293,7 +293,7 @@ middlewareObj.checkStopWearingSkinnyJeansCommentOwnership = function(req, res, n
     if(req.isAuthenticated()){
         StopWearingSkinnyJeansComment.findById(req.params.id, function(err, foundStopWearingSkinnyJeansComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -301,14 +301,14 @@ middlewareObj.checkStopWearingSkinnyJeansCommentOwnership = function(req, res, n
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -317,7 +317,7 @@ middlewareObj.checkStudyIsStressfulCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         StudyIsStressfulComment.findById(req.params.id, function(err, foundStudyIsStressfulComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -325,14 +325,14 @@ middlewareObj.checkStudyIsStressfulCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -341,7 +341,7 @@ middlewareObj.checkCorrectYourHabitsCommentOwnership = function(req, res, next) 
     if(req.isAuthenticated()){
         CorrectYourHabitsComment.findById(req.params.id, function(err, foundCorrectYourHabitsComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -349,14 +349,14 @@ middlewareObj.checkCorrectYourHabitsCommentOwnership = function(req, res, next) 
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -365,7 +365,7 @@ middlewareObj.checkThinkAboutDepressionCommentOwnership = function(req, res, nex
     if(req.isAuthenticated()){
         ThinkAboutDepressionComment.findById(req.params.id, function(err, foundThinkAboutDepressionComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -373,14 +373,14 @@ middlewareObj.checkThinkAboutDepressionCommentOwnership = function(req, res, nex
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -389,7 +389,7 @@ middlewareObj.checkTalkToARecruitmentAgentCommentOwnership = function(req, res, 
     if(req.isAuthenticated()){
         TalkToARecruitmentAgentComment.findById(req.params.id, function(err, foundTalkToARecruitmentAgentComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -397,14 +397,14 @@ middlewareObj.checkTalkToARecruitmentAgentCommentOwnership = function(req, res, 
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -413,7 +413,7 @@ middlewareObj.checkMoreThanJustBreakfastCommentOwnership = function(req, res, ne
     if(req.isAuthenticated()){
         MoreThanJustBreakfastComment.findById(req.params.id, function(err, foundMoreThanJustBreakfastComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -421,14 +421,14 @@ middlewareObj.checkMoreThanJustBreakfastCommentOwnership = function(req, res, ne
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -437,7 +437,7 @@ middlewareObj.checkFunOutsideOfStudyCommentOwnership = function(req, res, next) 
     if(req.isAuthenticated()){
         FunOutsideOfStudyComment.findById(req.params.id, function(err, foundFunOutsideOfStudyComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -445,14 +445,14 @@ middlewareObj.checkFunOutsideOfStudyCommentOwnership = function(req, res, next) 
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -461,7 +461,7 @@ middlewareObj.checkFindingPartTimeWorkCommentOwnership = function(req, res, next
     if(req.isAuthenticated()){
         FindingPartTimeWorkComment.findById(req.params.id, function(err, foundFindingPartTimeWorkComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -469,14 +469,14 @@ middlewareObj.checkFindingPartTimeWorkCommentOwnership = function(req, res, next
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -485,7 +485,7 @@ middlewareObj.checkPayForDrivingOnATripCommentOwnership = function(req, res, nex
     if(req.isAuthenticated()){
         PayForDrivingOnATripComment.findById(req.params.id, function(err, foundPayForDrivingOnATripComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -493,14 +493,14 @@ middlewareObj.checkPayForDrivingOnATripCommentOwnership = function(req, res, nex
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -509,7 +509,7 @@ middlewareObj.checkLookingForAFlatCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         LookingForAFlatComment.findById(req.params.id, function(err, foundLookingForAFlatComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -517,14 +517,14 @@ middlewareObj.checkLookingForAFlatCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -533,7 +533,7 @@ middlewareObj.checkFriendStaysOverAtFlatCommentOwnership = function(req, res, ne
     if(req.isAuthenticated()){
         FriendStaysOverAtFlatComment.findById(req.params.id, function(err, foundFriendStaysOverAtFlatComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -541,14 +541,14 @@ middlewareObj.checkFriendStaysOverAtFlatCommentOwnership = function(req, res, ne
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -557,7 +557,7 @@ middlewareObj.checkWhereYouAreInLifeCommentOwnership = function(req, res, next) 
     if(req.isAuthenticated()){
         WhereYouAreInLifeComment.findById(req.params.id, function(err, foundWhereYouAreInLifeComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -565,14 +565,14 @@ middlewareObj.checkWhereYouAreInLifeCommentOwnership = function(req, res, next) 
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };

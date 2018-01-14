@@ -21,11 +21,12 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     //get data from form and add to uniTalk topics array
     var title  = req.body.title;
     var body   = req.body.body;
+    var image  = req.body.image;
     var author = {
         id: req.user._id,
-        username: req.user.username
+        username:  req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name
     };
-    var newFood = ({title: title, body: body, author: author});
+    var newFood = ({title: title, body: body, image: image, author: author});
     //create a new uniTalk topic and save to DB
     Food.create(newFood, function(err, newlyCreated){
         if(err){

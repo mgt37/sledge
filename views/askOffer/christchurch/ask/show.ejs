@@ -1,20 +1,23 @@
 <% include ../../../partials/header %>
-<div class="container">
+<div class="container" style="width: 66.667%;>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="thumbnail">
+                
                 <div class="caption-full">
-                    <h4><a><%= christchurchAsk.title %></a></h4>
-                    <p><%= christchurchAsk.body %></p>
-                    <p>
-                        <em>Submitted by <%= christchurchAsk.author.username %></em>
-                    </p>
+                    <h3><%= christchurchAsk.title %></h3>
+                    <p>Details: <%= christchurchAsk.body %></p>
+                    <p>Contact email: <%= christchurchAsk.contactEmail %></p>
+                    <p>Other contact information: <%= christchurchAsk.otherContact %></p>
+                    <p>Maximum hourly rate: $<%= christchurchAsk.hourlyRate %>/hour</p>
+                    
+                    
+                    <p><em>Submitted by <%= christchurchAsk.author.username %></em></p>
                     <% if(currentUser && christchurchAsk.author.id.equals(currentUser._id)){ %>
                         <a class="btn btn-xs btn-warning" href="/askOffer/christchurch/ask/<%= christchurchAsk._id %>/edit">Edit</a>
                         <form id="delete-form" action="/askOffer/christchurch/ask/<%= christchurchAsk._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-xs btn-danger">Delete</button>
                         </form>
-                        <a class="btn btn-primary btn-sm btn-block" href="#">Send email</a>
                     <% } %>
                 </div>
             </div>
@@ -23,20 +26,20 @@
                     <a class="btn btn-xs btn-success" href="/askOffer/christchurch/ask/<%= christchurchAsk._id %>/christchurchAskComments/new/">Add comment</a>
                 </div>
                 <hr>
-                <% christchurchAsk.comments.reverse().forEach(function(christchurchAskComment){ %>
+                <% christchurchAsk.comments.reverse().forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <strong><%= christchurchAskComment.author.username %></strong>
+                            <strong><%= comment.author.username %></strong>
                             <span class="pull-right"><%= Date();%></span>
                             <p>
-                                <%= christchurchAskComment.text %>
+                                <%= comment.text %>
                             </p>
-                        <% if(currentUser && christchurchAskComment.author.id.equals(currentUser._id)){ %>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                             <a class="btn btn-xs btn-warning" 
-                                href="/askOffer/christchurch/ask/<%= christchurchAsk._id %>/christchurchAskComments/<%= christchurchAskComment._id %>/edit">
+                                href="/askOffer/christchurch/ask/<%= christchurchAsk._id %>/christchurchAskComments/<%= comment._id %>/edit">
                                 Edit
                             </a>
-                            <form id="delete-form" action="/askOffer/christchurch/ask/<%= christchurchAsk._id %>/christchurchAskComments/<%= christchurchAskComment._id %>?_method=DELETE" method="POST">
+                            <form id="delete-form" action="/askOffer/christchurch/ask/<%= christchurchAsk._id %>/christchurchAskComments/<%= comment._id %>?_method=DELETE" method="POST">
                                 <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                             </form>
                         <% } %>

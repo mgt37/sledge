@@ -1,20 +1,23 @@
 <% include ../../../partials/header %>
-<div class="container">
+<div class="container" style="width: 66.667%;>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="thumbnail">
+                
                 <div class="caption-full">
-                    <h4><a><%= southCanterburyAsk.title %></a></h4>
-                    <p><%= southCanterburyAsk.body %></p>
-                    <p>
-                        <em>Submitted by <%= southCanterburyAsk.author.username %></em>
-                    </p>
+                    <h3><%= southCanterburyAsk.title %></h3>
+                    <p>Details: <%= southCanterburyAsk.body %></p>
+                    <p>Contact email: <%= southCanterburyAsk.contactEmail %></p>
+                    <p>Other contact information: <%= southCanterburyAsk.otherContact %></p>
+                    <p>Maximum hourly rate: $<%= southCanterburyAsk.hourlyRate %>/hour</p>
+                    
+                    
+                    <p><em>Submitted by <%= southCanterburyAsk.author.username %></em></p>
                     <% if(currentUser && southCanterburyAsk.author.id.equals(currentUser._id)){ %>
                         <a class="btn btn-xs btn-warning" href="/askOffer/southCanterbury/ask/<%= southCanterburyAsk._id %>/edit">Edit</a>
                         <form id="delete-form" action="/askOffer/southCanterbury/ask/<%= southCanterburyAsk._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-xs btn-danger">Delete</button>
                         </form>
-                        <a class="btn btn-primary btn-sm btn-block" href="#">Send email</a>
                     <% } %>
                 </div>
             </div>
@@ -23,20 +26,20 @@
                     <a class="btn btn-xs btn-success" href="/askOffer/southCanterbury/ask/<%= southCanterburyAsk._id %>/southCanterburyAskComments/new/">Add comment</a>
                 </div>
                 <hr>
-                <% southCanterburyAsk.comments.reverse().forEach(function(southCanterburyAskComment){ %>
+                <% southCanterburyAsk.comments.reverse().forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <strong><%= southCanterburyAskComment.author.username %></strong>
+                            <strong><%= comment.author.username %></strong>
                             <span class="pull-right"><%= Date();%></span>
                             <p>
-                                <%= southCanterburyAskComment.text %>
+                                <%= comment.text %>
                             </p>
-                        <% if(currentUser && southCanterburyAskComment.author.id.equals(currentUser._id)){ %>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                             <a class="btn btn-xs btn-warning" 
-                                href="/askOffer/southCanterbury/ask/<%= southCanterburyAsk._id %>/southCanterburyAskComments/<%= southCanterburyAskComment._id %>/edit">
+                                href="/askOffer/southCanterbury/ask/<%= southCanterburyAsk._id %>/southCanterburyAskComments/<%= comment._id %>/edit">
                                 Edit
                             </a>
-                            <form id="delete-form" action="/askOffer/southCanterbury/ask/<%= southCanterburyAsk._id %>/southCanterburyAskComments/<%= southCanterburyAskComment._id %>?_method=DELETE" method="POST">
+                            <form id="delete-form" action="/askOffer/southCanterbury/ask/<%= southCanterburyAsk._id %>/southCanterburyAskComments/<%= comment._id %>?_method=DELETE" method="POST">
                                 <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                             </form>
                         <% } %>

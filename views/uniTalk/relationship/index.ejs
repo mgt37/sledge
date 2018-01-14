@@ -5,7 +5,7 @@
        <div class="container">
            <h1>Relationships</h1> 
            <p>
-               <a class="btn btn-primary btn-lg" href="relationship/new">Add new uniTalk topic</a>
+               <a class="btn btn-primary btn-lg" href="relationship/new">Add a new topic</a>
            </p>
        </div>
     </header>
@@ -13,6 +13,7 @@
         <% relationships.reverse().forEach(function(relationship){ %>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="thumbnail">
+                    <img class="img-responsive" src="<%= relationship.image %>">
                     <div class="caption">
                         <h4><%= relationship.title %></h4>
                     </div>

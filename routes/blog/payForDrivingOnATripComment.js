@@ -1,18 +1,18 @@
 var express           = require("express");
 var router            = express();
 var timestamp                   = require('time-stamp');
-var PayForDrivingOnATripComment    = require("../../app/models/blog/payForDrivingOnATripComment");
+var Comment    = require("../../app/models/blog/payForDrivingOnATripComment");
 var middleware                  = require("../../middleware"),
 blogMiddleware                  = require("../../middleware/blog");
 
 //INDEX
 router.get("/", function(req, res){
     // Get all comments from DB
-    PayForDrivingOnATripComment.find({}, function(err, allPayForDrivingOnATripComment){
+    Comment.find({}, function(err, allComment){
         if(err){
             console.log(err);
         } else {
-            res.render("blog/posts/whatIsAFairAmountToPayForDrivingOnATrip/index", {payForDrivingOnATripComment: allPayForDrivingOnATripComment});
+            res.render("blog/posts/whatIsAFairAmountToPayForDrivingOnATrip/index", {comment: allComment});
         }
     });
 });
@@ -23,11 +23,11 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     var blogComment   = req.body.blogComment;
     var author = {
         id: req.user._id,
-        username: req.user.username
+        username:  req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name
     };
-    var newPayForDrivingOnATripComment = ({blogComment: blogComment, author: author});
+    var newComment = ({blogComment: blogComment, author: author});
     //create a comment and save to DB
-    PayForDrivingOnATripComment.create(newPayForDrivingOnATripComment, function(err, newlyCreated){
+    Comment.create(newComment, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
@@ -45,23 +45,23 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 //SHOW - Shows more information about one comment
 router.get("/:id", function(req, res){
     //Find the comment with provided ID
-    PayForDrivingOnATripComment.findById(req.params.id).populate("comments").exec(function(err, foundPayForDrivingOnATripComment){
+    Comment.findById(req.params.id).populate("comments").exec(function(err, foundComment){
         if(err){
             console.log(err);
         } else {
             //Render show template with that comment
-            res.render("blog/posts/whatIsAFairAmountToPayForDrivingOnATrip/show", {payForDrivingOnATripComment: foundPayForDrivingOnATripComment});    
+            res.render("blog/posts/whatIsAFairAmountToPayForDrivingOnATrip/show", {comment: foundComment});    
         }
     });    
 });
 
 // EDIT comment Route
 router.get("/:id/edit", blogMiddleware.checkPayForDrivingOnATripCommentOwnership, function(req, res){
-    PayForDrivingOnATripComment.findById(req.params.id, function(err, foundPayForDrivingOnATripComment){
+    Comment.findById(req.params.id, function(err, foundComment){
         if(err){
             res.redirect("/blog/posts/whatIsAFairAmountToPayForDrivingOnATrip");
         } else {
-            res.render("blog/posts/whatIsAFairAmountToPayForDrivingOnATrip/edit", {payForDrivingOnATripComment: foundPayForDrivingOnATripComment});
+            res.render("blog/posts/whatIsAFairAmountToPayForDrivingOnATrip/edit", {comment: foundComment});
         }
     });
 });
@@ -69,7 +69,7 @@ router.get("/:id/edit", blogMiddleware.checkPayForDrivingOnATripCommentOwnership
 // UPDATE comment Route
 router.put("/:id", blogMiddleware.checkPayForDrivingOnATripCommentOwnership, function(req, res){
     // Find and update the correct comment
-    PayForDrivingOnATripComment.findByIdAndUpdate(req.params.id, req.body.payForDrivingOnATripComment, function(err, updatedPayForDrivingOnATripComment){
+    Comment.findByIdAndUpdate(req.params.id, req.body.comment, function(err, updatedComment){
         if(err){
             res.redirect("/blog/posts/whatIsAFairAmountToPayForDrivingOnATrip");
         } else {
@@ -81,7 +81,7 @@ router.put("/:id", blogMiddleware.checkPayForDrivingOnATripCommentOwnership, fun
 
 // DESTROY comment Route
 router.delete("/:id", blogMiddleware.checkPayForDrivingOnATripCommentOwnership, function(req, res){
-    PayForDrivingOnATripComment.findByIdAndRemove(req.params.id, function(err){
+    Comment.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/blog/posts/whatIsAFairAmountToPayForDrivingOnATrip");
         } else {

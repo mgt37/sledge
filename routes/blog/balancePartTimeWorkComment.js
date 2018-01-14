@@ -1,18 +1,18 @@
-var express           = require("express");
-var router            = express();
-var timestamp                   = require('time-stamp');
-var BalancePartTimeWorkComment    = require("../../app/models/blog/balancePartTimeWorkComment");
-var middleware                  = require("../../middleware"),
-blogMiddleware                  = require("../../middleware/blog");
+var express             = require("express");
+var router              = express();
+var timestamp           = require('time-stamp');
+var Comment             = require("../../app/models/blog/balancePartTimeWorkComment");
+var middleware          = require("../../middleware"),
+blogMiddleware          = require("../../middleware/blog");
 
 //INDEX
 router.get("/", function(req, res){
     // Get all comments from DB
-    BalancePartTimeWorkComment.find({}, function(err, allBalancePartTimeWorkComment){
+    Comment.find({}, function(err, allComment){
         if(err){
             console.log(err);
         } else {
-            res.render("blog/posts/getTheBalanceRightWithPartTimeWork/index", {balancePartTimeWorkComment: allBalancePartTimeWorkComment});
+            res.render("blog/posts/getTheBalanceRightWithPartTimeWork/index", {comment: allComment});
         }
     });
 });
@@ -23,11 +23,11 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     var blogComment   = req.body.blogComment;
     var author = {
         id: req.user._id,
-        username: req.user.username
+        username:  req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name
     };
-    var newBalancePartTimeWorkComment = ({blogComment: blogComment, author: author});
+    var newComment = ({blogComment: blogComment, author: author});
     //create a comment and save to DB
-    BalancePartTimeWorkComment.create(newBalancePartTimeWorkComment, function(err, newlyCreated){
+    Comment.create(newComment, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
@@ -45,23 +45,23 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 //SHOW - Shows more information about one comment
 router.get("/:id", function(req, res){
     //Find the comment with provided ID
-    BalancePartTimeWorkComment.findById(req.params.id).populate("comments").exec(function(err, foundBalancePartTimeWorkComment){
+    Comment.findById(req.params.id).populate("comments").exec(function(err, foundComment){
         if(err){
             console.log(err);
         } else {
             //Render show template with that comment
-            res.render("blog/posts/getTheBalanceRightWithPartTimeWork/show", {balancePartTimeWorkComment: foundBalancePartTimeWorkComment});    
+            res.render("blog/posts/getTheBalanceRightWithPartTimeWork/show", {comment: foundComment});    
         }
     });    
 });
 
 // EDIT comment Route
 router.get("/:id/edit", blogMiddleware.checkBalancePartTimeWorkCommentOwnership, function(req, res){
-    BalancePartTimeWorkComment.findById(req.params.id, function(err, foundBalancePartTimeWorkComment){
+    Comment.findById(req.params.id, function(err, foundComment){
         if(err){
             res.redirect("/blog/posts/getTheBalanceRightWithPartTimeWork");
         } else {
-            res.render("blog/posts/getTheBalanceRightWithPartTimeWork/edit", {balancePartTimeWorkComment: foundBalancePartTimeWorkComment});
+            res.render("blog/posts/getTheBalanceRightWithPartTimeWork/edit", {comment: foundComment});
         }
     });
 });
@@ -69,7 +69,7 @@ router.get("/:id/edit", blogMiddleware.checkBalancePartTimeWorkCommentOwnership,
 // UPDATE comment Route
 router.put("/:id", blogMiddleware.checkBalancePartTimeWorkCommentOwnership, function(req, res){
     // Find and update the correct comment
-    BalancePartTimeWorkComment.findByIdAndUpdate(req.params.id, req.body.balancePartTimeWorkComment, function(err, updatedBalancePartTimeWorkComment){
+    Comment.findByIdAndUpdate(req.params.id, req.body.comment, function(err, updatedComment){
         if(err){
             res.redirect("/blog/posts/getTheBalanceRightWithPartTimeWork");
         } else {
@@ -81,7 +81,7 @@ router.put("/:id", blogMiddleware.checkBalancePartTimeWorkCommentOwnership, func
 
 // DESTROY comment Route
 router.delete("/:id", blogMiddleware.checkBalancePartTimeWorkCommentOwnership, function(req, res){
-    BalancePartTimeWorkComment.findByIdAndRemove(req.params.id, function(err){
+    Comment.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/blog/posts/getTheBalanceRightWithPartTimeWork");
         } else {

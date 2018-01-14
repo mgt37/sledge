@@ -1,18 +1,5 @@
 <% include ./partials/header %>
 
-<!--<form action="/register" method="POST">
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="password" placeholder="password">
-    <div class="form-group">
-    <label for="exampleFormControlSelect1">Example select</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option user_type="Student">Student</option>
-      <option user_type="Mentor">Mentor</option>
-    </select>
-  </div>
-    <button>Sign Up</button>-->
-    
-    
 <div class="container">
 
     <div class="col-sm-6 col-sm-offset-3">
@@ -29,24 +16,16 @@
     			<input type="text" class="form-control" name="username">
     		</div>
     		<div class="form-group">
-    			<label>Email</label>
-    			<input type="text" class="form-control" name="email">
-    		</div>
-    		<div class="form-group">
     			<label>Password</label>
     			<input type="password" class="form-control" name="password">
     		</div>
     
-    		<button type="submit" class="btn btn-warning btn-lg">Signup</button>
+    		<button type="submit" class="btn btn-warning btn-lg btn-block">Sign Up</button>
         </form>
-    
         <hr>
-    
         <p>Already have an account? <a href="/login">Login</a></p>
         <p>Or go <a href="/home">home</a>.</p>
-    
     </div>
-
 </div>
 
 <% include ./partials/footer %>

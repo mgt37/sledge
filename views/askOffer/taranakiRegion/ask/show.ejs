@@ -1,20 +1,23 @@
 <% include ../../../partials/header %>
-<div class="container">
+<div class="container" style="width: 66.667%;>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="thumbnail">
+                
                 <div class="caption-full">
-                    <h4><a><%= taranakiRegionAsk.title %></a></h4>
-                    <p><%= taranakiRegionAsk.body %></p>
-                    <p>
-                        <em>Submitted by <%= taranakiRegionAsk.author.username %></em>
-                    </p>
+                    <h3><%= taranakiRegionAsk.title %></h3>
+                    <p>Details: <%= taranakiRegionAsk.body %></p>
+                    <p>Contact email: <%= taranakiRegionAsk.contactEmail %></p>
+                    <p>Other contact information: <%= taranakiRegionAsk.otherContact %></p>
+                    <p>Maximum hourly rate: $<%= taranakiRegionAsk.hourlyRate %>/hour</p>
+                    
+                    
+                    <p><em>Submitted by <%= taranakiRegionAsk.author.username %></em></p>
                     <% if(currentUser && taranakiRegionAsk.author.id.equals(currentUser._id)){ %>
                         <a class="btn btn-xs btn-warning" href="/askOffer/taranakiRegion/ask/<%= taranakiRegionAsk._id %>/edit">Edit</a>
                         <form id="delete-form" action="/askOffer/taranakiRegion/ask/<%= taranakiRegionAsk._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-xs btn-danger">Delete</button>
                         </form>
-                        <a class="btn btn-primary btn-sm btn-block" href="#">Send email</a>
                     <% } %>
                 </div>
             </div>
@@ -23,20 +26,20 @@
                     <a class="btn btn-xs btn-success" href="/askOffer/taranakiRegion/ask/<%= taranakiRegionAsk._id %>/taranakiRegionAskComments/new/">Add comment</a>
                 </div>
                 <hr>
-                <% taranakiRegionAsk.comments.reverse().forEach(function(taranakiRegionAskComment){ %>
+                <% taranakiRegionAsk.comments.reverse().forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <strong><%= taranakiRegionAskComment.author.username %></strong>
+                            <strong><%= comment.author.username %></strong>
                             <span class="pull-right"><%= Date();%></span>
                             <p>
-                                <%= taranakiRegionAskComment.text %>
+                                <%= comment.text %>
                             </p>
-                        <% if(currentUser && taranakiRegionAskComment.author.id.equals(currentUser._id)){ %>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                             <a class="btn btn-xs btn-warning" 
-                                href="/askOffer/taranakiRegion/ask/<%= taranakiRegionAsk._id %>/taranakiRegionAskComments/<%= taranakiRegionAskComment._id %>/edit">
+                                href="/askOffer/taranakiRegion/ask/<%= taranakiRegionAsk._id %>/taranakiRegionAskComments/<%= comment._id %>/edit">
                                 Edit
                             </a>
-                            <form id="delete-form" action="/askOffer/taranakiRegion/ask/<%= taranakiRegionAsk._id %>/taranakiRegionAskComments/<%= taranakiRegionAskComment._id %>?_method=DELETE" method="POST">
+                            <form id="delete-form" action="/askOffer/taranakiRegion/ask/<%= taranakiRegionAsk._id %>/taranakiRegionAskComments/<%= comment._id %>?_method=DELETE" method="POST">
                                 <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                             </form>
                         <% } %>

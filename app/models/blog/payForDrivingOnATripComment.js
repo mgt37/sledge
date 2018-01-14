@@ -5,7 +5,6 @@ var payForDrivingOnATripCommentSchema = mongoose.Schema({
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
         },
         username: String
     }

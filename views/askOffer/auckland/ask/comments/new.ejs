@@ -1,11 +1,11 @@
 <% include ../../../../partials/header %>
 <div class="container">
     <div class="row">
-        <h1 style="text-align: center">Add new comment to <%= aucklandAsk.name %></h1>
+        <h1 style="text-align: center">Add new comment to <%= aucklandAsk.title %></h1>
         <div style="width: 66.667%; margin: 25px auto;">
             <form action="/askOffer/auckland/ask/<%= aucklandAsk._id %>/aucklandAskComments" method="POST">
                 <div class="form-group">
-                   <input class="form-control" type="text" name="aucklandAskComment[text]" placeholder="text"> 
+                   <input class="form-control" type="text" name="comment[text]" placeholder="text"> 
                 </div>
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block">Submit</button>

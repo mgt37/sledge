@@ -1,18 +1,18 @@
 var express           = require("express");
 var router            = express();
 var timestamp                   = require('time-stamp');
-var SleepEffectivelyComment    = require("../../app/models/blog/sleepEffectivelyComment");
+var Comment    = require("../../app/models/blog/sleepEffectivelyComment");
 var middleware                  = require("../../middleware"),
 blogMiddleware                  = require("../../middleware/blog");
 
 //INDEX
 router.get("/", function(req, res){
     // Get all comments from DB
-    SleepEffectivelyComment.find({}, function(err, allSleepEffectivelyComment){
+    Comment.find({}, function(err, allComment){
         if(err){
             console.log(err);
         } else {
-            res.render("blog/posts/howToSleepEffectivelyWhileStudying/index", {sleepEffectivelyComment: allSleepEffectivelyComment});
+            res.render("blog/posts/howToSleepEffectivelyWhileStudying/index", {comment: allComment});
         }
     });
 });
@@ -23,11 +23,11 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     var blogComment   = req.body.blogComment;
     var author = {
         id: req.user._id,
-        username: req.user.username
+        username:  req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name
     };
-    var newSleepEffectivelyComment = ({blogComment: blogComment, author: author});
+    var newComment = ({blogComment: blogComment, author: author});
     //create a comment and save to DB
-    SleepEffectivelyComment.create(newSleepEffectivelyComment, function(err, newlyCreated){
+    Comment.create(newComment, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
@@ -45,23 +45,23 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 //SHOW - Shows more information about one comment
 router.get("/:id", function(req, res){
     //Find the comment with provided ID
-    SleepEffectivelyComment.findById(req.params.id).populate("comments").exec(function(err, foundSleepEffectivelyComment){
+    Comment.findById(req.params.id).populate("comments").exec(function(err, foundComment){
         if(err){
             console.log(err);
         } else {
             //Render show template with that comment
-            res.render("blog/posts/howToSleepEffectivelyWhileStudying/show", {sleepEffectivelyComment: foundSleepEffectivelyComment});    
+            res.render("blog/posts/howToSleepEffectivelyWhileStudying/show", {comment: foundComment});    
         }
     });    
 });
 
 // EDIT comment Route
 router.get("/:id/edit", blogMiddleware.checkSleepEffectivelyCommentOwnership, function(req, res){
-    SleepEffectivelyComment.findById(req.params.id, function(err, foundSleepEffectivelyComment){
+    Comment.findById(req.params.id, function(err, foundComment){
         if(err){
             res.redirect("/blog/posts/howToSleepEffectivelyWhileStudying");
         } else {
-            res.render("blog/posts/howToSleepEffectivelyWhileStudying/edit", {sleepEffectivelyComment: foundSleepEffectivelyComment});
+            res.render("blog/posts/howToSleepEffectivelyWhileStudying/edit", {comment: foundComment});
         }
     });
 });
@@ -69,7 +69,7 @@ router.get("/:id/edit", blogMiddleware.checkSleepEffectivelyCommentOwnership, fu
 // UPDATE comment Route
 router.put("/:id", blogMiddleware.checkSleepEffectivelyCommentOwnership, function(req, res){
     // Find and update the correct comment
-    SleepEffectivelyComment.findByIdAndUpdate(req.params.id, req.body.sleepEffectivelyComment, function(err, updatedSleepEffectivelyComment){
+    Comment.findByIdAndUpdate(req.params.id, req.body.comment, function(err, updatedComment){
         if(err){
             res.redirect("/blog/posts/howToSleepEffectivelyWhileStudying");
         } else {
@@ -81,7 +81,7 @@ router.put("/:id", blogMiddleware.checkSleepEffectivelyCommentOwnership, functio
 
 // DESTROY comment Route
 router.delete("/:id", blogMiddleware.checkSleepEffectivelyCommentOwnership, function(req, res){
-    SleepEffectivelyComment.findByIdAndRemove(req.params.id, function(err){
+    Comment.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/blog/posts/howToSleepEffectivelyWhileStudying");
         } else {

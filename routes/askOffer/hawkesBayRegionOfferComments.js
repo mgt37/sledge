@@ -2,7 +2,7 @@ var express                 = require("express");
 var router                  = express.Router({mergeParams: true});
 var HawkesBayRegionOffer             = require("../../app/models/askOffer/hawkesBayRegionOffer");
 var timestamp               = require('time-stamp');
-var HawkesBayRegionOfferComment      = require("../../app/models/askOffer/hawkesBayRegionOfferComment");
+var Comment      = require("../../app/models/askOffer/hawkesBayRegionOfferComment");
 var middleware              = require("../../middleware"),
 askOfferMiddleware           = require("../../middleware/askOffer");
 
@@ -26,22 +26,20 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(err);
             res.redirect("/askOffer/hawkesBayRegion/offer");
         } else {
-            /*console.log(req.body.careerComment);*/
-            HawkesBayRegionOfferComment.create(req.body.comment, function(err, comment){
+            Comment.create(req.body.comment, function(err, comment){
                 if(err){
-                    /*req.flash("error", "Something went wrong");*/
-                    /*console.log(err);*/
+                    req.flash("error", "Something went wrong");
                 } else {
                     // Add username and id to comment
                     comment.author.id = req.user._id;
-                    /*comment.text = req.body.body;*/
-                    comment.author.username = req.user.username;
-                   /* req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name ;*/
+                    comment.text = req.body.text;
+                    comment.author.username = req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name;
+                   
                     // Save comment
                     comment.save();
                     hawkesBayRegionOffer.comments.push(comment);
                     hawkesBayRegionOffer.save();
-                    /*req.flash("success", "Successfully added comment");*/
+                    req.flash("success", "Successfully added comment");
                     res.redirect('/askOffer/hawkesBayRegion/offer/' + hawkesBayRegionOffer._id);
                 }
             });
@@ -51,18 +49,18 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 
 // Comments EDIT
 router.get("/:comment_id/edit", askOfferMiddleware.checkHawkesBayRegionOfferCommentOwnership, function(req, res){
-    HawkesBayRegionOfferComment.findById(req.params.comment_id, function(err, foundHawkesBayRegionOfferComment){
+    Comment.findById(req.params.comment_id, function(err, foundComment){
         if(err){
             res.redirect("back");
         } else {
-           res.render("askOffer/hawkesBayRegion/offer/comments/edit", {hawkesBayRegionOffer_id: req.params.id, comment: foundHawkesBayRegionOfferComment}); 
+           res.render("askOffer/hawkesBayRegion/offer/comments/edit", {hawkesBayRegionOffer_id: req.params.id, comment: foundComment}); 
         }
     });
 });
 
 // Comment UPDATE
 router.put("/:comment_id", askOfferMiddleware.checkHawkesBayRegionOfferCommentOwnership, function(req, res){
-    HawkesBayRegionOfferComment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedHawkesBayRegionOfferComment){
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
         if(err){
             res.redirect("back");
         } else {
@@ -73,11 +71,11 @@ router.put("/:comment_id", askOfferMiddleware.checkHawkesBayRegionOfferCommentOw
 
 // Comment DESTROY
 router.delete("/:comment_id", askOfferMiddleware.checkHawkesBayRegionOfferCommentOwnership, function(req, res){
-    HawkesBayRegionOfferComment.findByIdAndRemove(req.params.comment_id, function(err){
+    Comment.findByIdAndRemove(req.params.comment_id, function(err){
         if(err){
             res.redirect("back");
         } else {
-            /*req.flash("success", "Comment deleted");*/
+            req.flash("success", "Comment deleted");
             res.redirect("/askOffer/hawkesBayRegion/offer/" + req.params.id);
         }
     });

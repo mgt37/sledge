@@ -20,14 +20,14 @@ var filter = require('content-filter');
 app.use(filter());
 
 //Require Routes
-var commentRoutes     = require('./routes/comments'),
-    topicRoutes       = require('./routes/topics'),
-    indexRoutes       = require('./routes/index'),
-    askOfferRoutes    = require('./routes/askOffer'),
-    studySearchRoutes = require('./routes/studySearch'),
+var commentRoutes      = require('./routes/comments'),
+    topicRoutes        = require('./routes/topics'),
+    indexRoutes        = require('./routes/index'),
+    askOfferRoutes     = require('./routes/askOffer'),
+    studySearchRoutes  = require('./routes/studySearch'),
     socialPlacesRoutes = require('./routes/socialPlaces'),
-    blogRoutes        = require('./routes/blog'),
-    contactRoutes     = require('./routes/contact');
+    blogRoutes         = require('./routes/blog'),
+    contactRoutes      = require('./routes/contact');
     
 // Uni Talk routes - require    
 var careerRoutes                 = require('./routes/uniTalk/careers'),
@@ -100,10 +100,10 @@ var aucklandAskRoutes                          = require('./routes/askOffer/auck
     hawkesBayRegionOfferRoutes                 = require('./routes/askOffer/hawkesBayRegionOffer'),
     hawkesBayRegionAskCommentRoutes            = require('./routes/askOffer/hawkesBayRegionAskComments'),
     hawkesBayRegionOfferCommentRoutes          = require('./routes/askOffer/hawkesBayRegionOfferComments'),
-    manawatuWanganuiRegionAskRoutes            = require('./routes/askOffer/manawatuWanganuiRegionAsk'),
-    manawatuWanganuiRegionOfferRoutes          = require('./routes/askOffer/manawatuWanganuiRegionOffer'),
-    manawatuWanganuiRegionAskCommentRoutes     = require('./routes/askOffer/manawatuWanganuiRegionAskComments'),
-    manawatuWanganuiRegionOfferCommentRoutes   = require('./routes/askOffer/manawatuWanganuiRegionOfferComments'),
+    manawatuWhanganuiRegionAskRoutes            = require('./routes/askOffer/manawatuWhanganuiRegionAsk'),
+    manawatuWhanganuiRegionOfferRoutes          = require('./routes/askOffer/manawatuWhanganuiRegionOffer'),
+    manawatuWhanganuiRegionAskCommentRoutes     = require('./routes/askOffer/manawatuWhanganuiRegionAskComments'),
+    manawatuWhanganuiRegionOfferCommentRoutes   = require('./routes/askOffer/manawatuWhanganuiRegionOfferComments'),
     nelsonMarlboroughRegionAskRoutes           = require('./routes/askOffer/nelsonMarlboroughRegionAsk'),
     nelsonMarlboroughRegionOfferRoutes         = require('./routes/askOffer/nelsonMarlboroughRegionOffer'),
     nelsonMarlboroughRegionAskCommentRoutes    = require('./routes/askOffer/nelsonMarlboroughRegionAskComments'),
@@ -142,7 +142,7 @@ var aucklandAskRoutes                          = require('./routes/askOffer/auck
     westCoastRegionOfferCommentRoutes          = require('./routes/askOffer/westCoastRegionOfferComments');
     
 // blog routes - require    
-var beHonestAboutSexCommentRoutes               = require('./routes/blog/beHonestAboutSexComment');
+var bHASWYFRoutes                        = require('./routes/blog/bHASWYF');
 var buildYourNetworkCommentRoutes               = require('./routes/blog/buildYourNetworkComment');
 var findYourFlawsCommentRoutes                  = require('./routes/blog/findYourFlawsComment');
 var foodBudgetCommentRoutes                     = require('./routes/blog/foodBudgetComment');
@@ -237,7 +237,6 @@ app.use(flash());
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 
-
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
     secret: "The secret code",
@@ -261,7 +260,6 @@ app.use("/", indexRoutes);
 app.use("/", askOfferRoutes);
 app.use("/", studySearchRoutes);
 app.use("/", socialPlacesRoutes);
-/*app.use("/home", indexRoutes);*/
 app.use("/blog", blogRoutes);
 app.use("/topics", topicRoutes);
 app.use("/topics/:id/comments", commentRoutes);
@@ -338,10 +336,10 @@ app.use("/askOffer/hawkesBayRegion/ask", hawkesBayRegionAskRoutes);
 app.use("/askOffer/hawkesBayRegion/offer", hawkesBayRegionOfferRoutes);
 app.use("/askOffer/hawkesBayRegion/ask/:id/hawkesBayRegionAskComments", hawkesBayRegionAskCommentRoutes);
 app.use("/askOffer/hawkesBayRegion/offer/:id/hawkesBayRegionOfferComments", hawkesBayRegionOfferCommentRoutes);
-app.use("/askOffer/manawatuWanganuiRegion/ask", manawatuWanganuiRegionAskRoutes);
-app.use("/askOffer/manawatuWanganuiRegion/offer", manawatuWanganuiRegionOfferRoutes);
-app.use("/askOffer/manawatuWanganuiRegion/ask/:id/manawatuWanganuiRegionAskComments", manawatuWanganuiRegionAskCommentRoutes);
-app.use("/askOffer/manawatuWanganuiRegion/offer/:id/manawatuWanganuiRegionOfferComments", manawatuWanganuiRegionOfferCommentRoutes);
+app.use("/askOffer/manawatuWhanganuiRegion/ask", manawatuWhanganuiRegionAskRoutes);
+app.use("/askOffer/manawatuWhanganuiRegion/offer", manawatuWhanganuiRegionOfferRoutes);
+app.use("/askOffer/manawatuWhanganuiRegion/ask/:id/manawatuWhanganuiRegionAskComments", manawatuWhanganuiRegionAskCommentRoutes);
+app.use("/askOffer/manawatuWhanganuiRegion/offer/:id/manawatuWhanganuiRegionOfferComments", manawatuWhanganuiRegionOfferCommentRoutes);
 app.use("/askOffer/nelsonMarlboroughRegion/ask", nelsonMarlboroughRegionAskRoutes);
 app.use("/askOffer/nelsonMarlboroughRegion/offer", nelsonMarlboroughRegionOfferRoutes);
 app.use("/askOffer/nelsonMarlboroughRegion/ask/:id/nelsonMarlboroughRegionAskComments", nelsonMarlboroughRegionAskCommentRoutes);
@@ -380,35 +378,31 @@ app.use("/askOffer/westCoastRegion/ask/:id/westCoastRegionAskComments", westCoas
 app.use("/askOffer/westCoastRegion/offer/:id/westCoastRegionOfferComments", westCoastRegionOfferCommentRoutes);
 
 //Blog routes
-app.use("/blog/beHonestAboutSexWithYourFlatmates", beHonestAboutSexCommentRoutes);
-app.use("/blog/beSocialAndBuildYourNetwork", buildYourNetworkCommentRoutes);
-app.use("/blog/findYourFlawsAndLearnToImproveOnThem", findYourFlawsCommentRoutes);
-app.use("/blog/foodBudget", foodBudgetCommentRoutes);
-app.use("/blog/getTheBalanceRightWithPartTimeWork", balancePartTimeWorkCommentRoutes);
-app.use("/blog/hayfeverTreatmentOnABudget", hayfeverTreatmentCommentRoutes);
-app.use("/blog/howToOvercomeProcrastination", overcomeProcrastinationCommentRoutes);
-app.use("/blog/howToSleepEffectivelyWhileStudying", sleepEffectivelyCommentRoutes);
-app.use("/blog/ideasForYourNextParty", partyIdeasCommentRoutes);
-app.use("/blog/moneyPlan", moneyPlanCommentRoutes);
-app.use("/blog/solvingTheToiletShortageProblemAtParties", toiletShortageAtPartiesCommentRoutes);
-app.use("/blog/stopWearingSkinnyJeans", stopWearingSkinnyJeansCommentRoutes);
-app.use("/blog/studyIsStressfulFindWaysToManageIt", studyIsStressfulCommentRoutes);
-app.use("/blog/takeOnTheChallengeToCorrectYourHabits", correctYourHabitsCommentRoutes);
-app.use("/blog/takeSomeTimeToThinkAboutDepression", thinkAboutDepressionCommentRoutes);
-app.use("/blog/talkToARecruitmentAgentAndStartYourCareer", talkToARecruitmentAgentCommentRoutes);
-app.use("/blog/thereIsMoreToItThanJustBreakfast", moreThanJustBreakfastCommentRoutes);
-app.use("/blog/waysToHaveFunOutsideOfStudy", funOutsideOfStudyCommentRoutes);
-app.use("/blog/whatIdeasAreThereForFindingPartTimeWork", findingPartTimeWorkCommentRoutes);
-app.use("/blog/whatIsAFairAmountToPayForDrivingOnATrip", payForDrivingOnATripCommentRoutes);
-app.use("/blog/whatIsImportantToConsiderWhenLookingForAFlat", lookingForAFlatCommentRoutes);
-app.use("/blog/whatToConsiderWhenAFriendStaysOverAtYourFlat", friendStaysOverAtFlatCommentRoutes);
-app.use("/blog/whereYouAreInLifeRightNowIsJustFine", whereYouAreInLifeCommentRoutes);
+app.use("/blog/posts/bHASWYF", bHASWYFRoutes);
+app.use("/blog/posts/beSocialAndBuildYourNetwork", buildYourNetworkCommentRoutes);
+app.use("/blog/posts/findYourFlawsAndLearnToImproveOnThem", findYourFlawsCommentRoutes);
+app.use("/blog/posts/foodBudget", foodBudgetCommentRoutes);
+app.use("/blog/posts/getTheBalanceRightWithPartTimeWork", balancePartTimeWorkCommentRoutes);
+app.use("/blog/posts/hayfeverTreatmentOnABudget", hayfeverTreatmentCommentRoutes);
+app.use("/blog/posts/howToOvercomeProcrastination", overcomeProcrastinationCommentRoutes);
+app.use("/blog/posts/howToSleepEffectivelyWhileStudying", sleepEffectivelyCommentRoutes);
+app.use("/blog/posts/ideasForYourNextParty", partyIdeasCommentRoutes);
+app.use("/blog/posts/moneyPlan", moneyPlanCommentRoutes);
+app.use("/blog/posts/solvingTheToiletShortageProblemAtParties", toiletShortageAtPartiesCommentRoutes);
+app.use("/blog/posts/stopWearingSkinnyJeans", stopWearingSkinnyJeansCommentRoutes);
+app.use("/blog/posts/studyIsStressfulFindWaysToManageIt", studyIsStressfulCommentRoutes);
+app.use("/blog/posts/takeOnTheChallengeToCorrectYourHabits", correctYourHabitsCommentRoutes);
+app.use("/blog/posts/takeSomeTimeToThinkAboutDepression", thinkAboutDepressionCommentRoutes);
+app.use("/blog/posts/talkToARecruitmentAgentAndStartYourCareer", talkToARecruitmentAgentCommentRoutes);
+app.use("/blog/posts/thereIsMoreToItThanJustBreakfast", moreThanJustBreakfastCommentRoutes);
+app.use("/blog/posts/waysToHaveFunOutsideOfStudy", funOutsideOfStudyCommentRoutes);
+app.use("/blog/posts/whatIdeasAreThereForFindingPartTimeWork", findingPartTimeWorkCommentRoutes);
+app.use("/blog/posts/whatIsAFairAmountToPayForDrivingOnATrip", payForDrivingOnATripCommentRoutes);
+app.use("/blog/posts/whatIsImportantToConsiderWhenLookingForAFlat", lookingForAFlatCommentRoutes);
+app.use("/blog/posts/whatToConsiderWhenAFriendStaysOverAtYourFlat", friendStaysOverAtFlatCommentRoutes);
+app.use("/blog/posts/whereYouAreInLifeRightNowIsJustFine", whereYouAreInLifeCommentRoutes);
 
 require('./app/routes')(app, passport); // load our routes and pass in our app and fully configured passport
-
-/*app.listen(3000,function(){
-console.log("Express Started on Port 3000");
-});*/
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("The Sledge server has started");

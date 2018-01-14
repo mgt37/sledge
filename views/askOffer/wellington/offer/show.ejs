@@ -1,42 +1,44 @@
 <% include ../../../partials/header %>
-<div class="container">
+<div class="container" style="width: 66.667%;>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="thumbnail">
+                
                 <div class="caption-full">
-                    <h4><a><%= wellingtonOffer.title %></a></h4>
-                    <p><%= wellingtonOffer.body %></p>
-                    <p>
-                        <em>Submitted by <%= wellingtonOffer.author.username %></em>
-                    </p>
+                    <h3><%= wellingtonOffer.title %></h3>
+                    <p>Details: <%= wellingtonOffer.body %></p>
+                    <p>Contact email: <%= wellingtonOffer.contactEmail %></p>
+                    <p>Other contact information: <%= wellingtonOffer.otherContact %></p>
+                    <p>Hourly rate: $<%= wellingtonOffer.hourlyRate %>/hour</p>
+                    
+                    <p><em>Submitted by <%= wellingtonOffer.author.username %></em></p>
                     <% if(currentUser && wellingtonOffer.author.id.equals(currentUser._id)){ %>
                         <a class="btn btn-xs btn-warning" href="/askOffer/wellington/offer/<%= wellingtonOffer._id %>/edit">Edit</a>
                         <form id="delete-form" action="/askOffer/wellington/offer/<%= wellingtonOffer._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-xs btn-danger">Delete</button>
                         </form>
-                        <a class="btn btn-primary btn-sm btn-block" href="#">Send email</a>
                     <% } %>
                 </div>
             </div>
             <div class="well">
                 <div class= "text-right">
-                    <a class="btn btn-xs btn-success" href="/askOffer/wellington/offer/<%= wellingtonOffer._id %>/wellingtonOfferComments/new">Add comment</a>
+                    <a class="btn btn-xs btn-success" href="/askOffer/wellington/offer/<%= wellingtonOffer._id %>/wellingtonOfferComments/new/">Add comment</a>
                 </div>
                 <hr>
-                <% wellingtonOffer.comments.reverse().forEach(function(wellingtonOfferComment){ %>
+                <% wellingtonOffer.comments.reverse().forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <strong><%= wellingtonOfferComment.author.username %></strong>
-                            <span class="pull-right"><%= Date.now();%></span>
+                            <strong><%= comment.author.username %></strong>
+                            <span class="pull-right"><%= Date();%></span>
                             <p>
-                                <%= wellingtonOfferComment.text %>
+                                <%= comment.text %>
                             </p>
-                        <% if(currentUser && wellingtonOfferComment.author.id.equals(currentUser._id)){ %>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                             <a class="btn btn-xs btn-warning" 
-                                href="/askOffer/wellington/offer/<%= wellingtonOffer._id %>/wellingtonOfferComments/<%= wellingtonOfferComment._id %>/edit">
+                                href="/askOffer/wellington/offer/<%= wellingtonOffer._id %>/wellingtonOfferComments/<%= comment._id %>/edit">
                                 Edit
                             </a>
-                            <form id="delete-form" action="/askOffer/wellington/offer/<%= wellingtonOffer._id %>/wellingtonOfferComments/<%= wellingtonOfferComment._id %>?_method=DELETE" method="POST">
+                            <form id="delete-form" action="/askOffer/wellington/offer/<%= wellingtonOffer._id %>/wellingtonOfferComments/<%= comment._id %>?_method=DELETE" method="POST">
                                 <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                             </form>
                         <% } %>

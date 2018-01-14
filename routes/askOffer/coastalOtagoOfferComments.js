@@ -2,7 +2,7 @@ var express                 = require("express");
 var router                  = express.Router({mergeParams: true});
 var CoastalOtagoOffer             = require("../../app/models/askOffer/coastalOtagoOffer");
 var timestamp               = require('time-stamp');
-var CoastalOtagoOfferComment      = require("../../app/models/askOffer/coastalOtagoOfferComment");
+var Comment      = require("../../app/models/askOffer/coastalOtagoOfferComment");
 var middleware              = require("../../middleware"),
 askOfferMiddleware           = require("../../middleware/askOffer");
 
@@ -26,22 +26,20 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(err);
             res.redirect("/askOffer/coastalOtago/offer");
         } else {
-            /*console.log(req.body.careerComment);*/
-            CoastalOtagoOfferComment.create(req.body.comment, function(err, comment){
+            Comment.create(req.body.comment, function(err, comment){
                 if(err){
-                    /*req.flash("error", "Something went wrong");*/
-                    /*console.log(err);*/
+                    req.flash("error", "Something went wrong");
                 } else {
                     // Add username and id to comment
                     comment.author.id = req.user._id;
-                    /*comment.text = req.body.body;*/
-                    comment.author.username = req.user.username;
-                   /* req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name ;*/
+                    comment.text = req.body.text;
+                    comment.author.username = req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name;
+                   
                     // Save comment
                     comment.save();
                     coastalOtagoOffer.comments.push(comment);
                     coastalOtagoOffer.save();
-                    /*req.flash("success", "Successfully added comment");*/
+                    req.flash("success", "Successfully added comment");
                     res.redirect('/askOffer/coastalOtago/offer/' + coastalOtagoOffer._id);
                 }
             });
@@ -51,18 +49,18 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 
 // Comments EDIT
 router.get("/:comment_id/edit", askOfferMiddleware.checkCoastalOtagoOfferCommentOwnership, function(req, res){
-    CoastalOtagoOfferComment.findById(req.params.comment_id, function(err, foundCoastalOtagoOfferComment){
+    Comment.findById(req.params.comment_id, function(err, foundComment){
         if(err){
             res.redirect("back");
         } else {
-           res.render("askOffer/coastalOtago/offer/comments/edit", {coastalOtagoOffer_id: req.params.id, comment: foundCoastalOtagoOfferComment}); 
+           res.render("askOffer/coastalOtago/offer/comments/edit", {coastalOtagoOffer_id: req.params.id, comment: foundComment}); 
         }
     });
 });
 
 // Comment UPDATE
 router.put("/:comment_id", askOfferMiddleware.checkCoastalOtagoOfferCommentOwnership, function(req, res){
-    CoastalOtagoOfferComment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedCoastalOtagoOfferComment){
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
         if(err){
             res.redirect("back");
         } else {
@@ -73,11 +71,11 @@ router.put("/:comment_id", askOfferMiddleware.checkCoastalOtagoOfferCommentOwner
 
 // Comment DESTROY
 router.delete("/:comment_id", askOfferMiddleware.checkCoastalOtagoOfferCommentOwnership, function(req, res){
-    CoastalOtagoOfferComment.findByIdAndRemove(req.params.comment_id, function(err){
+    Comment.findByIdAndRemove(req.params.comment_id, function(err){
         if(err){
             res.redirect("back");
         } else {
-            /*req.flash("success", "Comment deleted");*/
+            req.flash("success", "Comment deleted");
             res.redirect("/askOffer/coastalOtago/offer/" + req.params.id);
         }
     });

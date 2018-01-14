@@ -34,10 +34,10 @@ var AucklandAsk                          = require("../../app/models/askOffer/au
     HawkesBayRegionOffer                 = require("../../app/models/askOffer/hawkesBayRegionOffer"),
     HawkesBayRegionAskComment            = require("../../app/models/askOffer/hawkesBayRegionAskComment"),
     HawkesBayRegionOfferComment          = require("../../app/models/askOffer/hawkesBayRegionOfferComment"),
-    ManawatuWanganuiRegionAsk            = require("../../app/models/askOffer/manawatuWanganuiRegionAsk"),
-    ManawatuWanganuiRegionOffer          = require("../../app/models/askOffer/manawatuWanganuiRegionOffer"),
-    ManawatuWanganuiRegionAskComment     = require("../../app/models/askOffer/manawatuWanganuiRegionAskComment"),
-    ManawatuWanganuiRegionOfferComment   = require("../../app/models/askOffer/manawatuWanganuiRegionOfferComment"),
+    ManawatuWhanganuiRegionAsk            = require("../../app/models/askOffer/manawatuWhanganuiRegionAsk"),
+    ManawatuWhanganuiRegionOffer          = require("../../app/models/askOffer/manawatuWhanganuiRegionOffer"),
+    ManawatuWhanganuiRegionAskComment     = require("../../app/models/askOffer/manawatuWhanganuiRegionAskComment"),
+    ManawatuWhanganuiRegionOfferComment   = require("../../app/models/askOffer/manawatuWhanganuiRegionOfferComment"),
     NelsonMarlboroughRegionAsk           = require("../../app/models/askOffer/nelsonMarlboroughRegionAsk"),
     NelsonMarlboroughRegionOffer         = require("../../app/models/askOffer/nelsonMarlboroughRegionOffer"),
     NelsonMarlboroughRegionAskComment    = require("../../app/models/askOffer/nelsonMarlboroughRegionAskComment"),
@@ -83,7 +83,7 @@ middlewareObj.checkAucklandAskCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         AucklandAskComment.findById(req.params.comment_id, function(err, foundAucklandAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -91,14 +91,14 @@ middlewareObj.checkAucklandAskCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -107,7 +107,7 @@ middlewareObj.checkAucklandOfferCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         AucklandOfferComment.findById(req.params.comment_id, function(err, foundAucklandOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -115,14 +115,14 @@ middlewareObj.checkAucklandOfferCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -134,7 +134,7 @@ middlewareObj.checkAucklandAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundAucklandAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -158,7 +158,7 @@ middlewareObj.checkAucklandOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundAucklandOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -179,7 +179,7 @@ middlewareObj.checkBayOfPlentyRegionAskCommentOwnership = function(req, res, nex
     if(req.isAuthenticated()){
         BayOfPlentyRegionAskComment.findById(req.params.comment_id, function(err, foundBayOfPlentyRegionAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -187,14 +187,14 @@ middlewareObj.checkBayOfPlentyRegionAskCommentOwnership = function(req, res, nex
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -203,7 +203,7 @@ middlewareObj.checkBayOfPlentyRegionOfferCommentOwnership = function(req, res, n
     if(req.isAuthenticated()){
         BayOfPlentyRegionOfferComment.findById(req.params.comment_id, function(err, foundBayOfPlentyRegionOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -211,14 +211,14 @@ middlewareObj.checkBayOfPlentyRegionOfferCommentOwnership = function(req, res, n
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -230,7 +230,7 @@ middlewareObj.checkBayOfPlentyRegionAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundBayOfPlentyRegionAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -254,7 +254,7 @@ middlewareObj.checkBayOfPlentyRegionOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundBayOfPlentyRegionOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -275,7 +275,7 @@ middlewareObj.checkCentralOtagoAskCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         CentralOtagoAskComment.findById(req.params.comment_id, function(err, foundCentralOtagoAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -283,14 +283,14 @@ middlewareObj.checkCentralOtagoAskCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -299,7 +299,7 @@ middlewareObj.checkCentralOtagoOfferCommentOwnership = function(req, res, next) 
     if(req.isAuthenticated()){
         CentralOtagoOfferComment.findById(req.params.comment_id, function(err, foundCentralOtagoOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -307,14 +307,14 @@ middlewareObj.checkCentralOtagoOfferCommentOwnership = function(req, res, next) 
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -326,7 +326,7 @@ middlewareObj.checkCentralOtagoAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundCentralOtagoAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -350,7 +350,7 @@ middlewareObj.checkCentralOtagoOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundCentralOtagoOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -371,7 +371,7 @@ middlewareObj.checkChristchurchAskCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         ChristchurchAskComment.findById(req.params.comment_id, function(err, foundChristchurchAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -379,14 +379,14 @@ middlewareObj.checkChristchurchAskCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -395,7 +395,7 @@ middlewareObj.checkChristchurchOfferCommentOwnership = function(req, res, next) 
     if(req.isAuthenticated()){
         ChristchurchOfferComment.findById(req.params.comment_id, function(err, foundChristchurchOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -403,14 +403,14 @@ middlewareObj.checkChristchurchOfferCommentOwnership = function(req, res, next) 
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -422,7 +422,7 @@ middlewareObj.checkChristchurchAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundChristchurchAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -446,7 +446,7 @@ middlewareObj.checkChristchurchOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundChristchurchOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -467,7 +467,7 @@ middlewareObj.checkCoastalOtagoAskCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         CoastalOtagoAskComment.findById(req.params.comment_id, function(err, foundCoastalOtagoAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -475,14 +475,14 @@ middlewareObj.checkCoastalOtagoAskCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -491,7 +491,7 @@ middlewareObj.checkCoastalOtagoOfferCommentOwnership = function(req, res, next) 
     if(req.isAuthenticated()){
         CoastalOtagoOfferComment.findById(req.params.comment_id, function(err, foundCoastalOtagoOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -499,14 +499,14 @@ middlewareObj.checkCoastalOtagoOfferCommentOwnership = function(req, res, next) 
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -518,7 +518,7 @@ middlewareObj.checkCoastalOtagoAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundCoastalOtagoAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -542,7 +542,7 @@ middlewareObj.checkCoastalOtagoOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundCoastalOtagoOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -563,7 +563,7 @@ middlewareObj.checkDunedinAskCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         DunedinAskComment.findById(req.params.comment_id, function(err, foundDunedinAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -571,14 +571,14 @@ middlewareObj.checkDunedinAskCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -587,7 +587,7 @@ middlewareObj.checkDunedinOfferCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         DunedinOfferComment.findById(req.params.comment_id, function(err, foundDunedinOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -595,14 +595,14 @@ middlewareObj.checkDunedinOfferCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -614,7 +614,7 @@ middlewareObj.checkDunedinAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundDunedinAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -638,7 +638,7 @@ middlewareObj.checkDunedinOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundDunedinOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -659,7 +659,7 @@ middlewareObj.checkGisborneRegionAskCommentOwnership = function(req, res, next) 
     if(req.isAuthenticated()){
         GisborneRegionAskComment.findById(req.params.comment_id, function(err, foundGisborneRegionAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -667,14 +667,14 @@ middlewareObj.checkGisborneRegionAskCommentOwnership = function(req, res, next) 
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -683,7 +683,7 @@ middlewareObj.checkGisborneRegionOfferCommentOwnership = function(req, res, next
     if(req.isAuthenticated()){
         GisborneRegionOfferComment.findById(req.params.comment_id, function(err, foundGisborneRegionOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -691,14 +691,14 @@ middlewareObj.checkGisborneRegionOfferCommentOwnership = function(req, res, next
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -710,7 +710,7 @@ middlewareObj.checkGisborneRegionAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundGisborneRegionAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -734,7 +734,7 @@ middlewareObj.checkGisborneRegionOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundGisborneRegionOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -755,7 +755,7 @@ middlewareObj.checkHamiltonAskCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         HamiltonAskComment.findById(req.params.comment_id, function(err, foundHamiltonAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -763,14 +763,14 @@ middlewareObj.checkHamiltonAskCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -779,7 +779,7 @@ middlewareObj.checkHamiltonOfferCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         HamiltonOfferComment.findById(req.params.comment_id, function(err, foundHamiltonOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -787,14 +787,14 @@ middlewareObj.checkHamiltonOfferCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -806,7 +806,7 @@ middlewareObj.checkHamiltonAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundHamiltonAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -830,7 +830,7 @@ middlewareObj.checkHamiltonOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundHamiltonOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -851,7 +851,7 @@ middlewareObj.checkHawkesBayRegionAskCommentOwnership = function(req, res, next)
     if(req.isAuthenticated()){
         HawkesBayRegionAskComment.findById(req.params.comment_id, function(err, foundHawkesBayRegionAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -859,14 +859,14 @@ middlewareObj.checkHawkesBayRegionAskCommentOwnership = function(req, res, next)
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -875,7 +875,7 @@ middlewareObj.checkHawkesBayRegionOfferCommentOwnership = function(req, res, nex
     if(req.isAuthenticated()){
         HawkesBayRegionOfferComment.findById(req.params.comment_id, function(err, foundHawkesBayRegionOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -883,14 +883,14 @@ middlewareObj.checkHawkesBayRegionOfferCommentOwnership = function(req, res, nex
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -902,7 +902,7 @@ middlewareObj.checkHawkesBayRegionAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundHawkesBayRegionAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -926,7 +926,7 @@ middlewareObj.checkHawkesBayRegionOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundHawkesBayRegionOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -943,63 +943,15 @@ middlewareObj.checkHawkesBayRegionOfferOwnership = function(req, res, next) {
         }
 };
 
-middlewareObj.checkManawatuWanganuiRegionAskCommentOwnership = function(req, res, next) {
+middlewareObj.checkManawatuWhanganuiRegionAskCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
-        ManawatuWanganuiRegionAskComment.findById(req.params.comment_id, function(err, foundManawatuWanganuiRegionAskComment){
+        ManawatuWhanganuiRegionAskComment.findById(req.params.comment_id, function(err, foundManawatuWhanganuiRegionAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
-                if(foundManawatuWanganuiRegionAskComment.author.id.equals(req.user._id)){
-                    next();
-                } else {
-                    //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
-                    res.redirect("back");
-                }
-            }
-            });
-        } else {
-        //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
-        res.redirect("back");
-        }
-};
-
-middlewareObj.checkManawatuWanganuiRegionOfferCommentOwnership = function(req, res, next) {
-    if(req.isAuthenticated()){
-        ManawatuWanganuiRegionOfferComment.findById(req.params.comment_id, function(err, foundManawatuWanganuiRegionOfferComment){
-            if(err){
-                /*req.flash("error", "Comment not found");*/
-                res.redirect("back");
-            } else {
-            //does user own the comment?
-                if(foundManawatuWanganuiRegionOfferComment.author.id.equals(req.user._id)){
-                    next();
-                } else {
-                    //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
-                    res.redirect("back");
-                }
-            }
-            });
-        } else {
-        //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
-        res.redirect("back");
-        }
-};
-
-middlewareObj.checkManawatuWanganuiRegionAskOwnership = function(req, res, next) {
-    if(req.isAuthenticated()){
-        ManawatuWanganuiRegionAsk.findById(req.params.id, function(err, foundManawatuWanganuiRegionAsk){
-            if(err){
-                req.flash("error", "item not found");
-                res.redirect("back");
-            } else {
-            //does user own the uniTalk?
-                if(foundManawatuWanganuiRegionAsk.author.id.equals(req.user._id)){
+                if(foundManawatuWhanganuiRegionAskComment.author.id.equals(req.user._id)){
                     next();
                 } else {
                     //otherwise, redirect
@@ -1015,15 +967,63 @@ middlewareObj.checkManawatuWanganuiRegionAskOwnership = function(req, res, next)
         }
 };
 
-middlewareObj.checkManawatuWanganuiRegionOfferOwnership = function(req, res, next) {
+middlewareObj.checkManawatuWhanganuiRegionOfferCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
-        ManawatuWanganuiRegionOffer.findById(req.params.id, function(err, foundManawatuWanganuiRegionOffer){
+        ManawatuWhanganuiRegionOfferComment.findById(req.params.comment_id, function(err, foundManawatuWhanganuiRegionOfferComment){
+            if(err){
+                req.flash("error", "Comment not found");
+                res.redirect("back");
+            } else {
+            //does user own the comment?
+                if(foundManawatuWhanganuiRegionOfferComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    req.flash("error", "You do not have permission to do that");
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkManawatuWhanganuiRegionAskOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        ManawatuWhanganuiRegionAsk.findById(req.params.id, function(err, foundManawatuWhanganuiRegionAsk){
             if(err){
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
-                if(foundManawatuWanganuiRegionOffer.author.id.equals(req.user._id)){
+            //does user own the ask?
+                if(foundManawatuWhanganuiRegionAsk.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    //otherwise, redirect
+                    req.flash("error", "You do not have permission to do that");
+                    res.redirect("back");
+                }
+            }
+            });
+        } else {
+        //if not, redirect
+        req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+        }
+};
+
+middlewareObj.checkManawatuWhanganuiRegionOfferOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        ManawatuWhanganuiRegionOffer.findById(req.params.id, function(err, foundManawatuWhanganuiRegionOffer){
+            if(err){
+                req.flash("error", "item not found");
+                res.redirect("back");
+            } else {
+            //does user own the ask?
+                if(foundManawatuWhanganuiRegionOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
                     //otherwise, redirect
@@ -1043,7 +1043,7 @@ middlewareObj.checkNelsonMarlboroughRegionAskCommentOwnership = function(req, re
     if(req.isAuthenticated()){
         NelsonMarlboroughRegionAskComment.findById(req.params.comment_id, function(err, foundNelsonMarlboroughRegionAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1051,14 +1051,14 @@ middlewareObj.checkNelsonMarlboroughRegionAskCommentOwnership = function(req, re
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1067,7 +1067,7 @@ middlewareObj.checkNelsonMarlboroughRegionOfferCommentOwnership = function(req, 
     if(req.isAuthenticated()){
         NelsonMarlboroughRegionOfferComment.findById(req.params.comment_id, function(err, foundNelsonMarlboroughRegionOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1075,14 +1075,14 @@ middlewareObj.checkNelsonMarlboroughRegionOfferCommentOwnership = function(req, 
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1094,7 +1094,7 @@ middlewareObj.checkNelsonMarlboroughRegionAskOwnership = function(req, res, next
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundNelsonMarlboroughRegionAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1118,7 +1118,7 @@ middlewareObj.checkNelsonMarlboroughRegionOfferOwnership = function(req, res, ne
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundNelsonMarlboroughRegionOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1139,7 +1139,7 @@ middlewareObj.checkNorthlandRegionAskCommentOwnership = function(req, res, next)
     if(req.isAuthenticated()){
         NorthlandRegionAskComment.findById(req.params.comment_id, function(err, foundNorthlandRegionAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1147,14 +1147,14 @@ middlewareObj.checkNorthlandRegionAskCommentOwnership = function(req, res, next)
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1163,7 +1163,7 @@ middlewareObj.checkNorthlandRegionOfferCommentOwnership = function(req, res, nex
     if(req.isAuthenticated()){
         NorthlandRegionOfferComment.findById(req.params.comment_id, function(err, foundNorthlandRegionOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1171,14 +1171,14 @@ middlewareObj.checkNorthlandRegionOfferCommentOwnership = function(req, res, nex
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1190,7 +1190,7 @@ middlewareObj.checkNorthlandRegionAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundNorthlandRegionAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1214,7 +1214,7 @@ middlewareObj.checkNorthlandRegionOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundNorthlandRegionOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1235,7 +1235,7 @@ middlewareObj.checkSouthCanterburyAskCommentOwnership = function(req, res, next)
     if(req.isAuthenticated()){
         SouthCanterburyAskComment.findById(req.params.comment_id, function(err, foundSouthCanterburyAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1243,14 +1243,14 @@ middlewareObj.checkSouthCanterburyAskCommentOwnership = function(req, res, next)
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1259,7 +1259,7 @@ middlewareObj.checkSouthCanterburyOfferCommentOwnership = function(req, res, nex
     if(req.isAuthenticated()){
         SouthCanterburyOfferComment.findById(req.params.comment_id, function(err, foundSouthCanterburyOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1267,14 +1267,14 @@ middlewareObj.checkSouthCanterburyOfferCommentOwnership = function(req, res, nex
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1286,7 +1286,7 @@ middlewareObj.checkSouthCanterburyAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundSouthCanterburyAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1310,7 +1310,7 @@ middlewareObj.checkSouthCanterburyOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundSouthCanterburyOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1331,7 +1331,7 @@ middlewareObj.checkSouthlandRegionAskCommentOwnership = function(req, res, next)
     if(req.isAuthenticated()){
         SouthlandRegionAskComment.findById(req.params.comment_id, function(err, foundSouthlandRegionAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1339,14 +1339,14 @@ middlewareObj.checkSouthlandRegionAskCommentOwnership = function(req, res, next)
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1355,7 +1355,7 @@ middlewareObj.checkSouthlandRegionOfferCommentOwnership = function(req, res, nex
     if(req.isAuthenticated()){
         SouthlandRegionOfferComment.findById(req.params.comment_id, function(err, foundSouthlandRegionOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1363,14 +1363,14 @@ middlewareObj.checkSouthlandRegionOfferCommentOwnership = function(req, res, nex
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1382,7 +1382,7 @@ middlewareObj.checkSouthlandRegionAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundSouthlandRegionAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1406,7 +1406,7 @@ middlewareObj.checkSouthlandRegionOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundSouthlandRegionOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1427,7 +1427,7 @@ middlewareObj.checkTaranakiRegionAskCommentOwnership = function(req, res, next) 
     if(req.isAuthenticated()){
         TaranakiRegionAskComment.findById(req.params.comment_id, function(err, foundTaranakiRegionAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1435,14 +1435,14 @@ middlewareObj.checkTaranakiRegionAskCommentOwnership = function(req, res, next) 
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1451,7 +1451,7 @@ middlewareObj.checkTaranakiRegionOfferCommentOwnership = function(req, res, next
     if(req.isAuthenticated()){
         TaranakiRegionOfferComment.findById(req.params.comment_id, function(err, foundTaranakiRegionOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1459,14 +1459,14 @@ middlewareObj.checkTaranakiRegionOfferCommentOwnership = function(req, res, next
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1478,7 +1478,7 @@ middlewareObj.checkTaranakiRegionAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundTaranakiRegionAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1502,7 +1502,7 @@ middlewareObj.checkTaranakiRegionOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundTaranakiRegionOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1523,7 +1523,7 @@ middlewareObj.checkWaikatoRegionAskCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         WaikatoRegionAskComment.findById(req.params.comment_id, function(err, foundWaikatoRegionAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1531,14 +1531,14 @@ middlewareObj.checkWaikatoRegionAskCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1547,7 +1547,7 @@ middlewareObj.checkWaikatoRegionOfferCommentOwnership = function(req, res, next)
     if(req.isAuthenticated()){
         WaikatoRegionOfferComment.findById(req.params.comment_id, function(err, foundWaikatoRegionOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1555,14 +1555,14 @@ middlewareObj.checkWaikatoRegionOfferCommentOwnership = function(req, res, next)
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1574,7 +1574,7 @@ middlewareObj.checkWaikatoRegionAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundWaikatoRegionAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1598,7 +1598,7 @@ middlewareObj.checkWaikatoRegionOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundWaikatoRegionOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1619,7 +1619,7 @@ middlewareObj.checkWellingtonAskCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         WellingtonAskComment.findById(req.params.comment_id, function(err, foundWellingtonAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1627,14 +1627,14 @@ middlewareObj.checkWellingtonAskCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1643,7 +1643,7 @@ middlewareObj.checkWellingtonOfferCommentOwnership = function(req, res, next) {
     if(req.isAuthenticated()){
         WellingtonOfferComment.findById(req.params.comment_id, function(err, foundWellingtonOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1651,14 +1651,14 @@ middlewareObj.checkWellingtonOfferCommentOwnership = function(req, res, next) {
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1670,7 +1670,7 @@ middlewareObj.checkWellingtonAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundWellingtonAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1694,7 +1694,7 @@ middlewareObj.checkWellingtonOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundWellingtonOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1715,7 +1715,7 @@ middlewareObj.checkWellingtonRegionAskCommentOwnership = function(req, res, next
     if(req.isAuthenticated()){
         WellingtonRegionAskComment.findById(req.params.comment_id, function(err, foundWellingtonRegionAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1723,14 +1723,14 @@ middlewareObj.checkWellingtonRegionAskCommentOwnership = function(req, res, next
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1739,7 +1739,7 @@ middlewareObj.checkWellingtonRegionOfferCommentOwnership = function(req, res, ne
     if(req.isAuthenticated()){
         WellingtonRegionOfferComment.findById(req.params.comment_id, function(err, foundWellingtonRegionOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1747,14 +1747,14 @@ middlewareObj.checkWellingtonRegionOfferCommentOwnership = function(req, res, ne
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1766,7 +1766,7 @@ middlewareObj.checkWellingtonRegionAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundWellingtonRegionAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1790,7 +1790,7 @@ middlewareObj.checkWellingtonRegionOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundWellingtonRegionOffer.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1811,7 +1811,7 @@ middlewareObj.checkWestCoastRegionAskCommentOwnership = function(req, res, next)
     if(req.isAuthenticated()){
         WestCoastRegionAskComment.findById(req.params.comment_id, function(err, foundWestCoastRegionAskComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1819,14 +1819,14 @@ middlewareObj.checkWestCoastRegionAskCommentOwnership = function(req, res, next)
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1835,7 +1835,7 @@ middlewareObj.checkWestCoastRegionOfferCommentOwnership = function(req, res, nex
     if(req.isAuthenticated()){
         WestCoastRegionOfferComment.findById(req.params.comment_id, function(err, foundWestCoastRegionOfferComment){
             if(err){
-                /*req.flash("error", "Comment not found");*/
+                req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
             //does user own the comment?
@@ -1843,14 +1843,14 @@ middlewareObj.checkWestCoastRegionOfferCommentOwnership = function(req, res, nex
                     next();
                 } else {
                     //otherwise, redirect
-                    /*req.flash("error", "You do not have permission to do that");*/
+                    req.flash("error", "You do not have permission to do that");
                     res.redirect("back");
                 }
             }
             });
         } else {
         //if not, redirect
-        /*req.flash("error", "You need to be logged in to do that");*/
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
         }
 };
@@ -1862,7 +1862,7 @@ middlewareObj.checkWestCoastRegionAskOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundWestCoastRegionAsk.author.id.equals(req.user._id)){
                     next();
                 } else {
@@ -1886,7 +1886,7 @@ middlewareObj.checkWestCoastRegionOfferOwnership = function(req, res, next) {
                 req.flash("error", "item not found");
                 res.redirect("back");
             } else {
-            //does user own the uniTalk?
+            //does user own the ask?
                 if(foundWestCoastRegionOffer.author.id.equals(req.user._id)){
                     next();
                 } else {

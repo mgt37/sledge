@@ -1,20 +1,23 @@
 <% include ../../../partials/header %>
-<div class="container">
+<div class="container" style="width: 66.667%;>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="thumbnail">
+                
                 <div class="caption-full">
-                    <h4><a><%= southlandRegionAsk.title %></a></h4>
-                    <p><%= southlandRegionAsk.body %></p>
-                    <p>
-                        <em>Submitted by <%= southlandRegionAsk.author.username %></em>
-                    </p>
+                    <h3><%= southlandRegionAsk.title %></h3>
+                    <p>Details: <%= southlandRegionAsk.body %></p>
+                    <p>Contact email: <%= southlandRegionAsk.contactEmail %></p>
+                    <p>Other contact information: <%= southlandRegionAsk.otherContact %></p>
+                    <p>Maximum hourly rate: $<%= southlandRegionAsk.hourlyRate %>/hour</p>
+                    
+                    
+                    <p><em>Submitted by <%= southlandRegionAsk.author.username %></em></p>
                     <% if(currentUser && southlandRegionAsk.author.id.equals(currentUser._id)){ %>
                         <a class="btn btn-xs btn-warning" href="/askOffer/southlandRegion/ask/<%= southlandRegionAsk._id %>/edit">Edit</a>
                         <form id="delete-form" action="/askOffer/southlandRegion/ask/<%= southlandRegionAsk._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-xs btn-danger">Delete</button>
                         </form>
-                        <a class="btn btn-primary btn-sm btn-block" href="#">Send email</a>
                     <% } %>
                 </div>
             </div>
@@ -23,20 +26,20 @@
                     <a class="btn btn-xs btn-success" href="/askOffer/southlandRegion/ask/<%= southlandRegionAsk._id %>/southlandRegionAskComments/new/">Add comment</a>
                 </div>
                 <hr>
-                <% southlandRegionAsk.comments.reverse().forEach(function(southlandRegionAskComment){ %>
+                <% southlandRegionAsk.comments.reverse().forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <strong><%= southlandRegionAskComment.author.username %></strong>
+                            <strong><%= comment.author.username %></strong>
                             <span class="pull-right"><%= Date();%></span>
                             <p>
-                                <%= southlandRegionAskComment.text %>
+                                <%= comment.text %>
                             </p>
-                        <% if(currentUser && southlandRegionAskComment.author.id.equals(currentUser._id)){ %>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                             <a class="btn btn-xs btn-warning" 
-                                href="/askOffer/southlandRegion/ask/<%= southlandRegionAsk._id %>/southlandRegionAskComments/<%= southlandRegionAskComment._id %>/edit">
+                                href="/askOffer/southlandRegion/ask/<%= southlandRegionAsk._id %>/southlandRegionAskComments/<%= comment._id %>/edit">
                                 Edit
                             </a>
-                            <form id="delete-form" action="/askOffer/southlandRegion/ask/<%= southlandRegionAsk._id %>/southlandRegionAskComments/<%= southlandRegionAskComment._id %>?_method=DELETE" method="POST">
+                            <form id="delete-form" action="/askOffer/southlandRegion/ask/<%= southlandRegionAsk._id %>/southlandRegionAskComments/<%= comment._id %>?_method=DELETE" method="POST">
                                 <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                             </form>
                         <% } %>

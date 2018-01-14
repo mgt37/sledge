@@ -1,18 +1,18 @@
 var express           = require("express");
 var router            = express();
 var timestamp                   = require('time-stamp');
-var CorrectYourHabitsComment    = require("../../app/models/blog/correctYourHabitsComment");
+var Comment    = require("../../app/models/blog/correctYourHabitsComment");
 var middleware                  = require("../../middleware"),
 blogMiddleware                  = require("../../middleware/blog");
 
 //INDEX
 router.get("/", function(req, res){
     // Get all comments from DB
-    CorrectYourHabitsComment.find({}, function(err, allCorrectYourHabitsComment){
+    Comment.find({}, function(err, allComment){
         if(err){
             console.log(err);
         } else {
-            res.render("blog/posts/takeOnTheChallengeToCorrectYourHabits/index", {correctYourHabitsComment: allCorrectYourHabitsComment});
+            res.render("blog/posts/takeOnTheChallengeToCorrectYourHabits/index", {comment: allComment});
         }
     });
 });
@@ -23,11 +23,11 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     var blogComment   = req.body.blogComment;
     var author = {
         id: req.user._id,
-        username: req.user.username
+        username:  req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name
     };
-    var newCorrectYourHabitsComment = ({blogComment: blogComment, author: author});
+    var newComment = ({blogComment: blogComment, author: author});
     //create a comment and save to DB
-    CorrectYourHabitsComment.create(newCorrectYourHabitsComment, function(err, newlyCreated){
+    Comment.create(newComment, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
@@ -45,23 +45,23 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 //SHOW - Shows more information about one comment
 router.get("/:id", function(req, res){
     //Find the comment with provided ID
-    CorrectYourHabitsComment.findById(req.params.id).populate("comments").exec(function(err, foundCorrectYourHabitsComment){
+    Comment.findById(req.params.id).populate("comments").exec(function(err, foundComment){
         if(err){
             console.log(err);
         } else {
             //Render show template with that comment
-            res.render("blog/posts/takeOnTheChallengeToCorrectYourHabits/show", {correctYourHabitsComment: foundCorrectYourHabitsComment});    
+            res.render("blog/posts/takeOnTheChallengeToCorrectYourHabits/show", {comment: foundComment});    
         }
     });    
 });
 
 // EDIT comment Route
 router.get("/:id/edit", blogMiddleware.checkCorrectYourHabitsCommentOwnership, function(req, res){
-    CorrectYourHabitsComment.findById(req.params.id, function(err, foundCorrectYourHabitsComment){
+    Comment.findById(req.params.id, function(err, foundComment){
         if(err){
             res.redirect("/blog/posts/takeOnTheChallengeToCorrectYourHabits");
         } else {
-            res.render("blog/posts/takeOnTheChallengeToCorrectYourHabits/edit", {correctYourHabitsComment: foundCorrectYourHabitsComment});
+            res.render("blog/posts/takeOnTheChallengeToCorrectYourHabits/edit", {comment: foundComment});
         }
     });
 });
@@ -69,7 +69,7 @@ router.get("/:id/edit", blogMiddleware.checkCorrectYourHabitsCommentOwnership, f
 // UPDATE comment Route
 router.put("/:id", blogMiddleware.checkCorrectYourHabitsCommentOwnership, function(req, res){
     // Find and update the correct comment
-    CorrectYourHabitsComment.findByIdAndUpdate(req.params.id, req.body.correctYourHabitsComment, function(err, updatedCorrectYourHabitsComment){
+    Comment.findByIdAndUpdate(req.params.id, req.body.comment, function(err, updatedComment){
         if(err){
             res.redirect("/blog/posts/takeOnTheChallengeToCorrectYourHabits");
         } else {
@@ -81,7 +81,7 @@ router.put("/:id", blogMiddleware.checkCorrectYourHabitsCommentOwnership, functi
 
 // DESTROY comment Route
 router.delete("/:id", blogMiddleware.checkCorrectYourHabitsCommentOwnership, function(req, res){
-    CorrectYourHabitsComment.findByIdAndRemove(req.params.id, function(err){
+    Comment.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/blog/posts/takeOnTheChallengeToCorrectYourHabits");
         } else {

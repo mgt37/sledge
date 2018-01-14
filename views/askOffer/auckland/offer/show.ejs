@@ -1,42 +1,44 @@
 <% include ../../../partials/header %>
-<div class="container">
+<div class="container" style="width: 66.667%;>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="thumbnail">
+                
                 <div class="caption-full">
-                    <h4><a><%= aucklandOffer.title %></a></h4>
-                    <p><%= aucklandOffer.body %></p>
-                    <p>
-                        <em>Submitted by <%= aucklandOffer.author.username %></em>
-                    </p>
+                    <h3><%= aucklandOffer.title %></h3>
+                    <p>Details: <%= aucklandOffer.body %></p>
+                    <p>Contact email: <%= aucklandOffer.contactEmail %></p>
+                    <p>Other contact information: <%= aucklandOffer.otherContact %></p>
+                    <p>Hourly rate: $<%= aucklandOffer.hourlyRate %>/hour</p>
+                    
+                    <p><em>Submitted by <%= aucklandOffer.author.username %></em></p>
                     <% if(currentUser && aucklandOffer.author.id.equals(currentUser._id)){ %>
                         <a class="btn btn-xs btn-warning" href="/askOffer/auckland/offer/<%= aucklandOffer._id %>/edit">Edit</a>
                         <form id="delete-form" action="/askOffer/auckland/offer/<%= aucklandOffer._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-xs btn-danger">Delete</button>
                         </form>
-                        <a class="btn btn-primary btn-sm btn-block" href="#">Send email</a>
                     <% } %>
                 </div>
             </div>
             <div class="well">
                 <div class= "text-right">
-                    <a class="btn btn-xs btn-success" href="/askOffer/auckland/offer/<%= aucklandOffer._id %>/aucklandOfferComments/new">Add comment</a>
+                    <a class="btn btn-xs btn-success" href="/askOffer/auckland/offer/<%= aucklandOffer._id %>/aucklandOfferComments/new/">Add comment</a>
                 </div>
                 <hr>
-                <% aucklandOffer.comments.reverse().forEach(function(aucklandOfferComment){ %>
+                <% aucklandOffer.comments.reverse().forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <strong><%= aucklandOfferComment.author.username %></strong>
-                            <span class="pull-right"><%= Date.now();%></span>
+                            <strong><%= comment.author.username %></strong>
+                            <span class="pull-right"><%= Date();%></span>
                             <p>
-                                <%= aucklandOfferComment.text %>
+                                <%= comment.text %>
                             </p>
-                        <% if(currentUser && aucklandOfferComment.author.id.equals(currentUser._id)){ %>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                             <a class="btn btn-xs btn-warning" 
-                                href="/askOffer/auckland/offer/<%= aucklandOffer._id %>/aucklandOfferComments/<%= aucklandOfferComment._id %>/edit">
+                                href="/askOffer/auckland/offer/<%= aucklandOffer._id %>/aucklandOfferComments/<%= comment._id %>/edit">
                                 Edit
                             </a>
-                            <form id="delete-form" action="/askOffer/auckland/offer/<%= aucklandOffer._id %>/aucklandOfferComments/<%= aucklandOfferComment._id %>?_method=DELETE" method="POST">
+                            <form id="delete-form" action="/askOffer/auckland/offer/<%= aucklandOffer._id %>/aucklandOfferComments/<%= comment._id %>?_method=DELETE" method="POST">
                                 <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                             </form>
                         <% } %>

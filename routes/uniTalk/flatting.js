@@ -1,6 +1,6 @@
 var express           = require("express"),
     router            = express(),
-    Flatting            = require("../../app/models/uniTalk/flatting"),
+    Flatting          = require("../../app/models/uniTalk/flatting"),
     middleware        = require("../../middleware"),
     uniTalkMiddleware = require("../../middleware/uniTalk");
 
@@ -21,11 +21,12 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     //get data from form and add to uniTalk topics array
     var title  = req.body.title;
     var body   = req.body.body;
+    var image  = req.body.image;
     var author = {
         id: req.user._id,
-        username: req.user.username
+        username:  req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name
     };
-    var newFlatting = ({title: title, body: body, author: author});
+    var newFlatting = ({title: title, body: body, image: image, author: author});
     //create a new uniTalk topic and save to DB
     Flatting.create(newFlatting, function(err, newlyCreated){
         if(err){

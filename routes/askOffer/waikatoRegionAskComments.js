@@ -2,7 +2,7 @@ var express                 = require("express");
 var router                  = express.Router({mergeParams: true});
 var WaikatoRegionAsk             = require("../../app/models/askOffer/waikatoRegionAsk");
 var timestamp               = require('time-stamp');
-var WaikatoRegionAskComment      = require("../../app/models/askOffer/waikatoRegionAskComment");
+var Comment      = require("../../app/models/askOffer/waikatoRegionAskComment");
 var middleware              = require("../../middleware"),
 askOfferMiddleware           = require("../../middleware/askOffer");
 
@@ -26,22 +26,20 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(err);
             res.redirect("/askOffer/waikatoRegion/ask");
         } else {
-            /*console.log(req.body.careerComment);*/
-            WaikatoRegionAskComment.create(req.body.comment, function(err, comment){
+            Comment.create(req.body.comment, function(err, comment){
                 if(err){
-                    /*req.flash("error", "Something went wrong");*/
-                    /*console.log(err);*/
+                    req.flash("error", "Something went wrong");
                 } else {
                     // Add username and id to comment
                     comment.author.id = req.user._id;
-                    /*comment.text = req.body.body;*/
-                    comment.author.username = req.user.username;
-                   /* req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name ;*/
+                    comment.text = req.body.text;
+                    comment.author.username = req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name;
+            
                     // Save comment
                     comment.save();
                     waikatoRegionAsk.comments.push(comment);
                     waikatoRegionAsk.save();
-                    /*req.flash("success", "Successfully added comment");*/
+                    req.flash("success", "Successfully added comment");
                     res.redirect('/askOffer/waikatoRegion/ask/' + waikatoRegionAsk._id);
                 }
             });
@@ -51,18 +49,18 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 
 // Comments EDIT
 router.get("/:comment_id/edit", askOfferMiddleware.checkWaikatoRegionAskCommentOwnership, function(req, res){
-    WaikatoRegionAskComment.findById(req.params.comment_id, function(err, foundWaikatoRegionAskComment){
+    Comment.findById(req.params.comment_id, function(err, foundComment){
         if(err){
             res.redirect("back");
         } else {
-           res.render("askOffer/waikatoRegion/ask/comments/edit", {waikatoRegionAsk_id: req.params.id, comment: foundWaikatoRegionAskComment}); 
+           res.render("askOffer/waikatoRegion/ask/comments/edit", {waikatoRegionAsk_id: req.params.id, comment: foundComment}); 
         }
     });
 });
 
 // Comment UPDATE
 router.put("/:comment_id", askOfferMiddleware.checkWaikatoRegionAskCommentOwnership, function(req, res){
-    WaikatoRegionAskComment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedWaikatoRegionAskComment){
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
         if(err){
             res.redirect("back");
         } else {
@@ -73,11 +71,11 @@ router.put("/:comment_id", askOfferMiddleware.checkWaikatoRegionAskCommentOwners
 
 // Comment DESTROY
 router.delete("/:comment_id", askOfferMiddleware.checkWaikatoRegionAskCommentOwnership, function(req, res){
-    WaikatoRegionAskComment.findByIdAndRemove(req.params.comment_id, function(err){
+    Comment.findByIdAndRemove(req.params.comment_id, function(err){
         if(err){
             res.redirect("back");
         } else {
-            /*req.flash("success", "Comment deleted");*/
+            req.flash("success", "Comment deleted");
             res.redirect("/askOffer/waikatoRegion/ask/" + req.params.id);
         }
     });

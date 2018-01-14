@@ -2,7 +2,7 @@ var express                 = require("express");
 var router                  = express.Router({mergeParams: true});
 var WellingtonOffer             = require("../../app/models/askOffer/wellingtonOffer");
 var timestamp               = require('time-stamp');
-var WellingtonOfferComment      = require("../../app/models/askOffer/wellingtonOfferComment");
+var Comment      = require("../../app/models/askOffer/wellingtonOfferComment");
 var middleware              = require("../../middleware"),
 askOfferMiddleware           = require("../../middleware/askOffer");
 
@@ -26,22 +26,20 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(err);
             res.redirect("/askOffer/wellington/offer");
         } else {
-            /*console.log(req.body.careerComment);*/
-            WellingtonOfferComment.create(req.body.comment, function(err, comment){
+            Comment.create(req.body.comment, function(err, comment){
                 if(err){
-                    /*req.flash("error", "Something went wrong");*/
-                    /*console.log(err);*/
+                    req.flash("error", "Something went wrong");
                 } else {
                     // Add username and id to comment
                     comment.author.id = req.user._id;
-                    /*comment.text = req.body.body;*/
-                    comment.author.username = req.user.username;
-                   /* req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name ;*/
+                    comment.text = req.body.text;
+                    comment.author.username = req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name;
+      
                     // Save comment
                     comment.save();
                     wellingtonOffer.comments.push(comment);
                     wellingtonOffer.save();
-                    /*req.flash("success", "Successfully added comment");*/
+                    req.flash("success", "Successfully added comment");
                     res.redirect('/askOffer/wellington/offer/' + wellingtonOffer._id);
                 }
             });
@@ -51,18 +49,18 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 
 // Comments EDIT
 router.get("/:comment_id/edit", askOfferMiddleware.checkWellingtonOfferCommentOwnership, function(req, res){
-    WellingtonOfferComment.findById(req.params.comment_id, function(err, foundWellingtonOfferComment){
+    Comment.findById(req.params.comment_id, function(err, foundComment){
         if(err){
             res.redirect("back");
         } else {
-           res.render("askOffer/wellington/offer/comments/edit", {wellingtonOffer_id: req.params.id, comment: foundWellingtonOfferComment}); 
+           res.render("askOffer/wellington/offer/comments/edit", {wellingtonOffer_id: req.params.id, comment: foundComment}); 
         }
     });
 });
 
 // Comment UPDATE
 router.put("/:comment_id", askOfferMiddleware.checkWellingtonOfferCommentOwnership, function(req, res){
-    WellingtonOfferComment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedWellingtonOfferComment){
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
         if(err){
             res.redirect("back");
         } else {
@@ -73,11 +71,11 @@ router.put("/:comment_id", askOfferMiddleware.checkWellingtonOfferCommentOwnersh
 
 // Comment DESTROY
 router.delete("/:comment_id", askOfferMiddleware.checkWellingtonOfferCommentOwnership, function(req, res){
-    WellingtonOfferComment.findByIdAndRemove(req.params.comment_id, function(err){
+    Comment.findByIdAndRemove(req.params.comment_id, function(err){
         if(err){
             res.redirect("back");
         } else {
-            /*req.flash("success", "Comment deleted");*/
+            req.flash("success", "Comment deleted");
             res.redirect("/askOffer/wellington/offer/" + req.params.id);
         }
     });

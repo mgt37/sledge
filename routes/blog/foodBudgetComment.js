@@ -1,18 +1,18 @@
 var express           = require("express");
 var router            = express();
 var timestamp                   = require('time-stamp');
-var FoodBudgetComment    = require("../../app/models/blog/foodBudgetComment");
+var Comment    = require("../../app/models/blog/foodBudgetComment");
 var middleware                  = require("../../middleware"),
 blogMiddleware                  = require("../../middleware/blog");
 
 //INDEX
 router.get("/", function(req, res){
     // Get all comments from DB
-    FoodBudgetComment.find({}, function(err, allFoodBudgetComment){
+    Comment.find({}, function(err, allComment){
         if(err){
             console.log(err);
         } else {
-            res.render("blog/posts/foodBudget/index", {foodBudgetComment: allFoodBudgetComment});
+            res.render("blog/posts/foodBudget/index", {comment: allComment});
         }
     });
 });
@@ -23,11 +23,11 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     var blogComment   = req.body.blogComment;
     var author = {
         id: req.user._id,
-        username: req.user.username
+        username:  req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name
     };
-    var newFoodBudgetComment = ({blogComment: blogComment, author: author});
+    var newComment = ({blogComment: blogComment, author: author});
     //create a comment and save to DB
-    FoodBudgetComment.create(newFoodBudgetComment, function(err, newlyCreated){
+    Comment.create(newComment, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
@@ -45,23 +45,23 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 //SHOW - Shows more information about one comment
 router.get("/:id", function(req, res){
     //Find the comment with provided ID
-    FoodBudgetComment.findById(req.params.id).populate("comments").exec(function(err, foundFoodBudgetComment){
+    Comment.findById(req.params.id).populate("comments").exec(function(err, foundComment){
         if(err){
             console.log(err);
         } else {
             //Render show template with that comment
-            res.render("blog/posts/foodBudget/show", {foodBudgetComment: foundFoodBudgetComment});    
+            res.render("blog/posts/foodBudget/show", {comment: foundComment});    
         }
     });    
 });
 
 // EDIT comment Route
 router.get("/:id/edit", blogMiddleware.checkFoodBudgetCommentOwnership, function(req, res){
-    FoodBudgetComment.findById(req.params.id, function(err, foundFoodBudgetComment){
+    Comment.findById(req.params.id, function(err, foundComment){
         if(err){
             res.redirect("/blog/posts/foodBudget");
         } else {
-            res.render("blog/posts/foodBudget/edit", {foodBudgetComment: foundFoodBudgetComment});
+            res.render("blog/posts/foodBudget/edit", {comment: foundComment});
         }
     });
 });
@@ -69,7 +69,7 @@ router.get("/:id/edit", blogMiddleware.checkFoodBudgetCommentOwnership, function
 // UPDATE comment Route
 router.put("/:id", blogMiddleware.checkFoodBudgetCommentOwnership, function(req, res){
     // Find and update the correct comment
-    FoodBudgetComment.findByIdAndUpdate(req.params.id, req.body.foodBudgetComment, function(err, updatedFoodBudgetComment){
+    Comment.findByIdAndUpdate(req.params.id, req.body.comment, function(err, updatedComment){
         if(err){
             res.redirect("/blog/posts/foodBudget");
         } else {
@@ -81,7 +81,7 @@ router.put("/:id", blogMiddleware.checkFoodBudgetCommentOwnership, function(req,
 
 // DESTROY comment Route
 router.delete("/:id", blogMiddleware.checkFoodBudgetCommentOwnership, function(req, res){
-    FoodBudgetComment.findByIdAndRemove(req.params.id, function(err){
+    Comment.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/blog/posts/foodBudget");
         } else {

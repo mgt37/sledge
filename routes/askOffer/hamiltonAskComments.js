@@ -2,7 +2,7 @@ var express                 = require("express");
 var router                  = express.Router({mergeParams: true});
 var HamiltonAsk             = require("../../app/models/askOffer/hamiltonAsk");
 var timestamp               = require('time-stamp');
-var HamiltonAskComment      = require("../../app/models/askOffer/hamiltonAskComment");
+var Comment      = require("../../app/models/askOffer/hamiltonAskComment");
 var middleware              = require("../../middleware"),
 askOfferMiddleware           = require("../../middleware/askOffer");
 
@@ -26,22 +26,20 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(err);
             res.redirect("/askOffer/hamilton/ask");
         } else {
-            /*console.log(req.body.careerComment);*/
-            HamiltonAskComment.create(req.body.comment, function(err, comment){
+            Comment.create(req.body.comment, function(err, comment){
                 if(err){
-                    /*req.flash("error", "Something went wrong");*/
-                    /*console.log(err);*/
+                    req.flash("error", "Something went wrong");
                 } else {
                     // Add username and id to comment
                     comment.author.id = req.user._id;
-                    /*comment.text = req.body.body;*/
-                    comment.author.username = req.user.username;
-                   /* req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name ;*/
+                    comment.text = req.body.text;
+                    comment.author.username = req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name;
+                  
                     // Save comment
                     comment.save();
                     hamiltonAsk.comments.push(comment);
                     hamiltonAsk.save();
-                    /*req.flash("success", "Successfully added comment");*/
+                    req.flash("success", "Successfully added comment");
                     res.redirect('/askOffer/hamilton/ask/' + hamiltonAsk._id);
                 }
             });
@@ -51,18 +49,18 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 
 // Comments EDIT
 router.get("/:comment_id/edit", askOfferMiddleware.checkHamiltonAskCommentOwnership, function(req, res){
-    HamiltonAskComment.findById(req.params.comment_id, function(err, foundHamiltonAskComment){
+    Comment.findById(req.params.comment_id, function(err, foundComment){
         if(err){
             res.redirect("back");
         } else {
-           res.render("askOffer/hamilton/ask/comments/edit", {hamiltonAsk_id: req.params.id, comment: foundHamiltonAskComment}); 
+           res.render("askOffer/hamilton/ask/comments/edit", {hamiltonAsk_id: req.params.id, comment: foundComment}); 
         }
     });
 });
 
 // Comment UPDATE
 router.put("/:comment_id", askOfferMiddleware.checkHamiltonAskCommentOwnership, function(req, res){
-    HamiltonAskComment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedHamiltonAskComment){
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
         if(err){
             res.redirect("back");
         } else {
@@ -73,11 +71,11 @@ router.put("/:comment_id", askOfferMiddleware.checkHamiltonAskCommentOwnership, 
 
 // Comment DESTROY
 router.delete("/:comment_id", askOfferMiddleware.checkHamiltonAskCommentOwnership, function(req, res){
-    HamiltonAskComment.findByIdAndRemove(req.params.comment_id, function(err){
+    Comment.findByIdAndRemove(req.params.comment_id, function(err){
         if(err){
             res.redirect("back");
         } else {
-            /*req.flash("success", "Comment deleted");*/
+            req.flash("success", "Comment deleted");
             res.redirect("/askOffer/hamilton/ask/" + req.params.id);
         }
     });

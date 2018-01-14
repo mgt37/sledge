@@ -1,0 +1,56 @@
+<% include ../../../partials/header %>
+<div class="container" style="width: 66.667%;>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="thumbnail">
+                
+                <div class="caption-full">
+                    <h3><%= manawatuWhanganuiRegionOffer.title %></h3>
+                    <p>Details: <%= manawatuWhanganuiRegionOffer.body %></p>
+                    <p>Contact email: <%= manawatuWhanganuiRegionOffer.contactEmail %></p>
+                    <p>Other contact information: <%= manawatuWhanganuiRegionOffer.otherContact %></p>
+                    <p>Hourly rate: $<%= manawatuWhanganuiRegionOffer.hourlyRate %>/hour</p>
+                    
+                    <p><em>Submitted by <%= manawatuWhanganuiRegionOffer.author.username %></em></p>
+                    <% if(currentUser && manawatuWhanganuiRegionOffer.author.id.equals(currentUser._id)){ %>
+                        <a class="btn btn-xs btn-warning" href="/askOffer/manawatuWhanganuiRegion/offer/<%= manawatuWhanganuiRegionOffer._id %>/edit">Edit</a>
+                        <form id="delete-form" action="/askOffer/manawatuWhanganuiRegion/offer/<%= manawatuWhanganuiRegionOffer._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-danger">Delete</button>
+                        </form>
+                    <% } %>
+                </div>
+            </div>
+            <div class="well">
+                <div class= "text-right">
+                    <a class="btn btn-xs btn-success" href="/askOffer/manawatuWhanganuiRegion/offer/<%= manawatuWhanganuiRegionOffer._id %>/manawatuWhanganuiRegionOfferComments/new/">Add comment</a>
+                </div>
+                <hr>
+                <% manawatuWhanganuiRegionOffer.comments.reverse().forEach(function(comment){ %>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <strong><%= comment.author.username %></strong>
+                            <span class="pull-right"><%= Date();%></span>
+                            <p>
+                                <%= comment.text %>
+                            </p>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-xs btn-warning" 
+                                href="/askOffer/manawatuWhanganuiRegion/offer/<%= manawatuWhanganuiRegionOffer._id %>/manawatuWhanganuiRegionOfferComments/<%= comment._id %>/edit">
+                                Edit
+                            </a>
+                            <form id="delete-form" action="/askOffer/manawatuWhanganuiRegion/offer/<%= manawatuWhanganuiRegionOffer._id %>/manawatuWhanganuiRegionOfferComments/<%= comment._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                        <% } %>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+            
+            <div class= "text-right">
+                    <a class="btn btn-info" href="/askOffer/manawatuWhanganuiRegion/offer/">Return to all offers</a>
+            </div>
+        </div>
+    </div>
+</div>
+<% include ../../../partials/footer %>

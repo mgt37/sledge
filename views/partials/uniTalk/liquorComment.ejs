@@ -1,17 +1,17 @@
-                <% liquor.liquorComments.reverse().forEach(function(liquorComment){ %>
+                <% liquor.comments.reverse().forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <strong><%= liquorComment.author.username %></strong>
+                            <strong><%= comment.author.username %></strong>
                             <span class="pull-right"><%= Date.now();%></span>
                             <p>
-                                <%= liquorComment.text %>
+                                <%= comment.text %>
                             </p>
-                        <% if(currentUser && liquorComment.author.id.equals(currentUser._id)){ %>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                             <a class="btn btn-xs btn-warning" 
-                                href="/uniTalk/liquor/<%= liquor._id %>/liquorComments/<%= liquorComment._id %>/edit">
+                                href="/uniTalk/liquor/<%= liquor._id %>/liquorComments/<%= comment._id %>/edit">
                                 Edit
                             </a>
-                            <form id="delete-form" action="/uniTalk/liquor/<%= liquor._id %>/liquorComments/<%= liquorComment._id %>?_method=DELETE" method="POST">
+                            <form id="delete-form" action="/uniTalk/liquor/<%= liquor._id %>/liquorComments/<%= comment._id %>?_method=DELETE" method="POST">
                                 <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                             </form>
                         <% } %>

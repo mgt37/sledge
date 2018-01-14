@@ -2,7 +2,7 @@ var express                 = require("express");
 var router                  = express.Router({mergeParams: true});
 var DunedinOffer             = require("../../app/models/askOffer/dunedinOffer");
 var timestamp               = require('time-stamp');
-var DunedinOfferComment      = require("../../app/models/askOffer/dunedinOfferComment");
+var Comment      = require("../../app/models/askOffer/dunedinOfferComment");
 var middleware              = require("../../middleware"),
 askOfferMiddleware           = require("../../middleware/askOffer");
 
@@ -26,22 +26,20 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(err);
             res.redirect("/askOffer/dunedin/offer");
         } else {
-            /*console.log(req.body.careerComment);*/
-            DunedinOfferComment.create(req.body.comment, function(err, comment){
+            Comment.create(req.body.comment, function(err, comment){
                 if(err){
-                    /*req.flash("error", "Something went wrong");*/
-                    /*console.log(err);*/
+                    req.flash("error", "Something went wrong");
                 } else {
                     // Add username and id to comment
                     comment.author.id = req.user._id;
-                    /*comment.text = req.body.body;*/
-                    comment.author.username = req.user.username;
-                   /* req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name ;*/
+                    comment.text = req.body.text;
+                    comment.author.username = req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name;
+                   
                     // Save comment
                     comment.save();
                     dunedinOffer.comments.push(comment);
                     dunedinOffer.save();
-                    /*req.flash("success", "Successfully added comment");*/
+                    req.flash("success", "Successfully added comment");
                     res.redirect('/askOffer/dunedin/offer/' + dunedinOffer._id);
                 }
             });
@@ -51,18 +49,18 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 
 // Comments EDIT
 router.get("/:comment_id/edit", askOfferMiddleware.checkDunedinOfferCommentOwnership, function(req, res){
-    DunedinOfferComment.findById(req.params.comment_id, function(err, foundDunedinOfferComment){
+    Comment.findById(req.params.comment_id, function(err, foundComment){
         if(err){
             res.redirect("back");
         } else {
-           res.render("askOffer/dunedin/offer/comments/edit", {dunedinOffer_id: req.params.id, comment: foundDunedinOfferComment}); 
+           res.render("askOffer/dunedin/offer/comments/edit", {dunedinOffer_id: req.params.id, comment: foundComment}); 
         }
     });
 });
 
 // Comment UPDATE
 router.put("/:comment_id", askOfferMiddleware.checkDunedinOfferCommentOwnership, function(req, res){
-    DunedinOfferComment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedDunedinOfferComment){
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
         if(err){
             res.redirect("back");
         } else {
@@ -73,11 +71,11 @@ router.put("/:comment_id", askOfferMiddleware.checkDunedinOfferCommentOwnership,
 
 // Comment DESTROY
 router.delete("/:comment_id", askOfferMiddleware.checkDunedinOfferCommentOwnership, function(req, res){
-    DunedinOfferComment.findByIdAndRemove(req.params.comment_id, function(err){
+    Comment.findByIdAndRemove(req.params.comment_id, function(err){
         if(err){
             res.redirect("back");
         } else {
-            /*req.flash("success", "Comment deleted");*/
+            req.flash("success", "Comment deleted");
             res.redirect("/askOffer/dunedin/offer/" + req.params.id);
         }
     });

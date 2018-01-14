@@ -1,42 +1,44 @@
 <% include ../../../partials/header %>
-<div class="container">
+<div class="container" style="width: 66.667%;>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="thumbnail">
+                
                 <div class="caption-full">
-                    <h4><a><%= wellingtonRegionOffer.title %></a></h4>
-                    <p><%= wellingtonRegionOffer.body %></p>
-                    <p>
-                        <em>Submitted by <%= wellingtonRegionOffer.author.username %></em>
-                    </p>
+                    <h3><%= wellingtonRegionOffer.title %></h3>
+                    <p>Details: <%= wellingtonRegionOffer.body %></p>
+                    <p>Contact email: <%= wellingtonRegionOffer.contactEmail %></p>
+                    <p>Other contact information: <%= wellingtonRegionOffer.otherContact %></p>
+                    <p>Hourly rate: $<%= wellingtonRegionOffer.hourlyRate %>/hour</p>
+                    
+                    <p><em>Submitted by <%= wellingtonRegionOffer.author.username %></em></p>
                     <% if(currentUser && wellingtonRegionOffer.author.id.equals(currentUser._id)){ %>
                         <a class="btn btn-xs btn-warning" href="/askOffer/wellingtonRegion/offer/<%= wellingtonRegionOffer._id %>/edit">Edit</a>
                         <form id="delete-form" action="/askOffer/wellingtonRegion/offer/<%= wellingtonRegionOffer._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-xs btn-danger">Delete</button>
                         </form>
-                        <a class="btn btn-primary btn-sm btn-block" href="#">Send email</a>
                     <% } %>
                 </div>
             </div>
             <div class="well">
                 <div class= "text-right">
-                    <a class="btn btn-xs btn-success" href="/askOffer/wellingtonRegion/offer/<%= wellingtonRegionOffer._id %>/wellingtonRegionOfferComments/new">Add comment</a>
+                    <a class="btn btn-xs btn-success" href="/askOffer/wellingtonRegion/offer/<%= wellingtonRegionOffer._id %>/wellingtonRegionOfferComments/new/">Add comment</a>
                 </div>
                 <hr>
-                <% wellingtonRegionOffer.comments.reverse().forEach(function(wellingtonRegionOfferComment){ %>
+                <% wellingtonRegionOffer.comments.reverse().forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <strong><%= wellingtonRegionOfferComment.author.username %></strong>
-                            <span class="pull-right"><%= Date.now();%></span>
+                            <strong><%= comment.author.username %></strong>
+                            <span class="pull-right"><%= Date();%></span>
                             <p>
-                                <%= wellingtonRegionOfferComment.text %>
+                                <%= comment.text %>
                             </p>
-                        <% if(currentUser && wellingtonRegionOfferComment.author.id.equals(currentUser._id)){ %>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                             <a class="btn btn-xs btn-warning" 
-                                href="/askOffer/wellingtonRegion/offer/<%= wellingtonRegionOffer._id %>/wellingtonRegionOfferComments/<%= wellingtonRegionOfferComment._id %>/edit">
+                                href="/askOffer/wellingtonRegion/offer/<%= wellingtonRegionOffer._id %>/wellingtonRegionOfferComments/<%= comment._id %>/edit">
                                 Edit
                             </a>
-                            <form id="delete-form" action="/askOffer/wellingtonRegion/offer/<%= wellingtonRegionOffer._id %>/wellingtonRegionOfferComments/<%= wellingtonRegionOfferComment._id %>?_method=DELETE" method="POST">
+                            <form id="delete-form" action="/askOffer/wellingtonRegion/offer/<%= wellingtonRegionOffer._id %>/wellingtonRegionOfferComments/<%= comment._id %>?_method=DELETE" method="POST">
                                 <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                             </form>
                         <% } %>

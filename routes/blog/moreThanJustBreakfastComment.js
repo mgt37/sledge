@@ -1,18 +1,18 @@
 var express           = require("express");
 var router            = express();
 var timestamp                   = require('time-stamp');
-var MoreThanJustBreakfastComment    = require("../../app/models/blog/moreThanJustBreakfastComment");
+var Comment    = require("../../app/models/blog/moreThanJustBreakfastComment");
 var middleware                  = require("../../middleware"),
 blogMiddleware                  = require("../../middleware/blog");
 
 //INDEX
 router.get("/", function(req, res){
     // Get all comments from DB
-    MoreThanJustBreakfastComment.find({}, function(err, allMoreThanJustBreakfastComment){
+    Comment.find({}, function(err, allComment){
         if(err){
             console.log(err);
         } else {
-            res.render("blog/posts/thereIsMoreToItThanJustBreakfast/index", {moreThanJustBreakfastComment: allMoreThanJustBreakfastComment});
+            res.render("blog/posts/thereIsMoreToItThanJustBreakfast/index", {comment: allComment});
         }
     });
 });
@@ -23,11 +23,11 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     var blogComment   = req.body.blogComment;
     var author = {
         id: req.user._id,
-        username: req.user.username
+        username:  req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name
     };
-    var newMoreThanJustBreakfastComment = ({blogComment: blogComment, author: author});
+    var newComment = ({blogComment: blogComment, author: author});
     //create a comment and save to DB
-    MoreThanJustBreakfastComment.create(newMoreThanJustBreakfastComment, function(err, newlyCreated){
+    Comment.create(newComment, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
@@ -45,23 +45,23 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 //SHOW - Shows more information about one comment
 router.get("/:id", function(req, res){
     //Find the comment with provided ID
-    MoreThanJustBreakfastComment.findById(req.params.id).populate("comments").exec(function(err, foundMoreThanJustBreakfastComment){
+    Comment.findById(req.params.id).populate("comments").exec(function(err, foundComment){
         if(err){
             console.log(err);
         } else {
             //Render show template with that comment
-            res.render("blog/posts/thereIsMoreToItThanJustBreakfast/show", {moreThanJustBreakfastComment: foundMoreThanJustBreakfastComment});    
+            res.render("blog/posts/thereIsMoreToItThanJustBreakfast/show", {comment: foundComment});    
         }
     });    
 });
 
 // EDIT comment Route
 router.get("/:id/edit", blogMiddleware.checkMoreThanJustBreakfastCommentOwnership, function(req, res){
-    MoreThanJustBreakfastComment.findById(req.params.id, function(err, foundMoreThanJustBreakfastComment){
+    Comment.findById(req.params.id, function(err, foundComment){
         if(err){
             res.redirect("/blog/posts/thereIsMoreToItThanJustBreakfast");
         } else {
-            res.render("blog/posts/thereIsMoreToItThanJustBreakfast/edit", {moreThanJustBreakfastComment: foundMoreThanJustBreakfastComment});
+            res.render("blog/posts/thereIsMoreToItThanJustBreakfast/edit", {comment: foundComment});
         }
     });
 });
@@ -69,7 +69,7 @@ router.get("/:id/edit", blogMiddleware.checkMoreThanJustBreakfastCommentOwnershi
 // UPDATE comment Route
 router.put("/:id", blogMiddleware.checkMoreThanJustBreakfastCommentOwnership, function(req, res){
     // Find and update the correct comment
-    MoreThanJustBreakfastComment.findByIdAndUpdate(req.params.id, req.body.moreThanJustBreakfastComment, function(err, updatedMoreThanJustBreakfastComment){
+    Comment.findByIdAndUpdate(req.params.id, req.body.comment, function(err, updatedComment){
         if(err){
             res.redirect("/blog/posts/thereIsMoreToItThanJustBreakfast");
         } else {
@@ -81,7 +81,7 @@ router.put("/:id", blogMiddleware.checkMoreThanJustBreakfastCommentOwnership, fu
 
 // DESTROY comment Route
 router.delete("/:id", blogMiddleware.checkMoreThanJustBreakfastCommentOwnership, function(req, res){
-    MoreThanJustBreakfastComment.findByIdAndRemove(req.params.id, function(err){
+    Comment.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/blog/posts/thereIsMoreToItThanJustBreakfast");
         } else {

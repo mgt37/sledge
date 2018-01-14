@@ -1,19 +1,11 @@
 var express        = require("express"),
     /*router         = express.Router(),*/
-    /*passport       = require("passport"),
-    User           = require("../app/models/user"),*/
     middleware     = require("../middleware/index");
-    /*app            = require('../app'),
-    configPassport = require('../config/passport'),
-    configAuth     = require('../config/auth');*/
 
 module.exports = function(applic, passport) {
 
 // normal routes ===============================================================
-
-	// show the home page (will also have our login links)
-	/*applic.get('/home', function(req, res) {res.render('home');});*/
-
+	
 	// PROFILE SECTION =========================
 	applic.get('/profile', middleware.isLoggedIn, function(req, res) {
 		res.render('profile', {
@@ -161,7 +153,7 @@ module.exports = function(applic, passport) {
 	// local -----------------------------------
 	applic.get('/unlink/local', function(req, res) {
 		var user            = req.user;
-		user.local.email    = undefined;
+		user.local.username = undefined;
 		user.local.password = undefined;
 		user.save(function(err) {
 			res.redirect('/profile');

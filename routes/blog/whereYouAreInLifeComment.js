@@ -1,18 +1,18 @@
 var express           = require("express");
 var router            = express();
 var timestamp                   = require('time-stamp');
-var WhereYouAreInLifeComment    = require("../../app/models/blog/whereYouAreInLifeComment");
+var Comment    = require("../../app/models/blog/whereYouAreInLifeComment");
 var middleware                  = require("../../middleware"),
 blogMiddleware                  = require("../../middleware/blog");
 
 //INDEX
 router.get("/", function(req, res){
     // Get all comments from DB
-    WhereYouAreInLifeComment.find({}, function(err, allWhereYouAreInLifeComment){
+    Comment.find({}, function(err, allComment){
         if(err){
             console.log(err);
         } else {
-            res.render("blog/posts/whereYouAreInLifeRightNowIsJustFine/index", {whereYouAreInLifeComment: allWhereYouAreInLifeComment});
+            res.render("blog/posts/whereYouAreInLifeRightNowIsJustFine/index", {comment: allComment});
         }
     });
 });
@@ -23,11 +23,11 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     var blogComment   = req.body.blogComment;
     var author = {
         id: req.user._id,
-        username: req.user.username
+        username:  req.user.local.username || req.user.facebook.name || req.user.twitter.username || req.user.google.name
     };
-    var newWhereYouAreInLifeComment = ({blogComment: blogComment, author: author});
+    var newComment = ({blogComment: blogComment, author: author});
     //create a comment and save to DB
-    WhereYouAreInLifeComment.create(newWhereYouAreInLifeComment, function(err, newlyCreated){
+    Comment.create(newComment, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
@@ -45,23 +45,23 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 //SHOW - Shows more information about one comment
 router.get("/:id", function(req, res){
     //Find the comment with provided ID
-    WhereYouAreInLifeComment.findById(req.params.id).populate("comments").exec(function(err, foundWhereYouAreInLifeComment){
+    Comment.findById(req.params.id).populate("comments").exec(function(err, foundComment){
         if(err){
             console.log(err);
         } else {
             //Render show template with that comment
-            res.render("blog/posts/whereYouAreInLifeRightNowIsJustFine/show", {whereYouAreInLifeComment: foundWhereYouAreInLifeComment});    
+            res.render("blog/posts/whereYouAreInLifeRightNowIsJustFine/show", {comment: foundComment});    
         }
     });    
 });
 
 // EDIT comment Route
 router.get("/:id/edit", blogMiddleware.checkWhereYouAreInLifeCommentOwnership, function(req, res){
-    WhereYouAreInLifeComment.findById(req.params.id, function(err, foundWhereYouAreInLifeComment){
+    Comment.findById(req.params.id, function(err, foundComment){
         if(err){
             res.redirect("/blog/posts/whereYouAreInLifeRightNowIsJustFine");
         } else {
-            res.render("blog/posts/whereYouAreInLifeRightNowIsJustFine/edit", {whereYouAreInLifeComment: foundWhereYouAreInLifeComment});
+            res.render("blog/posts/whereYouAreInLifeRightNowIsJustFine/edit", {comment: foundComment});
         }
     });
 });
@@ -69,7 +69,7 @@ router.get("/:id/edit", blogMiddleware.checkWhereYouAreInLifeCommentOwnership, f
 // UPDATE comment Route
 router.put("/:id", blogMiddleware.checkWhereYouAreInLifeCommentOwnership, function(req, res){
     // Find and update the correct comment
-    WhereYouAreInLifeComment.findByIdAndUpdate(req.params.id, req.body.whereYouAreInLifeComment, function(err, updatedWhereYouAreInLifeComment){
+    Comment.findByIdAndUpdate(req.params.id, req.body.comment, function(err, updatedComment){
         if(err){
             res.redirect("/blog/posts/whereYouAreInLifeRightNowIsJustFine");
         } else {
@@ -81,7 +81,7 @@ router.put("/:id", blogMiddleware.checkWhereYouAreInLifeCommentOwnership, functi
 
 // DESTROY comment Route
 router.delete("/:id", blogMiddleware.checkWhereYouAreInLifeCommentOwnership, function(req, res){
-    WhereYouAreInLifeComment.findByIdAndRemove(req.params.id, function(err){
+    Comment.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/blog/posts/whereYouAreInLifeRightNowIsJustFine");
         } else {

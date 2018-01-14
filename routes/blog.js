@@ -96,8 +96,8 @@ router.get("/posts/takeSomeTimeToThinkAboutDepression", function(req, res){
     res.render("blog/posts/takeSomeTimeToThinkAboutDepression/index");
 });
 
-router.get("/posts/beHonestAboutSexWithYourFlatmates", function(req, res){
-    res.render("blog/posts/beHonestAboutSexWithYourFlatmates/index");
+router.get("/posts/bHASWYF", function(req, res){
+    res.render("blog/posts/bHASWYF/index");
 });
 
 router.get("/posts/howToSleepEffectivelyWhileStudying", function(req, res){
