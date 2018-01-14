@@ -7,18 +7,7 @@
         <a class="btn btn-primary" href="whatIdeasAreThereForFindingPartTimeWork/new">Add new comment</a>
     </div>
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-        <% findingPartTimeWorkComment.reverse().forEach(function(findingPartTimeWorkComment){ %>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="thumbnail">
-                    <div>
-                        <p><%= findingPartTimeWorkComment.blogComment %></p>
-                    </div>
-                    <div>
-                        <a href="/blog/whatIdeasAreThereForFindingPartTimeWork/<%= findingPartTimeWorkComment._id %>" class="btn btn-primary">Read comment</a>
-                    </div>
-                </div>   
-            </div>
-        <% }); %>
+        
     </div>
 </div> 
 <div class="container">
