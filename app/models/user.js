@@ -1,49 +1,46 @@
-// load the things we need
 var mongoose              = require('mongoose');
-var bcrypt                = require('bcrypt-nodejs');
-var passportLocalMongoose = require("passport-local-mongoose");
+var bcrypt                = require('bcryptjs');
 
-// define the schema for our user model
-var userSchema = new mongoose.Schema({
-
-    local            : {
-        username     : String,
-        email        : String, // remove this?
-        password     : String
+// User Schema
+var userSchema = mongoose.Schema({
+    username     : {
+        type: String,
+        index: true
     },
-    facebook         : {
-        id           : String,
-        token        : String,
-        name         : String,
-        email        : String
+    password     : {
+        type: String
     },
-    twitter          : {
-        id           : String,
-        token        : String,
-        displayName  : String,
-        username     : String
+    email        : {
+        type: String
     },
-    google           : {
-        id           : String,
-        token        : String,
-        email        : String,
-        name         : String
+    name     : {
+        type: String
     }
-
 });
 
-// methods ======================
-// generating a hash
-userSchema.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+var User = module.exports = mongoose.model("User", userSchema);
+
+module.exports.createUser = function (newUser, callback){
+    bcrypt.genSalt(10, function(err, salt){
+        bcrypt.hash("newUser.password", salt, function(err, hash){
+            newUser.password = hash;
+            newUser.save(callback);
+        });
+    });
 };
 
-// checking if password is valid
-userSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password);
+module.exports.getUserByUsername = function(username, callback){
+    var query = {username: username};
+    User.findOne(query, callback);
 };
 
-userSchema.plugin(passportLocalMongoose);
+module.exports.getUserById = function(id, callback){
+    User.findbyId(id, callback);
+};
 
-// create the model for users and expose it to our app
-module.exports = mongoose.model("User", userSchema);
+module.exports.comparePassword = function(candidatePassword, hash, callback){
+    bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
+        if(err) throw err;
+        callback(null, isMatch);
+    });
+};

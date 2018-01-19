@@ -7,7 +7,18 @@
         <a class="btn btn-primary" href="waysToHaveFunOutsideOfStudy/new">Add new comment</a>
     </div>
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-        
+        <% funOutsideOfStudyComment.reverse().forEach(function(funOutsideOfStudyComment){ %>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="thumbnail">
+                    <div>
+                        <p><%= funOutsideOfStudyComment.blogComment %></p>
+                    </div>
+                    <div>
+                        <a href="/blog/waysToHaveFunOutsideOfStudy/<%= funOutsideOfStudyComment._id %>" class="btn btn-primary">Read comment</a>
+                    </div>
+                </div>   
+            </div>
+        <% }); %>
     </div>
 </div> 
 <div class="container">

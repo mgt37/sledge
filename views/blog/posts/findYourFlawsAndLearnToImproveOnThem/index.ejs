@@ -7,7 +7,18 @@
         <a class="btn btn-primary" href="findYourFlawsAndLearnToImproveOnThem/new">Add new comment</a>
     </div>
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-        
+        <% findYourFlawsComment.reverse().forEach(function(findYourFlawsComment){ %>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="thumbnail">
+                    <div>
+                        <p><%= findYourFlawsComment.blogComment %></p>
+                    </div>
+                    <div>
+                        <a href="/blog/findYourFlawsAndLearnToImproveOnThem/<%= findYourFlawsComment._id %>" class="btn btn-primary">Read comment</a>
+                    </div>
+                </div>   
+            </div>
+        <% }); %>
     </div>
 </div> 
 <div class="container">

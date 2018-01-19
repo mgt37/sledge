@@ -4,20 +4,20 @@
 
 <style>
        #map {
-        height: 750px;
+        height: 950px;
         width: 90%;
        }
-    </style>
+</style>
 
     <div id="map"></div>
     <script>
       function initMap(){
         // Map options
         var options = {
-            zoom: 16,
+            zoom: 15,
             maxZoom: 19,
             minZoom: 12,
-            center: {lat: -36.849, lng: 174.764},
+            center: {lat: -36.853, lng: 174.764},
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
             /*styles: styles*/
@@ -48,6 +48,38 @@
                 coords: {lat: -36.851382, lng: 174.763847},
                 iconImage: '/images/mapMarkers/cinema.png',
                 content: '<a href="https://www.eventcinemas.co.nz/cinema/queen-street" target="_blank"><p>Event Cinemas</p></a>'
+            },{
+                coords: {lat: -36.867504, lng: 174.776494},
+                iconImage: '/images/mapMarkers/bowling.png',
+                content: '<a href="http://www.newmarketbowling.co.nz/" target="_blank"><p>Newmarket Tenpin Bowling</p></a>'
+            },{
+                coords: {lat: -36.857440, lng: 174.748433},
+                iconImage: '/images/mapMarkers/billiard-2.png',
+                content: '<a href="http://www.ponsonbypoolhall.co.nz/" target="_blank"><p>Ponsonby Pool Hall</p></a>'
+            },{
+                coords: {lat: -36.858150, lng: 174.757390},
+                iconImage: '/images/mapMarkers/music_live.png',
+                content: '<a href="http://studiovenue.co.nz/" target="_blank"><p>Studio The Venue</p></a>'
+            },{
+                coords: {lat: -36.857645, lng: 174.757247},
+                iconImage: '/images/mapMarkers/dancinghall.png',
+                content: '<a href="http://www.kroad.com/nightlife/nightclubs/" target="_blank"><p>Club Duo</p></a>'
+            },{
+                coords: {lat: -36.857852, lng: 174.758564},
+                iconImage: '/images/mapMarkers/dancinghall.png',
+                content: '<a href="http://inkbar.co.nz/" target="_blank"><p>Ink Bar</p></a>'
+            },{
+                coords: {lat: -36.857802, lng: 174.758667},
+                iconImage: '/images/mapMarkers/dancinghall.png',
+                content: '<a href="http://www.kroad.com/nightlife/nightclubs/" target="_blank"><p>Le Box</p></a>'
+            },{
+                coords: {lat: -36.857714, lng: 174.760689},
+                iconImage: '/images/mapMarkers/dancinghall.png',
+                content: '<a href="http://www.neckofthewoods.co.nz/" target="_blank"><p>Neck of The Woods</p></a>'
+            },{
+                coords: {lat: -36.856528, lng: 174.758729},
+                iconImage: '/images/mapMarkers/dancinghall.png',
+                content: '<a href="http://www.nzredbar.co/" target="_blank"><p>Red Bar</p></a>'
             }
             ]
             

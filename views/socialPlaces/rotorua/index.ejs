@@ -4,7 +4,7 @@
 
 <style>
        #map {
-        height: 500px;
+        height: 750px;
         width: 90%;
        }
 </style>
@@ -14,10 +14,10 @@
       function initMap(){
         // Map options
         var options = {
-            zoom: 14,
-            maxZoom: 16,
+            zoom: 15,
+            maxZoom: 18,
             minZoom: 12,
-            center: {lat: -38.174, lng: 176.255},
+            center: {lat: -38.141, lng: 176.257},
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
             /*styles: styles*/
@@ -27,7 +27,33 @@
         var map = new google.maps.Map(document.getElementById('map'), options);
       
         // Array of markers
-        var markers = [] 
+        var markers = [
+            {
+                coords: {lat: -38.137404, lng: 176.252756},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.facebook.com/sidepocketbar.rotorua/?rf=175903775792590" target="_blank"><p>Side Pocket</p></a>'
+            },{
+                coords: {lat: -38.134901, lng: 176.249092},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.facebook.com/pages/Kiwi-Spirit-Bar/169940813052536" target="_blank"><p>Kiwi Spirit Bar</p></a>'
+            },{
+                coords: {lat: -38.133414, lng: 176.251254},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.ponsonbyrd.co.nz/" target="_blank"><p>Ponsonby Road Lounge Bar</p></a>'
+            },{
+                coords: {lat: -38.142940, lng: 176.283605},
+                iconImage: '/images/mapMarkers/bowling.png',
+                content: '<a href="http://www.strikezone.co.nz/" target="_blank"><p>Strike Zone</p></a>'
+            },{
+                coords: {lat: -38.138012, lng: 176.252480},
+                iconImage: '/images/mapMarkers/cinema.png',
+                content: '<a href="http://www.basementcinema.co.nz/" target="_blank"><p>Basement Cinemas</p></a>'
+            },{
+                coords: {lat: -38.138565, lng: 176.747932},
+                iconImage: '/images/mapMarkers/cinema.png',
+                content: '<a href="https://readingcinemas.co.nz/locations/theatre/rotorua" target="_blank"><p>Reading Cinemas</p></a>'
+            }
+        ] 
             
         // Loop through markers    
         for(var i = 0; i < markers.length; i++){

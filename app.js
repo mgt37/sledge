@@ -1,23 +1,36 @@
 //Load dependencies
 var express          = require('express'),
+    expressValidator = require('express-validator'),
     app              = express(),
+    bcrypt           = require('bcryptjs'),
     google           = require('google'),
     mongoose         = require('mongoose'),
-    flash            = require("connect-flash"),
+   flash            = require("connect-flash"),
     morgan           = require('morgan'),
     multer           = require('multer'),
     nodeMailer       = require('nodemailer'),
     path             = require('path'),
+    session          = require('express-session'),
     timestamp        = require('time-stamp'),
     cookieParser     = require('cookie-parser'),
     bodyParser       = require('body-parser'),
     passport         = require('passport'),
+    passporthttp     = require('passport-http'),
     methodOverride   = require('method-override'),
+    LocalStrategy    = require('passport-local').Strategy,
+    mongo            = require('mongodb'),
     User             = require('./app/models/user');
  
 // Content Filter    
 var filter = require('content-filter');
 app.use(filter());
+
+// Connect flash
+/*app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});*/
 
 //Require Routes
 var commentRoutes      = require('./routes/comments'),
@@ -27,6 +40,8 @@ var commentRoutes      = require('./routes/comments'),
     studySearchRoutes  = require('./routes/studySearch'),
     socialPlacesRoutes = require('./routes/socialPlaces'),
     blogRoutes         = require('./routes/blog'),
+    users              = require('./app/users'),
+    social              = require('./app/social'),
     contactRoutes      = require('./routes/contact');
     
 // Uni Talk routes - require    
@@ -226,8 +241,8 @@ var url = process.env.DATABASEURL || "mongodb://localhost/sledge";
 mongoose.connect(url, {useMongoClient: true} );
 
 mongoose.connect(process.env.DATABASEURL);
-app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
@@ -237,6 +252,37 @@ app.use(flash());
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 
+//Global variables
+/*app.use(function (req, res, next){
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});*/
+
+
+//----------------------------------------------------------------------------//
+// Express validator
+//----------------------------------------------------------------------------//
+app.use(expressValidator({
+    errorFormatter: function(param, msg, value){
+        var namespace =param.split('.')
+        , root = namespace.shift()
+        , formParam = root;
+        
+        while(namespace.length){
+            formParam += '[' + namespace.shift() + ']';
+        }
+        return {
+            param : formParam,
+            msg   : msg,
+            value : value
+        };
+    }
+}));
+//----------------------------------------------------------------------------//
+//----------------------------------------------------------------------------//
+
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
     secret: "The secret code",
@@ -245,13 +291,14 @@ app.use(require("express-session")({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+/*passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());*/
 
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
-    res.locals.error       = req.flash("error");
-    res.locals.success     = req.flash("success");
+    /*res.locals.error       = req.flash("error");
+    res.locals.success     = req.flash("success");*/
+    res.locals.user = req.user || null;
     next();
 });
 
@@ -264,6 +311,8 @@ app.use("/blog", blogRoutes);
 app.use("/topics", topicRoutes);
 app.use("/topics/:id/comments", commentRoutes);
 app.use("/", contactRoutes);
+app.use("/", users);
+app.use("/", social);
 
 //Uni Talk routes
 app.use("/uniTalk/career", careerRoutes);
@@ -402,7 +451,7 @@ app.use("/blog/posts/whatIsImportantToConsiderWhenLookingForAFlat", lookingForAF
 app.use("/blog/posts/whatToConsiderWhenAFriendStaysOverAtYourFlat", friendStaysOverAtFlatCommentRoutes);
 app.use("/blog/posts/whereYouAreInLifeRightNowIsJustFine", whereYouAreInLifeCommentRoutes);
 
-require('./app/routes')(app, passport); // load our routes and pass in our app and fully configured passport
+/*require('./app/routes')(app, passport);*/ // load our routes and pass in our app and fully configured passport
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("The Sledge server has started");
