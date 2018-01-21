@@ -1,6 +1,5 @@
 var express          = require("express"),
     User             = require('../app/models/user'),
-    Social           = require('../app/models/social'),
     configAuth       = require('./auth'), // use this one for testing
     LocalStrategy    = require('passport-local').Strategy,
     FacebookStrategy = require('passport-facebook').Strategy,
@@ -11,11 +10,25 @@ module.exports = function(passport) {
     // =========================================================================
     // passport session setup ==================================================
     // =========================================================================
-    
+    // required for persistent login sessions
+    // passport needs ability to serialize and unserialize users out of session
+
+    // used to serialize the user for the session
+    passport.serializeUser(function(user, done) {
+        done(null, user.id);
+    });
+
+    // used to deserialize the user
+    passport.deserializeUser(function(id, done) {
+        User.findById(id, function(err, user) {
+            done(err, user);
+        });
+    });
+
     // =========================================================================
     // LOCAL LOGIN =============================================================
     // =========================================================================
-    /*passport.use('local-login', new LocalStrategy({
+    passport.use('local-login', new LocalStrategy({
         // by default, local strategy uses username and password
         usernameField : 'username',
         passwordField : 'password',
@@ -25,7 +38,7 @@ module.exports = function(passport) {
 
         // asynchronous
         process.nextTick(function() {
-            User.findOne({ 'username' :  username }, function(err, user) { // was { 'local.username' :  username }
+            User.findOne({ 'local.username' :  username }, function(err, user) {
                 // if there are any errors, return the error
                 if (err)
                     return done(err);
@@ -42,37 +55,38 @@ module.exports = function(passport) {
                     return done(null, user);
             });
         });
-    }));*/
+
+    }));
 
     // =========================================================================
     // LOCAL SIGNUP ============================================================
     // =========================================================================
-    /*passport.use('local-signup', new LocalStrategy({
+    passport.use('local-signup', new LocalStrategy({
         // by default, local strategy uses username and password
         usernameField : 'username',
         passwordField : 'password',
-        passReqToCallback : true*/ // allows us to pass in the req from our route (lets us check if a user is logged in or not)
-    /*},
-    function(req, username, password, done) {*/
+        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+    },
+    function(req, username, password, done) {
 
         // asynchronous
-        /*process.nextTick(function() {*/
+        process.nextTick(function() {
 
             //  Whether we're signing up or connecting an account, we'll need
-            //  to know if the username is in use.
-            /*User.findOne({'username': username}, function(err, existingUser) {*/ // was { 'local.username' :  username }
+            //  to know if the email address is in use.
+            User.findOne({'local.username': username}, function(err, existingUser) {
 
                 // if there are any errors, return the error
-                /*if (err)
+                if (err)
                     return done(err);
 
                 // check to see if there's already a user with that email
                 if (existingUser) 
-                    return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
+                    return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
 
                 //  If we're logged in, we're connecting a new local account.
                 if(req.user) {
-                    var user            = req.local.user; // was req.user
+                    var user            = req.user;
                     user.local.username = username;
                     user.local.password = user.generateHash(password);
                     user.save(function(err) {
@@ -80,11 +94,11 @@ module.exports = function(passport) {
                             throw err;
                         return done(null, user);
                     });
-                } */
+                } 
                 //  We're not logged in, so we're creating a brand new user.
-                /*else {*/
+                else {
                     // create the user
-                    /*var newUser            = new User();
+                    var newUser            = new User();
 
                     newUser.local.username = username;
                     newUser.local.password = newUser.generateHash(password);
@@ -98,7 +112,7 @@ module.exports = function(passport) {
                 }
             });
         });
-    }));*/
+    }));
 
     // =========================================================================
     // FACEBOOK ================================================================
@@ -117,58 +131,58 @@ module.exports = function(passport) {
         process.nextTick(function() {
 
             // check if the user is already logged in
-            if (!req.social) {
+            if (!req.user) {
 
-                Social.findOne({ 'facebook.id' : profile.id }, function(err, social) {
+                User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
                     if (err)
                         return done(err);
 
-                    if (social) {
+                    if (user) {
 
                         // if there is a user id already but no token (user was linked at one point and then removed)
-                        if (!social.facebook.token) {
-                            social.facebook.token = token;
-                            social.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
-                            social.facebook.email = profile.emails[0].value;
+                        if (!user.facebook.token) {
+                            user.facebook.token = token;
+                            user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
+                            user.facebook.email = profile.emails[0].value;
 
-                            social.save(function(err) {
+                            user.save(function(err) {
                                 if (err)
                                     throw err;
-                                return done(null, social);
+                                return done(null, user);
                             });
                         }
 
-                        return done(null, social); // user found, return that user
+                        return done(null, user); // user found, return that user
                     } else {
                         // if there is no user, create them
-                        var newSocial            = new Social();
+                        var newUser            = new User();
 
-                        newSocial.facebook.id    = profile.id;
-                        newSocial.facebook.token = token;
-                        newSocial.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
-                        newSocial.facebook.email = profile.emails[0].value;
+                        newUser.facebook.id    = profile.id;
+                        newUser.facebook.token = token;
+                        newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
+                        newUser.facebook.email = profile.emails[0].value;
 
-                        newSocial.save(function(err) {
+                        newUser.save(function(err) {
                             if (err)
                                 throw err;
-                            return done(null, newSocial);
+                            return done(null, newUser);
                         });
                     }
                 });
 
             } else {
                 // user already exists and is logged in, we have to link accounts
-                var social            = req.social; // pull the user out of the session
+                var user            = req.user; // pull the user out of the session
 
-                social.facebook.id    = profile.id;
-                social.facebook.token = token;
-                social.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
-                social.facebook.email = profile.emails[0].value;
+                user.facebook.id    = profile.id;
+                user.facebook.token = token;
+                user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
+                user.facebook.email = profile.emails[0].value;
 
-                social.save(function(err) {
+                user.save(function(err) {
                     if (err)
                         throw err;
-                    return done(null, social);
+                    return done(null, user);
                 });
 
             }
@@ -193,57 +207,57 @@ module.exports = function(passport) {
         process.nextTick(function() {
 
             // check if the user is already logged in
-            if (!req.social) {
+            if (!req.user) {
 
-                Social.findOne({ 'twitter.id' : profile.id }, function(err, social) {
+                User.findOne({ 'twitter.id' : profile.id }, function(err, user) {
                     if (err)
                         return done(err);
 
-                    if (social) {
+                    if (user) {
                         // if there is a user id already but no token (user was linked at one point and then removed)
-                        if (!social.twitter.token) {
-                            social.twitter.token       = token;
-                            social.twitter.username    = profile.username;
-                            social.twitter.displayName = profile.displayName;
+                        if (!user.twitter.token) {
+                            user.twitter.token       = token;
+                            user.twitter.username    = profile.username;
+                            user.twitter.displayName = profile.displayName;
 
-                            social.save(function(err) {
+                            user.save(function(err) {
                                 if (err)
                                     throw err;
-                                return done(null, social);
+                                return done(null, user);
                             });
                         }
 
-                        return done(null, social); // user found, return that user
+                        return done(null, user); // user found, return that user
                     } else {
                         // if there is no user, create them
-                        var newSocial                 = new Social();
+                        var newUser                 = new User();
 
-                        newSocial.twitter.id          = profile.id;
-                        newSocial.twitter.token       = token;
-                        newSocial.twitter.username    = profile.username;
-                        newSocial.twitter.displayName = profile.displayName;
+                        newUser.twitter.id          = profile.id;
+                        newUser.twitter.token       = token;
+                        newUser.twitter.username    = profile.username;
+                        newUser.twitter.displayName = profile.displayName;
 
-                        newSocial.save(function(err) {
+                        newUser.save(function(err) {
                             if (err)
                                 throw err;
-                            return done(null, newSocial);
+                            return done(null, newUser);
                         });
                     }
                 });
 
             } else {
                 // user already exists and is logged in, we have to link accounts
-                var social                 = req.social; // pull the user out of the session
+                var user                 = req.user; // pull the user out of the session
 
-                social.twitter.id          = profile.id;
-                social.twitter.token       = token;
-                social.twitter.username    = profile.username;
-                social.twitter.displayName = profile.displayName;
+                user.twitter.id          = profile.id;
+                user.twitter.token       = token;
+                user.twitter.username    = profile.username;
+                user.twitter.displayName = profile.displayName;
 
-                social.save(function(err) {
+                user.save(function(err) {
                     if (err)
                         throw err;
-                    return done(null, social);
+                    return done(null, user);
                 });
             }
         });
@@ -266,57 +280,57 @@ module.exports = function(passport) {
         process.nextTick(function() {
 
             // check if the user is already logged in
-            if (!req.social) {
+            if (!req.user) {
 
-                Social.findOne({ 'google.id' : profile.id }, function(err, social) {
+                User.findOne({ 'google.id' : profile.id }, function(err, user) {
                     if (err)
                         return done(err);
 
-                    if (social) {
+                    if (user) {
 
                         // if there is a user id already but no token (user was linked at one point and then removed)
-                        if (!social.google.token) {
-                            social.google.token = token;
-                            social.google.name  = profile.displayName;
-                            social.google.email = profile.emails[0].value; // pull the first email
+                        if (!user.google.token) {
+                            user.google.token = token;
+                            user.google.name  = profile.displayName;
+                            user.google.email = profile.emails[0].value; // pull the first email
 
-                            social.save(function(err) {
+                            user.save(function(err) {
                                 if (err)
                                     throw err;
-                                return done(null, social);
+                                return done(null, user);
                             });
                         }
 
-                        return done(null, social);
+                        return done(null, user);
                     } else {
-                        var newSocial          = new Social();
+                        var newUser          = new User();
 
-                        newSocial.google.id    = profile.id;
-                        newSocial.google.token = token;
-                        newSocial.google.name  = profile.displayName;
-                        newSocial.google.email = profile.emails[0].value; // pull the first email
+                        newUser.google.id    = profile.id;
+                        newUser.google.token = token;
+                        newUser.google.name  = profile.displayName;
+                        newUser.google.email = profile.emails[0].value; // pull the first email
 
-                        newSocial.save(function(err) {
+                        newUser.save(function(err) {
                             if (err)
                                 throw err;
-                            return done(null, newSocial);
+                            return done(null, newUser);
                         });
                     }
                 });
 
             } else {
                 // user already exists and is logged in, we have to link accounts
-                var social               = req.social; // pull the user out of the session
+                var user               = req.user; // pull the user out of the session
 
-                social.google.id    = profile.id;
-                social.google.token = token;
-                social.google.name  = profile.displayName;
-                social.google.email = profile.emails[0].value; // pull the first email
+                user.google.id    = profile.id;
+                user.google.token = token;
+                user.google.name  = profile.displayName;
+                user.google.email = profile.emails[0].value; // pull the first email
 
-                social.save(function(err) {
+                user.save(function(err) {
                     if (err)
                         throw err;
-                    return done(null, social);
+                    return done(null, user);
                 });
             }
         });

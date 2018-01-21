@@ -7,18 +7,7 @@
         <a class="btn btn-primary" href="solvingTheToiletShortageProblemAtParties/new">Add new comment</a>
     </div>
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-        <% toiletShortageAtPartiesComment.reverse().forEach(function(toiletShortageAtPartiesComment){ %>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="thumbnail">
-                    <div>
-                        <p><%= toiletShortageAtPartiesComment.blogComment %></p>
-                    </div>
-                    <div>
-                        <a href="/blog/solvingTheToiletShortageProblemAtParties/<%= toiletShortageAtPartiesComment._id %>" class="btn btn-primary">Read comment</a>
-                    </div>
-                </div>   
-            </div>
-        <% }); %>
+        
     </div>
 </div> 
 <div class="container">

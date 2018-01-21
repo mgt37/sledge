@@ -4,7 +4,7 @@
 
 <style>
        #map {
-        height: 950px;
+        height: 750px;
         width: 90%;
        }
 </style>
@@ -14,10 +14,10 @@
       function initMap(){
         // Map options
         var options = {
-            zoom: 15,
-            maxZoom: 18,
-            minZoom: 12,
-            center: {lat: -37.690, lng: 176.165},
+            zoom: 14,
+            maxZoom: 16,
+            minZoom: 11,
+            center: {lat: -37.702, lng: 176.151},
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
             /*styles: styles*/
@@ -27,49 +27,7 @@
         var map = new google.maps.Map(document.getElementById('map'), options);
       
         // Array of markers
-        var markers = [
-            {
-                coords: {lat: -37.686899, lng: 176.169367},
-                iconImage: '/images/mapMarkers/bar_cocktail.png',
-                content: '<a href="https://www.downtowntauranga.co.nz/h2o-gaming-and-sports-bar-" target="_blank"><p>H20 Gaming and Sports Bar</p></a>'
-            },{
-                coords: {lat: -37.682695, lng: 176.169692},
-                iconImage: '/images/mapMarkers/bar_cocktail.png',
-                content: '<a href="http://www.thephoenixtauranga.co.nz/" target="_blank"><p>The Phoenix</p></a>'
-            },{
-                coords: {lat: -37.682402, lng: 176.169755},
-                iconImage: '/images/mapMarkers/bar_cocktail.png',
-                content: '<a href="https://m.cornerstonepub.net.nz/" target="_blank"><p>Cornerstone Pub</p></a>'
-            },{
-                coords: {lat: -37.682416, lng: 176.169152},
-                iconImage: '/images/mapMarkers/bar_cocktail.png',
-                content: '<a href="https://www.facebook.com/CitySportsBarTga" target="_blank"><p>City Sports Bar</p></a>'
-            },{
-                coords: {lat: -37.687777, lng: 176.165128},
-                iconImage: '/images/mapMarkers/bar_cocktail.png',
-                content: '<a href="" target="_blank"><p>Harringtons Nightclub</p></a>'
-            },{
-                coords: {lat: -37.681691, lng: 176.169242},
-                iconImage: '/images/mapMarkers/bar_cocktail.png',
-                content: '<a href="http://www.thebahamahut.co.nz/tauranga/home/" target="_blank"><p>The Bahama Hut</p></a>'
-            },{
-                coords: {lat: -37.687289, lng: 176.169481},
-                iconImage: '/images/mapMarkers/billiard-2.png',
-                content: '<a href="https://www.neighbourly.co.nz/business/martys-pool-snooker-entertainment-centre" target="_blank"><p>Martys Pool & Snooker Entertainment Centre</p></a>'
-            },{
-                coords: {lat: -37.686935, lng: 176.168411},
-                iconImage: '/images/mapMarkers/cinema.png',
-                content: '<a href="https://www.eventcinemas.co.nz/Cinema/Tauranga" target="_blank"><p>Event Cinemas</p></a>'
-            },{
-                coords: {lat: -37.685019, lng: 176.169430},
-                iconImage: '/images/mapMarkers/cinema.png',
-                content: '<a href="https://www.rialtotauranga.co.nz/" target="_blank"><p>Rialto</p></a>'
-            },{
-                coords: {lat: -37.701464, lng: 176.158599},
-                iconImage: '/images/mapMarkers/bowling.png',
-                content: '<a href="https://www.tenpintauranga.co.nz/" target="_blank"><p>Tenpin Tauranga</p></a>'
-            }
-            ] 
+        var markers = [] 
             
         // Loop through markers    
         for(var i = 0; i < markers.length; i++){
@@ -103,7 +61,6 @@
       }
     }
 </script>
-
 <script src="/maps/markerclusterer.js"></script> <!--// CHECK THIS-->
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key= AIzaSyCXXawr3FmnkIOO6Fz7zrRvcoUxzLEhUj0 &callback=initMap">
