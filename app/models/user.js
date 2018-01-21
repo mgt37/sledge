@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 var mongoose              = require("mongoose"),
     passportLocalMongoose = require("passport-local-mongoose");
 
@@ -12,6 +13,8 @@ var userSchema = new mongoose.Schema({
 userSchema.plugin(passportLocalMongoose);
 
 =======
+=======
+>>>>>>> parent of bf74a83... Added some social places, waiting to solve login error etc.
 // load the things we need
 var mongoose              = require('mongoose');
 var bcrypt                = require('bcrypt-nodejs');
@@ -60,5 +63,8 @@ userSchema.methods.validPassword = function(password) {
 userSchema.plugin(passportLocalMongoose);
 
 // create the model for users and expose it to our app
+<<<<<<< HEAD
+>>>>>>> parent of bf74a83... Added some social places, waiting to solve login error etc.
+=======
 >>>>>>> parent of bf74a83... Added some social places, waiting to solve login error etc.
 module.exports = mongoose.model("User", userSchema);

@@ -14,8 +14,11 @@ var express          = require('express'),
     passport         = require('passport'),
     methodOverride   = require('method-override'),
 <<<<<<< HEAD
+<<<<<<< HEAD
     LocalStrategy    = require("passport-local"), //Removed '.Strategy' ?
     mongo            = require('mongodb'),
+=======
+>>>>>>> parent of bf74a83... Added some social places, waiting to solve login error etc.
 =======
 >>>>>>> parent of bf74a83... Added some social places, waiting to solve login error etc.
     User             = require('./app/models/user');
@@ -252,6 +255,7 @@ app.use(require("express-session")({
 app.use(passport.initialize());
 app.use(passport.session());
 <<<<<<< HEAD
+<<<<<<< HEAD
 passport.use(new LocalStrategy(User.authenticate()));
 /*passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());*/
@@ -267,6 +271,12 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
+=======
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req, res, next){
+>>>>>>> parent of bf74a83... Added some social places, waiting to solve login error etc.
     res.locals.currentUser = req.user;
     res.locals.error       = req.flash("error");
     res.locals.success     = req.flash("success");
