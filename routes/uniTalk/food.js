@@ -1,19 +1,37 @@
 var express           = require("express"),
     router            = express(),
-    Food            = require("../../app/models/uniTalk/food"),
+    Food              = require("../../app/models/uniTalk/food"),
     middleware        = require("../../middleware"),
     uniTalkMiddleware = require("../../middleware/uniTalk");
 
 //INDEX - Show all uniTalk topics
 router.get("/", function(req, res){
-    // Get all uniTalk from DB
-    Food.find({}, function(err, allFood){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("uniTalk/food/index", {food: allFood});
-        }
-    });
+    var noMatch = null;
+    /*eval(require('locus'));*/
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all uniTalk from DB
+        Food.find({title: regex}, function(err, allFood){ //Change from name to other variable?
+            if(err){
+                console.log(err);
+            } else {
+                if(allFood.length <1){
+                    noMatch = 'No titles match that query. Please try again.';
+                }
+                res.render("uniTalk/food/index", {food: allFood, noMatch: noMatch});
+            }
+        });    
+    } else {
+        /*eval(require('locus'));*/
+        // Get all uniTalk from DB
+        Food.find({}, function(err, allFood){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("uniTalk/food/index", {food: allFood, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE - add new uniTalk topic to DB
@@ -91,5 +109,9 @@ router.delete("/:id", uniTalkMiddleware.checkFoodOwnership, function(req, res){
         }
     });
 });
+
+function escapeRegex(text){
+   return text.replace(/[-[\]{}()* +?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;

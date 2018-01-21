@@ -6,14 +6,32 @@ var express           = require("express"),
 
 //INDEX - Show all uniTalk topics
 router.get("/", function(req, res){
-    // Get all uniTalk from DB
-    Liquor.find({}, function(err, allLiquor){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("uniTalk/liquor/index", {liquor: allLiquor});
-        }
-    });
+    var noMatch = null;
+    /*eval(require('locus'));*/
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all uniTalk from DB
+        Liquor.find({title: regex}, function(err, allLiquor){ //Change from name to other variable?
+            if(err){
+                console.log(err);
+            } else {
+                if(allLiquor.length <1){
+                    noMatch = 'No titles match that query. Please try again.';
+                }
+                res.render("uniTalk/liquor/index", {liquor: allLiquor, noMatch: noMatch});
+            }
+        });    
+    } else {
+        /*eval(require('locus'));*/
+        // Get all uniTalk from DB
+        Liquor.find({}, function(err, allLiquor){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("uniTalk/liquor/index", {liquor: allLiquor, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE - add new uniTalk topic to DB
@@ -91,5 +109,9 @@ router.delete("/:id", uniTalkMiddleware.checkLiquorOwnership, function(req, res)
         }
     });
 });
+
+function escapeRegex(text){
+   return text.replace(/[-[\]{}()* +?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;

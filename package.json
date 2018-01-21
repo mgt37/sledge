@@ -25,6 +25,7 @@
     "express-session": "^1.15.6",
     "express-validator": "^4.3.0",
     "google": "^2.1.0",
+    "locus": "^2.0.1",
     "material-ui-search-bar": "^0.4.1",
     "method-override": "^2.3.10",
     "moment-datetime": "0.0.2",

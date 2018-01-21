@@ -1,12 +1,38 @@
 <% include ../../../partials/header %>
 
 <div class="container">
-    <a class="btn btn-info" href="/askOffer/southlandRegion/index">Return to index page</a>
-    <a class="btn btn-info" href="/askOffer">Return to start page</a>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <a class="btn btn-info" href="/askOffer/southlandRegion/index">Return to index page</a>
+        <a class="btn btn-info" href="/askOffer">Return to start page</a>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <p>
+            <form action="/askOffer/southlandRegion/offer" method="get" class="form-inline"> <!--check the route is correct-->
+                <div class="form-group">
+                    <input type="text" name="search" placeholder="Southland Region Offer Search" class="form-control">
+                    <input type="submit" value="search" class="btn btn-info">
+                </div>
+            </form>
+        </p>
+    </div>
        <div class="container">
            <h1>Offer</h1>
+           <h4>Southland Region</h4>
        </div>
        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <% if(noMatch !== null) { %>
+                <h4><%= noMatch %></h4>
+                <p>
+                   <form action="/askOffer/southlandRegion/offer" method="get" class="form-inline"> <!--check the route is correct-->
+                        <div class="form-group">
+                            <input type="text" name="search" placeholder="Southland Region Offer Search" class="form-control">
+                            <input type="submit" value="search" class="btn btn-info">
+                        </div>
+                    </form>
+               </p>
+                <% } %>
+            </div>
         <% southlandRegionOffer.reverse().forEach(function(southlandRegionOffer){ %>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="thumbnail">

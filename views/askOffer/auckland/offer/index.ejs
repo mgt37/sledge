@@ -1,23 +1,49 @@
 <% include ../../../partials/header %>
 
 <div class="container">
-    <a class="btn btn-info" href="/askOffer/centralOtago/index">Return to index page</a>
-    <a class="btn btn-info" href="/askOffer">Return to start page</a>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <a class="btn btn-info" href="/askOffer/auckland/index">Return to index page</a>
+        <a class="btn btn-info" href="/askOffer">Return to start page</a>
+    </div>    
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <p>
+            <form action="/askOffer/auckland/offer" method="get" class="form-inline"> <!--check the route is correct-->
+                <div class="form-group">
+                    <input type="text" name="search" placeholder="Auckland Offer Search" class="form-control">
+                    <input type="submit" value="search" class="btn btn-info">
+                </div>
+            </form>
+        </p>
+    </div>
        <div class="container">
            <h1>Offer</h1>
+           <h4>Auckland</h4>
        </div>
        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-        <% centralOtagoOffer.reverse().forEach(function(centralOtagoOffer){ %>
+           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <% if(noMatch !== null) { %>
+                <h4><%= noMatch %></h4>
+                <p>
+                   <form action="/askOffer/auckland/offer" method="get" class="form-inline"> <!--check the route is correct-->
+                        <div class="form-group">
+                            <input type="text" name="search" placeholder="Auckland Offer Search" class="form-control">
+                            <input type="submit" value="search" class="btn btn-info">
+                        </div>
+                    </form>
+               </p>
+                <% } %>
+            </div>
+        <% aucklandOffer.reverse().forEach(function(aucklandOffer){ %>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="thumbnail">
                     <div class="caption">
-                        <h4><%= centralOtagoOffer.title %></h4>
+                        <h4><%= aucklandOffer.title %></h4>
                     </div>
                     <div class="description">
-                        <p><%- centralOtagoOffer.body.substring(0, 100) %>...</p>
+                        <p><%- aucklandOffer.body.substring(0, 100) %>...</p>
                     </div>
                     <p>
-                        <a href="/askOffer/centralOtago/offer/<%= centralOtagoOffer._id %>" class="btn btn-primary">Read offer</a>
+                        <a href="/askOffer/auckland/offer/<%= aucklandOffer._id %>" class="btn btn-primary">Read offer</a>
                     </p>
                 </div>
             </div>

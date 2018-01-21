@@ -4,7 +4,7 @@
 
 <style>
        #map {
-        height: 500px;
+        height: 750px;
         width: 90%;
        }
 </style>
@@ -14,10 +14,10 @@
       function initMap(){
         // Map options
         var options = {
-            zoom: 15,
-            maxZoom: 17,
+            zoom: 16,
+            maxZoom: 18,
             minZoom: 12,
-            center: {lat: -41.275, lng: 173.286},
+            center: {lat: -41.273, lng: 173.285},
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
             /*styles: styles*/
@@ -27,7 +27,45 @@
         var map = new google.maps.Map(document.getElementById('map'), options);
       
         // Array of markers
-        var markers = [] 
+        var markers = [
+            {
+                coords: {lat: -41.275031, lng: 173.283618},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.harrysnelson.nz/" target="_blank"><p>Harrys</p></a>'
+            },{
+                coords: {lat: -41.274812, lng: 173.283963},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.vicbrewbar.co.nz/" target="_blank"><p>The Vic</p></a>'
+            },{
+                coords: {lat: -41.274812, lng: 173.283963},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.sprigandferntaverns.co.nz/taverns/hardy-street-nelson" target="_blank"><p>Sprig and Fern - Hardy Street</p></a>'
+            },{
+                coords: {lat: -41.272411, lng: 173.286482},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.facebook.com/rattlenhumNelson" target="_blank"><p>Rattle N Hum Bar</p></a>'
+            },{
+                coords: {lat: -41.272691, lng: 173.286227},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.eventfinda.co.nz/venue/the-shark-club-nelson" target="_blank"><p>The Shark Club</p></a>'
+            },{
+                coords: {lat: -41.272475, lng: 173.284715},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.liquidbar.co.nz/" target="_blank"><p>Liquid NZ Bar</p></a>'
+            },{
+                coords: {lat: -41.271663, lng: 173.285404},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.facebook.com/rhythmandbrown.nz" target="_blank"><p>Rhythm and Brown</p></a>'
+            },{
+                coords: {lat: -41.272545, lng: 173.287470},
+                iconImage: '/images/mapMarkers/dancinghall.png',
+                content: '<a href="http://www.littlerockbar.co.nz/" target="_blank"><p>Little Rock Bar and Nightclub</p></a>'
+            },{
+                coords: {lat: -41.270967, lng: 173.284179},
+                iconImage: '/images/mapMarkers/cinema.png',
+                content: '<a href="https://www.statecinemas.co.nz/" target="_blank"><p>State Cinemas</p></a>'
+            }
+            ] 
             
         // Loop through markers    
         for(var i = 0; i < markers.length; i++){

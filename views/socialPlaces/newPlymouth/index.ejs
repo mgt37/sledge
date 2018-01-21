@@ -4,7 +4,7 @@
 
 <style>
        #map {
-        height: 500px;
+        height: 750px;
         width: 90%;
        }
 </style>
@@ -14,10 +14,10 @@
       function initMap(){
         // Map options
         var options = {
-            zoom: 14,
-            maxZoom: 16,
+            zoom: 17,
+            maxZoom: 19,
             minZoom: 12,
-            center: {lat: -39.062, lng: 174.090},
+            center: {lat: -39.058, lng: 174.072},
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
             /*styles: styles*/
@@ -27,7 +27,41 @@
         var map = new google.maps.Map(document.getElementById('map'), options);
       
         // Array of markers
-        var markers = [] 
+        var markers = [
+            {
+                coords: {lat: -39.058397, lng: 174.071590},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://peggygordons.com/" target="_blank"><p>Peggy Gordons Celtic Bar</p></a>'
+            },{
+                coords: {lat: -39.058491, lng: 174.072364},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://themayfair.co.nz/index.php" target="_blank"><p>The Mayfair</p></a>'
+            },{
+                coords: {lat: -39.057354, lng: 174.072668},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.facebook.com/Icons-Sports-Bar-116191425108267/" target="_blank"><p>Icon Sports Bar & Cafe</p></a>'
+            },{
+                coords: {lat: -39.057277, lng: 174.073082},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://thegoodhomenp.co.nz/" target="_blank"><p>The Good Home</p></a>'
+            },{
+                coords: {lat: -39.056676, lng: 174.077061},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.crowdedhouse.co.nz/" target="_blank"><p>The Crowded House</p></a>'
+            },{
+                coords: {lat: -39.056483, lng: 174.077885},
+                iconImage: '/images/mapMarkers/cinema.png',
+                content: '<a href="https://www.eventcinemas.co.nz/Cinema/New-Plymouth" target="_blank"><p>Event Cinemas</p></a>'
+            },{
+                coords: {lat: -39.059253, lng: 174.067798},
+                iconImage: '/images/mapMarkers/bowling.png',
+                content: '<a href="http://www.bowlaramanp.co.nz/" target="_blank"><p>Bowlarama</p></a>'
+            },{
+                coords: {lat: -39.058508, lng: 174.072318},
+                iconImage: '/images/mapMarkers/billiard-2.png',
+                content: '<a href="https://www.facebook.com/EightBallPoolDarts/" target="_blank"><p>Eight Ball Pool and Darts</p></a>'
+            }
+            ] 
             
         // Loop through markers    
         for(var i = 0; i < markers.length; i++){

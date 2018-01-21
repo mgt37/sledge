@@ -4,7 +4,7 @@
 
 <style>
        #map {
-        height: 600px;
+        height: 1250px;
         width: 90%;
        }
 </style>
@@ -14,10 +14,10 @@
       function initMap(){
         // Map options
         var options = {
-            zoom: 14,
-            maxZoom: 17,
+            zoom: 16,
+            maxZoom: 18,
             minZoom: 11,
-            center: {lat: -41.294, lng: 174.763},
+            center: {lat: -41.292, lng: 174.779},
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
             /*styles: styles*/
@@ -27,7 +27,97 @@
         var map = new google.maps.Map(document.getElementById('map'), options);
       
         // Array of markers
-        var markers = [] 
+        var markers = [
+            {
+                coords: {lat: -41.294926, lng: 174.780103},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.hawthornlounge.co.nz/" target="_blank"><p>Hawthorn Lounge</p></a>'
+            },{
+                coords: {lat: -41.293087, lng: 174.782581},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.dakotabar.co.nz/" target="_blank"><p>Dakota Bar</p></a>'
+            },{
+                coords: {lat: -41.286914, lng: 174.777141},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.thegreenmanpub.co.nz/home" target="_blank"><p>The Green Man Pub</p></a>'
+            },{
+                coords: {lat: -41.293561, lng: 174.782262},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.mishmosh.bar/" target="_blank"><p>Mishmosh Bar</p></a>'
+            },{
+                coords: {lat: -41.293658, lng: 174.782682},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.minibar.co.nz/" target="_blank"><p>Minibar</p></a>'
+            },{
+                coords: {lat: -41.293674, lng: 174.783061},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.theestablishment.co.nz/" target="_blank"><p>The Establishment</p></a>'
+            },{
+                coords: {lat: -41.293269, lng: 174.782058},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.thefringebar.co.nz/" target="_blank"><p>The Fringe Bar</p></a>'
+            },{
+                coords: {lat: -41.291630, lng: 174.779497},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://hashigozake.co.nz/" target="_blank"><p>Hashigo Zake</p></a>'
+            },{
+                coords: {lat: -41.293039, lng: 174.780791},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.ilovevinylbar.co.nz/" target="_blank"><p>Vinyl Bar</p></a>'
+            },{
+                coords: {lat: -41.292754, lng: 174.776115},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://jjmurphy.co.nz/" target="_blank"><p>J J Murphy and Co.</p></a>'
+            },{
+                coords: {lat: -41.290715, lng: 174.775009},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://littlebeerquarter.co.nz/" target="_blank"><p>Little Beer Quarter</p></a>'
+            },{
+                coords: {lat: -41.296128, lng: 174.774018},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.laundry.net.nz/" target="_blank"><p>Laundry</p></a>'
+            },{
+                coords: {lat: -41.296535, lng: 174.774583},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.thecross.co.nz/" target="_blank"><p>Southern Cross</p></a>'
+            },{
+                coords: {lat: -41.283644, lng: 174.778723},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.foxglovebar.co.nz/" target="_blank"><p>Foxglove</p></a>'
+            },{
+                coords: {lat: -41.293401, lng: 174.781291},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.public.net.nz/page/home.aspx" target="_blank"><p>[Public.]</p></a>'
+            },{
+                coords: {lat: -41.289648, lng: 174.779209},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://www.stjohnsbar.co.nz/" target="_blank"><p>St Johns Bar and Restaurant</p></a>'
+            },{
+                coords: {lat: -41.293412, lng: 174.774455},
+                iconImage: '/images/mapMarkers/music_live.png',
+                content: '<a href="http://rogueandvagabond.co.nz/" target="_blank"><p>Rogue and Vagabond</p></a>'
+            },{
+                coords: {lat: -41.293110, lng: 174.782197},
+                iconImage: '/images/mapMarkers/music_live.png',
+                content: '<a href="https://www.cavernclub.co.nz/" target="_blank"><p>Cavern Club</p></a>'
+            },{
+                coords: {lat: -41.292055, lng: 174.781241},
+                iconImage: '/images/mapMarkers/bowling.png',
+                content: '<a href="http://www.thelanes.co.nz/" target="_blank"><p>The Lanes</p></a>'
+            },{
+                coords: {lat: -41.293092, lng: 174.780739},
+                iconImage: '/images/mapMarkers/billiard-2.png',
+                content: '<a href="http://theballroom.co.nz/" target="_blank"><p>The Ballroom Pool and Snooker Lounge</p></a>'
+            },{
+                coords: {lat: -41.292867, lng: 174.779811},
+                iconImage: '/images/mapMarkers/cinema.png',
+                content: '<a href="https://readingcinemas.co.nz/locations/theatre/courtenay" target="_blank"><p>Reading Cinemas</p></a>'
+            },{
+                coords: {lat: -41.294318, lng: 174.784058},
+                iconImage: '/images/mapMarkers/cinema.png',
+                content: '<a href="https://www.eventcinemas.co.nz/cinema/The-Embassy" target="_blank"><p>Event Cinemas</p></a>'
+            }
+            ] 
             
         // Loop through markers    
         for(var i = 0; i < markers.length; i++){

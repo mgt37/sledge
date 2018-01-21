@@ -8,14 +8,32 @@ var express           = require("express"),
     
 //INDEX - Show all asks
 router.get("/", function(req, res){
-    // Get all asks from DB
-    HamiltonAsk.find({}, function(err, allHamiltonAsk){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("askOffer/hamilton/ask/index", {hamiltonAsk: allHamiltonAsk});
-        }
-    });
+    var noMatch = null;
+    /*eval(require('locus'));*/
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all uniTalk from DB
+        HamiltonAsk.find({title: regex}, function(err, allHamiltonAsk){ //Change from name to other variable?
+            if(err){
+                console.log(err);
+            } else {
+                if(allHamiltonAsk.length <1){
+                    noMatch = 'No titles match that query. Please try again.';
+                }
+                res.render("askOffer/hamilton/ask/index", {hamiltonAsk: allHamiltonAsk, noMatch: noMatch});
+            }
+        });    
+    } else {
+        /*eval(require('locus'));*/
+        // Get all uniTalk from DB
+        HamiltonAsk.find({}, function(err, allHamiltonAsk){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("askOffer/hamilton/ask/index", {hamiltonAsk: allHamiltonAsk, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE - add new ask to DB
@@ -95,5 +113,9 @@ router.delete("/:id", askOfferMiddleware.checkHamiltonAskOwnership, function(req
         }
     });
 });
+
+function escapeRegex(text){
+   return text.replace(/[-[\]{}()* +?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;

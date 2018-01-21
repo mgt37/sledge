@@ -6,14 +6,32 @@ var express           = require("express"),
 
 //INDEX - Show all uniTalk topics
 router.get("/", function(req, res){
-    // Get all uniTalk from DB
-    Money.find({}, function(err, allMoney){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("uniTalk/money/index", {money: allMoney});
-        }
-    });
+    var noMatch = null;
+    /*eval(require('locus'));*/
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all uniTalk from DB
+        Money.find({title: regex}, function(err, allMoney){ //Change from name to other variable?
+            if(err){
+                console.log(err);
+            } else {
+                if(allMoney.length <1){
+                    noMatch = 'No titles match that query. Please try again.';
+                }
+                res.render("uniTalk/money/index", {money: allMoney, noMatch: noMatch});
+            }
+        });    
+    } else {
+        /*eval(require('locus'));*/
+        // Get all uniTalk from DB
+        Money.find({}, function(err, allMoney){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("uniTalk/money/index", {money: allMoney, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE - add new uniTalk topic to DB
@@ -91,5 +109,9 @@ router.delete("/:id", uniTalkMiddleware.checkMoneyOwnership, function(req, res){
         }
     });
 });
+
+function escapeRegex(text){
+   return text.replace(/[-[\]{}()* +?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;

@@ -7,14 +7,32 @@ var express           = require("express"),
 
 //INDEX - Show all uniTalk topics
 router.get("/", function(req, res){
-    // Get all uniTalk from DB
-    Career.find({}, function(err, allCareers){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("uniTalk/career/index", {careers: allCareers});
-        }
-    });
+    var noMatch = null;
+    /*eval(require('locus'));*/
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all uniTalk from DB
+        Career.find({title: regex}, function(err, allCareers){ //Change from name to other variable?
+            if(err){
+                console.log(err);
+            } else {
+                if(allCareers.length <1){
+                    noMatch = 'No titles match that query. Please try again.';
+                }
+                res.render("uniTalk/career/index", {careers: allCareers, noMatch: noMatch});
+            }
+        });    
+    } else {
+            /*eval(require('locus'));*/
+        // Get all uniTalk from DB
+        Career.find({}, function(err, allCareers){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("uniTalk/career/index", {careers: allCareers, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE - add new uniTalk topic to DB
@@ -92,5 +110,9 @@ router.delete("/:id", uniTalkMiddleware.checkCareerOwnership, function(req, res)
         }
     });
 });
+
+function escapeRegex(text){
+   return text.replace(/[-[\]{}()* +?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;

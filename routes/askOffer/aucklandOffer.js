@@ -8,14 +8,32 @@ var express           = require("express"),
     
 //INDEX - Show all asks
 router.get("/", function(req, res){
-    // Get all asks from DB
-    AucklandOffer.find({}, function(err, allAucklandOffer){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("askOffer/auckland/offer/index", {aucklandOffer: allAucklandOffer});
-        }
-    });
+    var noMatch = null;
+    /*eval(require('locus'));*/
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all uniTalk from DB
+        AucklandOffer.find({title: regex}, function(err, allAucklandOffer){ //Change from name to other variable?
+            if(err){
+                console.log(err);
+            } else {
+                if(allAucklandOffer.length <1){
+                    noMatch = 'No titles match that query. Please try again.';
+                }
+                res.render("askOffer/auckland/offer/index", {aucklandOffer: allAucklandOffer, noMatch: noMatch});
+            }
+        });    
+    } else {
+        /*eval(require('locus'));*/
+        // Get all uniTalk from DB
+        AucklandOffer.find({}, function(err, allAucklandOffer){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("askOffer/auckland/offer/index", {aucklandOffer: allAucklandOffer, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE - add new ask to DB
@@ -60,7 +78,7 @@ router.get("/:id", function(req, res){
     });
 });
 
-// EDIT Ask Route
+// EDIT Offer Route
 router.get("/:id/edit", askOfferMiddleware.checkAucklandOfferOwnership, function(req, res){
     AucklandOffer.findById(req.params.id, function(err, foundAucklandOffer){
         if(err){
@@ -71,7 +89,7 @@ router.get("/:id/edit", askOfferMiddleware.checkAucklandOfferOwnership, function
     });
 });
 
-// UPDATE Ask Route
+// UPDATE Offer Route
 router.put("/:id", askOfferMiddleware.checkAucklandOfferOwnership, function(req, res){
     // Find and update the ask
     AucklandOffer.findByIdAndUpdate(req.params.id, req.body.aucklandOffer, function(err, updatedAucklandOffer){
@@ -95,5 +113,9 @@ router.delete("/:id", askOfferMiddleware.checkAucklandOfferOwnership, function(r
         }
     });
 });
+
+function escapeRegex(text){
+   return text.replace(/[-[\]{}()* +?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;

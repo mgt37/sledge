@@ -8,14 +8,32 @@ var express           = require("express"),
     
 //INDEX - Show all asks
 router.get("/", function(req, res){
-    // Get all asks from DB
-    HawkesBayRegionOffer.find({}, function(err, allHawkesBayRegionOffer){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("askOffer/hawkesBayRegion/offer/index", {hawkesBayRegionOffer: allHawkesBayRegionOffer});
-        }
-    });
+    var noMatch = null;
+    /*eval(require('locus'));*/
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all uniTalk from DB
+        HawkesBayRegionOffer.find({title: regex}, function(err, allHawkesBayRegionOffer){ //Change from name to other variable?
+            if(err){
+                console.log(err);
+            } else {
+                if(allHawkesBayRegionOffer.length <1){
+                    noMatch = 'No titles match that query. Please try again.';
+                }
+                res.render("askOffer/hawkesBayRegion/offer/index", {hawkesBayRegionOffer: allHawkesBayRegionOffer, noMatch: noMatch});
+            }
+        });    
+    } else {
+        /*eval(require('locus'));*/
+        // Get all uniTalk from DB
+        HawkesBayRegionOffer.find({}, function(err, allHawkesBayRegionOffer){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("askOffer/hawkesBayRegion/offer/index", {hawkesBayRegionOffer: allHawkesBayRegionOffer, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE - add new ask to DB
@@ -95,5 +113,9 @@ router.delete("/:id", askOfferMiddleware.checkHawkesBayRegionOfferOwnership, fun
         }
     });
 });
+
+function escapeRegex(text){
+   return text.replace(/[-[\]{}()* +?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;

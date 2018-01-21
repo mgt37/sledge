@@ -8,14 +8,32 @@ var express           = require("express"),
     
 //INDEX - Show all asks
 router.get("/", function(req, res){
-    // Get all asks from DB
-    ManawatuWhanganuiRegionOffer.find({}, function(err, allManawatuWhanganuiRegionOffer){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("askOffer/manawatuWhanganuiRegion/offer/index", {manawatuWhanganuiRegionOffer: allManawatuWhanganuiRegionOffer});
-        }
-    });
+    var noMatch = null;
+    /*eval(require('locus'));*/
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all uniTalk from DB
+        ManawatuWhanganuiRegionOffer.find({title: regex}, function(err, allManawatuWhanganuiRegionOffer){ //Change from name to other variable?
+            if(err){
+                console.log(err);
+            } else {
+                if(allManawatuWhanganuiRegionOffer.length <1){
+                    noMatch = 'No titles match that query. Please try again.';
+                }
+                res.render("askOffer/manawatuWhanganuiRegion/offer/index", {manawatuWhanganuiRegionOffer: allManawatuWhanganuiRegionOffer, noMatch: noMatch});
+            }
+        });    
+    } else {
+        /*eval(require('locus'));*/
+        // Get all uniTalk from DB
+        ManawatuWhanganuiRegionOffer.find({}, function(err, allManawatuWhanganuiRegionOffer){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("askOffer/manawatuWhanganuiRegion/offer/index", {manawatuWhanganuiRegionOffer: allManawatuWhanganuiRegionOffer, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE - add new ask to DB
@@ -95,5 +113,9 @@ router.delete("/:id", askOfferMiddleware.checkManawatuWhanganuiRegionOfferOwners
         }
     });
 });
+
+function escapeRegex(text){
+   return text.replace(/[-[\]{}()* +?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;

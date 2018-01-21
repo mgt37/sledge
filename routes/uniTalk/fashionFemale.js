@@ -2,19 +2,37 @@ var express           = require("express"),
     router            = express(),
     FashionFemale     = require("../../app/models/uniTalk/fashionFemale"),
     middleware        = require("../../middleware"),
-    uniTalkMiddleware = require("../../middleware/uniTalk"),
-    applic            = require("../../app.js");
+    uniTalkMiddleware = require("../../middleware/uniTalk");
+    /*applic            = require("../../app.js");*/
 
 //INDEX - Show all uniTalk topics
 router.get("/", function(req, res){
-    // Get all uniTalk from DB
-    FashionFemale.find({}, function(err, allFashionFemale){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("uniTalk/fashionFemale/index", {fashionFemale: allFashionFemale});
-        }
-    });
+    var noMatch = null;
+    /*eval(require('locus'));*/
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all uniTalk from DB
+        FashionFemale.find({title: regex}, function(err, allFashionFemale){ //Change from name to other variable?
+            if(err){
+                console.log(err);
+            } else {
+                if(allFashionFemale.length <1){
+                    noMatch = 'No titles match that query. Please try again.';
+                }
+                res.render("uniTalk/fashionFemale/index", {fashionFemale: allFashionFemale, noMatch: noMatch});
+            }
+        });    
+    } else {
+        /*eval(require('locus'));*/
+        // Get all uniTalk from DB
+        FashionFemale.find({}, function(err, allFashionFemale){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("uniTalk/fashionFemale/index", {fashionFemale: allFashionFemale, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE - add new uniTalk topic to DB
@@ -114,5 +132,8 @@ router.delete("/:id", uniTalkMiddleware.checkFashionFemaleOwnership, function(re
   });
 });*/
 
+function escapeRegex(text){
+   return text.replace(/[-[\]{}()* +?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;

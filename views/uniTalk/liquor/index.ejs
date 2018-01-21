@@ -7,9 +7,30 @@
            <p>
                <a class="btn btn-primary btn-lg" href="liquor/new">Add a new topic</a>
            </p>
+           <p>
+               <form action="/uniTalk/liquor" method="get" class="form-inline"> <!--check the route is correct-->
+                   <div class="form-group">
+                       <input type="text" name="search" placeholder="Alcohol Unitalk Search" class="form-control">
+                       <input type="submit" value="search" class="btn btn-info">
+                   </div>
+               </form>
+           </p>
        </div>
     </header>
     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <% if(noMatch !== null) { %>
+            <h4><%= noMatch %></h4>
+            <p>
+               <form action="/uniTalk/liquor" method="get" class="form-inline"> <!--check the route is correct-->
+                   <div class="form-group">
+                       <input type="text" name="search" placeholder="Alcohol Unitalk Search" class="form-control">
+                       <input type="submit" value="search" class="btn btn-info">
+                   </div>
+               </form>
+           </p>
+            <% } %>
+        </div>
         <% liquor.reverse().forEach(function(liquor){ %>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="thumbnail">

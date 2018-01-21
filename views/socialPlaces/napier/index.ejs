@@ -14,10 +14,10 @@
       function initMap(){
         // Map options
         var options = {
-            zoom: 14,
-            maxZoom: 17,
+            zoom: 16,
+            maxZoom: 18,
             minZoom: 11,
-            center: {lat: -39.495, lng: 176.900},
+            center: {lat: -39.492, lng: 176.914},
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
             /*styles: styles*/
@@ -29,9 +29,33 @@
         // Array of markers
         var markers = [
             {
-                coords: {lat: -39.480816, lng: 176.895596},
+                coords: {lat: -39.488028, lng: 176.916755},
+                iconImage: '/images/mapMarkers/music_live.png',
+                content: '<a href="http://www.cabana.net.nz/" target="_blank"><p>Cabana Bar</p></a>'
+            },{
+                coords: {lat: -39.489438, lng: 176.917420},
                 iconImage: '/images/mapMarkers/bar_cocktail.png',
-                content: '<a href="http://thejandal.kiwi/locations/port-ahuriri" target="_blank"><p>The Jandal</p></a>'
+                content: '<a href="http://monicaloves.co.nz/" target="_blank"><p>Monica Loves</p></a>'
+            },{
+                coords: {lat: -39.489640, lng: 176.918378},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://masonic.co.nz/napier-restaurants/the-rose-irish-pub/" target="_blank"><p>The Rose Irish Pub</p></a>'
+            },{
+                coords: {lat: -39.489004, lng: 176.917789},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.facebook.com/gufflebar/" target="_blank"><p>Guffle Bar</p></a>'
+            },{
+                coords: {lat: -39.488878, lng: 176.917982},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="http://directmap.co.nz/napier/3959" target="_blank"><p>The Wind Sports Bar</p></a>'
+            },{
+                coords: {lat: -39.491523, lng: 176.915883},
+                iconImage: '/images/mapMarkers/dancinghall.png',
+                content: '<a href="http://monicaloves.co.nz/" target="_blank"><p>Club Rendezvous</p></a>'
+            },{
+                coords: {lat: -39.493548, lng: 176.913884},
+                iconImage: '/images/mapMarkers/cinema.png',
+                content: '<a href="https://readingcinemas.co.nz/locations/theatre/napier" target="_blank"><p>Reading Cinemas</p></a>'
             }
             ] 
             

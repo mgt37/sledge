@@ -8,14 +8,32 @@ var express           = require("express"),
     
 //INDEX - Show all asks
 router.get("/", function(req, res){
-    // Get all asks from DB
-    CentralOtagoOffer.find({}, function(err, allCentralOtagoOffer){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("askOffer/centralOtago/offer/index", {centralOtagoOffer: allCentralOtagoOffer});
-        }
-    });
+    var noMatch = null;
+    /*eval(require('locus'));*/
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all uniTalk from DB
+        CentralOtagoOffer.find({title: regex}, function(err, allCentralOtagoOffer){ //Change from name to other variable?
+            if(err){
+                console.log(err);
+            } else {
+                 if(allCentralOtagoOffer.length <1){
+                    noMatch = 'No titles match that query. Please try again.';
+                }
+                res.render("askOffer/centralOtago/offer/index", {centralOtagoOffer: allCentralOtagoOffer, noMatch: noMatch});
+            }
+        });    
+    } else {
+        /*eval(require('locus'));*/
+        // Get all uniTalk from DB
+        CentralOtagoOffer.find({}, function(err, allCentralOtagoOffer){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("askOffer/centralOtago/offer/index", {centralOtagoOffer: allCentralOtagoOffer, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE - add new ask to DB
@@ -95,5 +113,9 @@ router.delete("/:id", askOfferMiddleware.checkCentralOtagoOfferOwnership, functi
         }
     });
 });
+
+function escapeRegex(text){
+   return text.replace(/[-[\]{}()* +?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;

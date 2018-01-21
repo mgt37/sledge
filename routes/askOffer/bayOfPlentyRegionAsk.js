@@ -8,14 +8,32 @@ var express           = require("express"),
     
 //INDEX - Show all asks
 router.get("/", function(req, res){
-    // Get all asks from DB
-    BayOfPlentyRegionAsk.find({}, function(err, allBayOfPlentyRegionAsk){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("askOffer/bayOfPlentyRegion/ask/index", {bayOfPlentyRegionAsk: allBayOfPlentyRegionAsk});
-        }
-    });
+    var noMatch = null;
+    /*eval(require('locus'));*/
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all uniTalk from DB
+        BayOfPlentyRegionAsk.find({title: regex}, function(err, allBayOfPlentyRegionAsk){ //Change from name to other variable?
+            if(err){
+                console.log(err);
+            } else {
+                if(allBayOfPlentyRegionAsk.length <1){
+                    noMatch = 'No titles match that query. Please try again.';
+                }
+                res.render("askOffer/bayOfPlentyRegion/ask/index", {bayOfPlentyRegionAsk: allBayOfPlentyRegionAsk, noMatch: noMatch});
+            }
+        });    
+    } else {
+        /*eval(require('locus'));*/
+        // Get all uniTalk from DB
+        BayOfPlentyRegionAsk.find({}, function(err, allBayOfPlentyRegionAsk){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("askOffer/bayOfPlentyRegion/ask/index", {bayOfPlentyRegionAsk: allBayOfPlentyRegionAsk, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE - add new ask to DB
@@ -95,5 +113,9 @@ router.delete("/:id", askOfferMiddleware.checkBayOfPlentyRegionAskOwnership, fun
         }
     });
 });
+
+function escapeRegex(text){
+   return text.replace(/[-[\]{}()* +?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;

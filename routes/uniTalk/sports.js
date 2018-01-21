@@ -6,14 +6,32 @@ var express           = require("express"),
 
 //INDEX - Show all uniTalk topics
 router.get("/", function(req, res){
-    // Get all uniTalk from DB
-    Sport.find({}, function(err, allSports){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("uniTalk/sport/index", {sports: allSports});
-        }
-    });
+    var noMatch = null;
+    /*eval(require('locus'));*/
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all uniTalk from DB
+        Sport.find({title: regex}, function(err, allSports){ //Change from name to other variable?
+            if(err){
+                console.log(err);
+            } else {
+                if(allSports.length <1){
+                    noMatch = 'No titles match that query. Please try again.';
+                }
+                res.render("uniTalk/sport/index", {sports: allSports, noMatch: noMatch});
+            }
+        });    
+    } else {
+        /*eval(require('locus'));*/
+        // Get all uniTalk from DB
+        Sport.find({}, function(err, allSports){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("uniTalk/sport/index", {sports: allSports, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE - add new uniTalk topic to DB
@@ -91,5 +109,9 @@ router.delete("/:id", uniTalkMiddleware.checkSportOwnership, function(req, res){
         }
     });
 });
+
+function escapeRegex(text){
+   return text.replace(/[-[\]{}()* +?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;

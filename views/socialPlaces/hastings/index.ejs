@@ -4,7 +4,7 @@
 
 <style>
        #map {
-        height: 500px;
+        height: 1000px;
         width: 90%;
        }
 </style>
@@ -14,10 +14,10 @@
       function initMap(){
         // Map options
         var options = {
-            zoom: 14,
-            maxZoom: 16,
+            zoom: 15,
+            maxZoom: 18,
             minZoom: 12,
-            center: {lat: -39.641, lng: 176.838},
+            center: {lat: -39.635, lng: 176.838},
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
             /*styles: styles*/
@@ -27,7 +27,33 @@
         var map = new google.maps.Map(document.getElementById('map'), options);
       
         // Array of markers
-        var markers = [] 
+        var markers = [
+            {
+                coords: {lat: -39.639671, lng: 176.842235},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.facebook.com/Zabeels-Sports-Bar-TAB-178173912325599/"><p>Zabeels Sports Bar</p></a>'
+            },{
+                coords: {lat: -39.640669, lng: 176.840284},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.thecrubar.co.nz/"><p>The Cru Bar</p></a>'
+            },{
+                coords: {lat: -39.643692, lng: 176.844736},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://commonroom2017.wordpress.com/2017/07/21/live-music/"><p>Common Room</p></a>'
+            },{
+                coords: {lat: -39.642893, lng: 176.843744},
+                iconImage: '/images/mapMarkers/bar_cocktail.png',
+                content: '<a href="https://www.facebook.com/bar2013hastings"><p>Bar 2013</p></a>'
+            },{
+                coords: {lat: -39.642394, lng: 176.844018},
+                iconImage: '/images/mapMarkers/cinema.png',
+                content: '<a href="https://hastings.focalpointcinema.co.nz/" target="_blank"><p>Focal Point Cinema</p></a>'
+            },{
+                coords: {lat: -39.624047, lng: 176.821134},
+                iconImage: '/images/mapMarkers/bowling.png',
+                content: '<a href="https://superstrikehastings.co.nz/" target="_blank"><p>Superstrike</p></a>'
+            }
+            ] 
             
         // Loop through markers    
         for(var i = 0; i < markers.length; i++){

@@ -1,19 +1,37 @@
 var express           = require("express"),
     router            = express(),
-    Vehicle            = require("../../app/models/uniTalk/vehicle"),
+    Vehicle           = require("../../app/models/uniTalk/vehicle"),
     middleware        = require("../../middleware"),
     uniTalkMiddleware = require("../../middleware/uniTalk");
 
 //INDEX - Show all uniTalk topics
 router.get("/", function(req, res){
-    // Get all uniTalk from DB
-    Vehicle.find({}, function(err, allVehicle){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("uniTalk/vehicle/index", {vehicle: allVehicle});
-        }
-    });
+    var noMatch = null;
+    /*eval(require('locus'));*/
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all uniTalk from DB
+        Vehicle.find({title: regex}, function(err, allVehicle){ //Change from name to other variable?
+            if(err){
+                console.log(err);
+            } else {
+                if(allVehicle.length <1){
+                    noMatch = 'No titles match that query. Please try again.';
+                }
+                res.render("uniTalk/vehicle/index", {vehicle: allVehicle, noMatch: noMatch});
+            }
+        });    
+    } else {
+        /*eval(require('locus'));*/
+        // Get all uniTalk from DB
+        Vehicle.find({}, function(err, allVehicle){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("uniTalk/vehicle/index", {vehicle: allVehicle, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE - add new uniTalk topic to DB
@@ -91,5 +109,9 @@ router.delete("/:id", uniTalkMiddleware.checkVehicleOwnership, function(req, res
         }
     });
 });
+
+function escapeRegex(text){
+   return text.replace(/[-[\]{}()* +?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;

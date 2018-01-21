@@ -6,14 +6,32 @@ var express           = require("express"),
 
 //INDEX - Show all uniTalk topics
 router.get("/", function(req, res){
-    // Get all uniTalk from DB
-     FashionMale.find({}, function(err, allFashionMale){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("uniTalk/fashionMale/index", {fashionMale: allFashionMale});
-        }
-    });
+    var noMatch = null;
+    /*eval(require('locus'));*/
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all uniTalk from DB
+        FashionMale.find({title: regex}, function(err, allFashionMale){ //Change from name to other variable?
+            if(err){
+                console.log(err);
+            } else {
+                if(allFashionMale.length <1){
+                    noMatch = 'No titles match that query. Please try again.';
+                }
+                res.render("uniTalk/fashionMale/index", {fashionMale: allFashionMale, noMatch: noMatch});
+            }
+        });    
+    } else {
+        /*eval(require('locus'));*/
+        // Get all uniTalk from DB
+        FashionMale.find({}, function(err, allFashionMale){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("uniTalk/fashionMale/index", {fashionMale: allFashionMale, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE - add new uniTalk topic to DB
@@ -91,5 +109,9 @@ router.delete("/:id", uniTalkMiddleware.checkFashionMaleOwnership, function(req,
         }
     });
 });
+
+function escapeRegex(text){
+   return text.replace(/[-[\]{}()* +?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;

@@ -8,14 +8,32 @@ var express           = require("express"),
     
 //INDEX - Show all asks
 router.get("/", function(req, res){
-    // Get all asks from DB
-    CentralOtagoAsk.find({}, function(err, allCentralOtagoAsk){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("askOffer/centralOtago/ask/index", {centralOtagoAsk: allCentralOtagoAsk});
-        }
-    });
+    var noMatch = null;
+    /*eval(require('locus'));*/
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all uniTalk from DB
+        CentralOtagoAsk.find({title: regex}, function(err, allCentralOtagoAsk){ //Change from name to other variable?
+            if(err){
+                console.log(err);
+            } else {
+                if(allCentralOtagoAsk.length <1){
+                    noMatch = 'No titles match that query. Please try again.';
+                }
+                res.render("askOffer/centralOtago/ask/index", {centralOtagoAsk: allCentralOtagoAsk, noMatch: noMatch});
+            }
+        });    
+    } else {
+        /*eval(require('locus'));*/
+        // Get all uniTalk from DB
+        CentralOtagoAsk.find({}, function(err, allCentralOtagoAsk){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("askOffer/centralOtago/ask/index", {centralOtagoAsk: allCentralOtagoAsk, noMatch: noMatch});
+            }
+        });
+    }
 });
 
 //CREATE - add new ask to DB
@@ -95,5 +113,9 @@ router.delete("/:id", askOfferMiddleware.checkCentralOtagoAskOwnership, function
         }
     });
 });
+
+function escapeRegex(text){
+   return text.replace(/[-[\]{}()* +?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;
