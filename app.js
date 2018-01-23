@@ -13,17 +13,8 @@ var express          = require('express'),
     bodyParser       = require('body-parser'),
     passport         = require('passport'),
     methodOverride   = require('method-override'),
-<<<<<<< HEAD
-<<<<<<< HEAD
-    LocalStrategy    = require("passport-local"), //Removed '.Strategy' ?
-    mongo            = require('mongodb'),
-=======
->>>>>>> parent of bf74a83... Added some social places, waiting to solve login error etc.
-=======
->>>>>>> parent of bf74a83... Added some social places, waiting to solve login error etc.
     User             = require('./app/models/user');
-    
-    
+ 
 // Content Filter    
 var filter = require('content-filter');
 app.use(filter());
@@ -151,7 +142,7 @@ var aucklandAskRoutes                          = require('./routes/askOffer/auck
     westCoastRegionOfferCommentRoutes          = require('./routes/askOffer/westCoastRegionOfferComments');
     
 // blog routes - require    
-var bHASWYFRoutes                               = require('./routes/blog/bHASWYF');
+var bHASWYFRoutes                        = require('./routes/blog/bHASWYF');
 var buildYourNetworkCommentRoutes               = require('./routes/blog/buildYourNetworkComment');
 var findYourFlawsCommentRoutes                  = require('./routes/blog/findYourFlawsComment');
 var foodBudgetCommentRoutes                     = require('./routes/blog/foodBudgetComment');
@@ -254,34 +245,14 @@ app.use(require("express-session")({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-<<<<<<< HEAD
-<<<<<<< HEAD
-passport.use(new LocalStrategy(User.authenticate()));
-/*passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());*/
-
-app.use(function(req, res, next){
-    /*res.locals.currentUser = req.user;*/
-    /*res.locals.error       = req.flash("error");
-    res.locals.success     = req.flash("success");*/
-    /*res.locals.user = req.user || null;*/
-    /*next();*/
-=======
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
-=======
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
-app.use(function(req, res, next){
->>>>>>> parent of bf74a83... Added some social places, waiting to solve login error etc.
     res.locals.currentUser = req.user;
     res.locals.error       = req.flash("error");
     res.locals.success     = req.flash("success");
     next();
->>>>>>> parent of bf74a83... Added some social places, waiting to solve login error etc.
 });
 
 // Use Routes
